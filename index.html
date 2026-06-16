@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ogden Canyon 36-Inch Pipeline Replacement | Ogden City</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --canyon-rust:   #8B4A2B;
+    --canyon-stone:  #C4A882;
+    --water-blue:    #2A6D8F;
+    --water-dark:    #1A4560;
+    --sky:           #EAF3F8;
+    --earth:         #F5EFE6;
+    --text-dark:     #1C1C1C;
+    --text-mid:      #4A4A4A;
+    --text-light:    #7A7A7A;
+    --white:         #FFFFFF;
+    --accent-green:  #4A7C59;
+    --notice-amber:  #D4820A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NOTICE BAR ── */
+  .notice-bar {
+    background: var(--notice-amber);
+    color: var(--white);
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--water-dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+  }
+  .nav-logo img {
+    height: 48px;
+    display: block;
+  }
+  .nav-links {
+    display: flex;
+    gap: 6px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    background: var(--canyon-rust);
+    color: var(--white);
+  }
+  .nav-social {
+    display: flex;
+    gap: 10px;
+  }
+  .nav-social a {
+    color: rgba(255,255,255,0.7);
+    font-size: 1rem;
+    text-decoration: none;
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: background 0.2s;
+  }
+  .nav-social a:hover { background: var(--canyon-rust); color: white; border-color: var(--canyon-rust); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, var(--water-dark) 0%, #0f2e42 55%, var(--canyon-rust) 100%);
+    color: var(--white);
+    padding: 80px 24px 70px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://static.wixstatic.com/media/bdc62e_2379d451934147928ba8366a7ea64a56~mv2.jpg') center/cover no-repeat;
+    opacity: 0.18;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--canyon-stone);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.05;
+    max-width: 720px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+  .hero h1 span { color: var(--canyon-stone); }
+  .hero-sub {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    max-width: 580px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 32px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .stat-item { text-align: left; }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--canyon-stone);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--canyon-rust);
+    color: var(--white);
+    padding: 13px 26px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: #a0552f; }
+  .btn-outline {
+    border: 2px solid rgba(255,255,255,0.5);
+    color: var(--white);
+    padding: 13px 26px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+
+  /* ── PHASE STATUS BAR ── */
+  .phase-bar {
+    background: var(--earth);
+    border-bottom: 3px solid var(--canyon-stone);
+    padding: 18px 24px;
+  }
+  .phase-bar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .phase-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    white-space: nowrap;
+  }
+  .phase-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .badge-complete { background: #d4edda; color: #1a6630; }
+  .badge-active   { background: #fff3cd; color: #856404; }
+  .badge-upcoming { background: #e2e8f0; color: #475569; }
+  .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+  /* ── SECTIONS ── */
+  section { padding: 70px 24px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--canyon-rust);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--canyon-stone);
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--water-dark);
+    margin-bottom: 24px;
+    line-height: 1.1;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--white); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .about-body {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+  }
+  .about-body p + p { margin-top: 16px; }
+  .partner-block { margin-top: 12px; }
+  .partner-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-light);
+    margin-bottom: 16px;
+  }
+  .partner-logos {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .partner-logos img {
+    height: 48px;
+    object-fit: contain;
+    filter: grayscale(0.3);
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  .partner-logos img:hover { opacity: 1; filter: none; }
+
+  /* ── MAP ── */
+  #map { background: var(--sky); padding: 60px 24px; }
+  .map-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .map-embed {
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    aspect-ratio: 4/3;
+  }
+  .map-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+  .map-links { display: flex; flex-direction: column; gap: 14px; }
+  .map-link-card {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: var(--text-dark);
+    border-left: 4px solid var(--water-blue);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .map-link-card:hover { transform: translateX(4px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+  .map-link-card strong { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+  .map-link-card span { font-size: 0.8rem; color: var(--text-light); }
+
+  /* ── NEWS ── */
+  #news { background: var(--white); }
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .news-card {
+    border: 1px solid #e8e0d6;
+    border-radius: 6px;
+    padding: 24px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .news-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .news-source {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--canyon-rust);
+  }
+  .news-headline {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--water-dark);
+  }
+  .news-arrow { font-size: 0.8rem; color: var(--text-light); margin-top: auto; }
+
+  /* ── FAQ ── */
+  #faq { background: var(--earth); }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .faq-item {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 28px;
+    border-top: 3px solid var(--water-blue);
+  }
+  .faq-q {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--water-dark);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .faq-a {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  /* ── SCHEDULE ── */
+  #schedule { background: var(--water-dark); color: var(--white); }
+  #schedule .section-title { color: var(--white); }
+  #schedule .section-label { color: var(--canyon-stone); }
+  #schedule .section-label::after { background: var(--canyon-rust); }
+  .schedule-updated {
+    font-size: 0.78rem;
+    color: var(--canyon-stone);
+    font-weight: 600;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+  .schedule-items { display: flex; flex-direction: column; gap: 0; }
+  .schedule-item {
+    display: grid;
+    grid-template-columns: 220px 1fr auto;
+    gap: 20px;
+    align-items: start;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .schedule-item:last-child { border-bottom: none; }
+  .sch-date {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--canyon-stone);
+    letter-spacing: 0.04em;
+    padding-top: 2px;
+  }
+  .sch-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+  }
+  .sch-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+  }
+  .sch-status {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    align-self: flex-start;
+  }
+  .sch-complete { background: rgba(74,124,89,0.3); color: #7ee89a; }
+  .sch-active   { background: rgba(212,130,10,0.3); color: #ffc04d; }
+  .sch-upcoming { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+
+  .schedule-hours {
+    margin-top: 28px;
+    background: rgba(255,255,255,0.05);
+    border-left: 4px solid var(--canyon-rust);
+    border-radius: 0 6px 6px 0;
+    padding: 18px 22px;
+  }
+  .schedule-hours p { font-size: 0.88rem; color: rgba(255,255,255,0.8); line-height: 1.7; }
+  .schedule-hours strong { color: var(--white); }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--white); padding: 60px 24px; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 8px;
+  }
+  .gallery-grid .g-wide { grid-column: span 2; }
+  .gallery-grid img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+    transition: opacity 0.2s;
+  }
+  .gallery-grid img:hover { opacity: 0.88; }
+
+  /* ── TRAILHEAD ALERT ── */
+  .trailhead-alert {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-left: 5px solid #d4820a;
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-top: 40px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .alert-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+  .alert-body strong { display: block; font-size: 0.95rem; color: #7c4a00; margin-bottom: 5px; }
+  .alert-body p { font-size: 0.88rem; color: #5a3700; line-height: 1.6; }
+  .alert-body a { color: var(--water-blue); font-weight: 600; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--sky); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 20px; }
+  .contact-card {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .contact-card-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .contact-card strong { display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 4px; }
+  .contact-card a, .contact-card span { font-size: 1rem; font-weight: 600; color: var(--water-dark); text-decoration: none; }
+  .contact-card a:hover { color: var(--canyon-rust); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d0ccc6;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    background: var(--white);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--water-blue); }
+  .contact-form textarea { resize: vertical; min-height: 120px; }
+  .contact-form button {
+    background: var(--water-dark);
+    color: var(--white);
+    border: none;
+    padding: 13px 28px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+  .contact-form button:hover { background: var(--canyon-rust); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.6);
+    padding: 32px 24px;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer img { height: 36px; opacity: 0.7; }
+  .footer-text { font-size: 0.78rem; line-height: 1.6; }
+  .footer-social { display: flex; gap: 10px; }
+  .footer-social a {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.75rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .footer-social a:hover { color: var(--canyon-stone); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .about-grid, .map-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    .news-grid { grid-template-columns: 1fr; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid .g-wide { grid-column: span 1; }
+    .schedule-item { grid-template-columns: 1fr; gap: 6px; }
+    .nav-links { display: none; }
+    .hero-stats { gap: 20px; }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 50px 20px 50px; }
+    section { padding: 50px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<!-- NOTICE BAR -->
+<div class="notice-bar">
+  📣 Latest Notice: Asphalt restoration in Fairmount, Cobbles &amp; Hermitage — June 15–24, 2026
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#top">
+      <img src="https://static.wixstatic.com/media/f35286_3d462d6d96ef4884a120ce61cf7c332e~mv2.png" alt="Ogden City Logo">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#map">Map</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#gallery">Photos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-social">
+      <a href="https://www.facebook.com/OgdenCityUtah/" title="Facebook">f</a>
+      <a href="https://x.com/OgdenCityUtah" title="X / Twitter">𝕏</a>
+      <a href="https://www.instagram.com/ogdencityutah/" title="Instagram">ig</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Ogden City, Utah — Public Infrastructure</p>
+    <h1>Ogden Canyon<br><span>36-Inch Pipeline</span><br>Replacement</h1>
+    <p class="hero-sub">Replacing a century-old water transmission pipeline through Ogden Canyon — improving reliability, reducing water loss, and supporting the long-term water security of our community.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">6.4</div>
+        <div class="stat-label">Miles of Pipeline</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">$100M</div>
+        <div class="stat-label">Project Cost</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2025–29</div>
+        <div class="stat-label">Construction Window</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1M</div>
+        <div class="stat-label">Gallons Saved Daily</div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#schedule" class="btn-primary">View Current Schedule</a>
+      <a href="#contact" class="btn-outline">Contact Our Team</a>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE STATUS BAR -->
+<div class="phase-bar">
+  <div class="phase-bar-inner">
+    <span class="phase-label">Project Status:</span>
+    <div class="phase-badges">
+      <span class="badge badge-complete"><span class="badge-dot"></span>Phase 1 — Complete</span>
+      <span class="badge badge-complete"><span class="badge-dot"></span>Phase 2 — Complete</span>
+      <span class="badge badge-active"><span class="badge-dot"></span>East Bench — Active (May–Nov 2026)</span>
+      <span class="badge badge-upcoming"><span class="badge-dot"></span>Pineview Reservoir Crossing — TBA</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <p class="section-label">About the Project</p>
+        <h2 class="section-title">A Century-Old Lifeline, Renewed</h2>
+        <div class="about-body">
+          <p>Ogden City is replacing a critical 36-inch diameter water transmission pipeline that conveys water from the City's wellfield adjacent to Pineview Reservoir, through Ogden Canyon, and to the City's 23rd Street reservoirs.</p>
+          <p>This pipeline has served Ogden City for nearly 100 years. When operating, it currently loses approximately 1 million gallons daily due to leaks. The replacement will address water losses, improve reliability, and contribute to water conservation efforts — including providing additional water to the Great Salt Lake's Willard Spur.</p>
+          <p>The project is being completed in multiple phases between 2025 and 2029. <strong>Ogden City has selected Sunrise Engineering</strong> as the design engineer and <strong>Whitaker Construction</strong> as the CMGC contractor.</p>
+        </div>
+      </div>
+      <div>
+        <div class="partner-block">
+          <p class="partner-label">Project Partners</p>
+          <div class="partner-logos">
+            <img src="https://static.wixstatic.com/media/f35286_fa917e09a9c147d28307a8d4bf38f64a~mv2.png" alt="Weber Basin Water Conservancy District">
+            <img src="https://static.wixstatic.com/media/f35286_10fcaef6d4ee49c6811bab60f8f188c1~mv2.webp" alt="Sunrise Engineering">
+            <img src="https://static.wixstatic.com/media/f35286_a908c9d9e5424efab5a7159794cbcc44~mv2.png" alt="Whitaker Construction">
+            <img src="https://static.wixstatic.com/media/f35286_195809e039fa4fdfb537f1ffbdaa1a69~mv2.png" alt="Utah DEQ">
+          </div>
+        </div>
+        <div style="margin-top: 32px;">
+          <img src="https://static.wixstatic.com/media/3299cd_8bbe954939484de3b3788f7983137d57~mv2.jpg" alt="East Bench Pipeline Map" style="width:100%;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,0.12);">
+          <p style="font-size:0.75rem;color:var(--text-light);margin-top:8px;text-align:center;">East Bench Pipeline Alignment — click for full PDF</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="map">
+  <div class="section-inner">
+    <p class="section-label">Project Area</p>
+    <h2 class="section-title">Pipeline Corridor Map</h2>
+    <div class="map-grid">
+      <div class="map-embed">
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1B2m9nEBgqw24ifWMVIJZ8tC_QQITgNE&ehbc=2E312F" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="map-links">
+        <a class="map-link-card" href="https://earth.google.com/web/@41.24498608,-111.90419399,1642.12826452a,4586.55320676d,30.00035427y,-0h,0t,0r/data=CgRCAggBMigKJgokCiAxQjJtOW5FQmdxdzI0aWZXTVZJSlo4dENfUVFJVGdORSACOgMKATBCAggASgcIwYqsVBAB" target="_blank">
+          <strong>🌍 View in Google Earth</strong>
+          <span>3D terrain view of the full pipeline corridor</span>
+        </a>
+        <a class="map-link-card" href="https://www.ogdencitypipeline.com/_files/ugd/3299cd_75e51be312164c1d9f4b07bd98201967.pdf" target="_blank">
+          <strong>📄 Download East Bench Map (PDF)</strong>
+          <span>11×17 printable pipeline alignment map</span>
+        </a>
+        <a class="map-link-card" href="#contact">
+          <strong>📍 Add Your Contact Info</strong>
+          <span>Receive community-specific coordination notices</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="section-inner">
+    <p class="section-label">In the News</p>
+    <h2 class="section-title">Media Coverage</h2>
+    <div class="news-grid">
+      <a class="news-card" href="https://www.ksl.com/article/50870429/could-a-new-100-million-pipeline-help-the-great-salt-lake-and-birds" target="_blank">
+        <span class="news-source">KSL News</span>
+        <p class="news-headline">Could a new $100M pipeline help the Great Salt Lake and birds?</p>
+        <span class="news-arrow">Read article →</span>
+      </a>
+      <a class="news-card" href="https://www.epa.gov/wifia/ogden-wellfield-and-canyon-36-inch-water-line-replacement" target="_blank">
+        <span class="news-source">U.S. EPA</span>
+        <p class="news-headline">Water Infrastructure Finance and Innovation Act (WIFIA) — Project Profile</p>
+        <span class="news-arrow">Read article →</span>
+      </a>
+      <a class="news-card" href="https://www.standard.net/news/local/2025/feb/07/ogden-city-acquires-land-in-ogden-canyon-to-ensure-access-to-new-water-line/" target="_blank">
+        <span class="news-source">Standard-Examiner</span>
+        <p class="news-headline">Ogden City acquires land in Ogden Canyon to ensure access to new water line</p>
+        <span class="news-arrow">Read article →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <p class="section-label">Common Questions</p>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <p class="faq-q">Can I expect water service interruptions?</p>
+        <p class="faq-a">Brief interruptions are possible as the watermain traverses through the canyon. However, Ogden Canyon is primarily served by a separate 24-inch pipeline. The 36-inch pipeline carries water for larger trunkline purposes, so impacts to local service are expected to be minimal.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Will access to my property be restricted?</p>
+        <p class="faq-a">Depending on the alignment and right-of-way, it may be necessary to temporarily limit access at property access points. We will actively coordinate and notify residents well in advance of any such impacts.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">How are you ensuring safety in construction zones?</p>
+        <p class="faq-a">Please use extra caution and stay clear of construction zones, especially areas with deep trenches. Anticipate increased noise, dust, and vibration near active work. Follow road closure signs and do not enter areas zoned off by cones, barrels, or barricades.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Why is the pipeline being replaced now?</p>
+        <p class="faq-a">The current pipeline loses approximately 1 million gallons of drinking water daily due to leaks. The $100M replacement is funded through EPA's WIFIA program, state revolving loans, and ARPA funding. Over its lifetime, the new pipeline will save enough water to fill Pineview Reservoir three times.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="section-inner">
+    <p class="section-label">Construction Timeline</p>
+    <h2 class="section-title">Current Schedule</h2>
+    <p class="schedule-updated">Updated June 12, 2026 · Schedule subject to change due to weather and materials availability</p>
+    <div class="schedule-items">
+      <div class="schedule-item">
+        <div class="sch-date">Through April 30, 2026</div>
+        <div>
+          <p class="sch-title">Phase 2 — Canyon Pipeline Installation</p>
+          <p class="sch-desc">Pipeline installation in the Lower Hermitage community is complete. Culinary water flow through the 36-inch pipeline is currently active. Staging area grounds are under restoration.</p>
+        </div>
+        <span class="sch-status sch-complete">Complete</span>
+      </div>
+      <div class="schedule-item">
+        <div class="sch-date">June 15–24, 2026</div>
+        <div>
+          <p class="sch-title">Asphalt Restoration — Fairmount, Cobbles &amp; Hermitage</p>
+          <p class="sch-desc">Road surface restoration in the communities impacted by Phase 2 construction. Contact the PI team with questions.</p>
+        </div>
+        <span class="sch-status sch-active">Active Now</span>
+      </div>
+      <div class="schedule-item">
+        <div class="sch-date">May 1 – Nov 1, 2026</div>
+        <div>
+          <p class="sch-title">East Bench Pipeline Replacement</p>
+          <p class="sch-desc">Two-phase pipeline replacement along the east bench to water storage tanks at 22nd South. The 22nd South Trailhead parking lot is closed to vehicles during this period. Foot traffic is safely accommodated; specific trail sections along active work areas will be closed and posted as work progresses.</p>
+        </div>
+        <span class="sch-status sch-active">Active Now</span>
+      </div>
+      <div class="schedule-item">
+        <div class="sch-date">Ongoing</div>
+        <div>
+          <p class="sch-title">Geotechnical &amp; Survey Work</p>
+          <p class="sch-desc">Crews will continue potholing, geolocating, soil analysis, and pipeline replacement preparation work along the ROW.</p>
+        </div>
+        <span class="sch-status sch-active">Ongoing</span>
+      </div>
+      <div class="schedule-item">
+        <div class="sch-date">Fall 2026</div>
+        <div>
+          <p class="sch-title">Pipeline Staging — Gray Cliff Lodge Area</p>
+          <p class="sch-desc">The staging area across from the Gray Cliff Lodge will be reactivated for next-phase work. No pipeline shipments expected until Fall 2026.</p>
+        </div>
+        <span class="sch-status sch-upcoming">Upcoming</span>
+      </div>
+      <div class="schedule-item">
+        <div class="sch-date">TBA</div>
+        <div>
+          <p class="sch-title">Pineview Reservoir Crossing</p>
+          <p class="sch-desc">A drilling barge will visit Pineview Reservoir to capture soil samples. Pipeline replacement date to be announced. <a href="https://www.ogdencitypipeline.com/_files/ugd/f35286_d1c41329928e47d9a919478247a9622e.pdf" style="color:var(--canyon-stone);">See press release →</a></p>
+        </div>
+        <span class="sch-status sch-upcoming">TBA</span>
+      </div>
+      <div class="schedule-item">
+        <div class="sch-date">Spring 2029</div>
+        <div>
+          <p class="sch-title">Estimated Project Completion</p>
+          <p class="sch-desc">Full pipeline replacement through Ogden Canyon anticipated to be complete.</p>
+        </div>
+        <span class="sch-status sch-upcoming">Target</span>
+      </div>
+    </div>
+    <div class="schedule-hours">
+      <p><strong>Work Hours:</strong> Sunrise to Dusk, Monday–Friday. Nighttime work will not occur unless required for emergent tasks.</p>
+    </div>
+
+    <!-- Trailhead Alert -->
+    <div class="trailhead-alert">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-body">
+        <strong>22nd Street Trailhead — Parking Lot Closed May 1 – November 1, 2026</strong>
+        <p>The trailhead parking lot is being used as a mobilization and staging area for the East Bench pipeline work. Foot traffic is safely accommodated, but certain trail sections along active work will be closed and posted. <a href="https://www.ogdencitypipeline.com/_files/ugd/3299cd_75e51be312164c1d9f4b07bd98201967.pdf" target="_blank">Download the map PDF →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <p class="section-label">Construction Progress</p>
+    <h2 class="section-title">Project Photos</h2>
+    <div class="gallery-grid">
+      <img class="g-wide" src="https://static.wixstatic.com/media/bdc62e_2379d451934147928ba8366a7ea64a56~mv2.jpg" alt="Construction equipment and pipeline in Ogden Canyon">
+      <img src="https://static.wixstatic.com/media/f35286_8b2ade167a5d46f1af158bf51888aa5f~mv2.jpg" alt="Pipeline work">
+      <img src="https://static.wixstatic.com/media/f35286_aa2d2406ca6c40afb507ba33b0d13938~mv2.jpg" alt="Pipeline installation">
+      <img src="https://static.wixstatic.com/media/bdc62e_515758749a6c4ea2872ca812b7034990~mv2.jpg" alt="Construction crew">
+      <img src="https://static.wixstatic.com/media/f35286_c26292ff3d644c4bb9dd577c2444e0f0f003.jpg" alt="Canyon work site">
+      <img src="https://static.wixstatic.com/media/bdc62e_222cb42a49d04f3781f69684e6c08204f003.jpg" alt="Equipment on site">
+      <img src="https://static.wixstatic.com/media/bdc62e_dcc4954816284b8cbf79c329fc6f93b1~mv2.jpg" alt="Pipeline sections">
+      <img src="https://static.wixstatic.com/media/f35286_de2d5acb1b8646268627152883a9cf9cf003.jpg" alt="Restoration work">
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label">Reach Out</p>
+    <h2 class="section-title">Contact Our Team</h2>
+    <div class="contact-grid">
+      <div>
+        <p style="font-family:'Source Serif 4',serif;font-size:1.05rem;color:var(--text-mid);line-height:1.8;margin-bottom:28px;">For project-related inquiries, property access concerns, or to be added to our community coordination list, please reach out using any of the methods below.</p>
+        <div class="contact-info">
+          <div class="contact-card">
+            <div class="contact-card-icon">📞</div>
+            <div>
+              <strong>Project Hotline</strong>
+              <a href="tel:8018388365">801-838-8365</a>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">✉️</div>
+            <div>
+              <strong>Project Email</strong>
+              <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">🏛️</div>
+            <div>
+              <strong>Ogden City</strong>
+              <span>2549 Washington Blvd, Ogden, UT 84401</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <form class="contact-form" onsubmit="return false;">
+          <div class="form-row">
+            <input type="text" placeholder="First Name *" required>
+            <input type="text" placeholder="Last Name">
+          </div>
+          <input type="email" placeholder="Email Address">
+          <input type="tel" placeholder="Phone *" required>
+          <input type="text" placeholder="Property Address (optional)">
+          <textarea placeholder="Your message *" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <img src="https://static.wixstatic.com/media/f35286_3d462d6d96ef4884a120ce61cf7c332e~mv2.png" alt="Ogden City Logo">
+    <div class="footer-text">
+      © 2026 Ogden City · 2549 Washington Blvd, Ogden, UT 84401<br>
+      Ogden Canyon 36-Inch Pipeline Replacement Project · All rights reserved.
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/OgdenCityUtah/">Facebook</a>
+      <a href="https://x.com/OgdenCityUtah">X / Twitter</a>
+      <a href="https://www.instagram.com/ogdencityutah/">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
