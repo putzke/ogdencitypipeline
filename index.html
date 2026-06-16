@@ -583,6 +583,63 @@
   }
   .footer-social a:hover { color: var(--canyon-stone); }
 
+  /* ── HAMBURGER ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    background: none;
+    border: none;
+    margin-left: auto;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile drawer */
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: var(--water-dark);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 8px 0 16px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 13px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.15s;
+  }
+  .mobile-menu a:hover { background: rgba(255,255,255,0.07); }
+  .mobile-menu .mobile-social {
+    display: flex;
+    gap: 16px;
+    padding: 16px 24px 0;
+  }
+  .mobile-menu .mobile-social a {
+    border: none;
+    padding: 0;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.04em;
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     .about-grid, .map-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -592,12 +649,29 @@
     .gallery-grid .g-wide { grid-column: span 1; }
     .schedule-item { grid-template-columns: 1fr; gap: 6px; }
     .nav-links { display: none; }
+    .nav-social { display: none; }
+    .nav-hamburger { display: flex; }
     .hero-stats { gap: 20px; }
+    .phase-badges { gap: 8px; }
+    .map-grid { grid-template-columns: 1fr; }
+    .map-embed { aspect-ratio: 4/3; }
   }
   @media (max-width: 600px) {
-    .hero { padding: 50px 20px 50px; }
-    section { padding: 50px 20px; }
+    .hero { padding: 44px 20px 44px; }
+    section { padding: 44px 20px; }
+    #gallery { padding: 44px 20px; }
     .form-row { grid-template-columns: 1fr; }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; }
+    .stat-num { font-size: 2rem; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .gallery-grid img { height: 160px; }
+    .phase-bar-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .badge { font-size: 0.72rem; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .trailhead-alert { flex-direction: column; gap: 10px; }
+    .contact-card { padding: 16px; }
+    .nav-inner { padding: 8px 16px; }
+    .notice-bar { font-size: 0.78rem; padding: 8px 16px; }
   }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
@@ -628,6 +702,24 @@
       <a href="https://www.facebook.com/OgdenCityUtah/" title="Facebook">f</a>
       <a href="https://x.com/OgdenCityUtah" title="X / Twitter">𝕏</a>
       <a href="https://www.instagram.com/ogdencityutah/" title="Instagram">ig</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <!-- Mobile drawer -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#map" class="mobile-link">Map</a>
+    <a href="#news" class="mobile-link">News</a>
+    <a href="#faq" class="mobile-link">FAQ</a>
+    <a href="#schedule" class="mobile-link">Schedule</a>
+    <a href="#gallery" class="mobile-link">Photos</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+    <div class="mobile-social">
+      <a href="https://www.facebook.com/OgdenCityUtah/">Facebook</a>
+      <a href="https://x.com/OgdenCityUtah">X / Twitter</a>
+      <a href="https://www.instagram.com/ogdencityutah/">Instagram</a>
     </div>
   </div>
 </nav>
@@ -956,5 +1048,20 @@
   </div>
 </footer>
 
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  // Close menu when a link is tapped
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+</script>
 </body>
 </html>
