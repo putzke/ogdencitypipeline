@@ -564,6 +564,55 @@
     background: rgba(139,74,43,0.2) !important;
   }
 
+  /* ── MEDIA Q&A TOOL ── */
+  .qa-tool { margin-top: 56px; border-top: 2px solid var(--earth); padding-top: 40px; }
+  .qa-tool-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 28px; }
+  .qa-tool-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.6rem; font-weight: 700; text-transform: uppercase; color: var(--water-dark); line-height: 1.1; }
+  .qa-tool-subtitle { font-size: 0.85rem; color: var(--text-light); margin-top: 6px; line-height: 1.5; }
+  .qa-search-wrap { position: relative; width: 100%; max-width: 520px; }
+  .qa-search-wrap input { width: 100%; padding: 13px 16px 13px 44px; border: 2px solid #d0ccc6; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.95rem; color: var(--text-dark); background: var(--white); outline: none; transition: border-color 0.2s; }
+  .qa-search-wrap input:focus { border-color: var(--water-blue); }
+  .qa-search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 1rem; pointer-events: none; }
+  .qa-search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1rem; color: var(--text-light); cursor: pointer; display: none; padding: 4px; }
+  .qa-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .qa-tab { padding: 8px 18px; border-radius: 20px; border: 2px solid #d0ccc6; background: var(--white); font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-mid); cursor: pointer; transition: all 0.15s; }
+  .qa-tab:hover { border-color: var(--water-blue); color: var(--water-blue); }
+  .qa-tab.active { background: var(--water-dark); border-color: var(--water-dark); color: var(--white); }
+  .qa-tab-count { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.25); font-size: 0.7rem; margin-left: 6px; font-weight: 700; }
+  .qa-tab:not(.active) .qa-tab-count { background: var(--earth); color: var(--text-light); }
+  .qa-results-count { font-size: 0.78rem; color: var(--text-light); margin-bottom: 14px; font-weight: 500; }
+  .qa-list { display: flex; flex-direction: column; gap: 8px; }
+  .qa-card { border: 1px solid #e8e0d6; border-radius: 6px; overflow: hidden; transition: box-shadow 0.15s; background: var(--white); }
+  .qa-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .qa-card.hidden { display: none; }
+  .qa-question { width: 100%; text-align: left; background: none; border: none; padding: 18px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--water-dark); line-height: 1.4; }
+  .qa-question:hover { background: var(--sky); }
+  .qa-theme-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .theme-1 .qa-theme-dot { background: var(--water-blue); }
+  .theme-2 .qa-theme-dot { background: var(--notice-amber); }
+  .theme-3 .qa-theme-dot { background: var(--accent-green); }
+  .qa-chevron { margin-left: auto; font-size: 0.75rem; color: var(--text-light); flex-shrink: 0; transition: transform 0.2s; }
+  .qa-card.open .qa-chevron { transform: rotate(180deg); }
+  .qa-answer { display: none; padding: 0 20px 20px 42px; border-top: 1px solid var(--earth); }
+  .qa-card.open .qa-answer { display: block; }
+  .qa-answer-text { font-family: 'Source Serif 4', serif; font-size: 0.95rem; color: var(--text-mid); line-height: 1.8; padding-top: 16px; }
+  .qa-contact { margin-top: 16px; padding: 12px 16px; border-radius: 6px; display: flex; align-items: flex-start; gap: 10px; font-size: 0.8rem; line-height: 1.6; }
+  .qa-contact.direct { background: #d4edda; border-left: 3px solid #1a6630; }
+  .qa-contact.route { background: #e8f0fb; border-left: 3px solid var(--water-blue); }
+  .qa-contact-label { font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px; }
+  .qa-contact.direct .qa-contact-label { color: #1a6630; }
+  .qa-contact.route .qa-contact-label { color: var(--water-blue); }
+  .qa-contact a { color: var(--water-dark); font-weight: 600; }
+  .qa-contact a:hover { color: var(--canyon-rust); }
+  .qa-no-results { display: none; text-align: center; padding: 48px 24px; background: var(--earth); border-radius: 8px; }
+  .qa-no-results.visible { display: block; }
+  .qa-no-results p { font-size: 0.95rem; color: var(--text-mid); margin-bottom: 20px; }
+  .qa-fallback-card { background: var(--white); border-radius: 6px; padding: 20px; display: inline-block; text-align: left; box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-width: 360px; width: 100%; }
+  .qa-fallback-card strong { display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 8px; }
+  .qa-fallback-card a { display: block; font-weight: 600; color: var(--water-dark); text-decoration: none; font-size: 0.95rem; }
+  .qa-fallback-card a:hover { color: var(--canyon-rust); }
+  @media (max-width: 900px) { .qa-tool-header { flex-direction: column; } .qa-search-wrap { max-width: 100%; } }
+
   /* ── PINEVIEW RESERVOIR ── */
   #pineview { background: var(--white); }
   .pineview-draft-banner {
@@ -1193,10 +1242,394 @@
         </div>
       </div>
     </div>
+    <!-- MEDIA Q&A TOOL -->
+    <div class="qa-tool">
+      <div class="qa-tool-header">
+        <div>
+          <div class="qa-tool-title">Pineview Reservoir — Media Q&amp;A</div>
+          <div class="qa-tool-subtitle">For media inquiries specific to the Pineview Reservoir crossing. Search by keyword or browse by topic.<br>For general project questions, see the <a href="#faq">Project FAQ</a> section above.</div>
+        </div>
+        <div class="qa-search-wrap">
+          <span class="qa-search-icon">🔍</span>
+          <input type="text" id="qaSearch" placeholder="Search questions… e.g. drought, fish, cost" autocomplete="off">
+          <button class="qa-search-clear" id="qaSearchClear" title="Clear search">✕</button>
+        </div>
+      </div>
+
+      <!-- Theme tabs -->
+      <div class="qa-tabs">
+        <button class="qa-tab active" data-theme="all">All Topics <span class="qa-tab-count">21</span></button>
+        <button class="qa-tab" data-theme="1">💧 Water Reliability <span class="qa-tab-count">5</span></button>
+        <button class="qa-tab" data-theme="2">☀️ Drought Realities <span class="qa-tab-count">6</span></button>
+        <button class="qa-tab" data-theme="3">🌿 Responsible Stewardship <span class="qa-tab-count">10</span></button>
+      </div>
+
+      <div class="qa-results-count" id="qaCount">Showing all 21 questions</div>
+
+      <div class="qa-list" id="qaList">
+
+        <!-- THEME 1 — WATER RELIABILITY -->
+        <div class="qa-card theme-1" data-theme="1" data-q="why does this pipeline need to be replaced now end of design life losing water million gallons">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            Why does this pipeline need to be replaced now?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">The pipeline has reached the end of its design life after approximately 60 years of service beneath Pineview Reservoir and nearly 100 years through Ogden Canyon. The system is currently losing an estimated 1 million gallons of treated drinking water per day. Replacement is essential to protect water system reliability for the more than 120,000 residents who depend on this transmission corridor.</div>
+            <div class="qa-contact direct">
+              <div>
+                <div class="qa-contact-label">✅ Direct Media Contact</div>
+                Mike McBride, Communications Director, Ogden City<br>
+                <a href="mailto:MikeMcBride@ogdencity.gov">MikeMcBride@ogdencity.gov</a> · <a href="tel:8016298988">801-629-8988</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-1" data-theme="1" data-q="why wasn't this fixed sooner planning funding federal wifia infrastructure">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            Why wasn't this fixed sooner?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">Infrastructure projects of this scale require years of planning, environmental review, engineering, and funding assembly. Ogden City secured federal WIFIA financing and additional state and federal grants to fund the $100 million project. The complexity of replacing a pipeline beneath a reservoir, through a canyon, required extensive study before construction could begin.</div>
+            <div class="qa-contact direct">
+              <div>
+                <div class="qa-contact-label">✅ Direct Media Contact</div>
+                Mike McBride, Communications Director, Ogden City<br>
+                <a href="mailto:MikeMcBride@ogdencity.gov">MikeMcBride@ogdencity.gov</a> · <a href="tel:8016298988">801-629-8988</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-1" data-theme="1" data-q="alternatives draining reservoir directional drilling lining barge options considered">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            Have you considered all alternatives to draining the reservoir?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">Yes. The project team evaluated cured-in-place pipe lining, horizontal directional drilling, barge-based installation, new overland alignments, and deferred replacement — all were found to be infeasible, higher risk, significantly more expensive, or unable to address the pipeline's structural condition. The selected approach — lowering the reservoir and installing a parallel pipeline — was determined to be the most practical and cost-effective method.</div>
+            <div class="qa-contact route">
+              <div>
+                <div class="qa-contact-label">🔵 Technical Question — Route Through Hotline</div>
+                For detailed technical questions on construction alternatives, contact the project hotline and your inquiry will be directed to the appropriate engineering contact.<br>
+                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-1" data-theme="1" data-q="what happens pipeline fails before replace emergency catastrophic failure">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            What happens if the pipeline fails before you can replace it?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">A catastrophic failure would interrupt water supply to Ogden City and require emergency repairs under far more difficult conditions, at much greater cost, and with no guarantee of a rapid restoration of service. There are no regional interconnects at sufficient capacity to substitute for this pipeline during a multi-year repair scenario. This is precisely why timely replacement is critical.</div>
+            <div class="qa-contact direct">
+              <div>
+                <div class="qa-contact-label">✅ Direct Media Contact</div>
+                Mike McBride, Communications Director, Ogden City<br>
+                <a href="mailto:MikeMcBride@ogdencity.gov">MikeMcBride@ogdencity.gov</a> · <a href="tel:8016298988">801-629-8988</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-1" data-theme="1" data-q="how much cost project paying funding wifia federal state grants 100 million">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            How much is this project costing and who is paying for it?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">The total project cost is approximately $100 million across all phases through 2029. Funding comes from the EPA's Water Infrastructure Finance and Innovation Act (WIFIA) program, the Drinking Water State Revolving Fund, and additional federal and state grants. Ogden City rate payers contribute through the standard utility funding structure.</div>
+            <div class="qa-contact direct">
+              <div>
+                <div class="qa-contact-label">✅ Direct Media Contact</div>
+                Mike McBride, Communications Director, Ogden City<br>
+                <a href="mailto:MikeMcBride@ogdencity.gov">MikeMcBride@ogdencity.gov</a> · <a href="tel:8016298988">801-629-8988</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- THEME 2 — DROUGHT REALITIES -->
+        <div class="qa-card theme-2" data-theme="2" data-q="why draining reservoir during drought low water levels snowpack">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            Why are you draining the reservoir during a drought?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">The reservoir was already going to reach historically low levels this season because of the worst snowpack year on modern record — independent of this project. The construction drawdown works within that naturally occurring low window. Rather than drawing from other interconnected regional water sources, the project takes advantage of the drought-driven conditions to minimize overall impact on the regional water system.</div>
+            <div class="qa-contact direct">
+              <div>
+                <div class="qa-contact-label">✅ Direct Media Contact</div>
+                Mike McBride, Communications Director, Ogden City<br>
+                <a href="mailto:MikeMcBride@ogdencity.gov">MikeMcBride@ogdencity.gov</a> · <a href="tel:8016298988">801-629-8988</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-2" data-theme="2" data-q="is ogden city causing low reservoir levels drought pineview 20 percent">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            Is Ogden City causing the low reservoir levels?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">No. Pineview Reservoir is projected to reach approximately 20% of capacity this season due to drought conditions alone — before any construction-related release. The project's additional controlled release occurs within that already-reduced pool. Weber Basin Water Conservancy District has already implemented a 20% secondary water reduction for 2026 due to drought, unrelated to this project.</div>
+            <div class="qa-contact route">
+              <div>
+                <div class="qa-contact-label">🔵 Technical Question — Route Through Hotline</div>
+                For reservoir level data and drought hydrology questions, contact the project hotline and your inquiry will be directed to Weber Basin Water Conservancy District.<br>
+                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-2" data-theme="2" data-q="can't wait wetter year delay postpone snowpack future">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            Can't you wait for a wetter year?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">A wetter year would require releasing significantly more stored water — water the region cannot afford to lose during or after a drought cycle. This window, where drought-driven low levels reduce the additional release needed, is a rare and time-sensitive opportunity. Delaying also extends the period of risk from a pipeline failure and continues the loss of approximately 1 million gallons of treated water per day.</div>
+            <div class="qa-contact direct">
+              <div>
+                <div class="qa-contact-label">✅ Direct Media Contact</div>
+                Mike McBride, Communications Director, Ogden City<br>
+                <a href="mailto:MikeMcBride@ogdencity.gov">MikeMcBride@ogdencity.gov</a> · <a href="tel:8016298988">801-629-8988</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-2" data-theme="2" data-q="how low will reservoir get elevation level capacity percent">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            How low will the reservoir get?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">Pineview is projected to reach approximately 20% of capacity due to drought alone this season. Construction operations will require a further controlled drawdown beyond that natural low to expose the pipeline alignment. The specific target elevation is being finalized through engineering and permitting coordination with the U.S. Bureau of Reclamation, which owns and operates Pineview Dam.</div>
+            <div class="qa-contact route">
+              <div>
+                <div class="qa-contact-label">🔵 Technical Question — Route Through Hotline</div>
+                For reservoir elevation and drawdown specifics, contact the project hotline and your inquiry will be directed to the U.S. Bureau of Reclamation.<br>
+                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-2" data-theme="2" data-q="when will reservoir refill snowmelt inflow january 2027">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            When will the reservoir refill?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">Refill depends on snowpack and natural inflows from the Ogden River and its tributaries. Construction is targeted to be complete and the dam returned to normal operations by late January 2027, at which point natural refill can begin. Full refill to normal pool is contingent on subsequent winter snowpack.</div>
+            <div class="qa-contact route">
+              <div>
+                <div class="qa-contact-label">🔵 Technical Question — Route Through Hotline</div>
+                For reservoir refill hydrology questions, contact the project hotline and your inquiry will be directed to Weber Basin Water Conservancy District.<br>
+                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-2" data-theme="2" data-q="secondary water users irrigation pineview water systems 20 percent reduction">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            What about secondary water users and irrigation?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">Weber Basin has already implemented a 20% secondary water reduction for 2026 due to drought. The project team is coordinating with Pineview Water Systems, which serves secondary water users in the Ogden Valley, to ensure their operational needs are factored into the drawdown timing and volume planning.</div>
+            <div class="qa-contact route">
+              <div>
+                <div class="qa-contact-label">🔵 Technical Question — Route Through Hotline</div>
+                For secondary water and irrigation impact questions, contact the project hotline and your inquiry will be directed to Pineview Water Systems.<br>
+                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- THEME 3 — RESPONSIBLE STEWARDSHIP -->
+        <div class="qa-card theme-3" data-theme="3" data-q="where is water going drain reservoir ogden river weber river downstream beneficial use">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            Where is the water going when they drain the reservoir?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">All water released from Pineview Reservoir flows downstream through the Ogden River to the Weber River, where it serves beneficial uses including potable water systems, agricultural irrigation, wildlife habitat, and eventually contributes to Great Salt Lake inflows. No water is wasted — every gallon released goes to beneficial downstream uses.</div>
+            <div class="qa-contact direct">
+              <div>
+                <div class="qa-contact-label">✅ Direct Media Contact</div>
+                Mike McBride, Communications Director, Ogden City<br>
+                <a href="mailto:MikeMcBride@ogdencity.gov">MikeMcBride@ogdencity.gov</a> · <a href="tel:8016298988">801-629-8988</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-3" data-theme="3" data-q="drinking water supply at risk safe reliable service interruption">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            Is the drinking water supply at risk?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">No — the project actually reduces risk. The existing pipeline carries the majority of Ogden City's water supply, and its replacement eliminates the risk of catastrophic failure that could leave more than 120,000 people without water. The existing pipeline remains in service during construction and will afterward serve as a redundant backup line — giving water managers two independent transmission lines for the first time.</div>
+            <div class="qa-contact direct">
+              <div>
+                <div class="qa-contact-label">✅ Direct Media Contact</div>
+                Mike McBride, Communications Director, Ogden City<br>
+                <a href="mailto:MikeMcBride@ogdencity.gov">MikeMcBride@ogdencity.gov</a> · <a href="tel:8016298988">801-629-8988</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-3" data-theme="3" data-q="fish wildlife reservoir habitat spawning protection plan UDWR">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            What about fish and wildlife in the reservoir?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">The Utah Division of Wildlife Resources is co-developing a Fish and Wildlife Protection Plan with the project team. Drawdown timing will be coordinated to avoid critical spawning periods to the extent possible. Mitigation measures will be implemented consistent with the protection plan requirements.</div>
+            <div class="qa-contact route">
+              <div>
+                <div class="qa-contact-label">🔵 Technical Question — Route Through Hotline</div>
+                For fish and wildlife impact questions, contact the project hotline and your inquiry will be directed to the Utah Division of Wildlife Resources.<br>
+                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-3" data-theme="3" data-q="bald eagles migratory birds forest service sensitive species impact">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            What is the impact on bald eagles and migratory birds?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">The U.S. Forest Service has identified bald eagle as a Regional Forester Sensitive Species with increased prevalence in the project area. Pre-construction surveys and monitoring protocols are being developed in coordination with the U.S. Forest Service as part of the Special Use Permit process.</div>
+            <div class="qa-contact route">
+              <div>
+                <div class="qa-contact-label">🔵 Technical Question — Route Through Hotline</div>
+                For bald eagle and migratory bird questions, contact the project hotline and your inquiry will be directed to the U.S. Forest Service.<br>
+                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-3" data-theme="3" data-q="authorized federal state agencies permits bureau reclamation forest service EPA">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            Is this project authorized by federal and state agencies?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">Yes. The project is authorized and overseen by the U.S. Bureau of Reclamation, which owns Pineview Dam and must authorize all release operations. The U.S. Forest Service is issuing a Special Use Permit for the reservoir crossing work. The EPA reviewed the project through the WIFIA financing process. All reservoir release operations will be conducted in compliance with state and federal water rights law.</div>
+            <div class="qa-contact route">
+              <div>
+                <div class="qa-contact-label">🔵 Technical Question — Route Through Hotline</div>
+                For permitting and federal authorization questions, contact the project hotline and your inquiry will be directed to the U.S. Bureau of Reclamation.<br>
+                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-3" data-theme="3" data-q="old pipeline removed stays bottom reservoir redundant backup parallel">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            What happens to the old pipeline — is it being removed?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">No. The existing pipeline will remain in place at the bottom of the reservoir. A new parallel 36-inch pipeline is being installed alongside it within the established right-of-way. After construction, the existing pipeline will be rehabilitated and serve as a redundant backup transmission line — giving water managers two independent lines through the reservoir for the first time in the system's history.</div>
+            <div class="qa-contact direct">
+              <div>
+                <div class="qa-contact-label">✅ Direct Media Contact</div>
+                Mike McBride, Communications Director, Ogden City<br>
+                <a href="mailto:MikeMcBride@ogdencity.gov">MikeMcBride@ogdencity.gov</a> · <a href="tel:8016298988">801-629-8988</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-3" data-theme="3" data-q="recreation boating fishing yacht club marina access low pool summer">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            What about recreation — boating, fishing, the yacht club?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">The project team is committed to early and transparent communication with recreation users. Outreach to the Pineview Reservoir Yacht Club, marina operators, and Utah State Parks has been ongoing since early 2026. Updated boat ramp access maps and reservoir level information will be posted regularly on this website. The City recognizes that lower reservoir levels will affect recreation this season and is working to minimize those impacts.</div>
+            <div class="qa-contact direct">
+              <div>
+                <div class="qa-contact-label">✅ Direct Media Contact</div>
+                Mike McBride, Communications Director, Ogden City<br>
+                <a href="mailto:MikeMcBride@ogdencity.gov">MikeMcBride@ogdencity.gov</a> · <a href="tel:8016298988">801-629-8988</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-3" data-theme="3" data-q="dam safe drawdown pineview bureau reclamation monitoring">
+          <button class="qa-question" onclick="toggleQA(this)">
+            <span class="qa-theme-dot"></span>
+            Is the dam safe during the drawdown?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">Yes. Pineview Dam is owned and operated by the U.S. Bureau of Reclamation, which will oversee all drawdown operations. Dam safety monitoring will be maintained throughout the construction window. All release operations are subject to USBR authorization and conducted under their direct supervision.</div>
+            <div class="qa-contact route">
+              <div>
+                <div class="qa-contact-label">🔵 Technical Question — Route Through Hotline</div>
+                For dam safety questions, contact the project hotline and your inquiry will be directed to the U.S. Bureau of Reclamation.<br>
+                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end qa-list -->
+
+      <!-- No results fallback -->
+      <div class="qa-no-results" id="qaNoResults">
+        <p>No matching questions found. Try different keywords, or contact our media representative directly.</p>
+        <div class="qa-fallback-card">
+          <strong>📞 Media Contact</strong>
+          <a href="mailto:MikeMcBride@ogdencity.gov">MikeMcBride@ogdencity.gov</a>
+          <a href="tel:8016298988" style="margin-top:4px;">801-629-8988</a>
+          <a href="tel:8018388365" style="margin-top:4px;font-weight:400;color:var(--text-light);font-size:0.85rem;">Project Hotline: 801-838-8365</a>
+        </div>
+      </div>
+
+    </div><!-- end qa-tool -->
+
   </div>
 </section>
-
-<!-- GALLERY -->
 <section id="gallery">
   <div class="section-inner">
     <p class="section-label">Construction Progress</p>
@@ -1286,7 +1719,61 @@
 </footer>
 
 <script>
-  const hamburger = document.getElementById('hamburger');
+  // ── Q&A ACCORDION ──
+  function toggleQA(btn) {
+    const card = btn.closest('.qa-card');
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.qa-card.open').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+
+  // ── Q&A SEARCH & FILTER ──
+  const qaSearch = document.getElementById('qaSearch');
+  const qaSearchClear = document.getElementById('qaSearchClear');
+  const qaCount = document.getElementById('qaCount');
+  const qaNoResults = document.getElementById('qaNoResults');
+  const qaCards = document.querySelectorAll('.qa-card');
+  const qaTabs = document.querySelectorAll('.qa-tab');
+  let activeTheme = 'all';
+
+  function updateQA() {
+    const term = qaSearch.value.toLowerCase().trim();
+    qaSearchClear.style.display = term ? 'block' : 'none';
+    let visible = 0;
+    qaCards.forEach(card => {
+      const q = card.querySelector('.qa-question').textContent.toLowerCase();
+      const data = (card.dataset.q || '').toLowerCase();
+      const theme = card.dataset.theme;
+      const matchesSearch = !term || q.includes(term) || data.includes(term);
+      const matchesTheme = activeTheme === 'all' || theme === activeTheme;
+      if (matchesSearch && matchesTheme) {
+        card.classList.remove('hidden');
+        visible++;
+      } else {
+        card.classList.add('hidden');
+        card.classList.remove('open');
+      }
+    });
+    qaCount.textContent = term
+      ? `Showing ${visible} of 21 questions matching "${qaSearch.value}"`
+      : activeTheme === 'all'
+        ? `Showing all 21 questions`
+        : `Showing ${visible} question${visible !== 1 ? 's' : ''}`;
+    qaNoResults.classList.toggle('visible', visible === 0);
+  }
+
+  qaSearch.addEventListener('input', updateQA);
+  qaSearchClear.addEventListener('click', () => { qaSearch.value = ''; updateQA(); qaSearch.focus(); });
+
+  qaTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      qaTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      activeTheme = tab.dataset.theme;
+      updateQA();
+    });
+  });
+</script>
   const mobileMenu = document.getElementById('mobileMenu');
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('open');
