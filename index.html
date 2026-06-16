@@ -7,7 +7,39 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
+  .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--water-dark);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 0 0 6px 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  z-index: 9999;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+*:focus-visible {
+  outline: 3px solid #2A6D8F;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offset: 3px; }
+:root {
     --canyon-rust:   #8B4A2B;
     --canyon-stone:  #C4A882;
     --water-blue:    #2A6D8F;
@@ -16,7 +48,7 @@
     --earth:         #F5EFE6;
     --text-dark:     #1C1C1C;
     --text-mid:      #4A4A4A;
-    --text-light:    #7A7A7A;
+    --text-light:    #595959;
     --white:         #FFFFFF;
     --accent-green:  #4A7C59;
     --notice-amber:  #D4820A;
@@ -955,12 +987,14 @@
 <body>
 
 <!-- NOTICE BAR -->
-<div class="notice-bar">
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<div class="notice-bar" role="banner">
   📣 Latest Notice: Asphalt restoration in Fairmount, Cobbles &amp; Hermitage — June 15–24, 2026
 </div>
 
 <!-- NAV -->
-<nav>
+<nav role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a class="nav-logo" href="#top">
       <img src="images/ogdencity-logo.png" alt="Ogden City Logo">
@@ -976,11 +1010,11 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-social">
-      <a href="https://www.facebook.com/OgdenCityUtah/" title="Facebook" target="_blank" rel="noopener">f</a>
-      <a href="https://x.com/OgdenCityUtah" title="X / Twitter" target="_blank" rel="noopener">𝕏</a>
-      <a href="https://www.instagram.com/ogdencityutah/" title="Instagram" target="_blank" rel="noopener">ig</a>
+      <a href="https://www.facebook.com/OgdenCityUtah/" aria-label="Ogden City on Facebook" target="_blank" rel="noopener">f</a>
+      <a href="https://x.com/OgdenCityUtah" aria-label="Ogden City on X / Twitter" target="_blank" rel="noopener">𝕏</a>
+      <a href="https://www.instagram.com/ogdencityutah/" aria-label="Ogden City on Instagram" target="_blank" rel="noopener">ig</a>
     </div>
-    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -1003,6 +1037,7 @@
 </nav>
 
 <!-- HERO -->
+<main id="main-content">
 <section class="hero" id="top">
   <div class="hero-inner">
     <p class="hero-eyebrow">Ogden City, Utah — Public Infrastructure</p>
@@ -1034,25 +1069,25 @@
 </section>
 
 <!-- PHASE STATUS BAR -->
-<div class="phase-bar">
+<div class="phase-bar" role="region" aria-label="Project phase status">
   <div class="phase-bar-inner">
     <span class="phase-label">Project Status:</span>
     <div class="phase-badges">
-      <span class="badge badge-complete"><span class="badge-dot"></span>Phase 1 — Complete</span>
-      <span class="badge badge-complete"><span class="badge-dot"></span>Phase 2 — Complete</span>
-      <span class="badge badge-active"><span class="badge-dot"></span>East Bench — Active (May–Nov 2026)</span>
-      <span class="badge badge-active"><span class="badge-dot"></span>Pineview Reservoir Crossing — In Progress</span>
+      <span class="badge badge-complete"><span class="badge-dot" aria-hidden="true"></span>Phase 1 — Complete</span>
+      <span class="badge badge-complete"><span class="badge-dot" aria-hidden="true"></span>Phase 2 — Complete</span>
+      <span class="badge badge-active"><span class="badge-dot" aria-hidden="true"></span>East Bench — Active (May–Nov 2026)</span>
+      <span class="badge badge-active"><span class="badge-dot" aria-hidden="true"></span>Pineview Reservoir Crossing — In Progress</span>
     </div>
   </div>
 </div>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" aria-labelledby="about-title">
   <div class="section-inner">
     <div class="about-grid">
       <div>
         <p class="section-label">About the Project</p>
-        <h2 class="section-title">A Century-Old Lifeline, Renewed</h2>
+        <h2 class="section-title" id="about-title">A Century-Old Lifeline, Renewed</h2>
         <div class="about-body">
           <p>Ogden City is replacing a critical 36-inch diameter water transmission pipeline that conveys water from the City's wellfield adjacent to Pineview Reservoir, through Ogden Canyon, and to the City's 23rd Street reservoirs. This pipeline has served Ogden City well for nearly 100 years and needs to be replaced.</p>
           <p>The project will be completed in multiple phases between 2025 and 2029. Ogden City has selected Sunrise Engineering as the design engineer for the project and Whitaker Construction as the CMGC contractor for the project.</p>
@@ -1081,10 +1116,10 @@
 </section>
 
 <!-- MAP -->
-<section id="map">
+<section id="map" aria-labelledby="map-title">
   <div class="section-inner">
     <p class="section-label">Project Area</p>
-    <h2 class="section-title">Pipeline Replacement Construction Portal</h2>
+    <h2 class="section-title" id="map-title">Pipeline Replacement Construction Portal</h2>
     <div class="map-grid">
       <div class="map-embed">
         <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1B2m9nEBgqw24ifWMVIJZ8tC_QQITgNE&ehbc=2E312F" allowfullscreen loading="lazy"></iframe>
@@ -1112,10 +1147,10 @@
 </section>
 
 <!-- NEWS -->
-<section id="news">
+<section id="news" aria-labelledby="news-title">
   <div class="section-inner">
     <p class="section-label">In the News</p>
-    <h2 class="section-title">Media Coverage</h2>
+    <h2 class="section-title" id="news-title">Media Coverage</h2>
     <div class="news-grid">
       <a class="news-card" href="https://www.ksl.com/article/50870429/could-a-new-100-million-pipeline-help-the-great-salt-lake-and-birds" target="_blank">
         <span class="news-source">KSL News</span>
@@ -1137,10 +1172,10 @@
 </section>
 
 <!-- FAQ -->
-<section id="faq">
+<section id="faq" aria-labelledby="faq-title">
   <div class="section-inner">
     <p class="section-label">Common Questions</p>
-    <h2 class="section-title">Frequently Asked Questions</h2>
+    <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
     <div class="faq-grid">
       <div class="faq-item">
         <p class="faq-q">Can I expect water service interruptions?</p>
@@ -1163,10 +1198,10 @@
 </section>
 
 <!-- SCHEDULE -->
-<section id="schedule">
+<section id="schedule" aria-labelledby="schedule-title">
   <div class="section-inner">
     <p class="section-label">Construction Timeline</p>
-    <h2 class="section-title">Current Schedule</h2>
+    <h2 class="section-title" id="schedule-title">Current Schedule</h2>
     <p class="schedule-updated">Updated June 12, 2026 · Schedule subject to change due to weather and materials availability</p>
     <div class="schedule-items">
       <div class="schedule-item">
@@ -1242,11 +1277,11 @@
 </section>
 
 <!-- PINEVIEW RESERVOIR -->
-<section id="pineview">
+<section id="pineview" aria-labelledby="pineview-title">
   <div class="section-inner">
     <div class="pineview-draft-banner">⚠️ Draft — Pending final review by Sunrise Engineering Public Involvement &amp; Ogden City Communications</div>
     <p class="section-label">Press Release</p>
-    <h2 class="section-title">Pineview Reservoir Pipeline Crossing</h2>
+    <h2 class="section-title" id="pineview-title">Pineview Reservoir Pipeline Crossing</h2>
 
     <!-- Download bar -->
     <div class="pineview-download">
@@ -1284,19 +1319,19 @@
           <p class="section-label" style="margin-bottom: 16px;">Media Graphics</p>
           <div class="media-placeholder-grid">
             <div class="media-placeholder">
-              <div class="media-placeholder-icon">🗺️</div>
+              <div class="media-placeholder-icon" aria-hidden="true">🗺️</div>
               <strong>Reservoir Crossing Map</strong>
               <span>Pipeline alignment and crossing area diagram</span>
               <span class="coming-soon">Coming Soon</span>
             </div>
             <div class="media-placeholder">
-              <div class="media-placeholder-icon">📊</div>
+              <div class="media-placeholder-icon" aria-hidden="true">📊</div>
               <strong>Construction Diagram</strong>
               <span>Installation method cross-section graphic</span>
               <span class="coming-soon">Coming Soon</span>
             </div>
             <div class="media-placeholder">
-              <div class="media-placeholder-icon">📸</div>
+              <div class="media-placeholder-icon" aria-hidden="true">📸</div>
               <strong>Project Photo</strong>
               <span>Site photography for media use</span>
               <span class="coming-soon">Coming Soon</span>
@@ -1353,9 +1388,10 @@
           <div class="qa-tool-title">Pineview Reservoir — Media Q&amp;A</div>
           <div class="qa-tool-subtitle">For media inquiries specific to the Pineview Reservoir crossing. Search by keyword or browse by topic.<br>For general project questions, see the <a href="#faq">Project FAQ</a> section above.</div>
         </div>
-        <div class="qa-search-wrap">
+        <div class="qa-search-wrap" role="search">
           <span class="qa-search-icon">🔍</span>
-          <input type="text" id="qaSearch" placeholder="Search questions… e.g. drought, fish, cost" autocomplete="off">
+          <label for="qaSearch" class="sr-only">Search Pineview Reservoir Q&amp;A questions</label>
+          <input type="text" id="qaSearch" placeholder="Search questions… e.g. drought, fish, cost" autocomplete="off" aria-describedby="qaCount">
           <button class="qa-search-clear" id="qaSearchClear" title="Clear search">✕</button>
         </div>
       </div>
@@ -1370,11 +1406,11 @@
 
       <div class="qa-results-count" id="qaCount">Showing all 21 questions</div>
 
-      <div class="qa-list" id="qaList">
+      <div class="qa-list" id="qaList" role="list" aria-label="Pineview Reservoir questions and answers">
 
         <!-- THEME 1 — WATER RELIABILITY -->
-        <div class="qa-card theme-1" data-theme="1" data-q="why does this pipeline need to be replaced now end of design life losing water million gallons">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-1" role="listitem" data-theme="1" data-q="why does this pipeline need to be replaced now end of design life losing water million gallons">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             Why does this pipeline need to be replaced now?
             <span class="qa-chevron">▼</span>
@@ -1391,8 +1427,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-1" data-theme="1" data-q="why wasn't this fixed sooner planning funding federal wifia infrastructure">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-1" role="listitem" data-theme="1" data-q="why wasn't this fixed sooner planning funding federal wifia infrastructure">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             Why wasn't this fixed sooner?
             <span class="qa-chevron">▼</span>
@@ -1409,8 +1445,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-1" data-theme="1" data-q="alternatives draining reservoir directional drilling lining barge options considered">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-1" role="listitem" data-theme="1" data-q="alternatives draining reservoir directional drilling lining barge options considered">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             Have you considered all alternatives to draining the reservoir?
             <span class="qa-chevron">▼</span>
@@ -1427,8 +1463,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-1" data-theme="1" data-q="what happens pipeline fails before replace emergency catastrophic failure">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-1" role="listitem" data-theme="1" data-q="what happens pipeline fails before replace emergency catastrophic failure">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             What happens if the pipeline fails before you can replace it?
             <span class="qa-chevron">▼</span>
@@ -1445,8 +1481,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-1" data-theme="1" data-q="how much cost project paying funding wifia federal state grants 100 million">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-1" role="listitem" data-theme="1" data-q="how much cost project paying funding wifia federal state grants 100 million">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             How much is this project costing and who is paying for it?
             <span class="qa-chevron">▼</span>
@@ -1464,8 +1500,8 @@
         </div>
 
         <!-- THEME 2 — DROUGHT REALITIES -->
-        <div class="qa-card theme-2" data-theme="2" data-q="why draining reservoir during drought low water levels snowpack">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-2" role="listitem" data-theme="2" data-q="why draining reservoir during drought low water levels snowpack">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             Why are you draining the reservoir during a drought?
             <span class="qa-chevron">▼</span>
@@ -1482,8 +1518,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-2" data-theme="2" data-q="is ogden city causing low reservoir levels drought pineview 20 percent">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-2" role="listitem" data-theme="2" data-q="is ogden city causing low reservoir levels drought pineview 20 percent">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             Is Ogden City causing the low reservoir levels?
             <span class="qa-chevron">▼</span>
@@ -1500,8 +1536,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-2" data-theme="2" data-q="can't wait wetter year delay postpone snowpack future">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-2" role="listitem" data-theme="2" data-q="can't wait wetter year delay postpone snowpack future">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             Can't you wait for a wetter year?
             <span class="qa-chevron">▼</span>
@@ -1518,8 +1554,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-2" data-theme="2" data-q="how low will reservoir get elevation level capacity percent">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-2" role="listitem" data-theme="2" data-q="how low will reservoir get elevation level capacity percent">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             How low will the reservoir get?
             <span class="qa-chevron">▼</span>
@@ -1536,8 +1572,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-2" data-theme="2" data-q="when will reservoir refill snowmelt inflow january 2027">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-2" role="listitem" data-theme="2" data-q="when will reservoir refill snowmelt inflow january 2027">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             When will the reservoir refill?
             <span class="qa-chevron">▼</span>
@@ -1554,8 +1590,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-2" data-theme="2" data-q="secondary water users irrigation pineview water systems 20 percent reduction">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-2" role="listitem" data-theme="2" data-q="secondary water users irrigation pineview water systems 20 percent reduction">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             What about secondary water users and irrigation?
             <span class="qa-chevron">▼</span>
@@ -1573,8 +1609,8 @@
         </div>
 
         <!-- THEME 3 — RESPONSIBLE STEWARDSHIP -->
-        <div class="qa-card theme-3" data-theme="3" data-q="where is water going drain reservoir ogden river weber river downstream beneficial use">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="where is water going drain reservoir ogden river weber river downstream beneficial use">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             Where is the water going when they drain the reservoir?
             <span class="qa-chevron">▼</span>
@@ -1591,8 +1627,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-3" data-theme="3" data-q="drinking water supply at risk safe reliable service interruption">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="drinking water supply at risk safe reliable service interruption">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             Is the drinking water supply at risk?
             <span class="qa-chevron">▼</span>
@@ -1609,8 +1645,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-3" data-theme="3" data-q="fish wildlife reservoir habitat spawning protection plan UDWR">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="fish wildlife reservoir habitat spawning protection plan UDWR">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             What about fish and wildlife in the reservoir?
             <span class="qa-chevron">▼</span>
@@ -1627,8 +1663,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-3" data-theme="3" data-q="bald eagles migratory birds forest service sensitive species impact">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="bald eagles migratory birds forest service sensitive species impact">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             What is the impact on bald eagles and migratory birds?
             <span class="qa-chevron">▼</span>
@@ -1645,8 +1681,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-3" data-theme="3" data-q="authorized federal state agencies permits bureau reclamation forest service EPA">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="authorized federal state agencies permits bureau reclamation forest service EPA">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             Is this project authorized by federal and state agencies?
             <span class="qa-chevron">▼</span>
@@ -1663,8 +1699,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-3" data-theme="3" data-q="old pipeline removed stays bottom reservoir redundant backup parallel">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="old pipeline removed stays bottom reservoir redundant backup parallel">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             What happens to the old pipeline — is it being removed?
             <span class="qa-chevron">▼</span>
@@ -1681,8 +1717,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-3" data-theme="3" data-q="recreation boating fishing yacht club marina access low pool summer">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="recreation boating fishing yacht club marina access low pool summer">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             What about recreation — boating, fishing, the yacht club?
             <span class="qa-chevron">▼</span>
@@ -1699,8 +1735,8 @@
           </div>
         </div>
 
-        <div class="qa-card theme-3" data-theme="3" data-q="dam safe drawdown pineview bureau reclamation monitoring">
-          <button class="qa-question" onclick="toggleQA(this)">
+        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="dam safe drawdown pineview bureau reclamation monitoring">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             Is the dam safe during the drawdown?
             <span class="qa-chevron">▼</span>
@@ -1734,10 +1770,10 @@
 
   </div>
 </section>
-<section id="gallery">
+<section id="gallery" aria-labelledby="gallery-title">
   <div class="section-inner">
     <p class="section-label">Construction Progress</p>
-    <h2 class="section-title">Project Photos</h2>
+    <h2 class="section-title" id="gallery-title">Project Photos</h2>
     <div class="gallery-grid">
       <img class="g-wide" src="images/gallery-1.jpg" alt="Construction in Ogden Canyon" onclick="openLightbox(0)">
       <img src="images/gallery-2.jpg" alt="Pipeline work near Alaskan Inn" onclick="openLightbox(1)">
@@ -1756,27 +1792,27 @@
 </section>
 
 <!-- LIGHTBOX -->
-<div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOnBg(event)">
-  <button class="lightbox-nav prev" id="lbPrev" onclick="shiftLightbox(-1)">&#8249;</button>
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" onclick="closeLightboxOnBg(event)">
+  <button class="lightbox-nav prev" id="lbPrev" aria-label="Previous photo" onclick="shiftLightbox(-1)">&#8249;</button>
   <img class="lightbox-img" id="lightboxImg" src="" alt="">
   <div class="lightbox-controls">
     <span class="lightbox-counter" id="lightboxCounter"></span>
     <a class="lightbox-btn" id="lightboxDownload" href="" download target="_blank">⬇ Download</a>
-    <button class="lightbox-btn close-btn" onclick="closeLightbox()">✕ Close</button>
+    <button class="lightbox-btn close-btn" aria-label="Close photo viewer" onclick="closeLightbox()">✕ Close</button>
   </div>
-  <button class="lightbox-nav next" id="lbNext" onclick="shiftLightbox(1)">&#8250;</button>
+  <button class="lightbox-nav next" id="lbNext" aria-label="Next photo" onclick="shiftLightbox(1)">&#8250;</button>
 </div>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" aria-labelledby="contact-title">
   <div class="section-inner">
     <p class="section-label">Reach Out</p>
-    <h2 class="section-title">Contact Our Team</h2>
+    <h2 class="section-title" id="contact-title">Contact Our Team</h2>
     <p style="font-family:'Source Serif 4',serif;font-size:1.05rem;color:var(--text-mid);line-height:1.8;max-width:680px;margin-bottom:36px;">For project-related inquiries, property access concerns, or to be added to our community coordination list, please reach out directly using any of the methods below. Our public involvement team typically responds within one business day.</p>
     <div class="contact-grid">
       <div class="contact-info">
         <div class="contact-card">
-          <div class="contact-card-icon">📞</div>
+          <div class="contact-card-icon" aria-hidden="true">📞</div>
           <div>
             <strong>Project Hotline</strong>
             <a href="tel:8018388365">801-838-8365</a>
@@ -1784,7 +1820,7 @@
           </div>
         </div>
         <div class="contact-card">
-          <div class="contact-card-icon">✉️</div>
+          <div class="contact-card-icon" aria-hidden="true">✉️</div>
           <div>
             <strong>Project Email</strong>
             <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
@@ -1794,7 +1830,7 @@
       </div>
       <div class="contact-info">
         <div class="contact-card">
-          <div class="contact-card-icon">🏛️</div>
+          <div class="contact-card-icon" aria-hidden="true">🏛️</div>
           <div>
             <strong>Ogden City</strong>
             <span>2549 Washington Blvd, Ogden, UT 84401</span>
@@ -1802,7 +1838,7 @@
           </div>
         </div>
         <div class="contact-card">
-          <div class="contact-card-icon">🌐</div>
+          <div class="contact-card-icon" aria-hidden="true">🌐</div>
           <div>
             <strong>Follow the Project</strong>
             <div style="display:flex;gap:14px;margin-top:6px;flex-wrap:wrap;">
@@ -1818,13 +1854,24 @@
   </div>
 </section>
 
+</main>
+
 <!-- FOOTER -->
-<footer>
+<footer role="contentinfo">
   <div class="footer-inner">
     <img src="images/ogdencity-logo.png" alt="Ogden City Logo">
     <div class="footer-text">
       © 2026 Ogden City · 2549 Washington Blvd, Ogden, UT 84401<br>
       Ogden Canyon 36-Inch Pipeline Replacement Project · All rights reserved.
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <a href="https://www.w3.org/WAI/WCAG2AA-Conformance" target="_blank" rel="noopener" aria-label="WCAG 2.1 Level AA Conformance - Learn more at W3C" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:6px;padding:8px 14px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
+        <span style="font-size:1.1rem;" aria-hidden="true">♿</span>
+        <div>
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.9);">WCAG 2.1 — Level AA</div>
+          <div style="font-size:0.65rem;color:rgba(255,255,255,0.5);">Accessibility Compliant</div>
+        </div>
+      </a>
     </div>
     <div class="footer-social">
       <a href="https://www.facebook.com/OgdenCityUtah/">Facebook</a>
@@ -1856,6 +1903,7 @@
     lbIndex = i;
     updateLightbox();
     document.getElementById('lightbox').classList.add('open');
+    document.getElementById('lbPrev').focus();
     document.body.style.overflow = 'hidden';
   }
   function closeLightbox() {
@@ -1889,8 +1937,14 @@
   function toggleQA(btn) {
     const card = btn.closest('.qa-card');
     const isOpen = card.classList.contains('open');
-    document.querySelectorAll('.qa-card.open').forEach(c => c.classList.remove('open'));
-    if (!isOpen) card.classList.add('open');
+    document.querySelectorAll('.qa-card.open').forEach(c => {
+      c.classList.remove('open');
+      c.querySelector('.qa-question').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      card.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
   }
 
   // ── Q&A SEARCH & FILTER ──
@@ -1941,17 +1995,35 @@
   });
 </script>
 <script>
+  const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
   hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
+    const isOpen = hamburger.classList.toggle('open');
     mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
   });
-  // Close menu when a link is tapped
   document.querySelectorAll('.mobile-link').forEach(link => {
     link.addEventListener('click', () => {
       hamburger.classList.remove('open');
       mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open navigation menu');
     });
+  });
+
+  // ── LIGHTBOX FOCUS TRAP ──
+  function getFocusable(el) {
+    return [...el.querySelectorAll('button, a, input, [tabindex]:not([tabindex="-1"])')].filter(e => !e.disabled);
+  }
+  document.getElementById('lightbox').addEventListener('keydown', e => {
+    if (e.key === 'Tab') {
+      const focusable = getFocusable(document.getElementById('lightbox'));
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
   });
 </script>
 </body>
