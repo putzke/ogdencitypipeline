@@ -548,7 +548,35 @@
   }
   .footer-social a:hover { color: var(--canyon-stone); }
 
-  /* ── LIGHTBOX ── */
+  /* ── HERO ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .hero-eyebrow  { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+  .hero h1       { animation: fadeUp 0.7s ease both; animation-delay: 0.3s; }
+  .hero-sub      { animation: fadeUp 0.6s ease both; animation-delay: 0.55s; }
+  .hero-stats    { animation: fadeUp 0.6s ease both; animation-delay: 0.75s; }
+  .hero-actions  { animation: fadeUp 0.6s ease both; animation-delay: 0.95s; }
+  .stat-num {
+    animation: countUp 1.2s ease both;
+    animation-delay: 1s;
+  }
+  @keyframes countUp {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-eyebrow, .hero h1, .hero-sub, .hero-stats, .hero-actions, .stat-num {
+      animation: none;
+    }
+  }
+
+  /* ── PRESS RELEASE nav button */
   .lightbox-overlay {
     display: none;
     position: fixed;
