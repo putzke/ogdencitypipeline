@@ -583,7 +583,15 @@
   }
   .footer-social a:hover { color: var(--canyon-stone); }
 
-  /* ── HAMBURGER ── */
+  /* ── SCROLL OFFSET FOR STICKY NAV ── */
+  section, .phase-bar {
+    scroll-margin-top: 90px;
+  }
+  @media (max-width: 900px) {
+    section, .phase-bar {
+      scroll-margin-top: 80px;
+    }
+  }
   .nav-hamburger {
     display: none;
     flex-direction: column;
