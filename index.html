@@ -548,7 +548,81 @@
   }
   .footer-social a:hover { color: var(--canyon-stone); }
 
-  /* Press Release nav button */
+  /* ── LIGHTBOX ── */
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+  }
+  .lightbox-overlay.open { display: flex; }
+  .lightbox-img {
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.6);
+  }
+  .lightbox-controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    align-items: center;
+  }
+  .lightbox-btn {
+    background: rgba(255,255,255,0.12);
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 9px 20px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .lightbox-btn:hover { background: rgba(255,255,255,0.22); }
+  .lightbox-btn.close-btn { background: var(--canyon-rust); border-color: var(--canyon-rust); }
+  .lightbox-btn.close-btn:hover { background: #a0552f; }
+  .lightbox-counter {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif;
+  }
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-nav:hover { background: rgba(255,255,255,0.25); }
+  .lightbox-nav.prev { left: 16px; }
+  .lightbox-nav.next { right: 16px; }
+  .gallery-grid img { cursor: zoom-in; }
+
+  /* ── PRESS RELEASE nav button */
   .nav-links a.nav-press-btn {
     background: var(--canyon-rust);
     color: var(--white) !important;
@@ -1637,21 +1711,33 @@
     <p class="section-label">Construction Progress</p>
     <h2 class="section-title">Project Photos</h2>
     <div class="gallery-grid">
-      <img class="g-wide" src="images/gallery-1.jpg" alt="Construction in Ogden Canyon">
-      <img src="images/gallery-2.jpg" alt="Pipeline work near Alaskan Inn">
-      <img src="images/gallery-3.jpg" alt="Canyon view">
-      <img src="images/gallery-4.png" alt="Cobbles Crossing">
-      <img src="images/gallery-5.jpg" alt="SR-39 Crossing">
-      <img src="images/gallery-6.jpg" alt="Pipeline installation">
-      <img src="images/gallery-7.jpg" alt="Construction equipment">
-      <img src="images/gallery-8.jpg" alt="Pipeline segments">
-      <img src="images/gallery-9.jpg" alt="Canyon work site">
-      <img src="images/gallery-10.jpg" alt="Crew at work">
-      <img src="images/gallery-12.jpg" alt="Pipe sections">
-      <img src="images/gallery-13.jpg" alt="Pipe installation">
+      <img class="g-wide" src="images/gallery-1.jpg" alt="Construction in Ogden Canyon" onclick="openLightbox(0)">
+      <img src="images/gallery-2.jpg" alt="Pipeline work near Alaskan Inn" onclick="openLightbox(1)">
+      <img src="images/gallery-3.jpg" alt="Canyon view" onclick="openLightbox(2)">
+      <img src="images/gallery-4.png" alt="Cobbles Crossing" onclick="openLightbox(3)">
+      <img src="images/gallery-5.jpg" alt="SR-39 Crossing" onclick="openLightbox(4)">
+      <img src="images/gallery-6.jpg" alt="Pipeline installation" onclick="openLightbox(5)">
+      <img src="images/gallery-7.jpg" alt="Construction equipment" onclick="openLightbox(6)">
+      <img src="images/gallery-8.jpg" alt="Pipeline segments" onclick="openLightbox(7)">
+      <img src="images/gallery-9.jpg" alt="Canyon work site" onclick="openLightbox(8)">
+      <img src="images/gallery-10.jpg" alt="Crew at work" onclick="openLightbox(9)">
+      <img src="images/gallery-12.jpg" alt="Pipe sections" onclick="openLightbox(10)">
+      <img src="images/gallery-13.jpg" alt="Pipe installation" onclick="openLightbox(11)">
     </div>
   </div>
 </section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOnBg(event)">
+  <button class="lightbox-nav prev" id="lbPrev" onclick="shiftLightbox(-1)">&#8249;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <div class="lightbox-controls">
+    <span class="lightbox-counter" id="lightboxCounter"></span>
+    <a class="lightbox-btn" id="lightboxDownload" href="" download target="_blank">⬇ Download</a>
+    <button class="lightbox-btn close-btn" onclick="closeLightbox()">✕ Close</button>
+  </div>
+  <button class="lightbox-nav next" id="lbNext" onclick="shiftLightbox(1)">&#8250;</button>
+</div>
 
 <!-- CONTACT -->
 <section id="contact">
@@ -1721,7 +1807,57 @@
 </footer>
 
 <script>
-  // ── Q&A ACCORDION ──
+  // ── LIGHTBOX ──
+  const galleryImages = [
+    { src: 'images/gallery-1.jpg',  alt: 'Construction in Ogden Canyon' },
+    { src: 'images/gallery-2.jpg',  alt: 'Pipeline work near Alaskan Inn' },
+    { src: 'images/gallery-3.jpg',  alt: 'Canyon view' },
+    { src: 'images/gallery-4.png',  alt: 'Cobbles Crossing' },
+    { src: 'images/gallery-5.jpg',  alt: 'SR-39 Crossing' },
+    { src: 'images/gallery-6.jpg',  alt: 'Pipeline installation' },
+    { src: 'images/gallery-7.jpg',  alt: 'Construction equipment' },
+    { src: 'images/gallery-8.jpg',  alt: 'Pipeline segments' },
+    { src: 'images/gallery-9.jpg',  alt: 'Canyon work site' },
+    { src: 'images/gallery-10.jpg', alt: 'Crew at work' },
+    { src: 'images/gallery-12.jpg', alt: 'Pipe sections' },
+    { src: 'images/gallery-13.jpg', alt: 'Pipe installation' },
+  ];
+  let lbIndex = 0;
+
+  function openLightbox(i) {
+    lbIndex = i;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeLightboxOnBg(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  }
+  function shiftLightbox(dir) {
+    lbIndex = (lbIndex + dir + galleryImages.length) % galleryImages.length;
+    updateLightbox();
+  }
+  function updateLightbox() {
+    const img = galleryImages[lbIndex];
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightboxImg').alt = img.alt;
+    document.getElementById('lightboxDownload').href = img.src;
+    document.getElementById('lightboxDownload').download = img.src.split('/').pop();
+    document.getElementById('lightboxCounter').textContent = `${lbIndex + 1} of ${galleryImages.length}`;
+  }
+  // Keyboard nav
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'ArrowRight') shiftLightbox(1);
+    if (e.key === 'ArrowLeft') shiftLightbox(-1);
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+
   function toggleQA(btn) {
     const card = btn.closest('.qa-card');
     const isOpen = card.classList.contains('open');
