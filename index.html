@@ -548,7 +548,146 @@
   }
   .footer-social a:hover { color: var(--canyon-stone); }
 
-  /* ── SCROLL OFFSET FOR STICKY NAV ── */
+  /* ── PINEVIEW RESERVOIR ── */
+  #pineview { background: var(--white); }
+  .pineview-draft-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7c4a00;
+    margin-bottom: 20px;
+  }
+  .pineview-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 60px;
+    align-items: start;
+    margin-bottom: 48px;
+  }
+  .pineview-body {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+  }
+  .pineview-body p + p { margin-top: 16px; }
+  .pineview-pull {
+    background: var(--sky);
+    border-left: 4px solid var(--water-blue);
+    border-radius: 0 6px 6px 0;
+    padding: 20px 22px;
+    margin: 24px 0;
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--water-dark);
+    line-height: 1.7;
+  }
+  .fast-facts {
+    background: var(--water-dark);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 28px;
+    position: sticky;
+    top: 100px;
+  }
+  .fast-facts h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--canyon-stone);
+    margin-bottom: 20px;
+  }
+  .fact-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .fact-item:last-child { border-bottom: none; }
+  .fact-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--canyon-stone);
+    margin-bottom: 3px;
+  }
+  .fact-value { color: rgba(255,255,255,0.9); }
+  .pineview-download {
+    background: var(--earth);
+    border-radius: 8px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .pineview-download-text strong { display: block; font-size: 1rem; font-weight: 600; color: var(--water-dark); margin-bottom: 4px; }
+  .pineview-download-text span { font-size: 0.85rem; color: var(--text-light); }
+  .btn-download {
+    background: var(--water-dark);
+    color: var(--white);
+    padding: 11px 22px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-download:hover { background: var(--canyon-rust); }
+  .media-placeholder-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .media-placeholder {
+    border: 2px dashed var(--canyon-stone);
+    border-radius: 8px;
+    padding: 36px 20px;
+    text-align: center;
+    background: var(--earth);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .media-placeholder-icon { font-size: 2rem; opacity: 0.5; }
+  .media-placeholder strong { font-size: 0.85rem; font-weight: 600; color: var(--text-mid); }
+  .media-placeholder span { font-size: 0.75rem; color: var(--text-light); }
+  .media-placeholder .coming-soon {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--canyon-rust);
+    background: rgba(139,74,43,0.1);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  @media (max-width: 900px) {
+    .pineview-grid { grid-template-columns: 1fr; gap: 32px; }
+    .fast-facts { position: static; }
+    .media-placeholder-grid { grid-template-columns: 1fr; }
+  }
   section, .phase-bar {
     scroll-margin-top: 90px;
   }
@@ -665,6 +804,7 @@
       <li><a href="#news">News</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#pineview">Pineview</a></li>
       <li><a href="#gallery">Photos</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -684,6 +824,7 @@
     <a href="#news" class="mobile-link">News</a>
     <a href="#faq" class="mobile-link">FAQ</a>
     <a href="#schedule" class="mobile-link">Schedule</a>
+    <a href="#pineview" class="mobile-link">Pineview Reservoir</a>
     <a href="#gallery" class="mobile-link">Photos</a>
     <a href="#contact" class="mobile-link">Contact</a>
     <div class="mobile-social">
@@ -926,6 +1067,109 @@
       <div class="alert-body">
         <strong>22nd Street Trailhead — Parking Lot Closed May 1 – November 1, 2026</strong>
         <p>The trailhead parking lot is being used as a mobilization and staging area for the East Bench pipeline work. Foot traffic is safely accommodated, but certain trail sections along active work will be closed and posted. <a href="https://www.ogdencitypipeline.com/_files/ugd/3299cd_75e51be312164c1d9f4b07bd98201967.pdf" target="_blank">Download the map PDF →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PINEVIEW RESERVOIR -->
+<section id="pineview">
+  <div class="section-inner">
+    <div class="pineview-draft-banner">⚠️ Draft — Content pending final review by Ogden City Communications</div>
+    <p class="section-label">Reservoir Crossing</p>
+    <h2 class="section-title">Pineview Reservoir Pipeline Crossing</h2>
+
+    <!-- Download bar -->
+    <div class="pineview-download">
+      <div class="pineview-download-text">
+        <strong>📄 Full Press Release — Pineview Reservoir Crossing</strong>
+        <span>Draft · Ogden City Department of Public Utilities · For Immediate Release [Late June / Early July 2026]</span>
+      </div>
+      <a href="files/PressRelease_PipelineProject_Draft1.pdf" target="_blank" class="btn-download">⬇ Download PDF</a>
+    </div>
+
+    <!-- Main content grid -->
+    <div class="pineview-grid">
+      <div>
+        <div class="pineview-body">
+          <p>Ogden City has announced the start of construction for the critical reservoir crossing phase of the Ogden Canyon 36-Inch Water Transmission Pipeline Replacement Project. As part of this work, <strong>Pineview Reservoir water levels will be lowered this summer</strong> to allow crews to install a new parallel transmission pipeline alongside the existing pipeline at the bottom of the reservoir.</p>
+
+          <p>The existing pipeline has been in service for approximately 60 years beneath Pineview Reservoir and nearly 100 years through Ogden Canyon. It currently loses approximately one million gallons of treated drinking water per day and is reaching the end of its service life. Replacement is essential to protect water system reliability and prevent failures that could interrupt service to more than 120,000 residents throughout the region.</p>
+
+          <div class="pineview-pull">Utah's 2025–2026 water year has produced the lowest statewide snowpack on modern record. Rather than drawing from other regional water sources, the project team will take advantage of naturally lower drought-driven reservoir levels to complete the work — preserving storage elsewhere and minimizing disruption to the broader regional water system.</div>
+
+          <p><strong>The project does not require draining Pineview Reservoir.</strong> Crews will lower water levels sufficiently to install the new pipeline alongside the existing one within the established right-of-way. The existing pipeline will remain in service during construction and will afterward be rehabilitated as a redundant backup line — giving water managers two independent transmission lines for the first time.</p>
+
+          <p>The project is being carried out in close coordination with federal and state water management partners. All reservoir release operations will be authorized and supervised in compliance with state and federal water rights law. Reservoir levels are expected to be restored naturally through snowmelt infiltration by late January 2027.</p>
+
+          <p>Ogden City recognizes that lower reservoir levels will affect recreation at Pineview Reservoir this season. The City has been in active coordination with recreation stakeholders, marina operators, and the Pineview Reservoir Yacht Club since early 2026. Updated access maps and boat ramp conditions will be posted regularly at this project website.</p>
+        </div>
+
+        <!-- Media graphics placeholder -->
+        <div style="margin-top: 40px;">
+          <p class="section-label" style="margin-bottom: 16px;">Media Graphics</p>
+          <div class="media-placeholder-grid">
+            <div class="media-placeholder">
+              <div class="media-placeholder-icon">🗺️</div>
+              <strong>Reservoir Crossing Map</strong>
+              <span>Pipeline alignment and crossing area diagram</span>
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+            <div class="media-placeholder">
+              <div class="media-placeholder-icon">📊</div>
+              <strong>Construction Diagram</strong>
+              <span>Installation method cross-section graphic</span>
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+            <div class="media-placeholder">
+              <div class="media-placeholder-icon">📸</div>
+              <strong>Project Photo</strong>
+              <span>Site photography for media use</span>
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fast Facts sidebar -->
+      <div class="fast-facts">
+        <h3>Project Fast Facts</h3>
+        <div class="fact-item">
+          <div class="fact-label">Pipeline Age</div>
+          <div class="fact-value">~60 years beneath Pineview Reservoir; ~100 years through Ogden Canyon</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Daily Water Loss</div>
+          <div class="fact-value">~1,000,000 gallons per day from existing pipeline</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Total Investment</div>
+          <div class="fact-value">~$100 million (all phases, 2025–2029)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Reservoir Capacity</div>
+          <div class="fact-value">116,150 acre-feet (~2,874 acres at full pool)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Drought Projection</div>
+          <div class="fact-value">~20% of capacity this season due to record-low snowpack</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Construction Approach</div>
+          <div class="fact-value">New parallel pipeline installed alongside existing pipe — reservoir lowered, not drained</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Expected Refill</div>
+          <div class="fact-value">Natural snowmelt infiltration by late January 2027</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Funding</div>
+          <div class="fact-value">EPA WIFIA program, Drinking Water State Revolving Fund, federal &amp; state grants</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Media Contact</div>
+          <div class="fact-value">Mike McBride, Communications Director<br>MikeMcBride@ogdencity.gov</div>
+        </div>
       </div>
     </div>
   </div>
