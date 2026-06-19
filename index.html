@@ -457,6 +457,19 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
   .schedule-item:last-child { border-bottom: none; }
+  .sch-chip {
+    display: inline-block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+  .sch-chip-complete { background: rgba(74,124,89,0.25); color: #7ee89a; border: 1px solid rgba(74,124,89,0.4); }
+  .sch-chip-active   { background: rgba(212,130,10,0.25); color: #ffc04d; border: 1px solid rgba(212,130,10,0.4); }
+  .sch-chip-upcoming { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.15); }
+
   .sch-date {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.85rem;
@@ -1203,9 +1216,23 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <p class="section-label">Construction Timeline</p>
     <h2 class="section-title" id="schedule-title">Current Schedule</h2>
     <p class="schedule-updated">Updated June 12, 2026 · Schedule subject to change due to weather and materials availability</p>
-    <div class="schedule-items">
+
+    <!-- Legend -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;">
+      <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;background:#d4edda;color:#1a6630;padding:4px 12px;border-radius:20px;">● Complete</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;background:#fff3cd;color:#856404;padding:4px 12px;border-radius:20px;">● Active Now</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.15);">● Upcoming</span>
+    </div>
+
+    <!-- GROUP 1: Canyon & East Bench -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;margin-top:8px;">
+      <div style="height:1px;flex:1;background:rgba(255,255,255,0.15);"></div>
+      <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--canyon-stone);white-space:nowrap;">Phase 1 &amp; 2 — Canyon &amp; East Bench</span>
+      <div style="height:1px;flex:1;background:rgba(255,255,255,0.15);"></div>
+    </div>
+    <div class="schedule-items" style="margin-bottom:28px;">
       <div class="schedule-item">
-        <div class="sch-date">Through April 30, 2026</div>
+        <div><span class="sch-chip sch-chip-complete">Through Apr 30, 2026</span></div>
         <div>
           <p class="sch-title">Phase 2 — Canyon Pipeline Installation</p>
           <p class="sch-desc">Pipeline installation in the Lower Hermitage community is complete. Culinary water flow through the 36-inch pipeline is currently active. Staging area grounds are under restoration.</p>
@@ -1213,7 +1240,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         <span class="sch-status sch-complete">Complete</span>
       </div>
       <div class="schedule-item">
-        <div class="sch-date">June 15–24, 2026</div>
+        <div><span class="sch-chip sch-chip-active">June 15–24, 2026</span></div>
         <div>
           <p class="sch-title">Asphalt Restoration — Fairmount, Cobbles &amp; Hermitage</p>
           <p class="sch-desc">Road surface restoration in the communities impacted by Phase 2 construction. Contact the PI team with questions.</p>
@@ -1221,7 +1248,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         <span class="sch-status sch-active">Active Now</span>
       </div>
       <div class="schedule-item">
-        <div class="sch-date">May 1 – Nov 1, 2026</div>
+        <div><span class="sch-chip sch-chip-active">May 1 – Nov 1, 2026</span></div>
         <div>
           <p class="sch-title">East Bench Pipeline Replacement</p>
           <p class="sch-desc">Two-phase pipeline replacement along the east bench to water storage tanks at 22nd South. The 22nd South Trailhead parking lot is closed to vehicles during this period. Foot traffic is safely accommodated; specific trail sections along active work areas will be closed and posted as work progresses.</p>
@@ -1229,7 +1256,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         <span class="sch-status sch-active">Active Now</span>
       </div>
       <div class="schedule-item">
-        <div class="sch-date">Ongoing</div>
+        <div><span class="sch-chip sch-chip-active">Ongoing</span></div>
         <div>
           <p class="sch-title">Geotechnical &amp; Survey Work</p>
           <p class="sch-desc">Crews will continue potholing, geolocating, soil analysis, and pipeline replacement preparation work along the ROW.</p>
@@ -1237,31 +1264,49 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         <span class="sch-status sch-active">Ongoing</span>
       </div>
       <div class="schedule-item">
-        <div class="sch-date">Fall 2026</div>
+        <div><span class="sch-chip sch-chip-upcoming">Fall 2026</span></div>
         <div>
           <p class="sch-title">Pipeline Staging — Gray Cliff Lodge Area</p>
           <p class="sch-desc">The staging area across from the Gray Cliff Lodge will be reactivated for next-phase work. No pipeline shipments expected until Fall 2026.</p>
         </div>
         <span class="sch-status sch-upcoming">Upcoming</span>
       </div>
+    </div>
+
+    <!-- GROUP 2: Pineview Reservoir -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+      <div style="height:1px;flex:1;background:rgba(255,255,255,0.15);"></div>
+      <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--canyon-stone);white-space:nowrap;">Pineview Reservoir Crossing</span>
+      <div style="height:1px;flex:1;background:rgba(255,255,255,0.15);"></div>
+    </div>
+    <div class="schedule-items" style="margin-bottom:28px;">
       <div class="schedule-item">
-        <div class="sch-date">November 2025</div>
+        <div><span class="sch-chip sch-chip-complete">November 2025</span></div>
         <div>
           <p class="sch-title">Pineview Reservoir Crossing — Geotechnical Work</p>
-          <p class="sch-desc">A drilling barge visited Pineview Reservoir in November 2025 to capture soil samples in preparation for the pipeline crossing. Pipeline replacement date to be announced. <a href="files/PUBLIC_NOTICE_Drilling_Barge_Pineview_Reservoir.pdf" target="_blank" style="color:var(--canyon-stone);">See public notice →</a></p>
+          <p class="sch-desc">A drilling barge visited Pineview Reservoir in November 2025 to capture soil samples in preparation for the pipeline crossing. <a href="files/PUBLIC_NOTICE_Drilling_Barge_Pineview_Reservoir.pdf" target="_blank" style="color:var(--canyon-stone);">See public notice →</a></p>
         </div>
         <span class="sch-status sch-complete">Complete</span>
       </div>
       <div class="schedule-item">
-        <div class="sch-date">Nov 2026 – Feb 2027</div>
+        <div><span class="sch-chip sch-chip-upcoming">Nov 2026 – Feb 2027</span></div>
         <div>
           <p class="sch-title">Pineview Reservoir Crossing — Pipeline Installation</p>
           <p class="sch-desc">Crews will undergo construction of the Pineview Reservoir crossing phase from Port Ramp Marina to Browning Point.</p>
         </div>
         <span class="sch-status sch-upcoming">Upcoming</span>
       </div>
+    </div>
+
+    <!-- GROUP 3: Completion -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+      <div style="height:1px;flex:1;background:rgba(255,255,255,0.15);"></div>
+      <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--canyon-stone);white-space:nowrap;">Project Completion</span>
+      <div style="height:1px;flex:1;background:rgba(255,255,255,0.15);"></div>
+    </div>
+    <div class="schedule-items">
       <div class="schedule-item">
-        <div class="sch-date">Spring 2029</div>
+        <div><span class="sch-chip sch-chip-upcoming">Spring 2029</span></div>
         <div>
           <p class="sch-title">Estimated Project Completion</p>
           <p class="sch-desc">Full pipeline replacement through Ogden Canyon anticipated to be complete.</p>
@@ -1269,13 +1314,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         <span class="sch-status sch-upcoming">Target</span>
       </div>
     </div>
+
     <div class="schedule-hours">
       <p><strong>Work Hours:</strong> Sunrise to Dusk, Monday–Friday. Nighttime work will not occur unless required for emergent tasks.</p>
     </div>
 
     <!-- Trailhead Alert -->
     <div class="trailhead-alert">
-      <div class="alert-icon">⚠️</div>
+      <div class="alert-icon" aria-hidden="true">⚠️</div>
       <div class="alert-body">
         <strong>22nd Street Trailhead — Parking Lot Closed May 1 – November 1, 2026</strong>
         <p>The trailhead parking lot is being used as a mobilization and staging area for the East Bench pipeline work. Foot traffic is safely accommodated, but certain trail sections along active work will be closed and posted. <a href="https://www.ogdencitypipeline.com/_files/ugd/3299cd_75e51be312164c1d9f4b07bd98201967.pdf" target="_blank">Download the map PDF →</a></p>
