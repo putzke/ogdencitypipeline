@@ -868,8 +868,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   .btn-download:hover { background: var(--canyon-rust); }
   .media-placeholder-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
   }
   .media-placeholder {
     border: 2px dashed var(--canyon-stone);
@@ -898,7 +898,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   @media (max-width: 900px) {
     .pineview-grid { grid-template-columns: 1fr; gap: 32px; }
     .fast-facts { position: static; }
-    .media-placeholder-grid { grid-template-columns: 1fr; }
+    .media-placeholder-grid { grid-template-columns: 1fr 1fr; }
   }
   section, .phase-bar {
     scroll-margin-top: 90px;
@@ -1371,29 +1371,49 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
           <p>Ogden City recognizes that lower reservoir levels will affect recreation at Pineview Reservoir this season. The City has been in active coordination with recreation stakeholders, marina operators, and the Pineview Reservoir Yacht Club since early 2026. Updated access maps and boat ramp conditions will be posted regularly at this project website.</p>
         </div>
 
-        <!-- Media graphics placeholder -->
+        <!-- Media resource links -->
         <div style="margin-top: 40px;">
-          <p class="section-label" style="margin-bottom: 16px;">Media Graphics</p>
+          <p class="section-label" style="margin-bottom: 16px;">Media Resources & Data</p>
           <div class="media-placeholder-grid">
-            <div class="media-placeholder">
-              <div class="media-placeholder-icon" aria-hidden="true">🗺️</div>
-              <strong>Reservoir Crossing Map</strong>
-              <span>Pipeline alignment and crossing area diagram</span>
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-            <div class="media-placeholder">
-              <div class="media-placeholder-icon" aria-hidden="true">📊</div>
-              <strong>Construction Diagram</strong>
-              <span>Installation method cross-section graphic</span>
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-            <div class="media-placeholder">
-              <div class="media-placeholder-icon" aria-hidden="true">📸</div>
-              <strong>Project Photo</strong>
-              <span>Site photography for media use</span>
-              <span class="coming-soon">Coming Soon</span>
-            </div>
+
+            <a href="https://water.sec.usace.army.mil/overview/spk/locations/pineview" target="_blank" rel="noopener" style="text-decoration:none;">
+              <div style="border:1px solid #d0ccc6;border-radius:8px;padding:24px 20px;background:var(--white);display:flex;flex-direction:column;gap:10px;height:100%;transition:box-shadow 0.2s;box-shadow:0 2px 6px rgba(0,0,0,0.06);" onmouseover="this.style.boxShadow='0 6px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.boxShadow='0 2px 6px rgba(0,0,0,0.06)'">
+                <div style="font-size:1.6rem;" aria-hidden="true">🌊</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;color:var(--water-dark);line-height:1.2;">Pineview Dam &amp; Reservoir</div>
+                <div style="font-size:0.8rem;color:var(--text-mid);line-height:1.6;">U.S. Army Corps of Engineers — Live water data, pool elevation, storage, and inflow/outflow statistics.</div>
+                <div style="margin-top:auto;font-size:0.75rem;font-weight:600;color:var(--water-blue);letter-spacing:0.04em;">View Data →</div>
+              </div>
+            </a>
+
+            <a href="https://water.utah.gov/reservoirlevels/" target="_blank" rel="noopener" style="text-decoration:none;">
+              <div style="border:1px solid #d0ccc6;border-radius:8px;padding:24px 20px;background:var(--white);display:flex;flex-direction:column;gap:10px;height:100%;transition:box-shadow 0.2s;box-shadow:0 2px 6px rgba(0,0,0,0.06);" onmouseover="this.style.boxShadow='0 6px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.boxShadow='0 2px 6px rgba(0,0,0,0.06)'">
+                <div style="font-size:1.6rem;" aria-hidden="true">📊</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;color:var(--water-dark);line-height:1.2;">Pineview Water Levels vs. Other Reservoirs</div>
+                <div style="font-size:0.8rem;color:var(--text-mid);line-height:1.6;">Utah Division of Water Resources — Compare Pineview reservoir levels against other Utah reservoirs in context.</div>
+                <div style="margin-top:auto;font-size:0.75rem;font-weight:600;color:var(--water-blue);letter-spacing:0.04em;">View Reservoir Levels →</div>
+              </div>
+            </a>
+
+            <a href="https://data.usbr.gov/time-series/output?id=656.19780102-20260620&it=656&lo=437&v=1" target="_blank" rel="noopener" style="text-decoration:none;">
+              <div style="border:1px solid #d0ccc6;border-radius:8px;padding:24px 20px;background:var(--white);display:flex;flex-direction:column;gap:10px;height:100%;transition:box-shadow 0.2s;box-shadow:0 2px 6px rgba(0,0,0,0.06);" onmouseover="this.style.boxShadow='0 6px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.boxShadow='0 2px 6px rgba(0,0,0,0.06)'">
+                <div style="font-size:1.6rem;" aria-hidden="true">📈</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;color:var(--water-dark);line-height:1.2;">Pineview Elevation — Historical Data</div>
+                <div style="font-size:0.8rem;color:var(--text-mid);line-height:1.6;">Bureau of Reclamation RISE — Plot your own graph and download time series elevation data for Pineview Reservoir.</div>
+                <div style="margin-top:auto;font-size:0.75rem;font-weight:600;color:var(--water-blue);letter-spacing:0.04em;">Generate Plot →</div>
+              </div>
+            </a>
+
+            <a href="https://www.usbr.gov/rsvrWater/rsv40Day.html?siteid=946&reservoirtype=Reservoir" target="_blank" rel="noopener" style="text-decoration:none;">
+              <div style="border:1px solid #d0ccc6;border-radius:8px;padding:24px 20px;background:var(--white);display:flex;flex-direction:column;gap:10px;height:100%;transition:box-shadow 0.2s;box-shadow:0 2px 6px rgba(0,0,0,0.06);" onmouseover="this.style.boxShadow='0 6px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.boxShadow='0 2px 6px rgba(0,0,0,0.06)'">
+                <div style="font-size:1.6rem;" aria-hidden="true">📅</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;color:var(--water-dark);line-height:1.2;">Pineview Elevation — Last 40 Days</div>
+                <div style="font-size:0.8rem;color:var(--text-mid);line-height:1.6;">Bureau of Reclamation Water Operations — Current 40-day pool elevation trend for Pineview Reservoir.</div>
+                <div style="margin-top:auto;font-size:0.75rem;font-weight:600;color:var(--water-blue);letter-spacing:0.04em;">View 40-Day Data →</div>
+              </div>
+            </a>
+
           </div>
+          <p style="font-size:0.75rem;color:var(--text-light);margin-top:12px;font-style:italic;">Additional media graphics coming soon. All data links open in a new tab.</p>
         </div>
       </div>
 
