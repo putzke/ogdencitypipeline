@@ -836,6 +836,35 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     margin-bottom: 3px;
   }
   .fact-value { color: rgba(255,255,255,0.9); }
+  .fact-item--satellite { border-bottom: none; padding-top: 16px; }
+  .satellite-date-range {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--canyon-stone);
+    margin-bottom: 10px;
+  }
+  .satellite-pdf-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .satellite-pdf-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #7ec8e3;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .satellite-pdf-link:hover { color: #ffffff; text-decoration: underline; }
+  .satellite-pdf-link svg { flex-shrink: 0; opacity: 0.85; }
   .pineview-download {
     background: var(--earth);
     border-radius: 8px;
@@ -1488,6 +1517,33 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         <div class="fact-item">
           <div class="fact-label">Funding</div>
           <div class="fact-value">EPA WIFIA program, Drinking Water State Revolving Fund, federal &amp; state grants</div>
+        </div>
+        <!-- Satellite View PDFs -->
+        <div class="fact-item fact-item--satellite">
+          <div class="fact-label">Simulated Satellite View of Pineview Reservoir Water Levels</div>
+          <div class="fact-value" style="margin-top:8px;">
+            <div class="satellite-date-range">August 1 – October 1, 2026</div>
+            <ul class="satellite-pdf-list">
+              <li>
+                <a href="files/Pineview-Satellite_View_AUGUST_2026.pdf" target="_blank" rel="noopener" class="satellite-pdf-link">
+                  <svg width="13" height="14" viewBox="0 0 13 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="11" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M4 7h5M4 9.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M4 4.5h2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                  August 1, 2026
+                </a>
+              </li>
+              <li>
+                <a href="files/Pineview-Satellite_View_SEPTEMBER_2026.pdf" target="_blank" rel="noopener" class="satellite-pdf-link">
+                  <svg width="13" height="14" viewBox="0 0 13 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="11" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M4 7h5M4 9.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M4 4.5h2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                  September 1, 2026
+                </a>
+              </li>
+              <li>
+                <a href="files/Pineview-Satellite_View_OCTOBER_2026.pdf" target="_blank" rel="noopener" class="satellite-pdf-link">
+                  <svg width="13" height="14" viewBox="0 0 13 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="11" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M4 7h5M4 9.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M4 4.5h2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                  October 1, 2026
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
