@@ -762,21 +762,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 
   /* ── PINEVIEW RESERVOIR ── */
   #pineview { background: var(--white); }
-  .pineview-draft-banner {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #fff3cd;
-    border: 1px solid #ffc107;
-    border-radius: 4px;
-    padding: 6px 14px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #7c4a00;
-    margin-bottom: 20px;
-  }
   .pineview-grid {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -1028,28 +1013,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 </head>
 <body>
 
-<!-- NOTICE BAR -->
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <div id="top" style="position:absolute;top:0;"></div>
-<div id="noticeBar" class="notice-bar" role="banner" style="background:var(--canyon-rust);font-size:1.15rem;font-weight:700;letter-spacing:0.04em;padding:15px 20px;">
-  📣 Latest Notice: For Pineview Reservoir Crossing Information — <a href="#pineview" style="color:white;text-decoration:underline;font-weight:800;text-underline-offset:3px;">Click Here</a>
-</div>
-<style>
-  /* ── NOTICE BAR ANIMATION (triggered after modal dismiss) ── */
-  .notice-bar-animate {
-    animation: noticePop 0.6s cubic-bezier(0.34,1.56,0.64,1) both !important;
-  }
-  @keyframes noticePop {
-    0%   { opacity: 0; transform: scaleY(0.3) scaleX(0.95); }
-    60%  { transform: scaleY(1.08) scaleX(1.01); }
-    80%  { transform: scaleY(0.97) scaleX(1); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .notice-bar-animate { animation: none !important; }
-  }
-</style>
 
 <!-- NAV -->
 <nav role="navigation" aria-label="Main navigation">
@@ -1378,7 +1344,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 <!-- PINEVIEW RESERVOIR -->
 <section id="pineview" aria-labelledby="pineview-title">
   <div class="section-inner">
-    <div class="pineview-draft-banner">⚠️ Draft — Pending final review by Sunrise Engineering Public Involvement &amp; Ogden City Communications</div>
     <p class="section-label">Press Release</p>
     <h2 class="section-title" id="pineview-title">Pineview Reservoir Pipeline Crossing</h2>
 
@@ -1386,7 +1351,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <div class="pineview-download">
       <div class="pineview-download-text">
         <strong>📄 Full Press Release — Pineview Reservoir Crossing</strong>
-        <span>Draft · Ogden City · For Immediate Release [Summer 2026]</span>
+        <span>Ogden City · For Immediate Release</span>
       </div>
       <a href="files/Pineview_Crossing_Press_Release.pdf" target="_blank" class="btn-download">⬇ Download PDF</a>
     </div>
@@ -2130,53 +2095,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 
 </main>
 
-<!-- DRAFT MODAL -->
-<div id="draftModal" style="position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);">
-  <div style="background:white;border-radius:12px;max-width:520px;width:100%;overflow:hidden;animation:modalIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;">
-    <div style="background:#8B4A2B;padding:28px 32px;text-align:center;">
-      <div style="font-size:2.5rem;margin-bottom:8px;">⚠️</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.9rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:white;line-height:1.1;">Draft Only</div>
-      <div style="font-size:0.8rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-top:6px;">Not for Public Distribution</div>
-    </div>
-    <div style="padding:28px 32px;text-align:center;font-family:'Inter',sans-serif;">
-      <p style="font-size:1rem;color:#1C1C1C;line-height:1.7;margin-bottom:10px;">This website is <strong>embargoed pending official press release</strong> by Ogden City Department of Public Utilities.</p>
-      <p style="font-size:0.9rem;color:#4A4A4A;line-height:1.7;margin-bottom:24px;">Content is subject to change prior to publication. Please do not share this link publicly or with media contacts until the press release has been formally issued.</p>
-      <div style="background:#F5EFE6;border-left:4px solid #8B4A2B;border-radius:0 6px 6px 0;padding:12px 16px;text-align:left;margin-bottom:24px;">
-        <p style="font-size:0.82rem;color:#4A4A4A;line-height:1.6;margin:0;">Prepared by <strong>Sunrise Engineering Public Involvement</strong> on behalf of Ogden City · <a href="mailto:info@ogdencitypipeline.com" style="color:#1A4560;font-weight:600;">info@ogdencitypipeline.com</a> · <a href="tel:8018388365" style="color:#1A4560;font-weight:600;">801-838-8365</a></p>
-      </div>
-      <button onclick="dismissModal()" style="background:#1A4560;color:white;border:none;padding:14px 36px;border-radius:6px;font-family:'Inter',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;width:100%;transition:background 0.2s;" onmouseover="this.style.background='#8B4A2B'" onmouseout="this.style.background='#1A4560'">
-        I Understand — View Draft Site
-      </button>
-    </div>
-  </div>
-</div>
-<style>
-  @keyframes modalIn {
-    from { opacity:0; transform:scale(0.85) translateY(20px); }
-    to   { opacity:1; transform:scale(1) translateY(0); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    #draftModal > div { animation: none; }
-  }
-</style>
 
-<!-- DRAFT BADGE -->
-<div id="draftBadge" style="position:fixed;bottom:32px;right:32px;z-index:999;background:#8B4A2B;color:white;border-radius:10px;padding:16px 22px;box-shadow:0 6px 24px rgba(0,0,0,0.4);max-width:220px;width:220px;text-align:center;border:2px solid rgba(255,255,255,0.25);animation:draftPulse 3s ease-in-out infinite;">
-  <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;opacity:0.9;margin-bottom:5px;">⚠️ Notice</div>
-  <div style="font-size:16px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;line-height:1.2;">Draft Only</div>
-  <div style="height:1px;background:rgba(255,255,255,0.25);margin:8px 0;"></div>
-  <div style="font-size:11px;font-weight:600;line-height:1.5;opacity:0.9;">To coincide with<br>press release</div>
-  <div style="font-size:10px;opacity:0.7;margin-top:6px;font-style:italic;">Not for public distribution</div>
-</div>
-<style>
-  @keyframes draftPulse {
-    0%, 100% { box-shadow: 0 6px 24px rgba(0,0,0,0.35); }
-    50% { box-shadow: 0 6px 32px rgba(139,74,43,0.7); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    #draftBadge { animation: none; }
-  }
-</style>
+
 
 <!-- FOOTER -->
 <footer role="contentinfo">
@@ -2204,20 +2124,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 </footer>
 
 <script>
-  // ── DRAFT MODAL ──
-  function dismissModal() {
-    const modal = document.getElementById('draftModal');
-    modal.style.transition = 'opacity 0.3s ease';
-    modal.style.opacity = '0';
-    setTimeout(() => {
-      modal.style.display = 'none';
-      // Trigger notice bar pop animation after modal closes
-      const bar = document.getElementById('noticeBar');
-      bar.classList.add('notice-bar-animate');
-      setTimeout(() => bar.classList.remove('notice-bar-animate'), 700);
-    }, 300);
-  }
-
   // ── LIGHTBOX ──
   const galleryImages = [
     { src: 'images/gallery-1.jpg',  alt: 'Construction in Ogden Canyon' },
