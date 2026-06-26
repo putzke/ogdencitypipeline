@@ -2338,6 +2338,17 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 </footer>
 
 <script>
+  // ── NOTICE BAR FLASH ON LOAD ──
+  window.addEventListener('load', function() {
+    const bar = document.getElementById('noticeBar');
+    if (!bar) return;
+    // Brief delay so the page has painted, then flash in
+    setTimeout(function() {
+      bar.classList.add('notice-bar-animate');
+      setTimeout(function() { bar.classList.remove('notice-bar-animate'); }, 700);
+    }, 400);
+  });
+
   // ── LIGHTBOX ──
   const galleryImages = [
     { src: 'images/gallery-1.jpg',  alt: 'Construction in Ogden Canyon' },
