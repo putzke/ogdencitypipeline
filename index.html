@@ -1096,8 +1096,12 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 
 <div id="top" style="position:absolute;top:0;"></div>
 
-<div id="noticeBar" class="notice-bar" role="banner" style="background:var(--canyon-rust);font-size:1.15rem;font-weight:700;letter-spacing:0.04em;padding:15px 20px;">
-  📣 Latest Notice: For Pineview Reservoir Crossing Information — <a href="#pineview" style="color:white;text-decoration:underline;font-weight:800;text-underline-offset:3px;">Click Here</a>
+<div id="noticeBar" class="notice-bar" role="banner" style="background:var(--canyon-rust);font-size:1.15rem;font-weight:700;letter-spacing:0.04em;padding:12px 20px;display:flex;flex-direction:column;gap:8px;">
+  <div>📣 Latest Notice: For Pineview Reservoir Crossing Information — <a href="#pineview" style="color:white;text-decoration:underline;font-weight:800;text-underline-offset:3px;">Click Here</a></div>
+  <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;font-weight:600;letter-spacing:0.02em;">
+    <img src="data:image/png;base64,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" alt="Utah DWR logo" style="width:32px;height:32px;border-radius:4px;flex-shrink:0;"/>
+    <a href="https://wildlife.utah.gov/pdf/guidebooks/emergency-changes/emergency-change-2026-07-02-pineview-reservoir.pdf" target="_blank" rel="noopener" style="color:white;text-decoration:underline;font-weight:700;text-underline-offset:3px;">UDWR Notice — Update to Anglers for the Taking of Fish from Pineview Reservoir</a>
+  </div>
 </div>
 <style>
   /* ── NOTICE BAR ANIMATION ── */
@@ -1653,10 +1657,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 
       <!-- Theme tabs -->
       <div class="qa-tabs">
-        <button class="qa-tab active" data-theme="all">All Topics <span class="qa-tab-count">35</span></button>
+        <button class="qa-tab active" data-theme="all">All Topics <span class="qa-tab-count">37</span></button>
         <button class="qa-tab" data-theme="1">💧 Water Reliability <span class="qa-tab-count">9</span></button>
         <button class="qa-tab" data-theme="2">☀️ Drought Realities <span class="qa-tab-count">8</span></button>
-        <button class="qa-tab" data-theme="3">🌿 Responsible Stewardship <span class="qa-tab-count">18</span></button>
+        <button class="qa-tab" data-theme="3">🌿 Responsible Stewardship <span class="qa-tab-count">20</span></button>
       </div>
 
       <div class="qa-results-count" id="qaCount">Showing all 27 questions</div>
@@ -1907,11 +1911,11 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
             <span class="qa-chevron">▼</span>
           </button>
           <div class="qa-answer">
-            <div class="qa-answer-text">Drawdown timing will be coordinated to be considerate to critical spawning periods. UDWR does not expect any visible fish mortality due to low water, but plans to double harvest limits for most fish species — effective sometime in early July — as a precaution. Ogden City provides supplemental water flows to Willard Bay Reservoir to benefit fish and wildlife.</div>
-            <div class="qa-contact route">
+            <div class="qa-answer-text">DWR does not expect any visible fish mortality due to low water, but — as a precaution — has increased the daily harvest limit to 12 largemouth or smallmouth bass (a combined total), and one tiger muskellunge larger than 40 inches. There are no harvest limits for black crappie, black bullhead, bluegill, green sunfish and yellow perch. Emergency fish harvest regulations are in effect from July 2, 2026 through Dec. 31, 2026. Ogden City provides supplemental water flows to Willard Bay Reservoir to benefit fish and wildlife.</div>
+            <div class="qa-contact direct">
               <div>
-                <div class="qa-contact-label">🔵 Technical Question — Route Through Hotline</div>
-                For fish and wildlife impact questions, contact the project hotline and your inquiry will be directed to the Utah Division of Wildlife Resources.<br>
+                <div class="qa-contact-label">✅ Sunrise Engineering — Public Involvement Team</div>
+                Our PI team will assist with your inquiry and direct you to the appropriate Ogden City Communications contact for press interviews.<br>
                 <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
               </div>
             </div>
@@ -1925,7 +1929,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
             <span class="qa-chevron">▼</span>
           </button>
           <div class="qa-answer">
-            <div class="qa-answer-text">UDWR expects some fish to be flushed downstream. Many young fish will become prey for larger predator fish like tiger muskellunge and smallmouth bass; however, this would happen anyway due to naturally low water levels due to the drought. Many of the fish species in Pineview are well adapted to ups and downs in water levels and their populations will bounce back with time following refilling of the reservoir.</div>
+            <div class="qa-answer-text">DWR expects some fish to be flushed downstream. Many young fish will become prey for larger predator fish like tiger muskellunge and smallmouth bass; however, this would happen anyway due to naturally low water levels caused by the drought. Many of the fish species in Pineview are well adapted to ups and downs in water levels and their populations are expected to rebound over time following refilling of the reservoir.</div>
             <div class="qa-contact direct">
               <div>
                 <div class="qa-contact-label">✅ Sunrise Engineering — Public Involvement Team</div>
@@ -1943,7 +1947,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
             <span class="qa-chevron">▼</span>
           </button>
           <div class="qa-answer">
-            <div class="qa-answer-text">It's not likely given the rate of reservoir drawdown. Water will recede slowly enough for fish to find deeper water.</div>
+            <div class="qa-answer-text">It's not likely given the rate of reservoir drawdown. Water will recede slow enough for fish to find deeper water.</div>
             <div class="qa-contact direct">
               <div>
                 <div class="qa-contact-label">✅ Sunrise Engineering — Public Involvement Team</div>
@@ -1957,19 +1961,19 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         <div class="qa-card theme-3" data-theme="3" data-q="UDWR restock fish stocking tiger muskellunge next year replenish" role="listitem">
           <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
-            Will UDWR restock fish next year?
+            Will DWR restock fish next year?
             <span class="qa-chevron">▼</span>
           </button>
           <div class="qa-answer">
-            <div class="qa-answer-text">UDWR regularly stocks tiger muskellunge, which are sterile and cannot maintain populations on their own — this allows them to control numbers of this species. They plan on stocking tiger muskellunge next year. All other species in the reservoir maintain their populations through natural reproduction and will not need to be supplemented with stocking.</div>
-            <div class="qa-contact route">
+            <div class="qa-answer-text">DWR regularly stocks tiger muskellunge, which are sterile, and cannot maintain populations on their own. This allows them to control numbers of this species. They plan on stocking tiger muskellunge next year. All other species in the reservoir maintain their populations through natural reproduction and will not need to be supplemented with stocking.</div>
+            <div class="qa-contact direct">
               <div>
-                <div class="qa-contact-label">🔵 Technical Question — Route Through Hotline</div>
-                For fish stocking and wildlife management questions, contact the project hotline and your inquiry will be directed to the Utah Division of Wildlife Resources.<br>
+                <div class="qa-contact-label">✅ Sunrise Engineering — Public Involvement Team</div>
+                Our PI team will assist with your inquiry and direct you to the appropriate Ogden City Communications contact for press interviews.<br>
                 <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
               </div>
             </div>
-          </div>
+                        </div>
         </div>
 
         <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="bald eagles migratory birds forest service sensitive species impact">
@@ -2264,6 +2268,42 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
           </button>
           <div class="qa-answer">
             <div class="qa-answer-text">Anderson Cove and Cemetery Boat Launches will gradually become inaccessible as water levels recede. A full site closure for Port Ramp Boat Launch will remain in effect through 2026 to complete reconstruction of the site.</div>
+            <div class="qa-contact direct">
+              <div>
+                <div class="qa-contact-label">✅ Sunrise Engineering — Public Involvement Team</div>
+                Our PI team will assist with your inquiry and direct you to the appropriate Ogden City Communications contact for press interviews.<br>
+                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="fish habitat improve structures submerged reservoir waterline DWR funding">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
+            <span class="qa-theme-dot"></span>
+            Will there be efforts to improve fish habitat while water levels are lower?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">DWR is pursuing funding to make strategic fish habitat improvements while reservoir water levels are low. The goal is to install habitat structures near the reservoir waterline so they are submerged early as the reservoir refills, immediately providing refuge and habitat for fish.</div>
+            <div class="qa-contact direct">
+              <div>
+                <div class="qa-contact-label">✅ Sunrise Engineering — Public Involvement Team</div>
+                Our PI team will assist with your inquiry and direct you to the appropriate Ogden City Communications contact for press interviews.<br>
+                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="DWR survey fish populations Pineview boat launch management recovery">
+          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
+            <span class="qa-theme-dot"></span>
+            Will DWR be surveying fish populations at Pineview?
+            <span class="qa-chevron">▼</span>
+          </button>
+          <div class="qa-answer">
+            <div class="qa-answer-text">DWR will survey the fish populations at Pineview as soon as there is enough water in the reservoir to launch a boat. These surveys will guide DWR's management strategies and help give the Pineview fishery the best opportunity for a successful recovery.</div>
             <div class="qa-contact direct">
               <div>
                 <div class="qa-contact-label">✅ Sunrise Engineering — Public Involvement Team</div>
