@@ -1144,37 +1144,45 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   <script>
   function downloadQAExcel() {
     const themeMap = { '1': 'Water Reliability', '2': 'Drought Realities', '3': 'Responsible Stewardship' };
-    const cards = document.querySelectorAll('#qaList .qa-card');
+
+    // Temporarily show ALL cards regardless of current filter/search state
+    const allCards = document.querySelectorAll('#qaList [class*="qa-card"]');
     const rows = [['#', 'Category', 'Question', 'Answer']];
     let i = 1;
-    cards.forEach(card => {
+
+    allCards.forEach(card => {
       const theme = themeMap[card.getAttribute('data-theme')] || 'General';
-      const q = card.querySelector('.qa-question')?.innerText?.replace('▼','').replace('▲','').trim() || '';
-      const a = card.querySelector('.qa-answer-text')?.innerText?.trim() || '';
-      // Remove theme dot text if present
-      const qClean = q.replace(/^[•·]\s*/, '').trim();
-      rows.push([i++, theme, qClean, a]);
+
+      // Get question — strip the theme dot span, chevron, and whitespace
+      const qBtn = card.querySelector('.qa-question');
+      let q = '';
+      if (qBtn) {
+        // Clone and remove the dot span and chevron span before reading text
+        const clone = qBtn.cloneNode(true);
+        clone.querySelectorAll('.qa-theme-dot, .qa-chevron').forEach(el => el.remove());
+        q = clone.innerText ? clone.innerText.trim() : clone.textContent.trim();
+      }
+
+      // Get answer text only (not the contact routing block)
+      const aEl = card.querySelector('.qa-answer-text');
+      const a = aEl ? (aEl.innerText || aEl.textContent || '').trim() : '';
+
+      if (q && a) {
+        rows.push([i++, theme, q, a]);
+      }
     });
 
     const ws = XLSX.utils.aoa_to_sheet(rows);
-
-    // Column widths
     ws['!cols'] = [
-      { wch: 4 },   // #
-      { wch: 22 },  // Category
-      { wch: 55 },  // Question
-      { wch: 90 },  // Answer
+      { wch: 4 },
+      { wch: 24 },
+      { wch: 58 },
+      { wch: 90 },
     ];
-
-    // Style header row bold (basic)
-    ['A1','B1','C1','D1'].forEach(ref => {
-      if (ws[ref]) ws[ref].s = { font: { bold: true }, fill: { fgColor: { rgb: '1A4560' } } };
-    });
 
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Media Q&A');
 
-    // Add metadata sheet
     const meta = [
       ['Ogden Canyon 36-Inch Pipeline Replacement Project'],
       ['Pineview Reservoir Crossing — Media Q&A'],
@@ -1182,10 +1190,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       ['Source', 'ogdencitypipeline.com'],
       ['Contact', '801-838-8365  |  info@ogdencitypipeline.com'],
       ['Downloaded', new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'})],
-      ['Total Q&As', rows.length - 1],
+      ['Total Q&As exported', rows.length - 1],
     ];
     const ws2 = XLSX.utils.aoa_to_sheet(meta);
-    ws2['!cols'] = [{ wch: 20 }, { wch: 60 }];
+    ws2['!cols'] = [{ wch: 22 }, { wch: 60 }];
     XLSX.utils.book_append_sheet(wb, ws2, 'About');
 
     XLSX.writeFile(wb, 'Ogden_Pipeline_Media_QA.xlsx');
