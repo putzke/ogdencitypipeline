@@ -2122,7 +2122,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         <button class="qa-tab" data-theme="3">🌿 Responsible Stewardship <span class="qa-tab-count">20</span></button>
       </div>
 
-      <div class="qa-results-count" id="qaCount">Showing all 27 questions</div>
+      <div class="qa-results-count" id="qaCount">Showing all questions</div>
 
       <div class="qa-list" id="qaList" role="list" aria-label="Pineview Reservoir questions and answers">
 
@@ -3066,10 +3066,11 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         card.classList.remove('open');
       }
     });
+    const totalCards = qaCards.length;
     qaCount.textContent = term
-      ? `Showing ${visible} of 27 questions matching "${qaSearch.value}"`
+      ? `Showing ${visible} of ${totalCards} questions matching "${qaSearch.value}"`
       : activeTheme === 'all'
-        ? `Showing all 27 questions`
+        ? `Showing all ${totalCards} questions`
         : `Showing ${visible} question${visible !== 1 ? 's' : ''}`;
     qaNoResults.classList.toggle('visible', visible === 0);
   }
