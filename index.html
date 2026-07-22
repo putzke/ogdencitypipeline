@@ -2116,10 +2116,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 
       <!-- Theme tabs -->
       <div class="qa-tabs">
-        <button class="qa-tab active" data-theme="all">All Topics <span class="qa-tab-count">37</span></button>
-        <button class="qa-tab" data-theme="1">💧 Water Reliability <span class="qa-tab-count">9</span></button>
-        <button class="qa-tab" data-theme="2">☀️ Drought Realities <span class="qa-tab-count">8</span></button>
-        <button class="qa-tab" data-theme="3">🌿 Responsible Stewardship <span class="qa-tab-count">20</span></button>
+        <button class="qa-tab active" data-theme="all">All Topics <span class="qa-tab-count" id="qaBadgeAll"></span></button>
+        <button class="qa-tab" data-theme="1">💧 Water Reliability <span class="qa-tab-count" id="qaBadge1"></span></button>
+        <button class="qa-tab" data-theme="2">☀️ Drought Realities <span class="qa-tab-count" id="qaBadge2"></span></button>
+        <button class="qa-tab" data-theme="3">🌿 Responsible Stewardship <span class="qa-tab-count" id="qaBadge3"></span></button>
       </div>
 
       <div class="qa-results-count" id="qaCount">Showing all questions</div>
@@ -3087,6 +3087,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   const qaCards = document.querySelectorAll('.qa-card');
   const qaTabs = document.querySelectorAll('.qa-tab');
   let activeTheme = 'all';
+
+  // Populate badge counts dynamically
+  document.getElementById('qaBadgeAll').textContent = qaCards.length;
+  ['1','2','3'].forEach(t => {
+    const n = document.querySelectorAll('.qa-card[data-theme="'+t+'"]').length;
+    const el = document.getElementById('qaBadge'+t);
+    if (el) el.textContent = n;
+  });
 
   function updateQA() {
     const term = qaSearch.value.toLowerCase().trim();
