@@ -1577,14 +1577,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   </div>
   <!-- Mobile drawer -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#about" class="mobile-link" data-i18n="nav_about">About</a>
-    <a href="#map" class="mobile-link" data-i18n="nav_map">Map</a>
-    <a href="#news" class="mobile-link" data-i18n="nav_news">News</a>
-    <a href="#faq" class="mobile-link" data-i18n="nav_faq">FAQ</a>
-    <a href="#schedule" class="mobile-link" data-i18n="nav_schedule">Schedule</a>
+    <a href="#about" class="mobile-link" data-i18n="mnav_about">About</a>
+    <a href="#map" class="mobile-link" data-i18n="mnav_map">Map</a>
+    <a href="#news" class="mobile-link" data-i18n="mnav_news">News</a>
+    <a href="#faq" class="mobile-link" data-i18n="mnav_faq">FAQ</a>
+    <a href="#schedule" class="mobile-link" data-i18n="mnav_schedule">Schedule</a>
     <a href="#pineview" class="mobile-link mobile-press-link">📄 Press Release — Pineview Reservoir</a>
-    <a href="#gallery" class="mobile-link" data-i18n="nav_photos">Photos</a>
-    <a href="#contact" class="mobile-link" data-i18n="nav_contact">Contact</a>
+    <a href="#gallery" class="mobile-link" data-i18n="mnav_photos">Photos</a>
+    <a href="#contact" class="mobile-link" data-i18n="mnav_contact">Contact</a>
     <div class="mobile-social">
       <a href="https://www.facebook.com/OgdenCityUtah/" target="_blank" rel="noopener">Facebook</a>
       <a href="https://x.com/OgdenCityUtah" target="_blank" rel="noopener">X / Twitter</a>
@@ -3193,15 +3193,24 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 /* ===== LANGUAGE TOGGLE — Phase 1 Prototype ===== */
 (function() {
   const T = {
-    // Nav
-    nav_about:    { en: 'About',           es: 'Acerca del Proyecto' },
-    nav_map:      { en: 'Map',             es: 'Mapa' },
-    nav_news:     { en: 'News',            es: 'Noticias' },
-    nav_faq:      { en: 'FAQ',             es: 'Preguntas Frecuentes' },
-    nav_schedule: { en: 'Schedule',        es: 'Calendario' },
-    nav_press:    { en: 'Press Release',   es: 'Comunicado de Prensa' },
-    nav_photos:   { en: 'Photos',          es: 'Fotos' },
-    nav_contact:  { en: 'Contact',         es: 'Contacto' },
+    // Nav (desktop — short labels to fit bar)
+    nav_about:    { en: 'About',         es: 'Acerca' },
+    nav_map:      { en: 'Map',           es: 'Mapa' },
+    nav_news:     { en: 'News',          es: 'Noticias' },
+    nav_faq:      { en: 'FAQ',           es: 'Preguntas' },
+    nav_schedule: { en: 'Schedule',      es: 'Calendario' },
+    nav_press:    { en: 'Press Release', es: 'Prensa' },
+    nav_photos:   { en: 'Photos',        es: 'Fotos' },
+    nav_contact:  { en: 'Contact',       es: 'Contacto' },
+
+    // Nav (mobile drawer — room for full labels)
+    mnav_about:    { en: 'About',    es: 'Acerca del Proyecto' },
+    mnav_map:      { en: 'Map',      es: 'Mapa' },
+    mnav_news:     { en: 'News',     es: 'Noticias' },
+    mnav_faq:      { en: 'FAQ',      es: 'Preguntas Frecuentes' },
+    mnav_schedule: { en: 'Schedule', es: 'Calendario' },
+    mnav_photos:   { en: 'Photos',   es: 'Fotos' },
+    mnav_contact:  { en: 'Contact',  es: 'Contacto' },
 
     // Stats
     stat_miles:   { en: 'Miles of Pipeline',     es: 'Millas de Tubería' },
