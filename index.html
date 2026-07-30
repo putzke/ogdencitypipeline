@@ -1536,7 +1536,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   @media (prefers-reduced-motion: reduce) {
     .notice-bar-animate { animation: none !important; }
   }
-</style>
+
+  /* Language toggle */
+  .lang-toggle { display: flex; align-items: center; gap: 0; margin-left: 12px; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 4px; overflow: hidden; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; }
+  .lang-btn { padding: 4px 8px; background: transparent; color: rgba(255,255,255,0.6); border: none; cursor: pointer; transition: all 0.15s; }
+  .lang-btn.active { background: rgba(255,255,255,0.2); color: white; }
+  .lang-btn:hover:not(.active) { color: rgba(255,255,255,0.9); }
+
+  </style>
 
 <!-- NAV -->
 <nav role="navigation" aria-label="Main navigation">
@@ -1545,19 +1552,23 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       <img src="images/ogdencity-logo.png" alt="Ogden City Logo">
     </a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#map">Map</a></li>
-      <li><a href="#news">News</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#schedule">Schedule</a></li>
-      <li><a href="#pineview" class="nav-press-btn">Press Release</a></li>
-      <li><a href="#gallery">Photos</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about" data-i18n="nav_about">About</a></li>
+      <li><a href="#map" data-i18n="nav_map">Map</a></li>
+      <li><a href="#news" data-i18n="nav_news">News</a></li>
+      <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
+      <li><a href="#schedule" data-i18n="nav_schedule">Schedule</a></li>
+      <li><a href="#pineview" class="nav-press-btn" data-i18n="nav_press">Press Release</a></li>
+      <li><a href="#gallery" data-i18n="nav_photos">Photos</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
     </ul>
     <div class="nav-social">
       <a href="https://www.facebook.com/OgdenCityUtah/" aria-label="Ogden City on Facebook" target="_blank" rel="noopener">f</a>
       <a href="https://x.com/OgdenCityUtah" aria-label="Ogden City on X / Twitter" target="_blank" rel="noopener">𝕏</a>
       <a href="https://www.instagram.com/ogdencityutah/" aria-label="Ogden City on Instagram" target="_blank" rel="noopener">ig</a>
+    </div>
+    <div class="lang-toggle" aria-label="Language selector">
+      <button class="lang-btn active" id="langEN" onclick="setLang('en')" aria-label="English">EN</button>
+      <button class="lang-btn" id="langES" onclick="setLang('es')" aria-label="Español">ES</button>
     </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
@@ -1565,14 +1576,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   </div>
   <!-- Mobile drawer -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#about" class="mobile-link">About</a>
-    <a href="#map" class="mobile-link">Map</a>
-    <a href="#news" class="mobile-link">News</a>
-    <a href="#faq" class="mobile-link">FAQ</a>
-    <a href="#schedule" class="mobile-link">Schedule</a>
+    <a href="#about" class="mobile-link" data-i18n="nav_about">About</a>
+    <a href="#map" class="mobile-link" data-i18n="nav_map">Map</a>
+    <a href="#news" class="mobile-link" data-i18n="nav_news">News</a>
+    <a href="#faq" class="mobile-link" data-i18n="nav_faq">FAQ</a>
+    <a href="#schedule" class="mobile-link" data-i18n="nav_schedule">Schedule</a>
     <a href="#pineview" class="mobile-link mobile-press-link">📄 Press Release — Pineview Reservoir</a>
-    <a href="#gallery" class="mobile-link">Photos</a>
-    <a href="#contact" class="mobile-link">Contact</a>
+    <a href="#gallery" class="mobile-link" data-i18n="nav_photos">Photos</a>
+    <a href="#contact" class="mobile-link" data-i18n="nav_contact">Contact</a>
     <div class="mobile-social">
       <a href="https://www.facebook.com/OgdenCityUtah/" target="_blank" rel="noopener">Facebook</a>
       <a href="https://x.com/OgdenCityUtah" target="_blank" rel="noopener">X / Twitter</a>
@@ -1609,7 +1620,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     </div>
     <div style="text-align:center;padding:6px 0 6px;">
       <a href="#pineview-qa" style="display:inline-flex;align-items:center;gap:10px;background:var(--water-dark);color:white;text-decoration:none;padding:14px 36px;border-radius:6px;font-family:'Barlow Condensed',sans-serif;font-size:1.25rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:background 0.2s,box-shadow 0.2s;" onmouseover="this.style.background='#8B4A2B';this.style.boxShadow='0 6px 18px rgba(0,0,0,0.2)'" onmouseout="this.style.background='var(--water-dark)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'">
-        🔍 Jump to Media Q&amp;A Section ↓
+        🔍 <span data-i18n="jump_media_qa">Jump to Media Q&amp;A Section</span> ↓
       </a>
     </div>
   </div>
@@ -1620,8 +1631,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
      ║  Search for "BOAT RAMP NOTICE" to find both endpoints       ║
      ╚══════════════════════════════════════════════════════════════╝ -->
 <div style="width:100%;background:rgba(15,46,66,0.7);border-top:1px solid rgba(196,168,130,0.3);border-bottom:1px solid rgba(196,168,130,0.3);padding:18px 28px;text-align:center;">
-  <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.95rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#C4A882;margin-bottom:8px;">⚓ Boat Ramp Access at Pineview Reservoir</div>
-  <p style="font-family:'Open Sans',sans-serif;font-size:0.84rem;line-height:1.65;color:rgba(255,255,255,0.8);margin:0 auto;font-style:italic;max-width:960px;">&ldquo;Due to anticipated low water levels, all boat ramps at Pineview Reservoir will gradually become inaccessible. Anderson Cove boat ramp is projected to close around July 20th; camping and day use will remain open all year. Cemetery Point boat ramp is expected to close mid-August, with day use remaining open through mid-September. Personal watercraft not requiring a boat ramp may still access the water from either location. Port Ramp Boat Launch will remain fully closed through 2026 for reconstruction. Other fee-free recreation sites will not be directly affected, though water access will be limited by low water levels.&rdquo; <span style="font-style:normal;display:inline-flex;align-items:center;gap:5px;vertical-align:middle;opacity:0.75;font-size:0.92em;">&mdash; <img src="data:image/png;base64,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" alt="USFS" style="width:16px;height:16px;vertical-align:middle;border-radius:2px;"> U.S. Forest Service</span></p>
+  <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.95rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#C4A882;margin-bottom:8px;">⚓ <span data-i18n="ramp_title">Boat Ramp Access at Pineview Reservoir</span></div>
+  <p style="font-family:'Open Sans',sans-serif;font-size:0.84rem;line-height:1.65;color:rgba(255,255,255,0.8);margin:0 auto;font-style:italic;max-width:960px;">&ldquo;Due to anticipated low water levels, all boat ramps at Pineview Reservoir will gradually become inaccessible. Anderson Cove boat ramp is projected to close around July 20th; camping and day use will remain open all year. Cemetery Point boat ramp is expected to close mid-August, with day use remaining open through mid-September. Personal watercraft not requiring a boat ramp may still access the water from either location. Port Ramp Boat Launch will remain fully closed through 2026 for reconstruction. Other fee-free recreation sites will not be directly affected, though water access will be limited by low water levels.&rdquo; <span style="font-style:normal;display:inline-flex;align-items:center;gap:5px;vertical-align:middle;opacity:0.75;font-size:0.92em;">&mdash; <img src="data:image/png;base64,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" alt="USFS" style="width:16px;height:16px;vertical-align:middle;border-radius:2px;"> <span data-i18n="ramp_attr">U.S. Forest Service</span></span></p>
 </div>
 <!-- END BOAT RAMP NOTICE -->
 
@@ -1633,24 +1644,24 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <div class="hero-stats">
       <div class="stat-item">
         <div class="stat-num">6.4</div>
-        <div class="stat-label">Miles of Pipeline</div>
+        <div class="stat-label" data-i18n="stat_miles">Miles of Pipeline</div>
       </div>
       <div class="stat-item">
         <div class="stat-num">$100M</div>
-        <div class="stat-label">Project Cost</div>
+        <div class="stat-label" data-i18n="stat_cost">Project Cost</div>
       </div>
       <div class="stat-item">
         <div class="stat-num">2025–29</div>
-        <div class="stat-label">Construction Window</div>
+        <div class="stat-label" data-i18n="stat_window">Construction Window</div>
       </div>
       <div class="stat-item">
         <div class="stat-num">1M</div>
-        <div class="stat-label">Gallons Saved Daily</div>
+        <div class="stat-label" data-i18n="stat_gallons">Gallons Saved Daily</div>
       </div>
     </div>
     <div class="hero-actions">
-      <a href="#schedule" class="btn-primary">View Current Schedule</a>
-      <a href="#contact" class="btn-outline">Contact Our Team</a>
+      <a href="#schedule" class="btn-primary" data-i18n="cta_schedule">View Current Schedule</a>
+      <a href="#contact" class="btn-outline" data-i18n="cta_contact">Contact Our Team</a>
     </div>
   </div>
 </section>
@@ -1658,7 +1669,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 <!-- PHASE STATUS BAR -->
 <div class="phase-bar" role="region" aria-label="Project phase status">
   <div class="phase-bar-inner">
-    <span class="phase-label">Project Status:</span>
+    <span class="phase-label" data-i18n="phase_status">Project Status:</span>
     <div class="phase-badges">
       <span class="badge badge-complete"><span class="badge-dot" aria-hidden="true"></span>Phase 1 — Complete</span>
       <span class="badge badge-complete"><span class="badge-dot" aria-hidden="true"></span>Phase 2 — Complete</span>
@@ -1673,11 +1684,11 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   <div class="section-inner">
     <div class="about-grid">
       <div>
-        <p class="section-label">About the Project</p>
-        <h2 class="section-title" id="about-title">A Century-Old Lifeline, Renewed</h2>
+        <p class="section-label" data-i18n="label_about">About the Project</p>
+        <h2 class="section-title" id="about-title" data-i18n="title_about">A Century-Old Lifeline, Renewed</h2>
         <div class="about-body">
-          <p>Ogden City is replacing a critical 36-inch diameter water transmission pipeline that conveys water from the City's wellfield adjacent to Pineview Reservoir, through Ogden Canyon, and to the City's 23rd Street reservoirs. This pipeline has served Ogden City well for nearly 100 years and needs to be replaced.</p>
-          <p>The project will be completed in multiple phases between 2025 and 2029. Ogden City has selected Sunrise Engineering as the design engineer for the project and Whitaker Construction as the contractor for the project.</p>
+          <p data-i18n="about_p1">Ogden City is replacing a critical 36-inch diameter water transmission pipeline that conveys water from the City's wellfield adjacent to Pineview Reservoir, through Ogden Canyon, and to the City's 23rd Street reservoirs. This pipeline has served Ogden City well for nearly 100 years and needs to be replaced.</p>
+          <p data-i18n="about_p2">The project will be completed in multiple phases between 2025 and 2029. Ogden City has selected Sunrise Engineering as the design engineer for the project and Whitaker Construction as the contractor for the project.</p>
           <p>As design and planning of the project proceeds, additional outreach will take place with residents of Ogden Canyon who will be impacted by this project. Information regarding anticipated timing for construction of the phases of the project will be provided on this website. If you have specific questions regarding the project, please feel free to reach out to our public involvement team using the contact information on this website.</p>
         </div>
       </div>
@@ -1705,8 +1716,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 <!-- MAP -->
 <section id="map" aria-labelledby="map-title">
   <div class="section-inner">
-    <p class="section-label">Project Area</p>
-    <h2 class="section-title" id="map-title">Pipeline Replacement Construction Portal</h2>
+    <p class="section-label" data-i18n="label_map">Project Area</p>
+    <h2 class="section-title" id="map-title" data-i18n="title_map">Pipeline Replacement Construction Portal</h2>
     <div class="map-grid">
       <div class="map-embed">
         <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1B2m9nEBgqw24ifWMVIJZ8tC_QQITgNE&ehbc=2E312F" allowfullscreen loading="lazy"></iframe>
@@ -1736,8 +1747,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 <!-- NEWS -->
 <section id="news" aria-labelledby="news-title">
   <div class="section-inner">
-    <p class="section-label">In the News</p>
-    <h2 class="section-title" id="news-title">Media Coverage</h2>
+    <p class="section-label" data-i18n="label_news">In the News</p>
+    <h2 class="section-title" id="news-title" data-i18n="title_news">Media Coverage</h2>
     <div class="news-grid">
       <a class="news-card" href="https://www.ksl.com/article/50870429/could-a-new-100-million-pipeline-help-the-great-salt-lake-and-birds" target="_blank">
         <span class="news-source">KSL News</span>
@@ -1761,8 +1772,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 <!-- FAQ -->
 <section id="faq" aria-labelledby="faq-title">
   <div class="section-inner">
-    <p class="section-label">Common Questions</p>
-    <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
+    <p class="section-label" data-i18n="label_faq">Common Questions</p>
+    <h2 class="section-title" id="faq-title" data-i18n="title_faq">Frequently Asked Questions</h2>
     <div class="faq-grid">
       <div class="faq-item">
         <p class="faq-q">Can I expect water service interruptions?</p>
@@ -1787,8 +1798,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 <!-- SCHEDULE -->
 <section id="schedule" aria-labelledby="schedule-title">
   <div class="section-inner">
-    <p class="section-label">Construction Timeline</p>
-    <h2 class="section-title" id="schedule-title">Current Schedule</h2>
+    <p class="section-label" data-i18n="label_schedule">Construction Timeline</p>
+    <h2 class="section-title" id="schedule-title" data-i18n="title_schedule">Current Schedule</h2>
     <p class="schedule-updated">Updated June 12, 2026 · Schedule subject to change due to weather and materials availability</p>
 
     <!-- Legend -->
@@ -1930,8 +1941,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 <!-- PINEVIEW RESERVOIR -->
 <section id="pineview" aria-labelledby="pineview-title">
   <div class="section-inner">
-    <p class="section-label">Press Release</p>
-    <h2 class="section-title" id="pineview-title">Pineview Reservoir Pipeline Crossing</h2>
+    <p class="section-label" data-i18n="label_press">Press Release</p>
+    <h2 class="section-title" id="pineview-title" data-i18n="title_press">Pineview Reservoir Pipeline Crossing</h2>
 
     <!-- Download bar -->
     <div class="pineview-download">
@@ -2104,7 +2115,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
           <div class="qa-search-wrap" role="search">
             <span class="qa-search-icon">🔍</span>
             <label for="qaSearch" class="sr-only">Search Pineview Reservoir Q&amp;A questions</label>
-            <input type="text" id="qaSearch" placeholder="Search questions… e.g. drought, fish, cost" autocomplete="off" aria-describedby="qaCount">
+            <input type="text" id="qaSearch" placeholder="Search questions… e.g. drought, fish, cost" data-i18n-placeholder="qa_search" autocomplete="off" aria-describedby="qaCount">
             <button class="qa-search-clear" id="qaSearchClear" title="Clear search">✕</button>
           </div>
           <button onclick="downloadQAExcel()" title="Download all Q&amp;As as Excel spreadsheet" style="display:inline-flex;align-items:center;gap:7px;padding:11px 16px;background:#1D6F42;color:white;border:none;border-radius:6px;font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.04em;cursor:pointer;white-space:nowrap;transition:background 0.2s;" onmouseover="this.style.background='#155230'" onmouseout="this.style.background='#1D6F42'">
@@ -2116,10 +2127,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 
       <!-- Theme tabs -->
       <div class="qa-tabs">
-        <button class="qa-tab active" data-theme="all">All Topics <span class="qa-tab-count" id="qaBadgeAll"></span></button>
-        <button class="qa-tab" data-theme="1">💧 Water Reliability <span class="qa-tab-count" id="qaBadge1"></span></button>
-        <button class="qa-tab" data-theme="2">☀️ Drought Realities <span class="qa-tab-count" id="qaBadge2"></span></button>
-        <button class="qa-tab" data-theme="3">🌿 Responsible Stewardship <span class="qa-tab-count" id="qaBadge3"></span></button>
+        <button class="qa-tab active" data-theme="all"><span data-i18n="qa_tab_all">All Topics</span> <span class="qa-tab-count" id="qaBadgeAll"></span></button>
+        <button class="qa-tab" data-theme="1"><span data-i18n="qa_tab_1">💧 Water Reliability</span> <span class="qa-tab-count" id="qaBadge1"></span></button>
+        <button class="qa-tab" data-theme="2"><span data-i18n="qa_tab_2">☀️ Drought Realities</span> <span class="qa-tab-count" id="qaBadge2"></span></button>
+        <button class="qa-tab" data-theme="3"><span data-i18n="qa_tab_3">🌿 Responsible Stewardship</span> <span class="qa-tab-count" id="qaBadge3"></span></button>
       </div>
 
       <div class="qa-results-count" id="qaCount">Showing all questions</div>
@@ -2890,8 +2901,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 </section>
 <section id="gallery" aria-labelledby="gallery-title">
   <div class="section-inner">
-    <p class="section-label">Construction Progress</p>
-    <h2 class="section-title" id="gallery-title">Project Photos</h2>
+    <p class="section-label" data-i18n="label_photos">Construction Progress</p>
+    <h2 class="section-title" id="gallery-title" data-i18n="title_photos">Project Photos</h2>
     <div class="gallery-grid">
       <img class="g-wide" src="images/gallery-1.jpg" alt="Construction in Ogden Canyon" onclick="openLightbox(0)">
       <img src="images/gallery-2.jpg" alt="Pipeline work near Alaskan Inn" onclick="openLightbox(1)">
@@ -2924,8 +2935,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 <!-- CONTACT -->
 <section id="contact" aria-labelledby="contact-title">
   <div class="section-inner">
-    <p class="section-label">Reach Out</p>
-    <h2 class="section-title" id="contact-title">Contact Our Team</h2>
+    <p class="section-label" data-i18n="label_contact">Reach Out</p>
+    <h2 class="section-title" id="contact-title" data-i18n="title_contact">Contact Our Team</h2>
     <p style="font-family:'Source Serif 4',serif;font-size:1.05rem;color:var(--text-mid);line-height:1.8;max-width:680px;margin-bottom:36px;">For project-related inquiries, property access concerns, or to be added to our community coordination list, please reach out directly using any of the methods below. Our public involvement team typically responds within one business day.</p>
     <div class="contact-grid">
       <div class="contact-info">
@@ -3115,13 +3126,23 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       }
     });
     const totalCards = qaCards.length;
-    qaCount.textContent = term
-      ? `Showing ${visible} of ${totalCards} questions matching "${qaSearch.value}"`
-      : activeTheme === 'all'
-        ? `Showing all ${totalCards} questions`
-        : `Showing ${visible} question${visible !== 1 ? 's' : ''}`;
+    const lang = document.documentElement.lang || 'en';
+    if (lang === 'es') {
+      qaCount.textContent = term
+        ? `Mostrando ${visible} de ${totalCards} preguntas con "${qaSearch.value}"`
+        : activeTheme === 'all'
+          ? `Mostrando las ${totalCards} preguntas`
+          : `Mostrando ${visible} pregunta${visible !== 1 ? 's' : ''}`;
+    } else {
+      qaCount.textContent = term
+        ? `Showing ${visible} of ${totalCards} questions matching "${qaSearch.value}"`
+        : activeTheme === 'all'
+          ? `Showing all ${totalCards} questions`
+          : `Showing ${visible} question${visible !== 1 ? 's' : ''}`;
+    }
     qaNoResults.classList.toggle('visible', visible === 0);
   }
+  window.updateQA = updateQA;
 
   qaSearch.addEventListener('input', updateQA);
   qaSearchClear.addEventListener('click', () => { qaSearch.value = ''; updateQA(); qaSearch.focus(); });
@@ -3166,6 +3187,108 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     }
   });
+</script>
+<script>
+/* ===== LANGUAGE TOGGLE — Phase 1 Prototype ===== */
+(function() {
+  const T = {
+    // Nav
+    nav_about:    { en: 'About',           es: 'Acerca del Proyecto' },
+    nav_map:      { en: 'Map',             es: 'Mapa' },
+    nav_news:     { en: 'News',            es: 'Noticias' },
+    nav_faq:      { en: 'FAQ',             es: 'Preguntas Frecuentes' },
+    nav_schedule: { en: 'Schedule',        es: 'Calendario' },
+    nav_press:    { en: 'Press Release',   es: 'Comunicado de Prensa' },
+    nav_photos:   { en: 'Photos',          es: 'Fotos' },
+    nav_contact:  { en: 'Contact',         es: 'Contacto' },
+
+    // Stats
+    stat_miles:   { en: 'Miles of Pipeline',     es: 'Millas de Tubería' },
+    stat_cost:    { en: 'Project Cost',          es: 'Costo del Proyecto' },
+    stat_window:  { en: 'Construction Window',   es: 'Período de Construcción' },
+    stat_gallons: { en: 'Gallons Saved Daily',   es: 'Galones Ahorrados Diariamente' },
+
+    // Hero CTAs
+    cta_schedule: { en: 'View Current Schedule',  es: 'Ver Calendario Actual' },
+    cta_contact:  { en: 'Contact Our Team',       es: 'Contacte a Nuestro Equipo' },
+
+    // Phase bar
+    phase_status: { en: 'Project Status:',  es: 'Estado del Proyecto:' },
+
+    // Section labels
+    label_about:    { en: 'About the Project',     es: 'Acerca del Proyecto' },
+    label_map:      { en: 'Project Area',          es: 'Área del Proyecto' },
+    label_news:     { en: 'In the News',           es: 'En las Noticias' },
+    label_faq:      { en: 'Common Questions',      es: 'Preguntas Comunes' },
+    label_schedule: { en: 'Construction Timeline', es: 'Línea de Tiempo de Construcción' },
+    label_press:    { en: 'Press Release',         es: 'Comunicado de Prensa' },
+    label_photos:   { en: 'Construction Progress', es: 'Progreso de Construcción' },
+    label_contact:  { en: 'Reach Out',             es: 'Contáctenos' },
+
+    // Section titles
+    title_about:    { en: 'A Century-Old Lifeline, Renewed',               es: 'Un Recurso Vital Centenario, Renovado' },
+    title_map:      { en: 'Pipeline Replacement Construction Portal',      es: 'Portal de Construcción del Reemplazo de Tubería' },
+    title_news:     { en: 'Media Coverage',                                es: 'Cobertura de Medios' },
+    title_faq:      { en: 'Frequently Asked Questions',                    es: 'Preguntas Frecuentes' },
+    title_schedule: { en: 'Current Schedule',                              es: 'Calendario Actual' },
+    title_press:    { en: 'Pineview Reservoir Pipeline Crossing',          es: 'Cruce de Tubería de la Presa Pineview' },
+    title_photos:   { en: 'Project Photos',                                es: 'Fotos del Proyecto' },
+    title_contact:  { en: 'Contact Our Team',                              es: 'Contacte a Nuestro Equipo' },
+
+    // Boat ramp notice
+    ramp_title: { en: 'Boat Ramp Access at Pineview Reservoir', es: 'Acceso a Rampas de Embarcaciones en la Presa Pineview' },
+    ramp_attr:  { en: 'U.S. Forest Service', es: 'Servicio Forestal de los EE.\u00a0UU. (USFS)' },
+
+    // Jump link
+    jump_media_qa: { en: 'Jump to Media Q&A Section', es: 'Ir a la Sección de Preguntas para Medios' },
+
+    // Q&A tabs
+    qa_tab_all: { en: 'All Topics',                    es: 'Todos los Temas' },
+    qa_tab_1:   { en: '\ud83d\udca7 Water Reliability',        es: '\ud83d\udca7 Confiabilidad del Agua' },
+    qa_tab_2:   { en: '\u2600\ufe0f Drought Realities',         es: '\u2600\ufe0f Realidades de la Sequía' },
+    qa_tab_3:   { en: '\ud83c\udf3f Responsible Stewardship',  es: '\ud83c\udf3f Administración Responsable' },
+
+    // About paragraphs
+    about_p1: {
+      en: 'Ogden City is replacing a critical 36-inch diameter water transmission pipeline that conveys water from the City\u2019s wellfield adjacent to Pineview Reservoir, through Ogden Canyon, and to the City\u2019s 23rd Street reservoirs. This pipeline has served Ogden City well for nearly 100 years and needs to be replaced.',
+      es: 'Ogden City está reemplazando una tubería crítica de transmisión de agua de 36 pulgadas de diámetro que transporta agua desde el campo de pozos de la Ciudad, adyacente a la Presa Pineview, a través de Ogden Canyon, hasta los tanques de almacenamiento de la Calle 23. Esta tubería ha servido a Ogden City por casi 100 años y necesita ser reemplazada.'
+    },
+    about_p2: {
+      en: 'The project will be completed in multiple phases between 2025 and 2029. Ogden City has selected Sunrise Engineering as the design engineer for the project and Whitaker Construction as the contractor for the project.',
+      es: 'El proyecto se completará en múltiples fases entre 2025 y 2029. Ogden City ha seleccionado a Sunrise Engineering como ingeniero de diseño del proyecto y a Whitaker Construction como contratista del proyecto.'
+    }
+    // Placeholder translations
+    qa_search: { en: 'Search questions… e.g. drought, fish, cost', es: 'Buscar preguntas… ej. sequía, peces, costo' }
+  };
+
+  let currentLang = 'en';
+
+  window.setLang = function(lang) {
+    currentLang = lang;
+    document.getElementById('langEN').classList.toggle('active', lang === 'en');
+    document.getElementById('langES').classList.toggle('active', lang === 'es');
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (T[key] && T[key][lang]) {
+        el.textContent = T[key][lang];
+      }
+    });
+
+    // Handle placeholder attributes
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (T[key] && T[key][lang]) {
+        el.placeholder = T[key][lang];
+      }
+    });
+
+    // Update dynamic Q&A status text
+    if (typeof updateQA === 'function') updateQA();
+
+    document.documentElement.lang = lang;
+  };
+})();
 </script>
 </body>
 </html>
