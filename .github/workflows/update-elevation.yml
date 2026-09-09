@@ -1,0 +1,31 @@
+name: Update Pineview Elevation
+
+on:
+  schedule:
+    # Run daily at 7:00 AM Mountain (1:00 PM UTC)
+    - cron: '0 13 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch latest elevation data
+        run: python scrape_pineview.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "Elevation Bot"
+          git config user.email "bot@ogdencitypipeline.com"
+          git add pineview_elevation.json
+          git diff --cached --quiet || git commit -m "Auto-update Pineview elevation $(date -u +%Y-%m-%d)"
+          git push
