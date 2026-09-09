@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-09T11:07:58Z",
+  "updated": "2026-09-09T17:03:20Z",
   "source": "USBR Water Operations 40-Day Dataset",
   "source_url": "https://www.usbr.gov/rsvrWater/rsv40Day.html?siteid=946&reservoirtype=Reservoir",
   "target_elevation": 4835.0,
@@ -12,7 +12,7 @@
   },
   "trends": {
     "daily_change_ft": -1.1,
-    "avg_7day_drop_ft": 1.03,
+    "avg_7day_drop_ft": 1.06,
     "remaining_to_target_ft": 9.1,
     "est_days_to_target": 9,
     "drawdown_progress_pct": 86.0
