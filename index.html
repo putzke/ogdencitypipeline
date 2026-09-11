@@ -1538,6 +1538,11 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     .notice-bar-animate { animation: none !important; }
   }
 
+  /* Live pulse animation */
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
   /* Language toggle */
   .lang-toggle { display: flex; align-items: center; gap: 0; margin-left: 12px; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 4px; overflow: hidden; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; }
   .lang-btn { padding: 4px 8px; background: transparent; color: rgba(255,255,255,0.6); border: none; cursor: pointer; transition: all 0.15s; }
@@ -1686,6 +1691,16 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     </div>
   </div>
 </section>
+
+
+<!-- WEEKLY UPDATE BANNER — edit content below each week -->
+<div style="background:linear-gradient(135deg,rgba(26,69,96,0.95),rgba(15,46,66,0.95));border-top:2px solid var(--canyon-stone);border-bottom:2px solid var(--canyon-stone);padding:14px 28px;text-align:center;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--canyon-stone);margin-bottom:5px;">📋 This Week — September 8, 2026</div>
+    <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.9);line-height:1.6;">Pineview Reservoir at <strong>4,842 ft</strong> — approximately 7 ft from construction target. Drawdown rate slowing as pool approaches 4,835 ft. Increased truck traffic expected at staging areas as crossing mobilization begins mid-September.</div>
+  </div>
+</div>
+<!-- END WEEKLY UPDATE BANNER -->
 
 <!-- PHASE STATUS BAR -->
 <div class="phase-bar" role="region" aria-label="Project phase status">
@@ -2061,8 +2076,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     </div>
 
     <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;">
-      <div id="elevationCard" style="flex:1;min-width:200px;background:var(--water-dark);border-radius:10px;padding:18px;text-align:center;color:white;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--canyon-stone);margin-bottom:6px;">Current Pool Elevation</div>
+      <div id="elevationCard" style="flex:1;min-width:200px;background:var(--water-dark);border-radius:10px;padding:18px;text-align:center;color:white;border:1.5px solid var(--canyon-stone);box-shadow:0 0 20px rgba(196,168,130,0.15);">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--canyon-stone);margin-bottom:6px;">Current Pool Elevation <span style="font-size:0.55rem;background:var(--accent-green);color:white;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;letter-spacing:0.04em;animation:livePulse 2s ease-in-out infinite;">● LIVE</span></div>
         <div id="elevVal" style="font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:700;">--</div>
         <div id="elevChange" style="font-size:0.82rem;color:rgba(255,255,255,0.6);margin-top:2px;"></div>
         <div style="margin-top:8px;background:rgba(255,255,255,0.12);border-radius:4px;height:7px;overflow:hidden;">
@@ -2078,10 +2093,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       <div style="flex:2;min-width:280px;background:var(--water-dark);border-radius:10px;padding:18px;color:white;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--canyon-stone);margin-bottom:8px;">Project Fast Facts</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;font-family:'Open Sans',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.75);line-height:1.7;">
+          <div><span style="color:var(--canyon-stone);font-weight:600;">Pipeline diameter:</span> 36 inches</div>
           <div><span style="color:var(--canyon-stone);font-weight:600;">Pipeline age:</span> ~55 yrs beneath reservoir</div>
+          <div><span style="color:var(--canyon-stone);font-weight:600;">Communities served:</span> 120,000+ residents</div>
           <div><span style="color:var(--canyon-stone);font-weight:600;">Approach:</span> Parallel pipeline install</div>
-          <div><span style="color:var(--canyon-stone);font-weight:600;">Capacity:</span> 110,150 acre-feet</div>
+          <div><span style="color:var(--canyon-stone);font-weight:600;">Reservoir capacity:</span> 110,150 acre-feet</div>
+          <div><span style="color:var(--canyon-stone);font-weight:600;">Construction method:</span> Open trench + slip-line</div>
           <div><span style="color:var(--canyon-stone);font-weight:600;">Water saved:</span> ~1M gallons/day</div>
+          <div><span style="color:var(--canyon-stone);font-weight:600;">Partner agencies:</span> 9</div>
           <div><span style="color:var(--canyon-stone);font-weight:600;">Expected refill:</span> January 2027</div>
           <div><span style="color:var(--canyon-stone);font-weight:600;">Funding:</span> EPA WIFIA, SRF, ARPA</div>
         </div>
