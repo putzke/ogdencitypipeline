@@ -165,11 +165,19 @@
       Pipeline Alignment
     </div>
     <div class="legend-item">
-      <div class="legend-swatch" style="background:rgba(255,100,50,0.5);border:1px solid #FF6432;"></div>
-      Construction Zone (coming)
+      <div class="legend-swatch" style="background:#589d0f;border:1px solid #0F9D58;border-radius:50%;width:12px;height:12px;"></div>
+      Complete
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:#d18802;border:1px solid #0288D1;border-radius:50%;width:12px;height:12px;"></div>
+      Staging Area
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:#0051e6;border:1px solid #E65100;border-radius:50%;width:12px;height:12px;"></div>
+      Active / Closure
     </div>
     <div style="margin-top:8px;font-size:0.65rem;color:rgba(255,255,255,0.4);font-style:italic;">
-      Image overlays can be added<br>for phased construction plans
+      Click markers for details &amp; photos
     </div>
   </div>
 </div>
@@ -229,6 +237,20 @@ var alignLayer = omnivore.kml('files/Pipeline_Alignment.kml')
     map.fitBounds(bounds, { padding: [40, 40] });
   })
   .on('error', function(e) { console.warn('Alignment KML error:', e); })
+  .addTo(map);
+
+// Load construction icons (placemarks with descriptions and photos)
+var iconsLayer = omnivore.kml('files/Construction_Icons.kml')
+  .on('ready', function() {
+    this.eachLayer(function(layer) {
+      if (layer.feature && layer.feature.properties) {
+        var name = layer.feature.properties.name || '';
+        var desc = layer.feature.properties.description || '';
+        layer.bindPopup('<div style="max-width:280px;max-height:300px;overflow-y:auto;font-family:Inter,sans-serif;font-size:13px;line-height:1.5;"><strong style="font-size:14px;color:#1A4560;">' + name + '</strong><br>' + desc + '</div>', { maxWidth: 300 });
+      }
+    });
+  })
+  .on('error', function(e) { console.warn('Icons KML error:', e); })
   .addTo(map);
 
 // Key location markers
