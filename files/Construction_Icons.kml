@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Construction Icons</name>
+    <Style id="icon-1502-0288D1-labelson">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-1574-0F9D58-labelson">
+      <IconStyle>
+        <color>ff589d0f</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-1597-E65100-labelson">
+      <IconStyle>
+        <color>ff0051e6</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-1853-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="line-000000-1775-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.775</width>
+      </LineStyle>
+    </Style>
+    <Style id="line-000000-1775-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>2.6625</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="line-000000-1775">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-000000-1775-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-000000-1775-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-000000-2163-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>2.163</width>
+      </LineStyle>
+    </Style>
+    <Style id="line-000000-2163-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>3.2445</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="line-000000-2163">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-000000-2163-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-000000-2163-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="poly-000000-2001-0-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>2.001</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>00000000</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <Style id="poly-000000-2001-0-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>3.0015</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>00000000</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <StyleMap id="poly-000000-2001-0">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#poly-000000-2001-0-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#poly-000000-2001-0-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>Vault Demolition</name>
+      <description>COMPLETE</description>
+      <styleUrl>#icon-1574-0F9D58-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -111.9025801,41.2412579,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Staging Area #2</name>
+      <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR5BGIa7QvNvpC8AdV-VF6cWD9l2foyFknvpgczGjYd9Qj53Wn1WG6CEMSA-8a0VxDg-SBNGMRlfv4pBSdmTq1zmrHJkwrotUOpJarcEzDao17-ltj3aIRN8y6tjPSxt0UuAvXATTY-mFp_TFSRGovjNtJR3tSjT_TqcSgMOsxcvqCwu3Oqtnn24pwIMUMbFxwDeOi_xhxayPgPfZDUi3RIKqmb31Edf74Ue_M9cWFphiUK3m9ZgFMzufU0?authuser=0&fife=s16383" height="200" width="auto" /><br><br>Open space between Alaskan Inn and Gray Cliffs Lodge/Restaurant.  this region will remain a staging area for future Winter phases. TBA.]]></description>
+      <styleUrl>#icon-1502-0288D1-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR5BGIa7QvNvpC8AdV-VF6cWD9l2foyFknvpgczGjYd9Qj53Wn1WG6CEMSA-8a0VxDg-SBNGMRlfv4pBSdmTq1zmrHJkwrotUOpJarcEzDao17-ltj3aIRN8y6tjPSxt0UuAvXATTY-mFp_TFSRGovjNtJR3tSjT_TqcSgMOsxcvqCwu3Oqtnn24pwIMUMbFxwDeOi_xhxayPgPfZDUi3RIKqmb31Edf74Ue_M9cWFphiUK3m9ZgFMzufU0?authuser=0&fife=s16383]]></value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -111.8809137,41.2516655,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Staging Area #1</name>
+      <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR6snIaUJuMmrije0VuwcNX1bG2kihPK0bmKHMOq9jSnbjEN4EHak2B8JWrCHtjvgSPYrthrQPOGR5VwhEulMWPntKZdeahms-NjR5F2yOlXIx4am6HuhdX2E52qRSW6P9ZLwbs2qrtCVpHI-4Ifnq4gvU8XEriV3NLRqyzX4qdnGuhUloxNQLAkmYqxFin5BqCJaIEr-TW9iAQfiklZey0Ooa9MUqpLaMu90fsLJVUnfiekLSZFG5S0tow?authuser=0&fife=s16383" height="200" width="auto" /><br><br>The utilization of this space as a staging area is COMPLETE.  Crews currently restoring location through May 2026.]]></description>
+      <styleUrl>#icon-1502-0288D1-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR6snIaUJuMmrije0VuwcNX1bG2kihPK0bmKHMOq9jSnbjEN4EHak2B8JWrCHtjvgSPYrthrQPOGR5VwhEulMWPntKZdeahms-NjR5F2yOlXIx4am6HuhdX2E52qRSW6P9ZLwbs2qrtCVpHI-4Ifnq4gvU8XEriV3NLRqyzX4qdnGuhUloxNQLAkmYqxFin5BqCJaIEr-TW9iAQfiklZey0Ooa9MUqpLaMu90fsLJVUnfiekLSZFG5S0tow?authuser=0&fife=s16383]]></value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -111.8872036,41.2489579,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>SR-39 Crossing</name>
+      <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR6c4lKJ89_n9Pst43ejvVn9JSMwD7f5p6gZhnBr1lbaITElmBqA4ZnkAJhv6OJsXaLIW2vHIFno83HCyMqxv4_IVLjUgKfwrJJkzyW6MBFslZ_NlX-UR8AkKkZ1O9MCNE_8JmeoSZ-pBwZQHYH0295vdnIh-_oGnc7uuN91ShhgTWpqtxTfIOO8iCQqB9DhjcSitdEcZF7KU_Ru75hiyD8yuem7Qo-6qI-M5fhlBxWNoK7VwbqRvM661fU?authuser=0&fife=s16383" height="200" width="auto" /><br><br>COMPLETE]]></description>
+      <styleUrl>#icon-1574-0F9D58-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR6c4lKJ89_n9Pst43ejvVn9JSMwD7f5p6gZhnBr1lbaITElmBqA4ZnkAJhv6OJsXaLIW2vHIFno83HCyMqxv4_IVLjUgKfwrJJkzyW6MBFslZ_NlX-UR8AkKkZ1O9MCNE_8JmeoSZ-pBwZQHYH0295vdnIh-_oGnc7uuN91ShhgTWpqtxTfIOO8iCQqB9DhjcSitdEcZF7KU_Ru75hiyD8yuem7Qo-6qI-M5fhlBxWNoK7VwbqRvM661fU?authuser=0&fife=s16383]]></value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -111.8800606,41.2518788,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Summer/Fall 2026 East Bench</name>
+      <description>June 2026 - November 2026: Pipeline replacement from SR-39 (Ogden Canyon Rd.) to the 21st south trailhead and working along the pipeline alignment to the South toward the water tanks</description>
+      <styleUrl>#icon-1853-C2185B-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -111.9270443,41.2310472,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Trailhead Parking (CLOSED)</name>
+      <description><![CDATA[22nd Street Trailhead Closed <br>(May 1 to Nov 1, 2026)<br><br>Construction contractors will be utilizing the parking area as a staging location for equipment and material.  Trailhead will remain open to visitors and foot traffic.  Please use 27th & 29th Street Trailhead as an alternate. for parking.]]></description>
+      <styleUrl>#icon-1597-E65100-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -111.9305985,41.2266255,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Upper Hermitage Staging Area</name>
+      <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR5TDgcUbNOdgtZ6-8hkJoDKY5r0QIIE8mFTcfP6VigFE3cc9KdfSdzj2gMNKFBKDNziW4eP6To5KHgAuhmrttRd2BunHVPIaNlAoRi2NNpAuhNlYoF6N6UZdsdRLNI0WuJFRIM8XE8b4LGfImEaUTY8x5dW5FCAfrK_BReFMWUn5lUKPyZYpE8yUmbwcEKTtSGC4QW_rpmRmCKNWxKuh1ON4oyKT3kC0FHWesPHhtld_EAtwe1q94BEkM4?authuser=0&fife=s16383" height="200" width="auto" /><br><br>COMPLETE]]></description>
+      <styleUrl>#icon-1574-0F9D58-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR5TDgcUbNOdgtZ6-8hkJoDKY5r0QIIE8mFTcfP6VigFE3cc9KdfSdzj2gMNKFBKDNziW4eP6To5KHgAuhmrttRd2BunHVPIaNlAoRi2NNpAuhNlYoF6N6UZdsdRLNI0WuJFRIM8XE8b4LGfImEaUTY8x5dW5FCAfrK_BReFMWUn5lUKPyZYpE8yUmbwcEKTtSGC4QW_rpmRmCKNWxKuh1ON4oyKT3kC0FHWesPHhtld_EAtwe1q94BEkM4?authuser=0&fife=s16383]]></value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -111.8813187,41.251486,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Lower Hermitage 2</name>
+      <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR7wNcrVDcB3wiI4MfiidWf74FtpRM1LiXEEcaeAbn1foZ7cyW-XJmFSZKsKH_QnPBudPqLcEKabywLh6Ci338wgQtol_AA3Hhlxih-WFve5bU7CWn-_9JjobpJjhSxKDc5Zy3nVeq1__BVI1p6SJM0_NVD8IwDrjLo-cFN7h0bbtRsQ-yCNb36OSOfl7ipVOGHWIoAzHa1A1BcnA_dFWhhdda1L4DtwMe6E1pThvR8X7jP7O_pDILD90YE?authuser=0&fife=s16383" height="200" width="auto" /><br><br>COMPLETE. Restoration expected by June 2026. Community meeting TBA.]]></description>
+      <styleUrl>#icon-1574-0F9D58-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR7wNcrVDcB3wiI4MfiidWf74FtpRM1LiXEEcaeAbn1foZ7cyW-XJmFSZKsKH_QnPBudPqLcEKabywLh6Ci338wgQtol_AA3Hhlxih-WFve5bU7CWn-_9JjobpJjhSxKDc5Zy3nVeq1__BVI1p6SJM0_NVD8IwDrjLo-cFN7h0bbtRsQ-yCNb36OSOfl7ipVOGHWIoAzHa1A1BcnA_dFWhhdda1L4DtwMe6E1pThvR8X7jP7O_pDILD90YE?authuser=0&fife=s16383]]></value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -111.8850023,41.2492896,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Lower Hermitage 1</name>
+      <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR6cNKdTiuwR-LKrL7HWcovcokyqO6aLtWgdrl5SYJcMfonZ_HrHoNHd51MBmhz71xKzf96_qqg4whnGUTytivvFisQl9O3JmL80izrGm4IqEjY9Rcbtv7SLXK4o1Vatfbl4JnyjUC1e4GKOI_Ju9ZH_xQrC2PurZaYORIH7M0Z0gtg4nTLEK66kCLGXerg5yUqUuh_M-kq99Zfa3mkN0_SqeM0CHBXyfQHnDGxklpTYwHH386NvmMzEmMM?authuser=0&fife=s16383" height="200" width="auto" /><br><br>COMPLETE.  Restoration expected by June 2026.  Community meeting TBA<br><br><img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR7DutcEdoHeaqD_zt3pXi4prR3ENI2Wx4uRlrZYqExu2EUrXejcFuMGYuJ5AgIy-QMMuzbAJ7BGep5JlX7Ux8ozdGPU95WQIaZLeXUexfZ4c9NTuUFAeruLEZVgVCQ6jz1yKWSxQQ_w05kF972lql0t79tGBlZIhDiPoeUg3W-NEUdcux4fwPBn_XymCjB1YJcU1e0KcN9J4X_9OvMnWGAeRed7k3SWFauuKsDpT-JU2Pe-nZGbiaPK_Xo?authuser=0&fife=s16383" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1574-0F9D58-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR6cNKdTiuwR-LKrL7HWcovcokyqO6aLtWgdrl5SYJcMfonZ_HrHoNHd51MBmhz71xKzf96_qqg4whnGUTytivvFisQl9O3JmL80izrGm4IqEjY9Rcbtv7SLXK4o1Vatfbl4JnyjUC1e4GKOI_Ju9ZH_xQrC2PurZaYORIH7M0Z0gtg4nTLEK66kCLGXerg5yUqUuh_M-kq99Zfa3mkN0_SqeM0CHBXyfQHnDGxklpTYwHH386NvmMzEmMM?authuser=0&fife=s16383 https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR7DutcEdoHeaqD_zt3pXi4prR3ENI2Wx4uRlrZYqExu2EUrXejcFuMGYuJ5AgIy-QMMuzbAJ7BGep5JlX7Ux8ozdGPU95WQIaZLeXUexfZ4c9NTuUFAeruLEZVgVCQ6jz1yKWSxQQ_w05kF972lql0t79tGBlZIhDiPoeUg3W-NEUdcux4fwPBn_XymCjB1YJcU1e0KcN9J4X_9OvMnWGAeRed7k3SWFauuKsDpT-JU2Pe-nZGbiaPK_Xo?authuser=0&fife=s16383]]></value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -111.8882292,41.2489466,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Asphalt Resurfacing and Restoration</name>
+      <description>Completed in Upper Fairmount, Cobbles and Lower Hermitage as of June 30</description>
+      <styleUrl>#icon-1574-0F9D58-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -111.895386,41.2442104,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Pineview Reservoir Crossing</name>
+      <description><![CDATA[(Tentative) October 2026 - January 2027<br><br>+ Mobilization begins as early as Sept 21.]]></description>
+      <styleUrl>#line-000000-2163</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          -111.8192546,41.2687595,0
+          -111.8180745,41.2676306,0
+          -111.8116157,41.2708723,0
+          -111.8091695,41.2711948,0
+          -111.8096201,41.2720818,0
+          -111.8115084,41.2720335,0
+          -111.8134611,41.2713561,0
+          -111.8161647,41.2700014,0
+          -111.8192546,41.2687595,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name>Phase 3 - Pipeline Replacement</name>
+      <description><![CDATA[October 2026 - May 2027<br><br>Work to begin as early as mid-October from far west side and moving east to the water treatment plant.  This phase does include another road crossing in 2027.]]></description>
+      <styleUrl>#line-000000-1775</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          -111.8663751,41.254239,0
+          -111.8659889,41.2535938,0
+          -111.8645512,41.2543358,0
+          -111.8639396,41.2544649,0
+          -111.8633281,41.2541423,0
+          -111.8622767,41.2537712,0
+          -111.8610322,41.2536906,0
+          -111.8599699,41.2537793,0
+          -111.8582856,41.2540939,0
+          -111.856805,41.2541584,0
+          -111.8545949,41.2536906,0
+          -111.8534576,41.2534809,0
+          -111.8514191,41.2531905,0
+          -111.8504964,41.2536583,0
+          -111.8494236,41.2542552,0
+          -111.8471919,41.2544165,0
+          -111.8474065,41.2549327,0
+          -111.8475782,41.2552876,0
+          -111.8495952,41.2551908,0
+          -111.8508612,41.2546907,0
+          -111.8513977,41.2543197,0
+          -111.852728,41.254239,0
+          -111.8544447,41.2545455,0
+          -111.8558179,41.2549408,0
+          -111.8573092,41.2550779,0
+          -111.8586289,41.2549005,0
+          -111.8597876,41.2546505,0
+          -111.8604957,41.2544568,0
+          -111.8612896,41.2544407,0
+          -111.8619119,41.2545456,0
+          -111.862856,41.2547957,0
+          -111.8638109,41.2551021,0
+          -111.8647657,41.2550296,0
+          -111.8652056,41.2550054,0
+          -111.8656455,41.2548199,0
+          -111.866013,41.2545597,0
+          -111.8663805,41.2542835,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name>Phase 3 - Pipeline Replacement</name>
+      <description>October 2026 - April 2027</description>
+      <styleUrl>#poly-000000-2001-0</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <tessellate>1</tessellate>
+            <coordinates>
+              -111.884927,41.2494887,0
+              -111.8849055,41.2491096,0
+              -111.8837897,41.2493677,0
+              -111.8831782,41.2497629,0
+              -111.8833069,41.2500453,0
+              -111.8836073,41.2498839,0
+              -111.8840365,41.2496823,0
+              -111.8845193,41.249529,0
+              -111.884927,41.2494887,0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>ROW Clearing and Grubbing</name>
+      <description>All trees within the ROW from Lower Fairmount to the Ogden Canyon Road crossing to be removed in September 2026</description>
+      <styleUrl>#icon-1853-C2185B-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -111.9074442,41.240109,0
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>
