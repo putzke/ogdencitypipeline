@@ -1130,8 +1130,13 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   /* ── PRESS RELEASE nav button */
   .nav-links a.nav-press-btn {
     white-space: nowrap;
+    animation: navPulse 3s ease-in-out infinite;
   }
-  .nav-links a.nav-press-btn:hover { background: var(--canyon-rust); }
+  @keyframes navPulse {
+    0%, 100% { background: transparent; color: rgba(255,255,255,0.85); }
+    50% { background: var(--canyon-rust); color: white; }
+  }
+  .nav-links a.nav-press-btn:hover { background: var(--canyon-rust); animation: none; }
   .mobile-press-link {
     color: var(--canyon-stone) !important;
     font-weight: 700 !important;
