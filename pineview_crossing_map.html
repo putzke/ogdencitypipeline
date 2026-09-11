@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pineview Reservoir Pipeline Crossing — Construction Map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', 'Open Sans', system-ui, sans-serif; background: #0f2e42; color: white; }
+  
+  #header {
+    background: linear-gradient(135deg, #1A4560, #0f2e42);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 2px solid #C4A882;
+  }
+  #header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #C4A882;
+  }
+  #header .subtitle {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.6);
+  }
+  #header a {
+    color: #C4A882;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 700;
+    border: 1px solid rgba(196,168,130,0.4);
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  #header a:hover { background: rgba(196,168,130,0.2); }
+
+  #map { height: calc(100vh - 110px); width: 100%; }
+
+  #legend {
+    position: absolute;
+    bottom: 30px;
+    left: 12px;
+    z-index: 1000;
+    background: rgba(15,46,66,0.92);
+    border: 1px solid rgba(196,168,130,0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.8);
+    backdrop-filter: blur(8px);
+    max-width: 220px;
+  }
+  #legend h3 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #C4A882;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+  .legend-swatch {
+    width: 20px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  #info-panel {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1000;
+    background: rgba(15,46,66,0.92);
+    border: 1px solid rgba(196,168,130,0.3);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.8);
+    backdrop-filter: blur(8px);
+    max-width: 260px;
+    line-height: 1.5;
+  }
+  #info-panel h3 {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #C4A882;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  #info-panel .elev {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white;
+    margin: 4px 0;
+  }
+  #info-panel .meta {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  #footer {
+    background: #0f2e42;
+    padding: 8px 20px;
+    text-align: center;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.4);
+    border-top: 1px solid rgba(196,168,130,0.2);
+  }
+  #footer a { color: #C4A882; text-decoration: none; }
+
+  @media (max-width: 600px) {
+    #header h1 { font-size: 0.9rem; }
+    #legend { max-width: 180px; font-size: 0.68rem; }
+    #info-panel { max-width: 200px; font-size: 0.72rem; }
+  }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div>
+    <h1>🗺️ Pineview Reservoir Pipeline Crossing</h1>
+    <div class="subtitle">Construction Map — Pipeline Alignment &amp; Right-of-Way</div>
+  </div>
+  <a href="https://ogdencitypipeline.com/#pineview">← Back to Project Site</a>
+</div>
+
+<div style="position:relative;">
+  <div id="map"></div>
+
+  <div id="info-panel">
+    <h3>Current Pool Elevation</h3>
+    <div class="elev" id="panelElev">--</div>
+    <div class="meta" id="panelMeta"></div>
+    <div style="margin-top:6px;background:rgba(255,255,255,0.12);border-radius:3px;height:5px;overflow:hidden;">
+      <div id="panelBar" style="width:0%;height:100%;background:#C4A882;border-radius:3px;transition:width 0.8s;"></div>
+    </div>
+    <div class="meta" style="margin-top:3px;">Target: 4,835 ft</div>
+  </div>
+
+  <div id="legend">
+    <h3>Map Legend</h3>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:rgba(255,234,0,0.5);border:1px solid #FFEA00;"></div>
+      Pipeline ROW
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:rgba(0,150,255,0.4);border:1px solid #0096FF;"></div>
+      Pineview Reservoir
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:rgba(255,100,50,0.5);border:1px solid #FF6432;"></div>
+      Construction Zone (coming)
+    </div>
+    <div style="margin-top:8px;font-size:0.65rem;color:rgba(255,255,255,0.4);font-style:italic;">
+      Image overlays can be added<br>for phased construction plans
+    </div>
+  </div>
+</div>
+
+<div id="footer">
+  Ogden Canyon 36-Inch Pipeline Replacement · <a href="https://ogdencitypipeline.com">ogdencitypipeline.com</a> · Sunrise Engineering, Inc.
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-omnivore/0.3.4/leaflet-omnivore.min.js"></script>
+<script>
+// Initialize map centered on Pineview Reservoir
+var map = L.map('map', {
+  center: [41.253, -111.880],
+  zoom: 13,
+  zoomControl: true
+});
+
+// Satellite imagery base layer (Esri)
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics',
+  maxZoom: 19
+}).addTo(map);
+
+// Labels overlay
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Reference_Overlay/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 19,
+  opacity: 0.7
+}).addTo(map);
+
+// Load KML pipeline alignment
+var kmlLayer = omnivore.kml('files/Pipeline_ROW.kml')
+  .on('ready', function() {
+    this.setStyle({
+      color: '#FFEA00',
+      weight: 2,
+      opacity: 0.8,
+      fillColor: '#FFEA00',
+      fillOpacity: 0.25
+    });
+    // Fit map to the pipeline extent
+    map.fitBounds(this.getBounds(), { padding: [40, 40] });
+  })
+  .on('error', function(e) {
+    console.warn('KML load error:', e);
+  })
+  .addTo(map);
+
+// Key location markers
+var markers = [
+  { lat: 41.2780, lng: -111.8230, name: 'Wellfield', desc: 'Ogden City Wellfield — pipeline origin point' },
+  { lat: 41.2575, lng: -111.8485, name: 'Port Ramp', desc: 'Port Ramp Boat Launch — closed through 2026 for reconstruction' },
+  { lat: 41.2688, lng: -111.8310, name: 'Reservoir Crossing', desc: 'Pipeline crosses beneath Pineview Reservoir bed' },
+  { lat: 41.2460, lng: -111.8620, name: 'Browning Point', desc: 'Southern crossing termination point' }
+];
+
+markers.forEach(function(m) {
+  L.circleMarker([m.lat, m.lng], {
+    radius: 7,
+    fillColor: '#C4A882',
+    color: '#1A4560',
+    weight: 2,
+    fillOpacity: 0.9
+  }).bindPopup('<strong>' + m.name + '</strong><br>' + m.desc).addTo(map);
+});
+
+// Load elevation data
+fetch('../pineview_elevation.json?v=' + Date.now())
+  .then(function(r) { return r.json(); })
+  .catch(function() {
+    // Fallback: try same directory
+    return fetch('pineview_elevation.json?v=' + Date.now()).then(function(r) { return r.json(); });
+  })
+  .then(function(d) {
+    if (!d) return;
+    document.getElementById('panelElev').textContent = d.current.elevation_ft.toFixed(1) + ' ft';
+    var chg = d.trends.daily_change_ft;
+    var arrow = chg < 0 ? '\u2193' : '\u2191';
+    document.getElementById('panelMeta').textContent = arrow + ' ' + Math.abs(chg).toFixed(2) + ' ft/day \u00b7 ' + d.current.date;
+    document.getElementById('panelBar').style.width = d.trends.drawdown_progress_pct + '%';
+  })
+  .catch(function() {
+    document.getElementById('panelElev').textContent = 'N/A';
+  });
+</script>
+</body>
+</html>
