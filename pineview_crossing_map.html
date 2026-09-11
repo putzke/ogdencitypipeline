@@ -253,23 +253,7 @@ var iconsLayer = omnivore.kml('files/Construction_Icons.kml')
   .on('error', function(e) { console.warn('Icons KML error:', e); })
   .addTo(map);
 
-// Key location markers
-var markers = [
-  { lat: 41.2780, lng: -111.8230, name: 'Wellfield', desc: 'Ogden City Wellfield — pipeline origin point' },
-  { lat: 41.2575, lng: -111.8485, name: 'Port Ramp', desc: 'Port Ramp Boat Launch — closed through 2026 for reconstruction' },
-  { lat: 41.2688, lng: -111.8310, name: 'Reservoir Crossing', desc: 'Pipeline crosses beneath Pineview Reservoir bed' },
-  { lat: 41.2460, lng: -111.8620, name: 'Browning Point', desc: 'Southern crossing termination point' }
-];
-
-markers.forEach(function(m) {
-  L.circleMarker([m.lat, m.lng], {
-    radius: 7,
-    fillColor: '#C4A882',
-    color: '#1A4560',
-    weight: 2,
-    fillOpacity: 0.9
-  }).bindPopup('<strong>' + m.name + '</strong><br>' + m.desc).addTo(map);
-});
+// Markers come from Construction_Icons.kml
 
 // Load elevation data
 fetch('pineview_elevation.json?v=' + Date.now())
