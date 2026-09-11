@@ -161,8 +161,8 @@
       Pipeline ROW
     </div>
     <div class="legend-item">
-      <div class="legend-swatch" style="background:rgba(0,150,255,0.4);border:1px solid #0096FF;"></div>
-      Pineview Reservoir
+      <div class="legend-swatch" style="background:rgba(0,150,255,0.6);border:1px solid #0096FF;"></div>
+      Pipeline Alignment
     </div>
     <div class="legend-item">
       <div class="legend-swatch" style="background:rgba(255,100,50,0.5);border:1px solid #FF6432;"></div>
@@ -200,22 +200,35 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/Worl
   opacity: 0.7
 }).addTo(map);
 
-// Load KML pipeline alignment
-var kmlLayer = omnivore.kml('files/Pipeline_ROW.kml')
+// Load KML layers
+var rowLayer = omnivore.kml('files/Pipeline_ROW.kml')
   .on('ready', function() {
     this.setStyle({
       color: '#FFEA00',
       weight: 2,
-      opacity: 0.8,
+      opacity: 0.7,
       fillColor: '#FFEA00',
-      fillOpacity: 0.25
+      fillOpacity: 0.2
     });
-    // Fit map to the pipeline extent
-    map.fitBounds(this.getBounds(), { padding: [40, 40] });
   })
-  .on('error', function(e) {
-    console.warn('KML load error:', e);
+  .on('error', function(e) { console.warn('ROW KML error:', e); })
+  .addTo(map);
+
+var alignLayer = omnivore.kml('files/Pipeline_Alignment.kml')
+  .on('ready', function() {
+    this.setStyle({
+      color: '#0096FF',
+      weight: 3,
+      opacity: 0.9
+    });
+    // Fit map to show the full alignment
+    var bounds = this.getBounds();
+    if (rowLayer.getBounds) {
+      try { bounds.extend(rowLayer.getBounds()); } catch(e) {}
+    }
+    map.fitBounds(bounds, { padding: [40, 40] });
   })
+  .on('error', function(e) { console.warn('Alignment KML error:', e); })
   .addTo(map);
 
 // Key location markers
@@ -237,7 +250,7 @@ markers.forEach(function(m) {
 });
 
 // Load elevation data
-fetch('../pineview_elevation.json?v=' + Date.now())
+fetch('pineview_elevation.json?v=' + Date.now())
   .then(function(r) { return r.json(); })
   .catch(function() {
     // Fallback: try same directory
