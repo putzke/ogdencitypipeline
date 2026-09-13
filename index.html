@@ -1137,6 +1137,34 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     50% { background: var(--canyon-rust); color: white; }
   }
   .nav-links a.nav-press-btn:hover { background: var(--canyon-rust); animation: none; }
+  .nav-press-li { position: relative; }
+  .nav-badge {
+    position: absolute;
+    bottom: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--canyon-stone);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .mobile-badge {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--canyon-stone);
+    background: rgba(196,168,130,0.18);
+    padding: 1px 7px;
+    border-radius: 8px;
+    vertical-align: middle;
+  }
   .mobile-press-link {
     color: var(--canyon-stone) !important;
     font-weight: 700 !important;
@@ -1612,7 +1640,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       <li><a href="#news" data-i18n="nav_news">News</a></li>
       <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
       <li><a href="#schedule" data-i18n="nav_schedule">Schedule</a></li>
-      <li><a href="#pineview" class="nav-press-btn" data-i18n="nav_press">Pineview Crossing</a></li>
+      <li class="nav-press-li"><a href="#pineview" class="nav-press-btn" data-i18n="nav_press">Pineview Crossing</a><span class="nav-badge" data-i18n="nav_badge_schedule">Schedule Published</span></li>
       <li><a href="#gallery" data-i18n="nav_photos">Photos</a></li>
       <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
     </ul>
@@ -1631,7 +1659,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <a href="#news" class="mobile-link" data-i18n="mnav_news">News</a>
     <a href="#faq" class="mobile-link" data-i18n="mnav_faq">FAQ</a>
     <a href="#schedule" class="mobile-link" data-i18n="mnav_schedule">Schedule</a>
-    <a href="#pineview" class="mobile-link mobile-press-link">📄 Press Release — Pineview Reservoir</a>
+    <a href="#pineview" class="mobile-link mobile-press-link">📄 Press Release — Pineview Reservoir <span class="mobile-badge" data-i18n="nav_badge_schedule">Schedule Published</span></a>
     <a href="#gallery" class="mobile-link" data-i18n="mnav_photos">Photos</a>
     <a href="#contact" class="mobile-link" data-i18n="mnav_contact">Contact</a>
     <div class="mobile-social">
@@ -3599,7 +3627,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     sched_t5: { en: 'Slip-lining pipeline to existing system', es: 'Revestimiento interior (slip-lining) de la tubería al sistema existente' },
     sched_d5: { en: 'Through early January · Day and night work', es: 'Hasta principios de enero · Trabajo diurno y nocturno' },
     sched_t6: { en: 'Lake bed restoration to original elevation', es: 'Restauración del lecho del lago a su elevación original' },
-    sched_d6: { en: 'By early February 2027', es: 'Para principios de febrero de 2027' }
+    sched_d6: { en: 'By early February 2027', es: 'Para principios de febrero de 2027' },
+
+    // Nav callout badge
+    nav_badge_schedule: { en: 'Schedule Published', es: 'Calendario Publicado' }
   };
 
   let currentLang = 'en';
