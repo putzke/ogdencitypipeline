@@ -1441,6 +1441,50 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     .notice-bar { font-size: 0.78rem; padding: 8px 16px; }
   }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  /* FEEDBACK WIDGET */
+  #feedbackToggle {
+    position: fixed; right: 18px; bottom: 18px; z-index: 500;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--canyon-rust); color: white; border: none; border-radius: 999px;
+    padding: 10px 16px; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.02em; box-shadow: 0 4px 14px rgba(0,0,0,0.22); cursor: pointer;
+    transition: transform 0.15s, background 0.2s;
+  }
+  #feedbackToggle:hover { background: #a0552f; transform: translateY(-1px); }
+  #feedbackPanel {
+    position: fixed; right: 18px; bottom: 70px; z-index: 500;
+    width: min(300px, calc(100vw - 36px));
+    background: white; border-radius: 12px; box-shadow: 0 10px 34px rgba(0,0,0,0.25);
+    border: 1px solid rgba(196,168,130,0.35); padding: 16px;
+    max-height: min(420px, calc(100vh - 110px)); overflow-y: auto;
+  }
+  #feedbackPanel[hidden] { display: none; }
+  #feedbackPanel h3 { margin:0 0 6px; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color: var(--canyon-rust); }
+  #feedbackPanel p { margin: 0 0 10px; font-size: 0.76rem; color: var(--text-mid); line-height: 1.5; }
+  #feedbackPanel label { display:block; font-size:0.72rem; font-weight:600; color: var(--water-dark); margin: 8px 0 3px; }
+  #feedbackPanel input, #feedbackPanel textarea {
+    width: 100%; box-sizing: border-box; border: 1px solid rgba(196,168,130,0.45); border-radius: 6px;
+    padding: 7px 9px; font-family: 'Inter', sans-serif; font-size: 0.8rem; resize: vertical;
+  }
+  #feedbackPanel input:focus, #feedbackPanel textarea:focus { outline: 2px solid var(--water-blue); outline-offset: 1px; }
+  #feedbackSubmit {
+    margin-top: 12px; width: 100%; background: var(--water-dark); color: white; border: none;
+    border-radius: 6px; padding: 9px; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+  }
+  #feedbackSubmit:hover { background: #123449; }
+  #feedbackSubmit:disabled { opacity: 0.6; cursor: default; }
+  #feedbackClose {
+    position: absolute; top: 10px; right: 10px; background: none; border: none;
+    font-size: 1rem; color: var(--text-mid); cursor: pointer; line-height: 1;
+  }
+  #feedbackSuccess, #feedbackError { font-size: 0.8rem; margin-top: 10px; padding: 8px 10px; border-radius: 6px; }
+  #feedbackSuccess { background: rgba(107,155,102,0.15); color: #3a6b35; }
+  #feedbackError { background: rgba(196,90,60,0.12); color: var(--canyon-rust); }
+  @media (max-width: 480px) {
+    #feedbackToggle span.fb-label { display:none; }
+    #feedbackToggle { padding: 12px; border-radius: 50%; }
+  }
 </style>
   <!-- SheetJS for Excel export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -2049,31 +2093,61 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
               <div style="position:absolute;left:-28px;top:3px;width:11px;height:11px;border-radius:50%;background:var(--accent-green);border:2.5px solid white;"></div>
               <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:700;color:var(--water-dark);">Reservoir drawdown to construction pool</div>
               <div style="font-size:0.76rem;color:var(--text-mid);margin-top:2px;line-height:1.5;">Target elevation: 4,835 ft · In progress</div>
+              <div class="sched-progress" id="sched-drawdown" style="display:none;margin-top:6px;align-items:center;gap:8px;">
+                <div style="flex:1;height:5px;background:rgba(196,168,130,0.25);border-radius:3px;overflow:hidden;"><div class="sched-progress-fill" style="width:0%;height:100%;background:var(--accent-green);border-radius:3px;"></div></div>
+                <span class="sched-progress-pct" style="font-size:0.7rem;color:var(--text-mid);font-weight:600;white-space:nowrap;"></span>
+                <span class="sched-progress-ahead" style="display:none;font-size:0.68rem;font-weight:700;color:var(--accent-green);white-space:nowrap;">✓ Ahead of Schedule</span>
+              </div>
             </div>
             <div style="margin-bottom:14px;position:relative;">
               <div style="position:absolute;left:-28px;top:3px;width:11px;height:11px;border-radius:50%;background:var(--canyon-stone);border:2.5px solid white;"></div>
               <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:700;color:var(--water-dark);">Pipeline crossing activity begins</div>
               <div style="font-size:0.76rem;color:var(--text-mid);margin-top:2px;line-height:1.5;">As early as Sept 14 · Increased truck traffic hauling material to staging areas · Temporary road constructed over reservoir bed</div>
+              <div class="sched-progress" id="sched-crossing" style="display:none;margin-top:6px;align-items:center;gap:8px;">
+                <div style="flex:1;height:5px;background:rgba(196,168,130,0.25);border-radius:3px;overflow:hidden;"><div class="sched-progress-fill" style="width:0%;height:100%;background:var(--accent-green);border-radius:3px;"></div></div>
+                <span class="sched-progress-pct" style="font-size:0.7rem;color:var(--text-mid);font-weight:600;white-space:nowrap;"></span>
+                <span class="sched-progress-ahead" style="display:none;font-size:0.68rem;font-weight:700;color:var(--accent-green);white-space:nowrap;">✓ Ahead of Schedule</span>
+              </div>
             </div>
             <div style="margin-bottom:14px;position:relative;">
               <div style="position:absolute;left:-28px;top:3px;width:11px;height:11px;border-radius:50%;background:var(--canyon-stone);border:2.5px solid white;"></div>
               <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:700;color:var(--water-dark);">Temporary road across reservoir bed</div>
               <div style="font-size:0.76rem;color:var(--text-mid);margin-top:2px;line-height:1.5;">Through mid-October</div>
+              <div class="sched-progress" id="sched-temproad" style="display:none;margin-top:6px;align-items:center;gap:8px;">
+                <div style="flex:1;height:5px;background:rgba(196,168,130,0.25);border-radius:3px;overflow:hidden;"><div class="sched-progress-fill" style="width:0%;height:100%;background:var(--accent-green);border-radius:3px;"></div></div>
+                <span class="sched-progress-pct" style="font-size:0.7rem;color:var(--text-mid);font-weight:600;white-space:nowrap;"></span>
+                <span class="sched-progress-ahead" style="display:none;font-size:0.68rem;font-weight:700;color:var(--accent-green);white-space:nowrap;">✓ Ahead of Schedule</span>
+              </div>
             </div>
             <div style="margin-bottom:14px;position:relative;">
               <div style="position:absolute;left:-28px;top:3px;width:11px;height:11px;border-radius:50%;background:rgba(196,168,130,0.4);border:2.5px solid white;"></div>
               <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:700;color:var(--water-dark);">Pipeline installation</div>
               <div style="font-size:0.76rem;color:var(--text-mid);margin-top:2px;line-height:1.5;">Through late November · Day and night work</div>
+              <div class="sched-progress" id="sched-installation" style="display:none;margin-top:6px;align-items:center;gap:8px;">
+                <div style="flex:1;height:5px;background:rgba(196,168,130,0.25);border-radius:3px;overflow:hidden;"><div class="sched-progress-fill" style="width:0%;height:100%;background:var(--accent-green);border-radius:3px;"></div></div>
+                <span class="sched-progress-pct" style="font-size:0.7rem;color:var(--text-mid);font-weight:600;white-space:nowrap;"></span>
+                <span class="sched-progress-ahead" style="display:none;font-size:0.68rem;font-weight:700;color:var(--accent-green);white-space:nowrap;">✓ Ahead of Schedule</span>
+              </div>
             </div>
             <div style="margin-bottom:14px;position:relative;">
               <div style="position:absolute;left:-28px;top:3px;width:11px;height:11px;border-radius:50%;background:rgba(196,168,130,0.4);border:2.5px solid white;"></div>
               <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:700;color:var(--water-dark);">Slip-lining pipeline to existing system</div>
               <div style="font-size:0.76rem;color:var(--text-mid);margin-top:2px;line-height:1.5;">Through early December</div>
+              <div class="sched-progress" id="sched-slipline" style="display:none;margin-top:6px;align-items:center;gap:8px;">
+                <div style="flex:1;height:5px;background:rgba(196,168,130,0.25);border-radius:3px;overflow:hidden;"><div class="sched-progress-fill" style="width:0%;height:100%;background:var(--accent-green);border-radius:3px;"></div></div>
+                <span class="sched-progress-pct" style="font-size:0.7rem;color:var(--text-mid);font-weight:600;white-space:nowrap;"></span>
+                <span class="sched-progress-ahead" style="display:none;font-size:0.68rem;font-weight:700;color:var(--accent-green);white-space:nowrap;">✓ Ahead of Schedule</span>
+              </div>
             </div>
             <div style="position:relative;">
               <div style="position:absolute;left:-28px;top:3px;width:11px;height:11px;border-radius:50%;background:rgba(196,168,130,0.2);border:2.5px solid white;"></div>
               <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:700;color:var(--water-dark);">Lake bed restoration to original elevation</div>
               <div style="font-size:0.76rem;color:var(--text-mid);margin-top:2px;line-height:1.5;">By early February 2027</div>
+              <div class="sched-progress" id="sched-restoration" style="display:none;margin-top:6px;align-items:center;gap:8px;">
+                <div style="flex:1;height:5px;background:rgba(196,168,130,0.25);border-radius:3px;overflow:hidden;"><div class="sched-progress-fill" style="width:0%;height:100%;background:var(--accent-green);border-radius:3px;"></div></div>
+                <span class="sched-progress-pct" style="font-size:0.7rem;color:var(--text-mid);font-weight:600;white-space:nowrap;"></span>
+                <span class="sched-progress-ahead" style="display:none;font-size:0.68rem;font-weight:700;color:var(--accent-green);white-space:nowrap;">✓ Ahead of Schedule</span>
+              </div>
             </div>
           </div>
         </div>
@@ -3002,6 +3076,28 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 </section>
 
 <!-- LIGHTBOX -->
+<!-- FEEDBACK WIDGET -->
+<button id="feedbackToggle" onclick="toggleFeedback()" aria-expanded="false" aria-controls="feedbackPanel">
+  <span aria-hidden="true">💬</span> <span class="fb-label" data-i18n="fb_toggle">Share a Comment</span>
+</button>
+<div id="feedbackPanel" role="dialog" aria-modal="false" aria-labelledby="feedbackTitle" hidden>
+  <button id="feedbackClose" onclick="toggleFeedback(false)" aria-label="Close">✕</button>
+  <h3 id="feedbackTitle" data-i18n="fb_title">Share a Comment or Concern</h3>
+  <p data-i18n="fb_sub">Have a question, concern, or comment about the project? Our Public Involvement team reviews every submission.</p>
+  <form id="feedbackForm">
+    <label for="fbName" data-i18n="fb_name">Name (optional)</label>
+    <input type="text" id="fbName" name="name" autocomplete="name">
+    <label for="fbEmail" data-i18n="fb_email">Email (optional, if you'd like a reply)</label>
+    <input type="email" id="fbEmail" name="email" autocomplete="email">
+    <label for="fbMessage" data-i18n="fb_message">Your comment or concern</label>
+    <textarea id="fbMessage" name="message" rows="4" required data-i18n-placeholder="fb_placeholder" placeholder="Type your message here…"></textarea>
+    <input type="hidden" name="_subject" value="New website comment — Ogden Canyon Pipeline">
+    <button type="submit" id="feedbackSubmit" data-i18n="fb_submit">Send</button>
+  </form>
+  <div id="feedbackSuccess" hidden data-i18n="fb_success">Thank you — your message has been sent to our Public Involvement team.</div>
+  <div id="feedbackError" hidden data-i18n="fb_error">Something went wrong sending your message. Please try again or call 801-838-8365.</div>
+</div>
+
 <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" onclick="closeLightboxOnBg(event)">
   <button class="lightbox-nav prev" id="lbPrev" aria-label="Previous photo" onclick="shiftLightbox(-1)">&#8249;</button>
   <img class="lightbox-img" id="lightboxImg" src="" alt="">
@@ -3469,7 +3565,19 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     pano_desc: { en: 'Panoramic view of Pineview Reservoir · Click to explore', es: 'Vista panorámica de la Presa Pineview · Haga clic para explorar' },
 
     // Placeholder translations
-    qa_search: { en: 'Search questions… e.g. drought, fish, cost', es: 'Buscar preguntas… ej. sequía, peces, costo' }
+    qa_search: { en: 'Search questions… e.g. drought, fish, cost', es: 'Buscar preguntas… ej. sequía, peces, costo' },
+
+    // Feedback widget
+    fb_toggle: { en: 'Share a Comment', es: 'Enviar un Comentario' },
+    fb_title: { en: 'Share a Comment or Concern', es: 'Comparta un Comentario o Inquietud' },
+    fb_sub: { en: 'Have a question, concern, or comment about the project? Our Public Involvement team reviews every submission.', es: '¿Tiene una pregunta, inquietud o comentario sobre el proyecto? Nuestro equipo de Participación Pública revisa cada mensaje.' },
+    fb_name: { en: 'Name (optional)', es: 'Nombre (opcional)' },
+    fb_email: { en: 'Email (optional, if you\'d like a reply)', es: 'Correo electrónico (opcional, si desea una respuesta)' },
+    fb_message: { en: 'Your comment or concern', es: 'Su comentario o inquietud' },
+    fb_placeholder: { en: 'Type your message here…', es: 'Escriba su mensaje aquí…' },
+    fb_submit: { en: 'Send', es: 'Enviar' },
+    fb_success: { en: 'Thank you — your message has been sent to our Public Involvement team.', es: 'Gracias — su mensaje ha sido enviado a nuestro equipo de Participación Pública.' },
+    fb_error: { en: 'Something went wrong sending your message. Please try again or call 801-838-8365.', es: 'Hubo un problema al enviar su mensaje. Intente de nuevo o llame al 801-838-8365.' }
   };
 
   let currentLang = 'en';
@@ -3508,6 +3616,93 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     document.documentElement.lang = lang;
   };
 })();
+</script>
+
+<script>
+// ===== FEEDBACK WIDGET =====
+// 1. Create a free form at https://formspree.io (or your preferred form service).
+// 2. Replace the URL below with the endpoint it gives you.
+// 3. Until replaced, the form will show a friendly error asking people to call/email instead.
+const FEEDBACK_FORM_ENDPOINT = "https://formspree.io/f/mvkojger";
+
+function toggleFeedback(force) {
+  const panel = document.getElementById('feedbackPanel');
+  const btn = document.getElementById('feedbackToggle');
+  const show = typeof force === 'boolean' ? force : panel.hidden;
+  panel.hidden = !show;
+  btn.setAttribute('aria-expanded', String(show));
+  if (show) {
+    document.getElementById('feedbackSuccess').hidden = true;
+    document.getElementById('feedbackError').hidden = true;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('feedbackForm');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('feedbackSubmit');
+      const successEl = document.getElementById('feedbackSuccess');
+      const errorEl = document.getElementById('feedbackError');
+      successEl.hidden = true;
+      errorEl.hidden = true;
+
+      if (!FEEDBACK_FORM_ENDPOINT || FEEDBACK_FORM_ENDPOINT.indexOf('REPLACE_WITH') !== -1) {
+        errorEl.textContent = 'This form isn\'t connected yet — please call 801-838-8365 or email info@ogdencitypipeline.com.';
+        errorEl.hidden = false;
+        return;
+      }
+
+      submitBtn.disabled = true;
+      fetch(FEEDBACK_FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function(response) {
+        if (response.ok) {
+          form.reset();
+          successEl.hidden = false;
+        } else {
+          errorEl.hidden = false;
+        }
+      }).catch(function() {
+        errorEl.hidden = false;
+      }).finally(function() {
+        submitBtn.disabled = false;
+      });
+    });
+  }
+
+  // ===== RESERVOIR CROSSING SCHEDULE — PROGRESS BARS =====
+  // Update these percentages weekly (0-100). Leave at 0 to keep the bar hidden for a phase.
+  const scheduleProgress = {
+    'sched-drawdown': 0,
+    'sched-crossing': 0,
+    'sched-temproad': 0,
+    'sched-installation': 0,
+    'sched-slipline': 0,
+    'sched-restoration': 0
+  };
+  // Set a phase to true only when you're ready to publicly show it finished ahead of its posted schedule.
+  const scheduleAhead = {
+    'sched-drawdown': false,
+    'sched-crossing': false,
+    'sched-temproad': false,
+    'sched-installation': false,
+    'sched-slipline': false,
+    'sched-restoration': false
+  };
+  Object.keys(scheduleProgress).forEach(function(id) {
+    const pct = scheduleProgress[id];
+    const el = document.getElementById(id);
+    if (!el || !pct) return;
+    el.style.display = 'flex';
+    el.querySelector('.sched-progress-fill').style.width = pct + '%';
+    el.querySelector('.sched-progress-pct').textContent = pct + '% complete';
+    if (scheduleAhead[id]) el.querySelector('.sched-progress-ahead').style.display = 'inline';
+  });
+});
 </script>
 
 <script>
