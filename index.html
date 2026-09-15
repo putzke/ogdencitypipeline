@@ -2105,9 +2105,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
               </div>
             </div>
             <div style="margin-bottom:14px;position:relative;">
-              <div style="position:absolute;left:-28px;top:3px;width:11px;height:11px;border-radius:50%;background:var(--canyon-stone);border:2.5px solid white;"></div>
+              <div style="position:absolute;left:-28px;top:3px;width:11px;height:11px;border-radius:50%;background:var(--accent-green);border:2.5px solid white;"></div>
               <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:700;color:var(--water-dark);" data-i18n="sched_t2">Pipeline crossing activity begins</div>
-              <div style="font-size:0.76rem;color:var(--text-mid);margin-top:2px;line-height:1.5;" data-i18n="sched_d2">As early as Sept 14 · Increased truck traffic hauling material to staging areas · Temporary road constructed over reservoir bed</div>
+              <div style="font-size:0.76rem;color:var(--text-mid);margin-top:2px;line-height:1.5;" data-i18n="sched_d2">Underway since Sept 14 · Increased truck traffic hauling material to staging areas · Temporary road constructed over reservoir bed</div>
               <div class="sched-progress" id="sched-crossing" style="display:none;margin-top:6px;align-items:center;gap:8px;">
                 <div style="flex:1;height:5px;background:rgba(196,168,130,0.25);border-radius:3px;overflow:hidden;"><div class="sched-progress-fill" style="width:0%;height:100%;background:var(--accent-green);border-radius:3px;"></div></div>
                 <span class="sched-progress-pct" style="font-size:0.7rem;color:var(--text-mid);font-weight:600;white-space:nowrap;"></span>
@@ -3603,7 +3603,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     sched_t1: { en: 'Reservoir drawdown to construction pool', es: 'Descenso del embalse a la piscina de construcción' },
     sched_d1: { en: 'Target elevation: 4,835 ft · In progress', es: 'Elevación objetivo: 4,835 pies · En curso' },
     sched_t2: { en: 'Pipeline crossing activity begins', es: 'Inicia la actividad de cruce de la tubería' },
-    sched_d2: { en: 'As early as Sept 14 · Increased truck traffic hauling material to staging areas · Temporary road constructed over reservoir bed', es: 'Tan pronto como el 14 de septiembre · Aumento del tráfico de camiones transportando materiales a las áreas de acopio · Construcción de un camino temporal sobre el lecho del embalse' },
+    sched_d2: { en: 'Underway since Sept 14 · Increased truck traffic hauling material to staging areas · Temporary road constructed over reservoir bed', es: 'En curso desde el 14 de septiembre · Aumento del tráfico de camiones transportando materiales a las áreas de acopio · Construcción de un camino temporal sobre el lecho del embalse' },
     sched_t3: { en: 'Temporary road across reservoir bed', es: 'Camino temporal a través del lecho del embalse' },
     sched_d3: { en: 'Through mid-October', es: 'Hasta mediados de octubre' },
     sched_t4: { en: 'Pipeline installation', es: 'Instalación de la tubería' },
@@ -3717,7 +3717,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // reported % is comfortably ahead of how much of the date window has elapsed — no manual
   // toggling needed. Phases without a clean date window (drawdown, crossing) just show % complete.
   const scheduleProgress = {
-    'sched-drawdown':     { pct: 98 },                                             // completes same day crossing work begins (Sept 14, 2026) — no separate window to compare against
+    'sched-drawdown':     { pct: 100 },                                            // reached target elevation — no separate window to compare against
     'sched-crossing':     { pct: 0 },                                              // begins Sept 14, 2026 — no defined end date
     'sched-temproad':     { pct: 0, start: '2026-09-14', end: '2026-10-15' },
     'sched-installation': { pct: 0, start: '2026-10-15', end: '2026-11-30' },
