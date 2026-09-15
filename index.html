@@ -3788,7 +3788,8 @@ document.addEventListener('DOMContentLoaded', function() {
       var rem = d.trends.remaining_to_target_ft.toFixed(1) + ' ft remaining';
       if (d.trends.est_days_to_target) rem += ' (~' + d.trends.est_days_to_target + ' days)';
       document.getElementById('elevRemaining').textContent = rem;
-      document.getElementById('elevDate').textContent = 'Source: USBR \u00b7 ' + d.current.date;
+      var srcLabel = d.source_short || 'USBR';
+      document.getElementById('elevDate').textContent = 'Source: ' + srcLabel + ' \u00b7 ' + d.current.date;
     })
     .catch(function(e) {
       document.getElementById('elevVal').textContent = 'Data unavailable';
