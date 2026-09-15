@@ -1,7 +1,9 @@
 {
-  "updated": "2026-09-15T17:30:00Z",
+  "updated": "2026-09-15T20:14:11Z",
   "source": "USBR Water Operations 40-Day Dataset",
   "source_url": "https://www.usbr.gov/rsvrWater/rsv40Day.html?siteid=946&reservoirtype=Reservoir",
+  "source_short": "USBR",
+  "fallback_used": false,
   "target_elevation": 4835.0,
   "current": {
     "date": "14-Sep-2026",
