@@ -1,25 +1,32 @@
 {
-  "updated": "2026-09-15T20:14:11Z",
+  "updated": "2026-09-16T17:30:15Z",
   "source": "USBR Water Operations 40-Day Dataset",
   "source_url": "https://www.usbr.gov/rsvrWater/rsv40Day.html?siteid=946&reservoirtype=Reservoir",
   "source_short": "USBR",
   "fallback_used": false,
   "target_elevation": 4835.0,
   "current": {
-    "date": "14-Sep-2026",
-    "elevation_ft": 4834.5,
-    "storage_af": 3146,
-    "inflow_cfs": -91,
-    "release_cfs": 378
+    "date": "15-Sep-2026",
+    "elevation_ft": 4833.4,
+    "storage_af": 2657,
+    "inflow_cfs": -25,
+    "release_cfs": 222
   },
   "trends": {
-    "daily_change_ft": -1.9,
+    "daily_change_ft": -1.1,
     "avg_7day_drop_ft": 1.53,
-    "remaining_to_target_ft": -0.5,
-    "est_days_to_target": 0,
+    "remaining_to_target_ft": -1.6,
+    "est_days_to_target": -1,
     "drawdown_progress_pct": 100
   },
   "recent_history": [
+    {
+      "date": "15-Sep-2026",
+      "elevation": 4833.4,
+      "storage_af": 2657,
+      "inflow_cfs": -25,
+      "release_cfs": 222
+    },
     {
       "date": "14-Sep-2026",
       "elevation": 4834.5,
@@ -61,13 +68,6 @@
       "storage_af": 7958,
       "inflow_cfs": -16,
       "release_cfs": 502
-    },
-    {
-      "date": "08-Sep-2026",
-      "elevation": 4844.1,
-      "storage_af": 8986,
-      "inflow_cfs": 60,
-      "release_cfs": 488
     }
   ]
 }
