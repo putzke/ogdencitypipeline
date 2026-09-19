@@ -1,9 +1,9 @@
 {
-  "updated": "2026-09-18T16:57:45Z",
-  "source": "USBR Water Operations 40-Day Dataset",
-  "source_url": "https://www.usbr.gov/rsvrWater/rsv40Day.html?siteid=946&reservoirtype=Reservoir",
-  "source_short": "USBR",
-  "fallback_used": false,
+  "updated": "2026-09-19T16:16:45Z",
+  "source": "USACE Sacramento District CDA (republished USBR SLC raw feed)",
+  "source_url": "https://water.usace.army.mil/overview/spk/locations/pineview",
+  "source_short": "USACE (backup)",
+  "fallback_used": true,
   "target_elevation": 4835.0,
   "current": {
     "date": "15-Sep-2026",
