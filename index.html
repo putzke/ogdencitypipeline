@@ -2118,7 +2118,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
               </div>
             </div>
             <div style="margin-bottom:14px;position:relative;">
-              <div style="position:absolute;left:-28px;top:3px;width:11px;height:11px;border-radius:50%;background:var(--canyon-stone);border:2.5px solid white;"></div>
+              <div style="position:absolute;left:-28px;top:3px;width:11px;height:11px;border-radius:50%;background:var(--accent-green);border:2.5px solid white;"></div>
               <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:700;color:var(--water-dark);" data-i18n="sched_t3">Temporary road across reservoir bed</div>
               <div style="font-size:0.76rem;color:var(--text-mid);margin-top:2px;line-height:1.5;" data-i18n="sched_d3">Through mid-October</div>
               <div class="sched-progress" id="sched-temproad" style="display:none;margin-top:6px;align-items:center;gap:8px;">
@@ -3733,7 +3733,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const scheduleProgress = {
     'sched-drawdown':     { pct: 100 },                                            // reached target elevation — no separate window to compare against
     'sched-crossing':     { pct: 0 },                                              // begins Sept 14, 2026 — no defined end date
-    'sched-temproad':     { pct: 0, start: '2026-09-14', end: '2026-10-15' },
+    'sched-temproad':     { pct: 0, auto: true, start: '2026-09-14', end: '2026-10-14' }, // % auto-computed from today's date within this window
     'sched-installation': { pct: 0, start: '2026-10-15', end: '2026-11-30' },
     'sched-slipline':     { pct: 0, start: '2026-12-01', end: '2027-01-08' },
     'sched-restoration':  { pct: 0, start: '2027-01-09', end: '2027-02-01' }
@@ -3759,13 +3759,24 @@ document.addEventListener('DOMContentLoaded', function() {
   const scheduleNow = new Date();
   Object.keys(scheduleProgress).forEach(function(id) {
     const info = scheduleProgress[id];
+
+    // Auto-tracked items: % complete is computed live from today's date within the start/end window
+    // (no weekly manual update needed — recalculates on every page load).
+    if (info.auto && info.start && info.end) {
+      const start = new Date(info.start + 'T00:00:00');
+      const end = new Date(info.end + 'T00:00:00');
+      const total = end - start;
+      const elapsed = scheduleNow - start;
+      info.pct = total > 0 ? Math.round(Math.max(0, Math.min(100, (elapsed / total) * 100))) : 0;
+    }
+
     const pct = info.pct;
     const el = document.getElementById(id);
     if (!el || !pct) return;
     el.style.display = 'flex';
     el.querySelector('.sched-progress-fill').style.width = pct + '%';
 
-    if (info.start && info.end) {
+    if (!info.auto && info.start && info.end) {
       const start = new Date(info.start + 'T00:00:00');
       const end = new Date(info.end + 'T00:00:00');
       const total = end - start;
