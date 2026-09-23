@@ -1,82 +1,73 @@
 {
-  "updated": "2026-09-23T14:35:36Z",
-  "source": "Manual update \u2014 USBR phone report (online data feed temporarily unavailable)",
+  "updated": "2026-09-23T17:44:29Z",
+  "source": "USBR Water Operations 40-Day Dataset",
   "source_url": "https://www.usbr.gov/rsvrWater/rsv40Day.html?siteid=946&reservoirtype=Reservoir",
-  "source_short": "USBR (manual)",
+  "source_short": "USBR",
   "fallback_used": false,
   "target_elevation": 4835.0,
   "current": {
-    "date": "23-Sep-2026",
-    "elevation_ft": 4830.5,
-    "storage_af": null,
-    "inflow_cfs": null,
-    "release_cfs": null
+    "date": "22-Sep-2026",
+    "elevation_ft": 4830.4,
+    "storage_af": 1508,
+    "inflow_cfs": 7,
+    "release_cfs": 94
   },
   "trends": {
-    "daily_change_ft": -0.36,
-    "avg_7day_drop_ft": 0.36,
-    "remaining_to_target_ft": -4.5,
-    "est_days_to_target": -1,
+    "daily_change_ft": -0.5,
+    "avg_7day_drop_ft": 0.43,
+    "remaining_to_target_ft": -4.6,
+    "est_days_to_target": -11,
     "drawdown_progress_pct": 100
   },
   "recent_history": [
     {
-      "date": "23-Sep-2026",
-      "elevation": 4830.5,
-      "storage_af": null,
-      "inflow_cfs": null,
-      "release_cfs": null
+      "date": "22-Sep-2026",
+      "elevation": 4830.4,
+      "storage_af": 1508,
+      "inflow_cfs": 7,
+      "release_cfs": 94
     },
     {
-      "date": "15-Sep-2026",
-      "elevation": 4833.4,
-      "storage_af": 2657,
-      "inflow_cfs": -25,
-      "release_cfs": 222
+      "date": "21-Sep-2026",
+      "elevation": 4830.9,
+      "storage_af": 1681,
+      "inflow_cfs": 20,
+      "release_cfs": 92
     },
     {
-      "date": "14-Sep-2026",
-      "elevation": 4834.5,
-      "storage_af": 3146,
-      "inflow_cfs": -91,
-      "release_cfs": 378
+      "date": "20-Sep-2026",
+      "elevation": 4831.3,
+      "storage_af": 1825,
+      "inflow_cfs": 17,
+      "release_cfs": 92
     },
     {
-      "date": "13-Sep-2026",
-      "elevation": 4836.4,
-      "storage_af": 4077,
-      "inflow_cfs": -60,
-      "release_cfs": 379
+      "date": "19-Sep-2026",
+      "elevation": 4831.7,
+      "storage_af": 1973,
+      "inflow_cfs": 71,
+      "release_cfs": 90
     },
     {
-      "date": "12-Sep-2026",
-      "elevation": 4838.0,
-      "storage_af": 4947,
-      "inflow_cfs": 12,
-      "release_cfs": 490
+      "date": "18-Sep-2026",
+      "elevation": 4831.8,
+      "storage_af": 2011,
+      "inflow_cfs": 20,
+      "release_cfs": 98
     },
     {
-      "date": "11-Sep-2026",
-      "elevation": 4839.6,
-      "storage_af": 5896,
-      "inflow_cfs": 1,
-      "release_cfs": 519
+      "date": "17-Sep-2026",
+      "elevation": 4832.2,
+      "storage_af": 2165,
+      "inflow_cfs": -13,
+      "release_cfs": 88
     },
     {
-      "date": "10-Sep-2026",
-      "elevation": 4841.2,
-      "storage_af": 6924,
-      "inflow_cfs": -22,
-      "release_cfs": 499
-    },
-    {
-      "date": "09-Sep-2026",
-      "elevation": 4842.7,
-      "storage_af": 7958,
-      "inflow_cfs": -16,
-      "release_cfs": 502
+      "date": "16-Sep-2026",
+      "elevation": 4832.7,
+      "storage_af": 2365,
+      "inflow_cfs": 40,
+      "release_cfs": 187
     }
-  ],
-  "manual_entry": true,
-  "manual_note": "Elevation provided by USBR staff via phone call on 23-Sep-2026; online USBR and USACE feeds were both stalled on 15-Sep-2026 data at time of update."
+  ]
 }
