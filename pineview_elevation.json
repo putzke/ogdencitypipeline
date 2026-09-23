@@ -1,25 +1,32 @@
 {
-  "updated": "2026-09-22T17:32:30Z",
-  "source": "USACE Sacramento District CDA (republished USBR SLC raw feed)",
-  "source_url": "https://water.usace.army.mil/overview/spk/locations/pineview",
-  "source_short": "USACE (backup)",
-  "fallback_used": true,
+  "updated": "2026-09-23T14:35:36Z",
+  "source": "Manual update \u2014 USBR phone report (online data feed temporarily unavailable)",
+  "source_url": "https://www.usbr.gov/rsvrWater/rsv40Day.html?siteid=946&reservoirtype=Reservoir",
+  "source_short": "USBR (manual)",
+  "fallback_used": false,
   "target_elevation": 4835.0,
   "current": {
-    "date": "15-Sep-2026",
-    "elevation_ft": 4833.4,
-    "storage_af": 2657,
-    "inflow_cfs": -25,
-    "release_cfs": 222
+    "date": "23-Sep-2026",
+    "elevation_ft": 4830.5,
+    "storage_af": null,
+    "inflow_cfs": null,
+    "release_cfs": null
   },
   "trends": {
-    "daily_change_ft": -1.1,
-    "avg_7day_drop_ft": 1.53,
-    "remaining_to_target_ft": -1.6,
+    "daily_change_ft": -0.36,
+    "avg_7day_drop_ft": 0.36,
+    "remaining_to_target_ft": -4.5,
     "est_days_to_target": -1,
     "drawdown_progress_pct": 100
   },
   "recent_history": [
+    {
+      "date": "23-Sep-2026",
+      "elevation": 4830.5,
+      "storage_af": null,
+      "inflow_cfs": null,
+      "release_cfs": null
+    },
     {
       "date": "15-Sep-2026",
       "elevation": 4833.4,
@@ -69,5 +76,7 @@
       "inflow_cfs": -16,
       "release_cfs": 502
     }
-  ]
+  ],
+  "manual_entry": true,
+  "manual_note": "Elevation provided by USBR staff via phone call on 23-Sep-2026; online USBR and USACE feeds were both stalled on 15-Sep-2026 data at time of update."
 }
