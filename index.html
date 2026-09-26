@@ -1331,36 +1331,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   }
   .satellite-pdf-link:hover { color: #ffffff; text-decoration: underline; }
   .satellite-pdf-link svg { flex-shrink: 0; opacity: 0.85; }
-  .pineview-download {
-    background: var(--earth);
-    border-radius: 8px;
-    padding: 24px 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-  }
-  .pineview-download-text strong { display: block; font-size: 1rem; font-weight: 600; color: var(--water-dark); margin-bottom: 4px; }
-  .pineview-download-text span { font-size: 0.85rem; color: var(--text-light); }
-  .btn-download {
-    background: var(--water-dark);
-    color: var(--white);
-    padding: 11px 22px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    transition: background 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .btn-download:hover { background: var(--canyon-rust); }
   .media-placeholder-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -2078,14 +2048,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <p class="section-label" data-i18n="label_press">Active Construction</p>
     <h2 class="section-title" id="pineview-title" data-i18n="title_press">Pineview Reservoir Pipeline Crossing</h2>
 
-    <!-- Download bar -->
-    <div class="pineview-download">
-      <div class="pineview-download-text">
-        <strong data-i18n="pr_title">📄 Full Press Release — Pineview Reservoir Crossing</strong>
-        <span data-i18n="pr_sub">Ogden City · For Immediate Release</span>
-      </div>
-      <a href="files/Pineview_Crossing_Press_Release.pdf" target="_blank" class="btn-download" data-i18n="pr_dl">⬇ Download PDF</a>
-    </div>
     <!-- Action buttons row -->
     <div style="display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:24px;flex-wrap:wrap;">
       <a href="files/Pineview_Construction_Camera.html" target="_blank" rel="noopener" class="cam-feed-pill" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:8px 16px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">
@@ -2145,9 +2107,12 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     })();
     </script>
 
-    <p style="font-size:0.88rem;color:var(--text-mid);line-height:1.7;margin-bottom:24px;padding:14px 18px;background:var(--sky);border-radius:6px;border-left:4px solid var(--water-blue);">
-      For media inquiries, please contact the <strong>Sunrise Engineering Public Involvement Team</strong> at <a href="tel:8018388365" style="font-weight:600;color:var(--water-dark);">801-838-8365</a>. Our team will assist in answering your inquiries and direct you to the appropriate Ogden City Communications contact to schedule press interviews.
-    </p>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px;padding:14px 18px;background:var(--sky);border-radius:6px;border-left:4px solid var(--water-blue);">
+      <p style="font-size:0.88rem;color:var(--text-mid);line-height:1.7;margin:0;flex:1;min-width:240px;" data-i18n-html="pr_media_contact">
+        For media inquiries, please contact the <strong>Sunrise Engineering Public Involvement Team</strong> at <a href="tel:8018388365" style="font-weight:600;color:var(--water-dark);">801-838-8365</a>. Our team will assist in answering your inquiries and direct you to the appropriate Ogden City Communications contact to schedule press interviews.
+      </p>
+      <a href="files/Pineview_Crossing_Press_Release.pdf" target="_blank" rel="noopener" title="Ogden City · For Immediate Release" style="flex-shrink:0;font-size:0.76rem;font-weight:600;color:var(--water-dark);text-decoration:underline;text-underline-offset:2px;white-space:nowrap;" data-i18n="pr_dl">📄 Press Release (PDF)</a>
+    </div>
 
     <!-- Main content grid -->
     <!-- CONSTRUCTION PORTAL -->
@@ -3640,9 +3605,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     ct_follow_desc: { en: 'Follow Ogden City for the latest updates', es: 'Siga a Ogden City para las últimas actualizaciones' },
 
     // Press release
-    pr_title: { en: '📄 Full Press Release — Pineview Reservoir Crossing', es: '📄 Comunicado Completo — Cruce de la Presa Pineview' },
-    pr_sub: { en: 'Ogden City · For Immediate Release', es: 'Ogden City · Para Publicación Inmediata' },
-    pr_dl: { en: '⬇ Download PDF', es: '⬇ Descargar PDF' },
+    pr_dl: { en: '📄 Press Release (PDF)', es: '📄 Comunicado de Prensa (PDF)' },
     pr_media_contact: { en: 'For media inquiries, please contact the <strong>Sunrise Engineering Public Involvement Team</strong> at <a href="tel:8018388365" style="font-weight:600;color:var(--water-dark);">801-838-8365</a>. Our team will assist in answering your inquiries and direct you to the appropriate Ogden City Communications contact to schedule press interviews.', es: 'Para consultas de medios, comuníquese con el <strong>Equipo de Participación Pública de Sunrise Engineering</strong> al <a href="tel:8018388365" style="font-weight:600;color:var(--water-dark);">801-838-8365</a>. Nuestro equipo le asistirá con sus consultas y le dirigirá al contacto apropiado de Comunicaciones de Ogden City para programar entrevistas de prensa.' },
     media_note: { en: 'Additional media graphics coming soon. All links open in a new tab.', es: 'Gráficos adicionales para medios próximamente. Todos los enlaces se abren en una nueva pestaña.' },
 
