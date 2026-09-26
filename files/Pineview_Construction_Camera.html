@@ -134,6 +134,35 @@
     font-size: 0.9rem;
     line-height: 1.6;
   }
+  .stat-strip {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(196,168,130,0.3);
+  }
+  .stat-chip {
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+    padding: 14px 8px;
+    border-right: 1px solid rgba(196,168,130,0.3);
+  }
+  .stat-chip:last-child { border-right: none; }
+  .stat-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: var(--water-dark);
+    line-height: 1.1;
+  }
+  .stat-label {
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-mid);
+    opacity: 0.7;
+    margin-top: 3px;
+  }
   .status-row {
     padding: 12px 20px;
     display: flex;
@@ -182,6 +211,24 @@
         📷 Camera feed initializing — the first images will appear here shortly after setup.
       </div>
     </div>
+    <div class="stat-strip" id="camStatStrip" style="display:none;">
+      <div class="stat-chip">
+        <div class="stat-value" id="statTemp">--</div>
+        <div class="stat-label">🌡️ Temp</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-value" id="statBattery">--</div>
+        <div class="stat-label">🔋 Battery</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-value" id="statSolar">--</div>
+        <div class="stat-label">☀️ Solar</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-value" id="statSignal">--</div>
+        <div class="stat-label">📶 Signal</div>
+      </div>
+    </div>
     <div class="status-row">
       <span id="camUpdated">Loading feed status…</span>
       <span style="opacity:0.6;">Camera captures every 30 minutes · SPYPOINT Flex-S-Dark</span>
@@ -224,6 +271,21 @@
         document.getElementById('camUpdated').textContent = 'Last updated: ' + updatedStr + (d.timelapse_available ? '' : ' · Timelapse building…');
         var btnTimelapse = document.getElementById('camBtnTimelapse');
         btnTimelapse.disabled = !d.timelapse_available;
+
+        var cs = d.camera_status;
+        var stripEl = document.getElementById('camStatStrip');
+        if (cs) {
+          stripEl.style.display = 'flex';
+          document.getElementById('statTemp').textContent = (cs.temperature_f != null) ? cs.temperature_f + '°F' : '—';
+          var battery = cs.power && cs.power.battery;
+          document.getElementById('statBattery').textContent = (battery && battery.pct != null) ? battery.pct + '%' : '—';
+          var solar = cs.power && cs.power.solar;
+          document.getElementById('statSolar').textContent = (solar && solar.pct != null) ? solar.pct + '%' : '—';
+          var signal = cs.signal;
+          document.getElementById('statSignal').textContent = (signal && signal.level) ? signal.level.charAt(0).toUpperCase() + signal.level.slice(1) : '—';
+        } else {
+          stripEl.style.display = 'none';
+        }
         // Bust the cache on both images so a left-open tab picks up new frames.
         document.getElementById('camImgLatest').src = '../images/pineview-cam-latest.jpg?v=' + Date.now();
         document.getElementById('camImgTimelapse').src = '../images/pineview-cam-timelapse.gif?v=' + Date.now();

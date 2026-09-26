@@ -79,6 +79,48 @@ def prune_old_frames(now):
             f.unlink()
 
 
+def extract_camera_status(camera):
+    """Pull the fields worth showing on the page out of the camera's status
+    block. Defensive throughout: this is an undocumented API, so any field
+    here can be missing, renamed, or reshaped without warning."""
+    status = getattr(camera, "status", None)
+    if status is None:
+        return None
+
+    result = {}
+
+    temp = getattr(status, "temperature", None)
+    if temp is not None and getattr(temp, "unit", "F") == "F":
+        result["temperature_f"] = getattr(temp, "value", None)
+
+    power = {}
+    for src in getattr(status, "powerSources", None) or []:
+        location = (getattr(src, "location", "") or "").upper()
+        entry = {"pct": getattr(src, "percentage", None), "level": getattr(src, "level", None)}
+        if location == "TRAY1":
+            power["battery"] = entry
+        elif location == "INTERNAL":
+            power["solar"] = entry
+        elif location == "EXTERNAL":
+            power["external"] = entry
+    if power:
+        result["power"] = power
+
+    signal = getattr(status, "signal", None)
+    processed = getattr(signal, "processed", None) if signal else None
+    if processed is not None:
+        result["signal"] = {
+            "pct": getattr(processed, "percentage", None),
+            "level": getattr(processed, "level", None),
+        }
+
+    status_updated = getattr(status, "lastUpdate", None)
+    if status_updated:
+        result["status_updated"] = status_updated
+
+    return result or None
+
+
 def build_timelapse():
     frames = sorted(FRAME_BUFFER_DIR.glob("*.jpg"), key=lambda f: float(f.stem))
     if len(frames) < 2:
@@ -135,25 +177,10 @@ def main():
     photos = sorted(photos, key=lambda p: getattr(p, "date", ""), reverse=True)
     latest = photos[0]
 
-    # TEMP DIAGNOSTIC — dump the raw camera + photo fields the live API
-    # actually returns, so we can see what metadata (temperature, battery,
-    # signal, etc.) is available beyond what's baked into the image pixels.
-    # Remove this block once we've inspected it.
-    def _to_plain(obj):
-        if hasattr(obj, "__dict__"):
-            return {k: _to_plain(v) for k, v in vars(obj).items()}
-        if isinstance(obj, (list, tuple)):
-            return [_to_plain(v) for v in obj]
-        return obj
+    camera_status = extract_camera_status(camera)
 
-    Path("pineview_cam_debug.json").write_text(
-        json.dumps(
-            {"camera": _to_plain(camera), "latest_photo": _to_plain(latest)},
-            indent=2,
-            default=str,
-        )
-        + "\n"
-    )
+    photo_tags = getattr(latest, "tag", None) or []
+    photo_tag = photo_tags[0] if photo_tags else None
 
     last_seen_id = LAST_SEEN_PATH.read_text().strip() if LAST_SEEN_PATH.exists() else None
     is_new_photo = latest.id != last_seen_id
@@ -186,10 +213,12 @@ def main():
             {
                 "updated": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "photo_date": getattr(latest, "date", None),
+                "photo_tag": photo_tag,
                 "source": "SPYPOINT Flex-S-Dark (unofficial API)",
                 "timelapse_window_hours": TIMELAPSE_WINDOW_HOURS,
                 "timelapse_frame_count": frame_count,
                 "timelapse_available": built,
+                "camera_status": camera_status,
             },
             indent=2,
         )
