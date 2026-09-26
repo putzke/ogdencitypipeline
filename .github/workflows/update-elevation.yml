@@ -16,6 +16,11 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Push with a real PAT instead of the default GITHUB_TOKEN so
+          # this bot's commits trigger the Pages deploy workflows (see
+          # update-pineview-cam.yml for the full explanation).
+          token: ${{ secrets.PAGES_DEPLOY_PAT }}
 
       - name: Set up Python
         uses: actions/setup-python@v5

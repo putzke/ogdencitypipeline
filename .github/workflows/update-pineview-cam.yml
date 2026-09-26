@@ -22,6 +22,15 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Push with a real PAT instead of the default GITHUB_TOKEN.
+          # GitHub does not let commits pushed with the default token
+          # trigger other workflows (anti-recursion protection), which
+          # meant the "Deploy to Pages" workflows never ran after this
+          # bot's commits and the live site stayed frozen on whatever a
+          # human last pushed. A PAT-authored push is treated as a normal
+          # push and triggers the deploy workflows as expected.
+          token: ${{ secrets.PAGES_DEPLOY_PAT }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
