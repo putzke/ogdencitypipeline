@@ -1137,6 +1137,27 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     50% { background: var(--canyon-rust); color: white; }
   }
   .nav-links a.nav-press-btn:hover { background: var(--canyon-rust); animation: none; }
+
+  /* ── CONSTRUCTION CAMERA PILL — draws the eye to the new feed ── */
+  .cam-feed-pill {
+    background: rgba(26,69,96,0.05);
+    color: var(--water-dark);
+    border: 1px solid rgba(26,69,96,0.25);
+    animation: camFeedPulse 2.4s ease-in-out infinite;
+  }
+  .cam-feed-pill:hover {
+    animation-play-state: paused;
+    background: var(--canyon-rust);
+    color: white;
+    border-color: var(--canyon-rust);
+  }
+  @keyframes camFeedPulse {
+    0%, 100% { background: rgba(26,69,96,0.05); color: var(--water-dark); border-color: rgba(26,69,96,0.25); box-shadow: 0 0 0 0 rgba(139,74,43,0.35); }
+    50% { background: var(--canyon-rust); color: white; border-color: var(--canyon-rust); box-shadow: 0 0 0 6px rgba(139,74,43,0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cam-feed-pill { animation: none; }
+  }
   .nav-press-li { position: relative; }
   .nav-badge {
     position: absolute;
@@ -1592,7 +1613,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <a href="#pineview" style="color:white;text-decoration:underline;font-weight:700;text-underline-offset:3px;" data-i18n="notice_crossing">Pineview Crossing Work Begins — 9/14/26</a>
   </div>
   <span style="color:rgba(255,255,255,0.4);font-size:0.75rem;">|</span>
-  <a href="https://tinyurl.com/mu787mk7" target="_blank" rel="noopener" style="color:white;text-decoration:underline;font-weight:700;text-underline-offset:3px;" data-i18n="notice_safety">Safety Alert — Facebook</a>
+  <div style="display:flex;align-items:center;gap:6px;">
+    <span style="font-size:1rem;line-height:1;" aria-hidden="true">📷</span>
+    <a href="files/Pineview_Construction_Camera.html" target="_blank" rel="noopener" style="color:white;text-decoration:underline;font-weight:700;text-underline-offset:3px;" data-i18n="notice_camera">Construction Camera — Live Feed</a>
+  </div>
   <span style="color:rgba(255,255,255,0.4);font-size:0.75rem;">|</span>
   <div style="display:flex;align-items:center;gap:6px;">
     <a href="https://www.facebook.com/OgdenCityUtah/" target="_blank" rel="noopener" aria-label="Facebook" style="color:white;font-size:0.75rem;font-weight:700;text-decoration:none;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(255,255,255,0.4);border-radius:50%;">f</a>
@@ -2064,8 +2088,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     </div>
     <!-- Action buttons row -->
     <div style="display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:24px;flex-wrap:wrap;">
-      <a href="files/Pineview_Construction_Camera.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:rgba(26,69,96,0.05);color:var(--water-dark);text-decoration:none;padding:8px 16px;border-radius:20px;border:1px solid rgba(26,69,96,0.25);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(26,69,96,0.12)';this.style.borderColor='rgba(26,69,96,0.45)'" onmouseout="this.style.background='rgba(26,69,96,0.05)';this.style.borderColor='rgba(26,69,96,0.25)'">
-        📷 Construction Site Feed/Timelapse <span style="font-size:0.65rem;background:var(--canyon-rust);color:white;padding:2px 8px;border-radius:10px;margin-left:2px;vertical-align:middle;">NEW</span>
+      <a href="files/Pineview_Construction_Camera.html" target="_blank" rel="noopener" class="cam-feed-pill" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:8px 16px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">
+        📷 Construction Site Feed/Timelapse <span style="font-size:0.65rem;background:white;color:var(--canyon-rust);padding:2px 8px;border-radius:10px;margin-left:2px;vertical-align:middle;">NEW</span>
       </a>
       <a href="files/Pineview-Satellite_View_SEPTEMBER_15_2026.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:rgba(26,69,96,0.05);color:var(--water-dark);text-decoration:none;padding:8px 16px;border-radius:20px;border:1px solid rgba(26,69,96,0.25);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(26,69,96,0.12)';this.style.borderColor='rgba(26,69,96,0.45)'" onmouseout="this.style.background='rgba(26,69,96,0.05)';this.style.borderColor='rgba(26,69,96,0.25)'" data-i18n="sat_thumb_2">
         🛰️ Simulated Satellite View — Sept 15, 2026
@@ -3477,7 +3501,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     // Notice bar
     notice_udwr:   { en: 'UDWR — Anglers Notice',          es: 'UDWR — Aviso para Pescadores' },
     notice_crossing: { en: 'Pineview Crossing Work Begins — 9/14/26', es: 'Comienza el Trabajo de Cruce Pineview — 14/9/26' },
-    notice_safety: { en: 'Safety Alert — Facebook',         es: 'Alerta de Seguridad — Facebook' },
+    notice_camera: { en: 'Construction Camera — Live Feed', es: 'Cámara de Construcción — Transmisión en Vivo' },
 
     // Satellite banner
     sat_thumb_2: { en: '🛰️ Simulated Satellite View — Sept 15, 2026', es: '🛰️ Vista Satelital Simulada — 15 sep de 2026' },
