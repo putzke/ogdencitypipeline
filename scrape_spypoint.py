@@ -47,7 +47,7 @@ TIMELAPSE_PATH = Path("images/pineview-cam-timelapse.gif")
 METADATA_PATH = Path("pineview_cam.json")
 LAST_SEEN_PATH = FRAME_BUFFER_DIR / ".last_photo_id"
 
-TIMELAPSE_WINDOW_HOURS = 6
+TIMELAPSE_WINDOW_HOURS = 12
 GIF_FRAME_DURATION_MS = 250
 GIF_MAX_DIMENSION = 900  # downscale frames for a reasonably small GIF
 
