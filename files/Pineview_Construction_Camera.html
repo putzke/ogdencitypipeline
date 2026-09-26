@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Construction Site Camera — Pineview Crossing | Ogden Canyon Pipeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --canyon-rust:   #8B4A2B;
+    --canyon-stone:  #C4A882;
+    --water-blue:    #2A6D8F;
+    --water-dark:    #1A4560;
+    --sky:           #EAF3F8;
+    --earth:         #F5EFE6;
+    --text-mid:      #4A4A4A;
+    --accent-green:  #4A7C59;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--earth);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-mid);
+  }
+  .topbar {
+    background: var(--water-dark);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .topbar a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .topbar a:hover { color: white; }
+  .topbar .wordmark {
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 20px 48px;
+  }
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--water-dark);
+    margin: 0 0 4px;
+  }
+  .subtitle {
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    margin: 0 0 20px;
+  }
+  .card {
+    background: rgba(26,69,96,0.06);
+    border: 1px solid rgba(196,168,130,0.3);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(196,168,130,0.3);
+  }
+  .card-header .label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--canyon-rust);
+  }
+  .toggle-btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 7px 16px;
+    border-radius: 16px;
+    border: 1px solid var(--water-dark);
+    background: transparent;
+    color: var(--water-dark);
+    cursor: pointer;
+  }
+  .toggle-btn.active {
+    background: var(--water-dark);
+    color: white;
+  }
+  .toggle-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .viewer {
+    position: relative;
+    background: #0d1f2b;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .viewer img {
+    width: 100%;
+    max-height: 640px;
+    object-fit: contain;
+    display: block;
+  }
+  #camPlaceholder {
+    padding: 60px 24px;
+    text-align: center;
+    color: rgba(255,255,255,0.65);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .status-row {
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: var(--text-mid);
+  }
+  .media-note {
+    padding: 0 20px 16px;
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    font-style: italic;
+    opacity: 0.8;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="wordmark">Ogden Canyon Pipeline</span>
+  <a href="../index.html#pineview">← Back to Project Site</a>
+</div>
+
+<main>
+  <h1>📷 Construction Site Camera</h1>
+  <p class="subtitle">Pineview Reservoir Pipeline Crossing — live photo feed and rolling timelapse from the job site.</p>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="label">Pineview Crossing</span>
+      <div style="display:flex;gap:6px;">
+        <button type="button" id="camBtnLatest" class="toggle-btn active" onclick="pineviewCamShow('latest')">Latest Photo</button>
+        <button type="button" id="camBtnTimelapse" class="toggle-btn" onclick="pineviewCamShow('timelapse')">6-Hr Timelapse</button>
+      </div>
+    </div>
+    <div class="viewer">
+      <img id="camImgLatest" alt="Latest photo from the Pineview crossing construction camera" src="../images/pineview-cam-latest.jpg"
+           onload="document.getElementById('camPlaceholder').style.display='none';"
+           onerror="this.style.display='none';document.getElementById('camPlaceholder').style.display='block';">
+      <img id="camImgTimelapse" alt="6-hour rolling timelapse from the Pineview crossing construction camera" src="../images/pineview-cam-timelapse.gif"
+           style="display:none;" onerror="this.style.display='none';">
+      <div id="camPlaceholder" style="display:none;">
+        📷 Camera feed initializing — the first images will appear here shortly after setup.
+      </div>
+    </div>
+    <div class="status-row">
+      <span id="camUpdated">Loading feed status…</span>
+      <span style="opacity:0.6;">Camera captures every 30 minutes · SPYPOINT Flex-S-Dark</span>
+    </div>
+    <div class="media-note">
+      Media use: Photos and timelapse footage from this camera may be used in broadcast or online media provided they are credited — "Courtesy of Ogden City Engineering."
+    </div>
+  </div>
+</main>
+
+<script>
+(function() {
+  var REFRESH_MS = 60000; // re-check for a fresher photo every minute while this tab stays open
+
+  window.pineviewCamShow = function(mode) {
+    var imgLatest = document.getElementById('camImgLatest');
+    var imgTimelapse = document.getElementById('camImgTimelapse');
+    var btnLatest = document.getElementById('camBtnLatest');
+    var btnTimelapse = document.getElementById('camBtnTimelapse');
+    var placeholder = document.getElementById('camPlaceholder');
+    if (btnTimelapse.disabled && mode === 'timelapse') return;
+    var showingTimelapse = mode === 'timelapse';
+    imgLatest.style.display = showingTimelapse ? 'none' : 'block';
+    imgTimelapse.style.display = showingTimelapse ? 'block' : 'none';
+    if (!showingTimelapse) {
+      placeholder.style.display = (imgLatest.complete && imgLatest.naturalWidth === 0) ? 'block' : 'none';
+    } else {
+      placeholder.style.display = 'none';
+    }
+    btnLatest.classList.toggle('active', !showingTimelapse);
+    btnTimelapse.classList.toggle('active', showingTimelapse);
+  };
+
+  function refreshStatus() {
+    fetch('../pineview_cam.json?v=' + Date.now())
+      .then(function(r) { if (!r.ok) throw new Error('no data'); return r.json(); })
+      .then(function(d) {
+        var updated = new Date(d.updated);
+        var updatedStr = isNaN(updated.getTime()) ? d.updated : updated.toLocaleString('en-US', {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
+        document.getElementById('camUpdated').textContent = 'Last updated: ' + updatedStr + (d.timelapse_available ? '' : ' · Timelapse building…');
+        var btnTimelapse = document.getElementById('camBtnTimelapse');
+        btnTimelapse.disabled = !d.timelapse_available;
+        // Bust the cache on both images so a left-open tab picks up new frames.
+        document.getElementById('camImgLatest').src = '../images/pineview-cam-latest.jpg?v=' + Date.now();
+        document.getElementById('camImgTimelapse').src = '../images/pineview-cam-timelapse.gif?v=' + Date.now();
+      })
+      .catch(function() {
+        document.getElementById('camUpdated').textContent = 'Camera feed initializing — check back soon.';
+      });
+  }
+
+  refreshStatus();
+  setInterval(refreshStatus, REFRESH_MS);
+})();
+</script>
+
+</body>
+</html>
