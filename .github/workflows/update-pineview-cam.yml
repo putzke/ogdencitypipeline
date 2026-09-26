@@ -1,0 +1,66 @@
+name: Update Pineview Camera
+
+on:
+  schedule:
+    # Every 30 minutes, matching the camera's current capture interval.
+    # GitHub's scheduled runs are best-effort and can lag several minutes
+    # during periods of high platform load — this is not a real-time feed.
+    - cron: '*/30 * * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+concurrency:
+  group: pineview-camera-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyspypoint Pillow
+
+      # The rolling frame buffer used to build the timelapse GIF is kept in
+      # Actions cache, NOT committed to git — otherwise every individual
+      # frame captured every 30 minutes would live forever in git history.
+      - name: Restore camera frame buffer cache
+        uses: actions/cache/restore@v4
+        with:
+          path: cam_frame_buffer
+          key: spypoint-frame-buffer-${{ github.run_id }}
+          restore-keys: |
+            spypoint-frame-buffer-
+
+      - name: Fetch latest camera photo and rebuild timelapse
+        env:
+          SPYPOINT_USERNAME: ${{ secrets.SPYPOINT_USERNAME }}
+          SPYPOINT_PASSWORD: ${{ secrets.SPYPOINT_PASSWORD }}
+        run: python scrape_spypoint.py
+
+      - name: Save camera frame buffer cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: cam_frame_buffer
+          key: spypoint-frame-buffer-${{ github.run_id }}
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "Pineview Camera Bot"
+          git config user.email "bot@ogdencitypipeline.com"
+          git add images/pineview-cam-latest.jpg images/pineview-cam-timelapse.gif pineview_cam.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto-update Pineview camera $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            for i in 1 2 3; do
+              git pull --rebase origin main && git push && break
+              sleep 5
+            done
+          fi
