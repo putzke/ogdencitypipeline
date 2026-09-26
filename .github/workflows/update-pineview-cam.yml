@@ -2,10 +2,13 @@ name: Update Pineview Camera
 
 on:
   schedule:
-    # Every 30 minutes, matching the camera's current capture interval.
-    # GitHub's scheduled runs are best-effort and can lag several minutes
-    # during periods of high platform load — this is not a real-time feed.
-    - cron: '*/30 * * * *'
+    # Every 30 minutes. Offset from :00/:30 on purpose -- GitHub's docs warn
+    # that scheduled runs queued exactly on the hour/half-hour are more
+    # likely to be delayed under high platform load, and on 2026-09-26 this
+    # workflow actually went ~4.5 hours without firing at */30. Running at
+    # :04/:34 instead avoids the busiest queue moments. Even so, scheduled
+    # runs are best-effort and can lag -- this is not a real-time feed.
+    - cron: '4,34 * * * *'
   workflow_dispatch:  # Allow manual trigger
 
 concurrency:

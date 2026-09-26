@@ -2,8 +2,11 @@ name: Update Pineview Elevation
 
 on:
   schedule:
-    # Run daily at 7:00 AM Mountain (1:00 PM UTC)
-    - cron: '0 13 * * *'
+    # Run daily at ~7:00 AM Mountain (1:00 PM UTC). Offset a few minutes past
+    # the hour on purpose -- runs queued exactly on the hour are more likely
+    # to be delayed under high GitHub Actions platform load (this run was
+    # itself observed running ~4.5 hours late on 2026-09-24, at :00).
+    - cron: '7 13 * * *'
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
