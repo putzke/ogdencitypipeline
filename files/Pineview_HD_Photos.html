@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full-HD Site Photos — Pineview Crossing | Ogden Canyon Pipeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --canyon-rust:   #8B4A2B;
+    --canyon-stone:  #C4A882;
+    --water-blue:    #2A6D8F;
+    --water-dark:    #1A4560;
+    --sky:           #EAF3F8;
+    --earth:         #F5EFE6;
+    --text-mid:      #4A4A4A;
+    --accent-green:  #4A7C59;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--earth);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-mid);
+  }
+  .topbar {
+    background: var(--water-dark);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .topbar a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .topbar a:hover { color: white; }
+  .topbar .wordmark {
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 28px 20px 48px;
+  }
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--water-dark);
+    margin: 0 0 4px;
+  }
+  .subtitle {
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    margin: 0 0 20px;
+  }
+  .card {
+    background: rgba(26,69,96,0.06);
+    border: 1px solid rgba(196,168,130,0.3);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(196,168,130,0.3);
+  }
+  .card-header .label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--canyon-rust);
+  }
+  .card-header .count {
+    font-size: 0.8rem;
+    color: var(--text-mid);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    padding: 20px;
+  }
+  .grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid rgba(196,168,130,0.35);
+    cursor: pointer;
+    display: block;
+    background: rgba(0,0,0,0.05);
+    transition: transform 0.15s;
+  }
+  .grid img:hover { transform: scale(1.02); }
+  .grid figure { margin: 0; }
+  .grid figcaption {
+    font-size: 0.72rem;
+    color: var(--text-mid);
+    opacity: 0.8;
+    margin-top: 4px;
+    text-align: center;
+  }
+  #emptyState {
+    padding: 60px 24px;
+    text-align: center;
+    color: var(--text-mid);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .media-note {
+    padding: 0 20px 16px;
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    font-style: italic;
+    opacity: 0.8;
+    line-height: 1.6;
+  }
+  /* Lightbox */
+  .lb-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(13,31,43,0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 24px;
+  }
+  .lb-overlay.open { display: flex; }
+  .lb-overlay img {
+    max-width: 100%;
+    max-height: 78vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  .lb-controls {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: rgba(255,255,255,0.85);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+  }
+  .lb-btn {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,0.22); }
+  .lb-btn.close-btn { background: var(--canyon-rust); border-color: var(--canyon-rust); }
+  .lb-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  .lb-nav:hover { background: rgba(255,255,255,0.25); }
+  .lb-nav.prev { left: 16px; }
+  .lb-nav.next { right: 16px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="wordmark">Ogden Canyon Pipeline</span>
+  <a href="../index.html#pineview">← Back to Project Site</a>
+</div>
+
+<main>
+  <h1>📸 Full-HD Site Photos</h1>
+  <p class="subtitle">Pineview Reservoir Pipeline Crossing — full-resolution photos requested from the job site camera.</p>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="label">Pineview Crossing</span>
+      <span class="count" id="photoCount"></span>
+    </div>
+    <div class="grid" id="photoGrid"></div>
+    <div id="emptyState" style="display:none;">
+      📸 No Full-HD photos yet — check back after one has been requested from the SPYPOINT app.
+    </div>
+    <div class="media-note">
+      Media use: Photos from this camera may be used in broadcast or online media provided they are credited — "Courtesy of Ogden City Engineering."
+    </div>
+  </div>
+</main>
+
+<div class="lb-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button type="button" class="lb-nav prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-controls">
+    <span id="lbCounter"></span>
+    <a class="lb-btn" id="lbDownload" href="" download>⬇ Download</a>
+    <button type="button" class="lb-btn close-btn" id="lbClose">✕ Close</button>
+  </div>
+  <button type="button" class="lb-nav next" id="lbNext" aria-label="Next photo">&#8250;</button>
+</div>
+
+<script>
+(function() {
+  var photos = [];
+  var lbIndex = 0;
+
+  function formatDate(iso) {
+    try {
+      return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function openLightbox(i) {
+    lbIndex = i;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function shiftLightbox(dir) {
+    lbIndex = (lbIndex + dir + photos.length) % photos.length;
+    updateLightbox();
+  }
+  function updateLightbox() {
+    var p = photos[lbIndex];
+    var img = document.getElementById('lbImg');
+    img.src = '../' + p.file;
+    img.alt = 'Full-HD site photo — ' + formatDate(p.date);
+    var dl = document.getElementById('lbDownload');
+    dl.href = '../' + p.file;
+    dl.download = p.file.split('/').pop();
+    document.getElementById('lbCounter').textContent = (lbIndex + 1) + ' of ' + photos.length + (p.date ? '  ·  ' + formatDate(p.date) : '');
+  }
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', function() { shiftLightbox(-1); });
+  document.getElementById('lbNext').addEventListener('click', function() { shiftLightbox(1); });
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') shiftLightbox(1);
+    if (e.key === 'ArrowLeft') shiftLightbox(-1);
+  });
+
+  fetch('../pineview_cam_hd.json?v=' + Date.now())
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(data) {
+      photos = (data && Array.isArray(data.photos)) ? data.photos.slice() : [];
+      photos.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+
+      var grid = document.getElementById('photoGrid');
+      var countEl = document.getElementById('photoCount');
+
+      if (!photos.length) {
+        document.getElementById('emptyState').style.display = 'block';
+        return;
+      }
+
+      countEl.textContent = photos.length + (photos.length === 1 ? ' photo' : ' photos');
+
+      photos.forEach(function(p, i) {
+        var figure = document.createElement('figure');
+        var img = document.createElement('img');
+        img.src = '../' + p.file;
+        img.alt = 'Full-HD site photo — ' + formatDate(p.date);
+        img.loading = 'lazy';
+        img.onclick = function() { openLightbox(i); };
+        var caption = document.createElement('figcaption');
+        caption.textContent = formatDate(p.date);
+        figure.appendChild(img);
+        figure.appendChild(caption);
+        grid.appendChild(figure);
+      });
+    })
+    .catch(function() {
+      document.getElementById('emptyState').style.display = 'block';
+    });
+})();
+</script>
+
+</body>
+</html>

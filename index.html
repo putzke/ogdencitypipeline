@@ -2053,6 +2053,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       <a href="files/Pineview_Construction_Camera.html" target="_blank" rel="noopener" class="cam-feed-pill" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:8px 16px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">
         📷 Construction Site Feed/Timelapse <span style="font-size:0.65rem;background:white;color:var(--canyon-rust);padding:2px 8px;border-radius:10px;margin-left:2px;vertical-align:middle;">NEW</span>
       </a>
+      <a href="files/Pineview_HD_Photos.html" target="_blank" rel="noopener" id="hdGalleryBtn" style="display:inline-flex;align-items:center;gap:6px;background:rgba(26,69,96,0.05);color:var(--water-dark);text-decoration:none;padding:8px 16px;border-radius:20px;border:1px solid rgba(26,69,96,0.25);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(26,69,96,0.12)';this.style.borderColor='rgba(26,69,96,0.45)'" onmouseout="this.style.background='rgba(26,69,96,0.05)';this.style.borderColor='rgba(26,69,96,0.25)'" data-i18n="hd_gallery_btn">
+        📸 Full-HD Site Photos <span id="hdGalleryBadge" style="display:none;font-size:0.65rem;background:var(--canyon-rust);color:white;padding:2px 8px;border-radius:10px;margin-left:2px;vertical-align:middle;"></span>
+      </a>
       <a href="files/Pineview-Satellite_View_SEPTEMBER_15_2026.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:rgba(26,69,96,0.05);color:var(--water-dark);text-decoration:none;padding:8px 16px;border-radius:20px;border:1px solid rgba(26,69,96,0.25);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(26,69,96,0.12)';this.style.borderColor='rgba(26,69,96,0.45)'" onmouseout="this.style.background='rgba(26,69,96,0.05)';this.style.borderColor='rgba(26,69,96,0.25)'" data-i18n="sat_thumb_2">
         🛰️ Simulated Satellite View — Sept 15, 2026
       </a>
@@ -2062,15 +2065,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         <span style="opacity:0.35;font-weight:400;">|</span>
         <a href="https://pano.seihds.com/processed/SLC/Ogden/PineviewPI/22Sep26_09-03PM/AG116.htm" target="_blank" rel="noopener" style="color:var(--water-dark);text-decoration:underline;text-underline-offset:2px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.65'" onmouseout="this.style.opacity='1'" data-i18n="pano_date_2">Sept 19</a>
       </span>
-    </div>
-
-    <!-- FULL-HD PHOTO GALLERY (populated by scrape_spypoint.py once Full-HD photos have been requested from the Spypoint app) -->
-    <div id="hdGallerySection" style="display:none;max-width:900px;margin:0 auto 20px;background:var(--sky);border:1px solid #e8e0d6;border-left:4px solid var(--canyon-rust);border-radius:8px;padding:14px 18px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--canyon-rust);" data-i18n="hd_gallery_title">📸 Full-HD Site Photos</div>
-        <span id="hdGalleryCount" style="font-size:0.72rem;color:var(--text-mid);"></span>
-      </div>
-      <div id="hdGalleryStrip" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;"></div>
     </div>
 
     <div id="camMiniStatus" style="text-align:center;font-family:'Open Sans',sans-serif;font-size:0.78rem;color:var(--text-mid);opacity:0.85;margin-top:-14px;margin-bottom:24px;">
@@ -3661,7 +3655,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     nav_badge_schedule: { en: 'Schedule Published', es: 'Calendario Publicado' },
 
     // Full-HD photo gallery (Pineview Crossing)
-    hd_gallery_title: { en: '📸 Full-HD Site Photos', es: '📸 Fotos del Sitio en Full-HD' }
+    hd_gallery_btn: { en: '📸 Full-HD Site Photos', es: '📸 Fotos del Sitio en Full-HD' }
   };
 
   let currentLang = 'en';
@@ -3856,47 +3850,18 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <script>
 (function() {
-  var section = document.getElementById('hdGallerySection');
-  var strip = document.getElementById('hdGalleryStrip');
-  var countEl = document.getElementById('hdGalleryCount');
-  if (!section || !strip || typeof galleryImages === 'undefined' || typeof openLightbox !== 'function') return;
-
-  function formatPhotoDate(iso) {
-    try {
-      return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    } catch (e) {
-      return '';
-    }
-  }
-
+  var badge = document.getElementById('hdGalleryBadge');
+  if (!badge) return;
   fetch('pineview_cam_hd.json?v=' + Date.now())
     .then(function(r) { return r.ok ? r.json() : null; })
     .then(function(data) {
-      if (!data || !Array.isArray(data.photos) || !data.photos.length) return;
-
-      var photos = data.photos.slice().sort(function(a, b) {
-        return new Date(b.date) - new Date(a.date);
-      });
-
-      photos.forEach(function(p) {
-        var label = 'Full-HD site photo' + (p.date ? ' — ' + formatPhotoDate(p.date) : '');
-        var idx = galleryImages.length;
-        galleryImages.push({ src: p.file, alt: label });
-
-        var thumb = document.createElement('img');
-        thumb.src = p.file;
-        thumb.alt = label;
-        thumb.title = label;
-        thumb.loading = 'lazy';
-        thumb.style.cssText = 'width:110px;height:80px;object-fit:cover;border-radius:6px;cursor:pointer;flex-shrink:0;border:1px solid rgba(196,168,130,0.35);';
-        thumb.onclick = (function(i) { return function() { openLightbox(i); }; })(idx);
-        strip.appendChild(thumb);
-      });
-
-      countEl.textContent = photos.length + (photos.length === 1 ? ' photo' : ' photos');
-      section.style.display = 'block';
+      var count = (data && Array.isArray(data.photos)) ? data.photos.length : 0;
+      if (count > 0) {
+        badge.textContent = count;
+        badge.style.display = 'inline';
+      }
     })
-    .catch(function() { /* no HD gallery yet -- section stays hidden */ });
+    .catch(function() { /* badge just stays hidden */ });
 })();
 </script>
 </body>
