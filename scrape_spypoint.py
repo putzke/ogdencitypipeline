@@ -135,6 +135,26 @@ def main():
     photos = sorted(photos, key=lambda p: getattr(p, "date", ""), reverse=True)
     latest = photos[0]
 
+    # TEMP DIAGNOSTIC — dump the raw camera + photo fields the live API
+    # actually returns, so we can see what metadata (temperature, battery,
+    # signal, etc.) is available beyond what's baked into the image pixels.
+    # Remove this block once we've inspected it.
+    def _to_plain(obj):
+        if hasattr(obj, "__dict__"):
+            return {k: _to_plain(v) for k, v in vars(obj).items()}
+        if isinstance(obj, (list, tuple)):
+            return [_to_plain(v) for v in obj]
+        return obj
+
+    Path("pineview_cam_debug.json").write_text(
+        json.dumps(
+            {"camera": _to_plain(camera), "latest_photo": _to_plain(latest)},
+            indent=2,
+            default=str,
+        )
+        + "\n"
+    )
+
     last_seen_id = LAST_SEEN_PATH.read_text().strip() if LAST_SEEN_PATH.exists() else None
     is_new_photo = latest.id != last_seen_id
 
