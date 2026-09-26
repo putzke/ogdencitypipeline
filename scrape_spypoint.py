@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Fetches the newest photo from the Pineview crossing Spypoint trail camera and
+Fetches new photos since the last run from the Pineview crossing Spypoint trail camera and
 rebuilds a rolling timelapse GIF covering the trailing TIMELAPSE_WINDOW_HOURS.
 
 Requires SPYPOINT_USERNAME and SPYPOINT_PASSWORD as environment variables —
@@ -168,14 +168,19 @@ def main():
         print(f"Found camera: id={cam.id} name={name} status={getattr(cam, 'status', '?')}")
     camera = cameras[0]
 
-    photos = client.photos(cameras=[camera], limit=5)
+    # limit=12 gives enough headroom to catch every photo from a batched
+    # cellular sync (e.g. syncing 12x/day with hourly captures queues ~2
+    # photos per sync) plus margin for an occasional missed run.
+    photos = client.photos(cameras=[camera], limit=12)
     if not photos:
         print("No photos returned for this camera yet.", file=sys.stderr)
         sys.exit(1)
 
-    # Sort newest first by capture date (API order isn't documented, so don't rely on it).
-    photos = sorted(photos, key=lambda p: getattr(p, "date", ""), reverse=True)
-    latest = photos[0]
+    # Oldest first -- with scheduled ("X times per day") cellular sync, several
+    # queued photos can land on Spypoint's server in a single batch, so more
+    # than one photo can be new since our last poll.
+    photos_asc = sorted(photos, key=lambda p: getattr(p, "date", ""))
+    latest = photos_asc[-1]
 
     camera_status = extract_camera_status(camera)
 
@@ -183,17 +188,31 @@ def main():
     photo_tag = photo_tags[0] if photo_tags else None
 
     last_seen_id = LAST_SEEN_PATH.read_text().strip() if LAST_SEEN_PATH.exists() else None
-    is_new_photo = latest.id != last_seen_id
+
+    if last_seen_id is None:
+        new_photos = photos_asc
+    else:
+        seen_ids = [p.id for p in photos_asc]
+        if last_seen_id in seen_ids:
+            new_photos = photos_asc[seen_ids.index(last_seen_id) + 1:]
+        else:
+            # Last-seen photo aged out of the API's returned window (a long
+            # gap between runs) -- best effort, take everything we were handed.
+            new_photos = photos_asc
 
     now = datetime.now(timezone.utc)
-    capture_time = parse_photo_date(latest, fallback=now)
 
-    if is_new_photo:
-        photo_url = latest.url("large")
-        frame_path = FRAME_BUFFER_DIR / f"{capture_time.timestamp():.0f}.jpg"
-        download(photo_url, frame_path)
+    if new_photos:
+        # Download every new photo, not just the newest one, so a batched
+        # sync doesn't silently skip frames and leave the timelapse thinner
+        # than TIMELAPSE_WINDOW_HOURS implies.
+        for photo in new_photos:
+            capture_time = parse_photo_date(photo, fallback=now)
+            photo_url = photo.url("large")
+            frame_path = FRAME_BUFFER_DIR / f"{capture_time.timestamp():.0f}.jpg"
+            download(photo_url, frame_path)
+            print(f"Downloaded new photo {photo.id} captured {getattr(photo, 'date', '?')}")
         LAST_SEEN_PATH.write_text(latest.id)
-        print(f"Downloaded new photo {latest.id} captured {getattr(latest, 'date', '?')}")
     else:
         print(f"No new photo since last run (still {latest.id}); refreshing timelapse only.")
 
