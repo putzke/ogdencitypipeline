@@ -63,7 +63,7 @@ jobs:
           # particular doesn't exist until a second frame has been captured,
           # and "git add" with multiple pathspecs aborts entirely (exit 128)
           # if any single one doesn't match anything.
-          for f in images/pineview-cam-latest.jpg images/pineview-cam-timelapse.gif pineview_cam.json pineview_cam_hd.json; do
+          for f in images/pineview-cam-latest.jpg images/pineview-cam-timelapse.gif pineview_cam.json pineview_cam_hd.json pineview_cam_power_log.jsonl; do
             if [ -f "$f" ]; then
               git add "$f"
             fi

@@ -25,6 +25,9 @@ Files touched:
   - pineview_cam.json                 (committed — small status file for the page)
   - images/hd/<photo-id>.jpg           (committed — Full-HD gallery, grows over time)
   - pineview_cam_hd.json               (committed — Full-HD gallery manifest for the page)
+  - pineview_cam_power_log.jsonl       (committed — one line per run: battery/solar/12V/signal/
+                                        temp snapshot, for evaluating whether capture/sync
+                                        frequency can safely be increased)
   - cam_frame_buffer/                 (NOT committed — persisted via actions/cache
                                         between runs so we don't bloat git history
                                         with every individual frame)
@@ -58,6 +61,9 @@ LAST_SEEN_PATH = FRAME_BUFFER_DIR / ".last_photo_id"
 HD_DIR = Path("images/hd")
 HD_MANIFEST_PATH = Path("pineview_cam_hd.json")
 HD_PHOTO_LIMIT = 50  # matches the purchased Full-HD photo request pack
+
+POWER_LOG_PATH = Path("pineview_cam_power_log.jsonl")
+POWER_LOG_MAX_LINES = 1000  # ~3 weeks of samples at a 30-min poll cadence
 
 TIMELAPSE_WINDOW_HOURS = 12
 GIF_FRAME_DURATION_MS = 250
@@ -168,6 +174,45 @@ def build_timelapse():
     return True, len(frames)
 
 
+def append_power_log(now, camera_status):
+    """Append one snapshot of the camera's reported power/signal/temp state.
+    This is what lets us actually judge -- from real data instead of a couple
+    of spot-checked app screenshots -- whether the 12V/solar supply has
+    headroom to support a shorter capture/sync interval. Best-effort: never
+    let a logging problem take down the main sync."""
+    if not camera_status:
+        return
+    try:
+        power = camera_status.get("power") or {}
+        battery = power.get("battery") or {}
+        solar = power.get("solar") or {}
+        external = power.get("external") or {}
+        signal = camera_status.get("signal") or {}
+
+        entry = {
+            "t": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "status_updated": camera_status.get("status_updated"),
+            "temp_f": camera_status.get("temperature_f"),
+            "battery_pct": battery.get("pct"),
+            "battery_level": battery.get("level"),
+            "solar_pct": solar.get("pct"),
+            "solar_level": solar.get("level"),
+            "external_pct": external.get("pct"),
+            "external_level": external.get("level"),
+            "signal_pct": signal.get("pct"),
+        }
+
+        lines = []
+        if POWER_LOG_PATH.exists():
+            lines = POWER_LOG_PATH.read_text().splitlines()
+        lines.append(json.dumps(entry))
+        if len(lines) > POWER_LOG_MAX_LINES:
+            lines = lines[-POWER_LOG_MAX_LINES:]
+        POWER_LOG_PATH.write_text("\n".join(lines) + "\n")
+    except Exception as exc:
+        print(f"Power log append failed (non-fatal): {exc}", file=sys.stderr)
+
+
 def sync_hd_gallery(client, camera):
     """Pull whatever Full-HD-requested photos are available (the API's own
     hd=True filter -- the same one the Spypoint app's gallery uses) and keep
@@ -271,6 +316,7 @@ def main():
     latest = photos_asc[-1]
 
     camera_status = extract_camera_status(camera)
+    append_power_log(now=datetime.now(timezone.utc), camera_status=camera_status)
 
     photo_tags = getattr(latest, "tag", None) or []
     photo_tag = photo_tags[0] if photo_tags else None
