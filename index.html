@@ -2102,6 +2102,40 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       </span>
     </div>
 
+    <div id="camMiniStatus" style="text-align:center;font-family:'Open Sans',sans-serif;font-size:0.78rem;color:var(--text-mid);opacity:0.85;margin-top:-14px;margin-bottom:24px;">
+      📷 <span id="camMiniText">Loading camera status…</span>
+    </div>
+    <script>
+    (function() {
+      var el = document.getElementById('camMiniText');
+      if (!el) return;
+      function timeAgo(iso) {
+        var mins = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+        if (mins < 1) return 'moments ago';
+        if (mins === 1) return '1 min ago';
+        if (mins < 60) return mins + ' min ago';
+        var hrs = Math.round(mins / 60);
+        return hrs === 1 ? '1 hr ago' : hrs + ' hrs ago';
+      }
+      function refresh() {
+        fetch('pineview_cam.json?v=' + Date.now())
+          .then(function(r) { return r.json(); })
+          .then(function(d) {
+            var parts = [];
+            var cs = d.camera_status;
+            if (cs && cs.temperature_f != null) parts.push('🌡️ ' + cs.temperature_f + '°F');
+            if (d.updated) parts.push('Updated ' + timeAgo(d.updated));
+            el.textContent = parts.length ? parts.join(' · ') : 'Live feed available';
+          })
+          .catch(function() {
+            el.textContent = 'Live feed available';
+          });
+      }
+      refresh();
+      setInterval(refresh, 60000);
+    })();
+    </script>
+
     <p style="font-size:0.88rem;color:var(--text-mid);line-height:1.7;margin-bottom:24px;padding:14px 18px;background:var(--sky);border-radius:6px;border-left:4px solid var(--water-blue);">
       For media inquiries, please contact the <strong>Sunrise Engineering Public Involvement Team</strong> at <a href="tel:8018388365" style="font-weight:600;color:var(--water-dark);">801-838-8365</a>. Our team will assist in answering your inquiries and direct you to the appropriate Ogden City Communications contact to schedule press interviews.
     </p>
