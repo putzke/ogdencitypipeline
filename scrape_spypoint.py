@@ -3,6 +3,12 @@
 Fetches new photos since the last run from the Pineview crossing Spypoint trail camera and
 rebuilds a rolling timelapse GIF covering the trailing TIMELAPSE_WINDOW_HOURS.
 
+Also syncs a small "Full-HD Site Photos" gallery: photos manually requested as
+Full-HD from the Spypoint app/gallery arrive asynchronously on a later camera
+transmission (see Spypoint's "How to request a Full-HD photos and videos"
+support article). This script polls the same hd=True filter the app's own
+gallery uses and keeps whatever has arrived so far in a small local gallery.
+
 Requires SPYPOINT_USERNAME and SPYPOINT_PASSWORD as environment variables —
 set these as GitHub Actions repository secrets (Settings > Secrets and
 variables > Actions). Never hard-code them here.
@@ -17,6 +23,8 @@ Files touched:
   - images/pineview-cam-latest.jpg   (committed — overwritten each run)
   - images/pineview-cam-timelapse.gif (committed — overwritten each run)
   - pineview_cam.json                 (committed — small status file for the page)
+  - images/hd/<photo-id>.jpg           (committed — Full-HD gallery, grows over time)
+  - pineview_cam_hd.json               (committed — Full-HD gallery manifest for the page)
   - cam_frame_buffer/                 (NOT committed — persisted via actions/cache
                                         between runs so we don't bloat git history
                                         with every individual frame)
@@ -47,6 +55,10 @@ TIMELAPSE_PATH = Path("images/pineview-cam-timelapse.gif")
 METADATA_PATH = Path("pineview_cam.json")
 LAST_SEEN_PATH = FRAME_BUFFER_DIR / ".last_photo_id"
 
+HD_DIR = Path("images/hd")
+HD_MANIFEST_PATH = Path("pineview_cam_hd.json")
+HD_PHOTO_LIMIT = 50  # matches the purchased Full-HD photo request pack
+
 TIMELAPSE_WINDOW_HOURS = 12
 GIF_FRAME_DURATION_MS = 250
 GIF_MAX_DIMENSION = 900  # downscale frames for a reasonably small GIF
@@ -66,6 +78,18 @@ def download(url, dest_path):
     req = urllib.request.Request(url, headers={"User-Agent": "OgdenPipelineBot/1.0"})
     with urllib.request.urlopen(req, timeout=30) as resp:
         dest_path.write_bytes(resp.read())
+
+
+def best_hd_url(photo):
+    """Prefer the highest-resolution URL available on this photo object.
+    Undocumented API -- try likely size keys in descending preference,
+    falling back to 'large' (the size the regular latest-photo sync already
+    relies on) if nothing more specific is present on this photo."""
+    for size in ("original", "hd", "highres", "xlarge", "full"):
+        section = getattr(photo, size, None)
+        if section is not None and getattr(section, "host", None) and getattr(section, "path", None):
+            return photo.url(size)
+    return photo.url("large")
 
 
 def prune_old_frames(now):
@@ -144,6 +168,68 @@ def build_timelapse():
     return True, len(frames)
 
 
+def sync_hd_gallery(client, camera):
+    """Pull whatever Full-HD-requested photos are available (the API's own
+    hd=True filter -- the same one the Spypoint app's gallery uses) and keep
+    a small local gallery of them. Existing entries are never re-downloaded;
+    failures here are logged but never abort the main latest-photo sync."""
+    try:
+        hd_photos = client.photos(cameras=[camera], hd=True, limit=HD_PHOTO_LIMIT)
+    except Exception as exc:  # undocumented API -- don't let this break the main sync
+        print(f"HD photo fetch failed, skipping this run: {exc}", file=sys.stderr)
+        return
+
+    if not hd_photos:
+        return
+
+    HD_DIR.mkdir(parents=True, exist_ok=True)
+
+    manifest = []
+    if HD_MANIFEST_PATH.exists():
+        try:
+            manifest = json.loads(HD_MANIFEST_PATH.read_text()).get("photos", [])
+        except (json.JSONDecodeError, OSError):
+            manifest = []
+    known_ids = {entry.get("id") for entry in manifest}
+
+    new_count = 0
+    for photo in hd_photos:
+        pid = getattr(photo, "id", None)
+        if not pid or pid in known_ids:
+            continue
+        tag_list = getattr(photo, "tag", None) or []
+        dest = HD_DIR / f"{pid}.jpg"
+        try:
+            download(best_hd_url(photo), dest)
+        except Exception as exc:
+            print(f"Failed to download HD photo {pid}: {exc}", file=sys.stderr)
+            continue
+        manifest.append({
+            "id": pid,
+            "date": getattr(photo, "date", None),
+            "tag": tag_list[0] if tag_list else None,
+            "file": str(dest).replace("\\", "/"),
+        })
+        known_ids.add(pid)
+        new_count += 1
+        print(f"Downloaded new Full-HD photo {pid} captured {getattr(photo, 'date', '?')}")
+
+    # Keep only the newest HD_PHOTO_LIMIT, in case the pack is ever topped up
+    # past what we want to keep publishing.
+    manifest.sort(key=lambda e: e.get("date") or "", reverse=True)
+    if len(manifest) > HD_PHOTO_LIMIT:
+        for stale in manifest[HD_PHOTO_LIMIT:]:
+            stale_path = Path(stale["file"])
+            if stale_path.exists():
+                stale_path.unlink()
+        manifest = manifest[:HD_PHOTO_LIMIT]
+
+    HD_MANIFEST_PATH.write_text(json.dumps({"photos": manifest}, indent=2) + "\n")
+
+    if new_count:
+        print(f"HD gallery: {new_count} new photo(s), {len(manifest)} total.")
+
+
 def main():
     if not USERNAME or not PASSWORD:
         print(
@@ -167,6 +253,8 @@ def main():
         name = getattr(getattr(cam, "config", None), "name", "(unnamed)")
         print(f"Found camera: id={cam.id} name={name} status={getattr(cam, 'status', '?')}")
     camera = cameras[0]
+
+    sync_hd_gallery(client, camera)
 
     # limit=12 gives enough headroom to catch every photo from a batched
     # cellular sync (e.g. syncing 12x/day with hourly captures queues ~2

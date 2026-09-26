@@ -2102,6 +2102,15 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       </span>
     </div>
 
+    <!-- FULL-HD PHOTO GALLERY (populated by scrape_spypoint.py once Full-HD photos have been requested from the Spypoint app) -->
+    <div id="hdGallerySection" style="display:none;max-width:900px;margin:0 auto 20px;background:var(--sky);border:1px solid #e8e0d6;border-left:4px solid var(--canyon-rust);border-radius:8px;padding:14px 18px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--canyon-rust);" data-i18n="hd_gallery_title">📸 Full-HD Site Photos</div>
+        <span id="hdGalleryCount" style="font-size:0.72rem;color:var(--text-mid);"></span>
+      </div>
+      <div id="hdGalleryStrip" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;"></div>
+    </div>
+
     <div id="camMiniStatus" style="text-align:center;font-family:'Open Sans',sans-serif;font-size:0.78rem;color:var(--text-mid);opacity:0.85;margin-top:-14px;margin-bottom:24px;">
       📷 <span id="camMiniText">Loading camera status…</span>
     </div>
@@ -3686,7 +3695,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     sched_d6: { en: 'By early February 2027', es: 'Para principios de febrero de 2027' },
 
     // Nav callout badge
-    nav_badge_schedule: { en: 'Schedule Published', es: 'Calendario Publicado' }
+    nav_badge_schedule: { en: 'Schedule Published', es: 'Calendario Publicado' },
+
+    // Full-HD photo gallery (Pineview Crossing)
+    hd_gallery_title: { en: '📸 Full-HD Site Photos', es: '📸 Fotos del Sitio en Full-HD' }
   };
 
   let currentLang = 'en';
@@ -3877,6 +3889,51 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(function(e) {
       document.getElementById('elevVal').textContent = 'Data unavailable';
     });
+})();
+</script>
+<script>
+(function() {
+  var section = document.getElementById('hdGallerySection');
+  var strip = document.getElementById('hdGalleryStrip');
+  var countEl = document.getElementById('hdGalleryCount');
+  if (!section || !strip || typeof galleryImages === 'undefined' || typeof openLightbox !== 'function') return;
+
+  function formatPhotoDate(iso) {
+    try {
+      return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    } catch (e) {
+      return '';
+    }
+  }
+
+  fetch('pineview_cam_hd.json?v=' + Date.now())
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(data) {
+      if (!data || !Array.isArray(data.photos) || !data.photos.length) return;
+
+      var photos = data.photos.slice().sort(function(a, b) {
+        return new Date(b.date) - new Date(a.date);
+      });
+
+      photos.forEach(function(p) {
+        var label = 'Full-HD site photo' + (p.date ? ' — ' + formatPhotoDate(p.date) : '');
+        var idx = galleryImages.length;
+        galleryImages.push({ src: p.file, alt: label });
+
+        var thumb = document.createElement('img');
+        thumb.src = p.file;
+        thumb.alt = label;
+        thumb.title = label;
+        thumb.loading = 'lazy';
+        thumb.style.cssText = 'width:110px;height:80px;object-fit:cover;border-radius:6px;cursor:pointer;flex-shrink:0;border:1px solid rgba(196,168,130,0.35);';
+        thumb.onclick = (function(i) { return function() { openLightbox(i); }; })(idx);
+        strip.appendChild(thumb);
+      });
+
+      countEl.textContent = photos.length + (photos.length === 1 ? ' photo' : ' photos');
+      section.style.display = 'block';
+    })
+    .catch(function() { /* no HD gallery yet -- section stays hidden */ });
 })();
 </script>
 </body>

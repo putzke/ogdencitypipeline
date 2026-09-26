@@ -63,11 +63,17 @@ jobs:
           # particular doesn't exist until a second frame has been captured,
           # and "git add" with multiple pathspecs aborts entirely (exit 128)
           # if any single one doesn't match anything.
-          for f in images/pineview-cam-latest.jpg images/pineview-cam-timelapse.gif pineview_cam.json; do
+          for f in images/pineview-cam-latest.jpg images/pineview-cam-timelapse.gif pineview_cam.json pineview_cam_hd.json; do
             if [ -f "$f" ]; then
               git add "$f"
             fi
           done
+          # Full-HD gallery images live in their own directory and grow over
+          # time as new photos are requested, so add whatever's there (if
+          # anything) rather than listing individual filenames.
+          if [ -d images/hd ] && [ -n "$(ls -A images/hd 2>/dev/null)" ]; then
+            git add images/hd
+          fi
           git diff --cached --quiet || git commit -m "Auto-update Pineview camera $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git pull --rebase origin main
           git push
