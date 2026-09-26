@@ -145,7 +145,6 @@ def main():
         photo_url = latest.url("large")
         frame_path = FRAME_BUFFER_DIR / f"{capture_time.timestamp():.0f}.jpg"
         download(photo_url, frame_path)
-        shutil.copyfile(frame_path, LATEST_PHOTO_PATH)
         LAST_SEEN_PATH.write_text(latest.id)
         print(f"Downloaded new photo {latest.id} captured {getattr(latest, 'date', '?')}")
     else:
@@ -153,6 +152,14 @@ def main():
 
     prune_old_frames(now)
     built, frame_count = build_timelapse()
+
+    # Always republish whatever is newest in the buffer as the "latest photo" —
+    # this makes the site self-healing if a prior run downloaded a frame but
+    # failed before publishing it (e.g. a git error), rather than getting
+    # stuck with no photo until the camera's next real capture.
+    newest_frames = sorted(FRAME_BUFFER_DIR.glob("*.jpg"), key=lambda f: float(f.stem))
+    if newest_frames:
+        shutil.copyfile(newest_frames[-1], LATEST_PHOTO_PATH)
 
     METADATA_PATH.write_text(
         json.dumps(
