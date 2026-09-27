@@ -63,9 +63,9 @@ HD_MANIFEST_PATH = Path("pineview_cam_hd.json")
 HD_PHOTO_LIMIT = 50  # matches the purchased Full-HD photo request pack
 
 POWER_LOG_PATH = Path("pineview_cam_power_log.jsonl")
-POWER_LOG_MAX_LINES = 1000  # ~3 weeks of samples at a 30-min poll cadence
+POWER_LOG_MAX_LINES = 2000  # ~3 weeks of samples at a 15-min poll cadence
 
-TIMELAPSE_WINDOW_HOURS = 12
+TIMELAPSE_WINDOW_HOURS = 6
 GIF_FRAME_DURATION_MS = 250
 GIF_MAX_DIMENSION = 900  # downscale frames for a reasonably small GIF
 
@@ -301,10 +301,10 @@ def main():
 
     sync_hd_gallery(client, camera)
 
-    # limit=12 gives enough headroom to catch every photo from a batched
-    # cellular sync (e.g. syncing 12x/day with hourly captures queues ~2
-    # photos per sync) plus margin for an occasional missed run.
-    photos = client.photos(cameras=[camera], limit=12)
+    # limit=24 gives enough headroom to catch every photo from a batched
+    # cellular sync at the current ~15-min capture cadence (roughly 4
+    # photos/hour) plus margin for an occasional missed run.
+    photos = client.photos(cameras=[camera], limit=24)
     if not photos:
         print("No photos returned for this camera yet.", file=sys.stderr)
         sys.exit(1)
