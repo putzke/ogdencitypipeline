@@ -1,0 +1,43 @@
+name: Update Pineview Weather
+
+on:
+  schedule:
+    # Every 3 hours, offset off the hour for the same reason as the camera
+    # and elevation jobs -- GitHub's scheduler is more likely to delay runs
+    # queued exactly on the hour. Weather doesn't need minute-level
+    # freshness, so a 3-hour cadence is plenty.
+    - cron: '11 */3 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+concurrency:
+  group: pineview-weather-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Push with a real PAT instead of the default GITHUB_TOKEN so this
+          # bot's commits trigger the Pages deploy workflows (see
+          # update-pineview-cam.yml for the full explanation).
+          token: ${{ secrets.PAGES_DEPLOY_PAT }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch weather / rainfall estimate
+        run: python scrape_weather.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "Pineview Weather Bot"
+          git config user.email "bot@ogdencitypipeline.com"
+          git add pineview_weather.json
+          git diff --cached --quiet || git commit -m "Auto-update Pineview weather $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push

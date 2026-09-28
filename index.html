@@ -2185,8 +2185,60 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
             </div>
           </div>
         </div>
+        <div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.88rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--canyon-rust);margin-bottom:12px;" data-i18n="weather_header">Local Weather — Huntsville, UT</div>
+          <div style="background:rgba(26,69,96,0.06);border:1px solid rgba(196,168,130,0.25);border-radius:10px;padding:14px 16px;">
+            <div style="display:flex;gap:10px;margin-bottom:12px;">
+              <div style="flex:1;text-align:center;background:white;border-radius:8px;padding:8px 6px;border:1px solid rgba(196,168,130,0.2);">
+                <div id="wxRain24" style="font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:700;color:var(--water-dark);">--</div>
+                <div style="font-size:0.6rem;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.03em;line-height:1.3;" data-i18n="weather_24h">Last 24 hrs (est.)</div>
+              </div>
+              <div style="flex:1;text-align:center;background:white;border-radius:8px;padding:8px 6px;border:1px solid rgba(196,168,130,0.2);">
+                <div id="wxRain7d" style="font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:700;color:var(--water-dark);">--</div>
+                <div style="font-size:0.6rem;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.03em;line-height:1.3;" data-i18n="weather_7d">Past 7 days (est.)</div>
+              </div>
+            </div>
+            <div id="wxForecastStrip" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;"></div>
+            <div style="font-size:0.6rem;color:var(--text-mid);font-style:italic;margin-top:10px;text-align:center;line-height:1.4;" data-i18n="weather_caption">Estimated from weather-model data (Open-Meteo), not a rain gauge reading.</div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <script>
+    (function() {
+      var strip = document.getElementById('wxForecastStrip');
+      var rain24 = document.getElementById('wxRain24');
+      var rain7d = document.getElementById('wxRain7d');
+      if (!strip || !rain24 || !rain7d) return;
+
+      fetch('pineview_weather.json?v=' + Date.now())
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(d) {
+          if (!d) return;
+          var r = d.rainfall_estimate || {};
+          rain24.textContent = (r.last_24h_in != null ? r.last_24h_in.toFixed(2) : '--') + '"';
+          rain7d.textContent = (r.last_7d_in != null ? r.last_7d_in.toFixed(2) : '--') + '"';
+
+          var days = d.forecast || [];
+          var html = '';
+          days.forEach(function(day, i) {
+            var dt = new Date(day.date + 'T12:00:00');
+            var label = i === 0 ? 'Today' : dt.toLocaleDateString('en-US', { weekday: 'short' });
+            var prob = (day.precip_prob_pct != null && day.precip_prob_pct >= 30) ? day.precip_prob_pct + '%' : '';
+            html += '<div style="text-align:center;">'
+              + '<div style="font-size:0.58rem;color:var(--text-mid);font-weight:700;text-transform:uppercase;">' + label + '</div>'
+              + '<div style="font-size:0.95rem;line-height:1.4;" title="' + (day.label || '') + '">' + (day.icon || '') + '</div>'
+              + '<div style="font-size:0.62rem;color:var(--water-dark);font-weight:700;">' + (day.hi_f != null ? day.hi_f + '°' : '--') + '</div>'
+              + '<div style="font-size:0.58rem;color:var(--text-mid);">' + (day.lo_f != null ? day.lo_f + '°' : '--') + '</div>'
+              + '<div style="font-size:0.54rem;color:var(--water-blue);font-weight:600;min-height:0.8em;">' + prob + '</div>'
+              + '</div>';
+          });
+          strip.innerHTML = html;
+        })
+        .catch(function() {});
+    })();
+    </script>
 
     <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;">
       <div id="elevationCard" style="flex:1;min-width:200px;background:var(--water-dark);border-radius:10px;padding:18px;text-align:center;color:white;border:1.5px solid var(--canyon-stone);box-shadow:0 0 20px rgba(196,168,130,0.15);">
@@ -3643,6 +3695,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     sched_d5: { en: 'Through early January · Day and night work', es: 'Hasta principios de enero · Trabajo diurno y nocturno' },
     sched_t6: { en: 'Lake bed restoration to original elevation', es: 'Restauración del lecho del lago a su elevación original' },
     sched_d6: { en: 'By early February 2027', es: 'Para principios de febrero de 2027' },
+    weather_header: { en: 'Local Weather — Huntsville, UT', es: 'Clima Local — Huntsville, UT' },
+    weather_24h: { en: 'Last 24 hrs (est.)', es: 'Últimas 24 hrs (est.)' },
+    weather_7d: { en: 'Past 7 days (est.)', es: 'Últimos 7 días (est.)' },
+    weather_caption: { en: 'Estimated from weather-model data (Open-Meteo), not a rain gauge reading.', es: 'Estimado a partir de datos de modelos meteorológicos (Open-Meteo), no una lectura de pluviómetro.' },
 
     // Nav callout badge
     nav_badge_schedule: { en: 'Schedule Published', es: 'Calendario Publicado' },
