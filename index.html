@@ -2113,10 +2113,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <div style="display:flex;gap:16px;margin-top:20px;flex-wrap:wrap;">
       <div style="flex:1.4;min-width:300px;background:rgba(26,69,96,0.12);border:1px solid rgba(196,168,130,0.25);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;">
         <a href="files/Pineview_Crossing_Flyer.pdf" target="_blank" rel="noopener" style="display:flex;flex-direction:column;text-decoration:none;color:inherit;">
-          <img src="images/pineview-crossing-flyer.jpg" alt="Pineview Reservoir Pipeline Crossing Installation flyer — truck routes, drop-off locations, and construction schedule" style="width:100%;height:auto;display:block;border-bottom:1px solid rgba(196,168,130,0.25);">
-          <div style="padding:10px 18px;text-align:center;">
+          <div style="padding:10px 18px;text-align:center;border-bottom:1px solid rgba(196,168,130,0.25);">
             <div style="font-size:0.8rem;color:var(--text-mid);font-style:italic;" data-i18n="map_flyer_click">Click to download or view as PDF</div>
           </div>
+          <img src="images/pineview-crossing-flyer.jpg" alt="Pineview Reservoir Pipeline Crossing Installation flyer — truck routes, drop-off locations, and construction schedule" style="width:100%;height:auto;display:block;">
         </a>
       </div>
       <div style="flex:1;min-width:280px;display:flex;flex-direction:column;gap:16px;">
@@ -2185,24 +2185,26 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
             </div>
           </div>
         </div>
-        <div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.88rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--canyon-rust);margin-bottom:12px;" data-i18n="weather_header">Local Weather — Huntsville, UT</div>
-          <div style="background:rgba(26,69,96,0.06);border:1px solid rgba(196,168,130,0.25);border-radius:10px;padding:14px 16px;">
-            <div style="display:flex;gap:10px;margin-bottom:12px;">
-              <div style="flex:1;text-align:center;background:white;border-radius:8px;padding:8px 6px;border:1px solid rgba(196,168,130,0.2);">
-                <div id="wxRain24" style="font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:700;color:var(--water-dark);">--</div>
-                <div style="font-size:0.6rem;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.03em;line-height:1.3;" data-i18n="weather_24h">Last 24 hrs (est.)</div>
-              </div>
-              <div style="flex:1;text-align:center;background:white;border-radius:8px;padding:8px 6px;border:1px solid rgba(196,168,130,0.2);">
-                <div id="wxRain7d" style="font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:700;color:var(--water-dark);">--</div>
-                <div style="font-size:0.6rem;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.03em;line-height:1.3;" data-i18n="weather_7d">Past 7 days (est.)</div>
-              </div>
-            </div>
-            <div id="wxForecastStrip" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;"></div>
-            <div style="font-size:0.6rem;color:var(--text-mid);font-style:italic;margin-top:10px;text-align:center;line-height:1.4;" data-i18n="weather_caption">Estimated from weather-model data (Open-Meteo), not a rain gauge reading.</div>
+      </div>
+    </div>
+
+    <!-- Local weather / rainfall banner — full width, below the portal grid -->
+    <div style="margin-top:16px;background:rgba(26,69,96,0.06);border:1px solid rgba(196,168,130,0.25);border-radius:10px;padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.88rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--canyon-rust);white-space:nowrap;" data-i18n="weather_header">Local Weather — Huntsville, UT</div>
+        <div style="display:flex;gap:10px;">
+          <div style="text-align:center;background:white;border-radius:8px;padding:8px 14px;border:1px solid rgba(196,168,130,0.2);min-width:96px;">
+            <div id="wxRain24" style="font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:700;color:var(--water-dark);">--</div>
+            <div style="font-size:0.6rem;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.03em;line-height:1.3;" data-i18n="weather_24h">Last 24 hrs (est.)</div>
+          </div>
+          <div style="text-align:center;background:white;border-radius:8px;padding:8px 14px;border:1px solid rgba(196,168,130,0.2);min-width:96px;">
+            <div id="wxRain7d" style="font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:700;color:var(--water-dark);">--</div>
+            <div style="font-size:0.6rem;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.03em;line-height:1.3;" data-i18n="weather_7d">Past 7 days (est.)</div>
           </div>
         </div>
+        <div id="wxForecastStrip" style="flex:1;min-width:280px;display:grid;grid-template-columns:repeat(7,1fr);gap:6px;"></div>
       </div>
+      <div style="font-size:0.6rem;color:var(--text-mid);font-style:italic;margin-top:10px;text-align:center;line-height:1.4;" data-i18n="weather_caption">Estimated from weather-model data (Open-Meteo), not a rain gauge reading.</div>
     </div>
 
     <script>
