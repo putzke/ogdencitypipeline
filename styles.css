@@ -1,0 +1,273 @@
+/* ============================================================
+   Juab County Water Supply Plan — Community Water Values
+   Styled to the Central Utah Water Conservancy District (CUWCD)
+   brand: navy, water blues, and District green.
+   "We Deliver Water for Life."
+   ============================================================ */
+
+:root{
+  --navy:#004080;
+  --navy-2:#00305f;
+  --blue:#0072b0;
+  --blue-lite:#009ddc;
+  --blue-pale:#e7f1f8;
+  --green:#61b33e;
+  --green-deep:#3f7827;
+  --green-ondark:#82d050;
+  --green-pale:#eef5e5;
+
+  --paper:#ffffff;
+  --paper-2:#f4f7fa;
+  --ink:#1f2a33;
+  --ink-soft:#3d4a54;
+  --line:#d5e0e8;
+
+  --display:"Public Sans",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,sans-serif;
+  --mono:var(--body);  /* retired robotic monospace; unified to Public Sans */
+
+  --wrap:1160px;
+  --r:10px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+
+.skip-link{position:absolute;left:-999px;top:0;z-index:100;background:var(--navy);color:#fff;padding:10px 16px;border-radius:0 0 8px 0}
+.skip-link:focus{left:0}
+
+a{color:var(--blue);text-decoration:none}
+/* high-contrast keyboard focus (WCAG 2.4.7) — double ring works on light and dark */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible{
+  outline:3px solid var(--navy);
+  outline-offset:2px;
+  box-shadow:0 0 0 6px rgba(122,182,72,.55);
+  border-radius:4px;
+}
+/* on dark bands, invert so the ring stays visible */
+.band-deep a:focus-visible,
+.band-deep button:focus-visible,
+.site-foot a:focus-visible{
+  outline-color:#fff;
+  box-shadow:0 0 0 6px rgba(122,182,72,.7);
+}
+
+.canal{position:fixed;left:38px;top:0;bottom:0;width:2px;z-index:0;background:linear-gradient(var(--blue-lite),transparent 40%,transparent 60%,var(--blue-lite));opacity:.22;pointer-events:none}
+@media(max-width:900px){.canal{display:none}}
+
+/* development notice banner */
+.dev-banner{background:#fff4d6;color:#6b4e00;border-bottom:1px solid #f0d98a;text-align:center;padding:8px 16px;font-size:.82rem;line-height:1.4}
+.dev-banner strong{color:#8a5a00;font-weight:700}
+.dev-banner-inner{display:inline-block;max-width:70ch}
+
+/* header */
+.site-head{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:2px solid var(--navy)}
+.head-inner{display:flex;align-items:center;justify-content:space-between;height:96px}
+.brand{display:flex;align-items:center;gap:16px;text-decoration:none;transition:opacity .2s}
+.brand:hover{opacity:.82}
+.brand-txt{font-family:var(--body);font-size:.95rem;line-height:1.2;letter-spacing:.02em;color:var(--ink-soft)}
+.brand-txt strong{font-size:1.2rem;color:var(--navy);letter-spacing:0}
+.brand-mark{width:34px;height:34px;border-radius:6px;flex:none;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy) 0 50%,var(--blue) 50% 100%)}
+.brand-mark::before{content:"";position:absolute;left:0;bottom:0;width:60%;height:55%;background:var(--green);clip-path:polygon(0 100%,100% 100%,0 0)}
+.brand-mark::after{content:"";position:absolute;right:6px;top:6px;width:40%;height:70%;background:var(--blue-lite);clip-path:polygon(100% 0,100% 100%,0 100%);opacity:.9}
+.nav{display:flex;gap:36px}
+.nav a{font-weight:600;font-size:1.05rem;color:var(--navy);padding:6px 0;border-bottom:3px solid transparent;transition:.2s}
+.nav a:hover{color:var(--blue);border-color:var(--green)}
+@media(max-width:720px){.nav{gap:16px}.nav a{font-size:.8rem}}
+
+/* hero */
+.hero{position:relative;padding:88px 0 72px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(1200px 500px at 82% -10%,rgba(79,169,221,.16),transparent 60%),radial-gradient(900px 600px at 4% 112%,rgba(122,182,72,.15),transparent 55%)}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+.eyebrow{font-family:var(--body);font-size:.78rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green-deep);margin-bottom:20px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(2.3rem,5.2vw,3.7rem);line-height:1.05;letter-spacing:-.02em;color:var(--navy);margin-bottom:22px}
+.lede{font-size:1.14rem;color:var(--ink-soft);max-width:36ch;margin-bottom:30px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;font-weight:700;font-size:.96rem;padding:13px 26px;border-radius:6px;transition:.2s;cursor:pointer;border:2px solid transparent}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:var(--blue);transform:translateY(-1px)}
+.btn-ghost{border-color:var(--navy);color:var(--navy);background:transparent}
+.btn-ghost:hover{background:var(--navy);color:#fff}
+.btn:disabled,.btn[disabled]{background:#9aa7b1;border-color:#9aa7b1;color:#eef2f5;cursor:not-allowed;opacity:.7;pointer-events:none;transform:none;box-shadow:none}
+
+/* supply viz */
+.supply-viz{text-align:center}
+.viz-frame{position:relative;width:100%;max-width:260px;margin:0 auto}
+.water{position:relative;height:340px;border-radius:60px;overflow:hidden;background:linear-gradient(#eef4f8,#e6eff5);border:3px solid var(--navy);box-shadow:0 20px 40px -24px rgba(27,58,91,.55),inset 0 2px 6px rgba(255,255,255,.7);}
+.water::after{content:"";position:absolute;top:16px;bottom:16px;left:16px;width:14px;background:linear-gradient(rgba(255,255,255,.5),rgba(255,255,255,.04));border-radius:40px;pointer-events:none;z-index:3}
+.water-fill{position:absolute;left:0;right:0;bottom:0;height:52%;background:linear-gradient(var(--blue-lite),var(--blue));transition:height 1.6s cubic-bezier(.2,.7,.2,1)}
+.water-fill::before{content:"";position:absolute;top:-9px;left:-50%;right:-50%;height:18px;background:radial-gradient(circle at 20% 0,var(--blue-lite) 0 6px,transparent 7px) 0 0/34px 18px repeat-x;opacity:.7;animation:wave 3s linear infinite}
+@keyframes wave{to{transform:translateX(34px)}}
+@media (prefers-reduced-motion:reduce){.water-fill::before{animation:none}}
+.new-supply{position:absolute;left:0;right:0;bottom:52%;height:0;background:repeating-linear-gradient(45deg,var(--green) 0 10px,var(--green-deep) 10px 20px);transition:height 1.6s cubic-bezier(.2,.7,.2,1) .4s;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ns-tag{font-family:var(--body);font-size:.66rem;font-weight:700;line-height:1.2;color:#12290a;text-transform:uppercase;letter-spacing:.03em;padding:4px 9px;background:rgba(255,255,255,.94);border-radius:6px}
+.viz-label{position:absolute;left:22px;right:22px;z-index:4;display:flex;justify-content:space-between;font-family:var(--body);font-size:.8rem;font-weight:700;letter-spacing:.01em}
+.viz-label-top{top:22px;color:var(--navy)}
+.viz-label-bot{bottom:22px;color:#fff;text-shadow:0 1px 4px rgba(0,48,95,.55)}
+.supply-viz figcaption{margin-top:16px;font-size:.95rem;line-height:1.5;color:var(--ink);max-width:32ch;margin-inline:auto;background:rgba(255,255,255,.86);padding:12px 16px;border-radius:10px}
+
+/* bands */
+.band{padding:84px 0;position:relative}
+.band-sage{background:var(--green-pale)}
+.band-deep{background:linear-gradient(var(--navy),var(--navy-2));color:#e7f1f8}
+.band-deep .section-title,.band-deep .section-eyebrow{color:#fff}
+.section-eyebrow{font-family:var(--body);font-size:.78rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.section-eyebrow.light{color:var(--blue-lite)}
+.section-title{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.12;letter-spacing:-.01em;color:var(--navy);margin-bottom:18px}
+.section-title em{font-style:normal;color:var(--green-deep)}
+.section-title.light em{color:var(--green)}
+.section-lede{font-size:1.06rem;color:var(--ink-soft);max-width:60ch;margin-bottom:40px}
+.band-deep .section-lede.light{color:#c8dcea}
+
+/* value cards */
+.value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media(max-width:860px){.value-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.value-grid{grid-template-columns:1fr}}
+.value-card{background:var(--paper);border-radius:var(--r);padding:26px 22px;border:1px solid var(--line);border-top:4px solid var(--green);position:relative;transition:.25s}
+.value-card:hover{transform:translateY(-4px);box-shadow:0 18px 32px -22px rgba(27,58,91,.5)}
+.vc-num{font-family:var(--body);font-size:.8rem;color:var(--green-deep);display:block;margin-bottom:14px;letter-spacing:.05em}
+.value-card h3{font-family:var(--display);font-weight:700;font-size:1.2rem;color:var(--navy);margin-bottom:8px}
+.value-card p{font-size:.94rem;color:var(--ink-soft)}
+
+/* dashboard */
+.dash{display:grid;gap:22px}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:640px){.stat-row{grid-template-columns:1fr}}
+.stat{background:var(--navy);color:#fff;border-radius:var(--r);padding:28px 26px;text-align:left}
+.stat-num{font-family:var(--display);font-weight:800;font-size:2.8rem;line-height:1;display:block;color:var(--green-ondark)}
+.stat-lbl{font-size:.9rem;color:#c8dcea;margin-top:8px;display:block}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.panel-title{font-family:var(--display);font-weight:700;font-size:1.24rem;color:var(--navy);margin-bottom:4px}
+.panel-sub{font-size:.9rem;color:var(--ink-soft);margin-bottom:22px}
+.panel-note{font-size:.8rem;color:var(--ink-soft);font-style:italic;margin-top:16px}
+.panel-2col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:760px){.panel-2col{grid-template-columns:1fr}}
+.barlist{list-style:none;display:grid;gap:16px}
+.barlist-tight{gap:12px}
+.barlist li{display:grid;grid-template-columns:1fr 2fr auto;align-items:center;gap:14px}
+.bl-label{font-size:.9rem;font-weight:500}
+.bl-track{height:12px;background:var(--paper-2);border-radius:100px;overflow:hidden;border:1px solid var(--line)}
+.bl-fill{display:block;height:100%;width:var(--v);background:linear-gradient(90deg,var(--blue-lite),var(--blue));border-radius:100px;transition:width 1.3s cubic-bezier(.2,.7,.2,1)}
+.bl-fill.bl-alt{background:linear-gradient(90deg,var(--green),var(--green-deep))}
+.bl-val{font-family:var(--body);font-size:.82rem;color:var(--ink-soft);min-width:2.6em;text-align:right}
+@media(max-width:520px){.barlist li{grid-template-columns:1fr auto;gap:6px}.bl-track{grid-column:1/-1;order:3}}
+.donut{width:170px;height:170px;border-radius:50%;margin:8px auto 20px;background:conic-gradient(var(--line) 0 100%);display:grid;place-items:center;position:relative;transition:background 1.4s ease}
+.donut-hole{width:104px;height:104px;border-radius:50%;background:var(--paper);display:grid;place-items:center;text-align:center;font-family:var(--body);font-size:.7rem;color:var(--ink-soft);line-height:1.3}
+.legend{list-style:none;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;font-size:.82rem;color:var(--ink-soft)}
+.legend li{display:flex;align-items:center;gap:6px}
+.dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+.dot-a{background:var(--blue)}
+.dot-b{background:var(--green)}
+.dot-c{background:var(--navy)}
+
+/* supply band */
+.supply-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+@media(max-width:800px){.supply-grid{grid-template-columns:1fr;gap:36px}}
+.supply-facts{list-style:none;display:grid;gap:18px}
+.supply-facts li{display:flex;align-items:baseline;gap:18px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.16)}
+.sf-num{font-family:var(--display);font-weight:800;font-size:2.2rem;color:var(--green-ondark);flex:none;min-width:4.4ch}
+.sf-lbl{font-size:.98rem;color:#c8dcea}
+
+/* participate */
+.participate{display:block}
+.part-copy{max-width:66ch;margin-bottom:40px}
+.part-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+@media(max-width:560px){.part-cards{grid-template-columns:1fr}}
+.part-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);border-top:4px solid var(--blue);padding:30px 26px;display:flex;flex-direction:column;gap:16px}
+.part-card-alt{background:var(--green-pale);border-color:#cfe0b9;border-top-color:var(--green)}
+.part-card h3{font-family:var(--display);font-weight:700;font-size:1.24rem;color:var(--navy);line-height:1.25}
+.part-card p{font-size:.94rem;color:var(--ink-soft);line-height:1.55;margin:0}
+.part-card .btn{align-self:flex-start;margin-top:6px}
+.part-meta{font-family:var(--body);font-size:.7rem;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;margin-top:2px}
+.survey-note{font-size:.8rem;line-height:1.4;color:#8a5a00;background:#fff4d6;border:1px solid #f0d98a;border-radius:6px;padding:7px 10px;margin:2px 0 0}
+
+/* footer */
+.site-foot{background:var(--navy-2);color:#c8dcea;padding:56px 0 40px}
+.foot-inner{display:grid;grid-template-columns:1.6fr .8fr 1.4fr;gap:48px;align-items:start}
+@media(max-width:860px){.foot-inner{grid-template-columns:1fr 1fr;gap:36px}}
+@media(max-width:560px){.foot-inner{grid-template-columns:1fr;gap:28px}}
+.foot-col-brand{max-width:none}
+.foot-h{font-family:var(--display);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:#8fb0c4;margin-bottom:14px}
+.foot-brand{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.foot-brand p{font-size:.9rem;line-height:1.5}
+.foot-brand strong{color:#fff}
+.foot-links{display:flex;flex-direction:column;gap:12px}
+.foot-links a{color:var(--blue-lite);font-weight:600;font-size:.9rem}
+.foot-links a:hover{color:#fff}
+.foot-fine{font-size:.8rem;color:#8fa8b8;line-height:1.55;margin-bottom:16px}
+.foot-tagline{font-family:var(--display);font-style:italic;font-weight:600;color:var(--green-ondark);font-size:1rem;margin-top:4px}
+
+/* official CUWCD logo images */
+.brand-logo{height:58px;width:auto;display:block}
+.foot-logo{height:56px;width:auto;display:block;margin-bottom:4px}
+@media(max-width:720px){.brand-logo{height:46px}}
+
+/* ============================================================
+   DEMO PHOTO BACKGROUNDS — permission pending
+   Images referenced directly from juab.is (Juab County Tourism).
+   Each section carries a visible credit label. To remove after
+   permissions are secured: delete the .photo-bg rules below and
+   the .photo-credit spans from index.html.
+   ============================================================ */
+
+.photo-bg{position:relative;background-size:cover;background-position:center;background-repeat:no-repeat}
+.photo-bg::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none}
+.photo-bg > *{position:relative;z-index:1}
+
+/* Hero: Mount Nebo over Juab Valley, light wash so navy text stays readable */
+.hero.photo-bg{background-image:url('https://juab.is/wp-content/uploads/2023/11/mount-nebo.jpg')}
+.hero.photo-bg::before{background:linear-gradient(rgba(255,255,255,.5),rgba(255,255,255,.42))}
+/* readability panel behind hero text (keeps photo vivid elsewhere) */
+.hero.photo-bg .hero-copy{
+  background:linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.72));
+  backdrop-filter:blur(3px);
+  padding:32px 34px;border-radius:16px;
+  box-shadow:0 20px 50px -30px rgba(18,41,63,.5);
+}
+/* darken the body copy slightly for extra contrast */
+.hero.photo-bg .lede{color:#33414c}
+@media(max-width:860px){.hero.photo-bg .hero-copy{padding:26px 24px}}
+
+
+/* Values band: Burraston Ponds (spring-fed water), light green wash */
+.band-sage.photo-bg{background-image:url('https://juab.is/wp-content/uploads/2023/11/Burraston-Ponds.jpg')}
+.band-sage.photo-bg::before{background:linear-gradient(rgba(238,245,229,.90),rgba(238,245,229,.82))}
+
+/* Supply band: Yuba State Park reservoir, dark navy wash so white text pops */
+.band-deep.photo-bg{background-image:url('https://juab.is/wp-content/uploads/2023/11/YubaStatePark2.jpg')}
+.band-deep.photo-bg::before{background:linear-gradient(rgba(27,58,91,.86),rgba(18,41,63,.90))}
+
+/* Credit label */
+.photo-credit{
+  position:absolute;right:12px;bottom:10px;z-index:2;
+  font-family:var(--body);font-size:.62rem;letter-spacing:.02em;
+  background:rgba(0,0,0,.55);color:#fff;padding:4px 9px;border-radius:5px;
+  max-width:80vw;line-height:1.3;
+}
+.photo-credit a{color:#bfe0ef;text-decoration:underline}
+.band-sage .photo-credit{background:rgba(27,58,91,.72)}
+@media(max-width:600px){.photo-credit{font-size:.56rem;right:8px;bottom:8px}}
+
+/* accessibility statement line in footer */
+.foot-a11y{
+  font-size:.78rem;color:#8fa8b8;
+  display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;line-height:1.5;
+}
+.foot-a11y a{color:var(--blue-lite);font-weight:600}
+.a11y-badge{
+  display:inline-flex;align-items:center;flex:none;
+  font-family:var(--body);font-size:.66rem;font-weight:700;letter-spacing:.04em;
+  color:#0b2033;background:var(--green-ondark);
+  padding:4px 9px;border-radius:5px;
+}
+
+/* illustrative/not-to-scale disclaimer under the hero water graphic */
+.viz-disclaimer{display:block;margin-top:8px;font-size:.72rem;line-height:1.4;font-style:italic;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:8px}
