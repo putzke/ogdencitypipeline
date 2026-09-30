@@ -1,35 +1,25 @@
 {
-  "updated": "2026-09-30T00:26:12Z",
+  "updated": "2026-09-30T09:40:41Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
   "source": "Open-Meteo forecast model (estimate, not a rain gauge reading)",
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
-    "as_of_date": "2026-09-29",
+    "as_of_date": "2026-09-30",
     "last_24h_in": 0.0,
     "last_7d_in": 0.74
   },
   "forecast": [
     {
-      "date": "2026-09-29",
-      "hi_f": 72,
+      "date": "2026-09-30",
+      "hi_f": 75,
       "lo_f": 48,
       "precip_in": 0.0,
       "precip_prob_pct": 1,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
-    },
-    {
-      "date": "2026-09-30",
-      "hi_f": 76,
-      "lo_f": 48,
-      "precip_in": 0.0,
-      "precip_prob_pct": 2,
-      "weathercode": 2,
-      "label": "Partly cloudy",
-      "icon": "\u26c5"
+      "weathercode": 0,
+      "label": "Clear",
+      "icon": "\u2600\ufe0f"
     },
     {
       "date": "2026-10-01",
@@ -54,7 +44,7 @@
     {
       "date": "2026-10-03",
       "hi_f": 81,
-      "lo_f": 60,
+      "lo_f": 61,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 3,
@@ -64,7 +54,7 @@
     {
       "date": "2026-10-04",
       "hi_f": 83,
-      "lo_f": 59,
+      "lo_f": 60,
       "precip_in": 0.0,
       "precip_prob_pct": 1,
       "weathercode": 3,
@@ -73,13 +63,23 @@
     },
     {
       "date": "2026-10-05",
-      "hi_f": 76,
-      "lo_f": 59,
-      "precip_in": 0.02,
-      "precip_prob_pct": 6,
-      "weathercode": 51,
-      "label": "Light drizzle",
-      "icon": "\ud83c\udf26\ufe0f"
+      "hi_f": 78,
+      "lo_f": 60,
+      "precip_in": 0.0,
+      "precip_prob_pct": 3,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
+    },
+    {
+      "date": "2026-10-06",
+      "hi_f": 78,
+      "lo_f": 57,
+      "precip_in": 0.0,
+      "precip_prob_pct": 3,
+      "weathercode": 0,
+      "label": "Clear",
+      "icon": "\u2600\ufe0f"
     }
   ]
 }
