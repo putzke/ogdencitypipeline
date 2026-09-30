@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-30T17:59:44Z",
+  "updated": "2026-09-30T22:14:24Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,7 +13,7 @@
   "forecast": [
     {
       "date": "2026-09-30",
-      "hi_f": 75,
+      "hi_f": 73,
       "lo_f": 47,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
@@ -27,14 +27,14 @@
       "lo_f": 50,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
-      "weathercode": 1,
-      "label": "Mostly clear",
-      "icon": "\ud83c\udf24\ufe0f"
+      "weathercode": 0,
+      "label": "Clear",
+      "icon": "\u2600\ufe0f"
     },
     {
       "date": "2026-10-02",
       "hi_f": 80,
-      "lo_f": 54,
+      "lo_f": 50,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 3,
@@ -66,7 +66,7 @@
       "hi_f": 80,
       "lo_f": 59,
       "precip_in": 0.0,
-      "precip_prob_pct": 4,
+      "precip_prob_pct": 2,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -76,7 +76,7 @@
       "hi_f": 77,
       "lo_f": 56,
       "precip_in": 0.0,
-      "precip_prob_pct": 5,
+      "precip_prob_pct": 3,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
