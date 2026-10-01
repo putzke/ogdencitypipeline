@@ -1397,7 +1397,11 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   }
   #mediaQaTab:hover { background: var(--canyon-rust); padding-right: 28px; }
   @media (max-width: 480px) {
-    #mediaQaTab { font-size: 1.48rem; padding: 24px 16px; }
+    #mediaQaTab {
+      font-size: 0.72rem; padding: 12px 8px; border-radius: 8px 0 0 8px;
+      letter-spacing: 0.04em; box-shadow: -3px 2px 10px rgba(0,0,0,0.2);
+    }
+    #mediaQaTab:hover { padding-right: 10px; }
   }
 
   /* FEEDBACK WIDGET */
