@@ -301,15 +301,18 @@ def main():
 
     sync_hd_gallery(client, camera)
 
-    # limit=48 gives enough headroom to catch every photo from a batched
-    # cellular sync at a 10-min capture cadence (roughly 6 photos/hour) even
-    # after a multi-hour gap between runs -- the GitHub Actions scheduler has
-    # silently skipped runs for 2+ hours before, and at 10-min captures that
-    # alone is 12+ new photos to catch up on. 48 covers an ~8-hour outage
-    # with margin to spare. (The 6-hour timelapse window itself is enforced
+    # limit=100 gives enough headroom to catch every photo from a batched
+    # cellular sync at a 5-min capture cadence (12 photos/hour) even after a
+    # multi-hour gap between runs -- the GitHub Actions scheduler has
+    # silently skipped runs for 2+ hours before (and once for ~4.5 hours, see
+    # the workflow file), and at 5-min captures that alone is 24-54+ new
+    # photos to catch up on. 100 covers a full ~8-hour outage with a little
+    # margin to spare. (Raised from 48 on 2026-10-01 when the capture
+    # interval was tightened from 10 min to 5 min -- 48 only covered ~4
+    # hours at the new rate. The 6-hour timelapse window itself is enforced
     # separately in prune_old_frames() by each frame's real timestamp, not by
     # this fetch limit -- frames persist across runs in the cached buffer.)
-    photos = client.photos(cameras=[camera], limit=48)
+    photos = client.photos(cameras=[camera], limit=100)
     if not photos:
         print("No photos returned for this camera yet.", file=sys.stderr)
         sys.exit(1)
