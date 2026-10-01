@@ -25,6 +25,11 @@ Files touched:
   - pineview_cam.json                 (committed — small status file for the page)
   - images/hd/<photo-id>.jpg           (committed — Full-HD gallery, grows over time)
   - pineview_cam_hd.json               (committed — Full-HD gallery manifest for the page)
+  - images/daily-archive/<YYYY-MM-DD>.jpg (committed — one photo per local day, the first
+                                        capture at/after 1pm Mountain; permanent, never
+                                        pruned -- long-term daily timelapse source material,
+                                        independent of the camera's own SD card)
+  - pineview_cam_daily_archive.json    (committed — daily archive manifest)
   - pineview_cam_power_log.jsonl       (committed — one line per run: battery/solar/12V/signal/
                                         temp snapshot, for evaluating whether capture/sync
                                         frequency can safely be increased)
@@ -40,6 +45,7 @@ import sys
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from PIL import Image
 
@@ -61,6 +67,26 @@ LAST_SEEN_PATH = FRAME_BUFFER_DIR / ".last_photo_id"
 HD_DIR = Path("images/hd")
 HD_MANIFEST_PATH = Path("pineview_cam_hd.json")
 HD_PHOTO_LIMIT = 50  # matches the purchased Full-HD photo request pack
+
+# One photo per local day, permanently archived to the repo -- a long-term
+# daily-interval timelapse source for the life of the project, independent
+# of the camera's own SD card (capacity and overwrite behavior on the
+# physical card are unconfirmed -- this gives Jeff a copy that can't be lost
+# to either). Added 2026-10-01.
+#
+# DAILY_ARCHIVE_ENABLED is the project's own off switch: when construction
+# wraps and there's no more point archiving daily stills, flip this to False
+# (a one-line edit, safely doable right in GitHub's web file editor -- no
+# need for a dev session or the local push workflow) and future runs skip
+# archiving entirely. Nothing else about the script is affected: the main
+# latest-photo sync and 6-hour timelapse keep running untouched, and every
+# day already archived stays exactly as it is -- this only gates whether
+# NEW days get added.
+DAILY_ARCHIVE_ENABLED = True
+DAILY_ARCHIVE_DIR = Path("images/daily-archive")
+DAILY_ARCHIVE_MANIFEST_PATH = Path("pineview_cam_daily_archive.json")
+DAILY_ARCHIVE_HOUR = 13  # 1:00 PM Mountain
+MOUNTAIN_TZ = ZoneInfo("America/Denver")
 
 POWER_LOG_PATH = Path("pineview_cam_power_log.jsonl")
 POWER_LOG_MAX_LINES = 2000  # ~3 weeks of samples at a 15-min poll cadence
@@ -275,6 +301,90 @@ def sync_hd_gallery(client, camera):
         print(f"HD gallery: {new_count} new photo(s), {len(manifest)} total.")
 
 
+def sync_daily_archive(photos_asc):
+    """Archive one photo per local calendar day -- the first capture at or
+    after DAILY_ARCHIVE_HOUR (1:00 PM Mountain) -- into a permanent folder
+    that gets committed to git. Unlike the rolling timelapse frame buffer,
+    nothing here is ever pruned. A day already in the manifest is skipped,
+    so this is safe to call every run. Best-effort: never let an archive
+    problem take down the main sync.
+
+    Coverage note: this only sees whatever photos_asc the main sync fetched
+    this run (bounded by the API call's `limit`), so a gap longer than that
+    window (a multi-day outage) could skip a day's archive photo entirely.
+    Acceptable for a long-term daily timelapse -- an occasional missing day
+    is a minor gap, not a reason to complicate this.
+    """
+    if not DAILY_ARCHIVE_ENABLED:
+        return
+    try:
+        manifest = []
+        if DAILY_ARCHIVE_MANIFEST_PATH.exists():
+            try:
+                manifest = json.loads(DAILY_ARCHIVE_MANIFEST_PATH.read_text()).get("days", [])
+            except (json.JSONDecodeError, OSError):
+                manifest = []
+        archived_dates = {entry.get("date") for entry in manifest}
+
+        new_count = 0
+        for photo in photos_asc:
+            raw = getattr(photo, "date", None)
+            if not raw:
+                continue
+            try:
+                capture_utc = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+            except ValueError:
+                continue
+
+            local = capture_utc.astimezone(MOUNTAIN_TZ)
+            date_str = local.strftime("%Y-%m-%d")
+            if date_str in archived_dates or local.hour < DAILY_ARCHIVE_HOUR:
+                continue  # already archived, or too early in the day -- a later run will catch it
+
+            DAILY_ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+            dest = DAILY_ARCHIVE_DIR / f"{date_str}.jpg"
+            try:
+                download(photo.url("large"), dest)
+            except Exception as exc:
+                print(f"Daily archive download failed for {date_str}: {exc}", file=sys.stderr)
+                continue
+
+            manifest.append({
+                "date": date_str,
+                "captured_local": local.strftime("%Y-%m-%d %H:%M:%S %Z"),
+                "captured_utc": raw,
+                "file": str(dest).replace("\\", "/"),
+            })
+            archived_dates.add(date_str)
+            new_count += 1
+            print(f"Daily archive: saved {date_str} ({local.strftime('%H:%M')} local)")
+
+        if new_count:
+            manifest.sort(key=lambda e: e.get("date") or "")
+            DAILY_ARCHIVE_MANIFEST_PATH.write_text(json.dumps({"days": manifest}, indent=2) + "\n")
+            print(f"Daily archive: {new_count} new day(s), {len(manifest)} total.")
+    except Exception as exc:
+        print(f"Daily archive sync failed (non-fatal): {exc}", file=sys.stderr)
+
+
+def _debug_jsonable(obj, _depth=0):
+    """Recursively convert an _AttrDict-style object (attributes set
+    dynamically from a dict, as pyspypoint's Camera/Photo objects are) into
+    plain dicts/lists/primitives so it can be dumped with json.dumps. Purely
+    a one-off diagnostic helper -- not used by the rest of the script."""
+    if _depth > 6:
+        return str(obj)
+    if obj is None or isinstance(obj, (str, int, float, bool)):
+        return obj
+    if isinstance(obj, (list, tuple)):
+        return [_debug_jsonable(v, _depth + 1) for v in obj]
+    if isinstance(obj, dict):
+        return {k: _debug_jsonable(v, _depth + 1) for k, v in obj.items()}
+    if hasattr(obj, "__dict__"):
+        return {k: _debug_jsonable(v, _depth + 1) for k, v in vars(obj).items()}
+    return str(obj)
+
+
 def main():
     if not USERNAME or not PASSWORD:
         print(
@@ -299,19 +409,33 @@ def main():
         print(f"Found camera: id={cam.id} name={name} status={getattr(cam, 'status', '?')}")
     camera = cameras[0]
 
+    # --- TEMPORARY DEBUG: added 2026-10-01, remove once we've confirmed
+    # whether Spypoint's API exposes SD card / storage usage anywhere on the
+    # camera object. pyspypoint wraps the raw API response dynamically (see
+    # client.py's _AttrDict), so any field Spypoint actually returns -- not
+    # just the ones extract_camera_status() currently reads -- will show up
+    # here. Check this run's GitHub Actions log for the
+    # "=== RAW CAMERA DEBUG DUMP ===" marker, look for anything storage/SD/
+    # memory-related, then delete this block (and _debug_jsonable above it)
+    # once we know the real field name (or that it isn't exposed at all).
+    print("=== RAW CAMERA DEBUG DUMP ===", file=sys.stderr)
+    print(json.dumps(_debug_jsonable(camera), indent=2, default=str), file=sys.stderr)
+    print("=== END RAW CAMERA DEBUG DUMP ===", file=sys.stderr)
+    # --- END TEMPORARY DEBUG ---
+
     sync_hd_gallery(client, camera)
 
     # limit=100 gives enough headroom to catch every photo from a batched
     # cellular sync at a 5-min capture cadence (12 photos/hour) even after a
-    # multi-hour gap between runs -- the GitHub Actions scheduler has
-    # silently skipped runs for 2+ hours before (and once for ~4.5 hours, see
-    # the workflow file), and at 5-min captures that alone is 24-54+ new
-    # photos to catch up on. 100 covers a full ~8-hour outage with a little
-    # margin to spare. (Raised from 48 on 2026-10-01 when the capture
-    # interval was tightened from 10 min to 5 min -- 48 only covered ~4
-    # hours at the new rate. The 6-hour timelapse window itself is enforced
-    # separately in prune_old_frames() by each frame's real timestamp, not by
-    # this fetch limit -- frames persist across runs in the cached buffer.)
+    # multi-hour gap between runs -- the GitHub Actions scheduler has silently
+    # skipped runs for 2+ hours before (and once for ~4.5 hours, see the
+    # workflow file), and at 5-min captures that alone is 24-54+ new photos to
+    # catch up on. 100 covers a full ~8-hour outage with a little margin to
+    # spare. (Raised from 48 on 2026-10-01 when the capture interval was
+    # tightened from 10 min to 5 min -- 48 only covered ~4 hours at the new
+    # rate. The 6-hour timelapse window itself is enforced separately in
+    # prune_old_frames() by each frame's real timestamp, not by this fetch
+    # limit -- frames persist across runs in the cached buffer.)
     photos = client.photos(cameras=[camera], limit=100)
     if not photos:
         print("No photos returned for this camera yet.", file=sys.stderr)
@@ -322,6 +446,8 @@ def main():
     # than one photo can be new since our last poll.
     photos_asc = sorted(photos, key=lambda p: getattr(p, "date", ""))
     latest = photos_asc[-1]
+
+    sync_daily_archive(photos_asc)
 
     camera_status = extract_camera_status(camera)
     append_power_log(now=datetime.now(timezone.utc), camera_status=camera_status)
