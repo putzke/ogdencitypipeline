@@ -1,10 +1,10 @@
 {
-  "updated": "2026-10-01T16:15:39Z",
-  "photo_date": "2026-10-01T16:14:02.583Z",
+  "updated": "2026-10-01T16:30:23Z",
+  "photo_date": "2026-10-01T16:29:03.379Z",
   "photo_tag": "day",
   "source": "SPYPOINT Flex-S-Dark (unofficial API)",
   "timelapse_window_hours": 6,
-  "timelapse_frame_count": 37,
+  "timelapse_frame_count": 39,
   "timelapse_available": true,
   "camera_status": {
     "temperature_f": 69,
@@ -26,6 +26,6 @@
       "pct": 100,
       "level": "high"
     },
-    "status_updated": "2026-10-01T10:14:18.000Z"
+    "status_updated": "2026-10-01T10:29:18.000Z"
   }
 }
