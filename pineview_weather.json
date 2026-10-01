@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T13:11:29Z",
+  "updated": "2026-10-01T20:20:33Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,8 +13,8 @@
   "forecast": [
     {
       "date": "2026-10-01",
-      "hi_f": 74,
-      "lo_f": 47,
+      "hi_f": 73,
+      "lo_f": 46,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 0,
@@ -23,8 +23,8 @@
     },
     {
       "date": "2026-10-02",
-      "hi_f": 79,
-      "lo_f": 52,
+      "hi_f": 78,
+      "lo_f": 50,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 3,
@@ -34,9 +34,9 @@
     {
       "date": "2026-10-03",
       "hi_f": 82,
-      "lo_f": 62,
+      "lo_f": 58,
       "precip_in": 0.0,
-      "precip_prob_pct": 0,
+      "precip_prob_pct": 1,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -44,7 +44,7 @@
     {
       "date": "2026-10-04",
       "hi_f": 84,
-      "lo_f": 61,
+      "lo_f": 60,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 3,
@@ -54,32 +54,32 @@
     {
       "date": "2026-10-05",
       "hi_f": 82,
-      "lo_f": 62,
-      "precip_in": 0.01,
-      "precip_prob_pct": 2,
-      "weathercode": 51,
-      "label": "Light drizzle",
-      "icon": "\ud83c\udf26\ufe0f"
+      "lo_f": 64,
+      "precip_in": 0.0,
+      "precip_prob_pct": 5,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-06",
       "hi_f": 79,
-      "lo_f": 57,
-      "precip_in": 0.02,
-      "precip_prob_pct": 3,
-      "weathercode": 51,
-      "label": "Light drizzle",
-      "icon": "\ud83c\udf26\ufe0f"
+      "lo_f": 60,
+      "precip_in": 0.0,
+      "precip_prob_pct": 5,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-07",
-      "hi_f": 80,
-      "lo_f": 58,
+      "hi_f": 78,
+      "lo_f": 57,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
-      "weathercode": 0,
-      "label": "Clear",
-      "icon": "\u2600\ufe0f"
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     }
   ]
 }
