@@ -218,7 +218,11 @@
       </div>
       <div class="stat-chip">
         <div class="stat-value" id="statBattery">--</div>
-        <div class="stat-label">🔋 Battery</div>
+        <div class="stat-label">🔋 Lit-22</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-value" id="statExternal">--</div>
+        <div class="stat-label">🔌 External (2000Ah)</div>
       </div>
       <div class="stat-chip">
         <div class="stat-value" id="statSolar">--</div>
@@ -279,6 +283,8 @@
           document.getElementById('statTemp').textContent = (cs.temperature_f != null) ? cs.temperature_f + '°F' : '—';
           var battery = cs.power && cs.power.battery;
           document.getElementById('statBattery').textContent = (battery && battery.pct != null) ? battery.pct + '%' : '—';
+          var external = cs.power && cs.power.external;
+          document.getElementById('statExternal').textContent = (external && external.pct != null) ? external.pct + '%' : '—';
           var solar = cs.power && cs.power.solar;
           document.getElementById('statSolar').textContent = (solar && solar.pct != null) ? solar.pct + '%' : '—';
           var signal = cs.signal;
