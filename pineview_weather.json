@@ -1,30 +1,20 @@
 {
-  "updated": "2026-10-02T00:46:41Z",
+  "updated": "2026-10-02T09:44:09Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
   "source": "Open-Meteo forecast model (estimate, not a rain gauge reading)",
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
-    "as_of_date": "2026-10-01",
+    "as_of_date": "2026-10-02",
     "last_24h_in": 0.0,
     "last_7d_in": 0.74
   },
   "forecast": [
     {
-      "date": "2026-10-01",
-      "hi_f": 74,
-      "lo_f": 46,
-      "precip_in": 0.0,
-      "precip_prob_pct": 0,
-      "weathercode": 0,
-      "label": "Clear",
-      "icon": "\u2600\ufe0f"
-    },
-    {
       "date": "2026-10-02",
-      "hi_f": 78,
-      "lo_f": 51,
+      "hi_f": 80,
+      "lo_f": 48,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 3,
@@ -34,52 +24,62 @@
     {
       "date": "2026-10-03",
       "hi_f": 82,
-      "lo_f": 58,
+      "lo_f": 59,
       "precip_in": 0.0,
-      "precip_prob_pct": 0,
+      "precip_prob_pct": 1,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-04",
-      "hi_f": 84,
-      "lo_f": 60,
+      "hi_f": 83,
+      "lo_f": 59,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
-      "weathercode": 0,
-      "label": "Clear",
-      "icon": "\u2600\ufe0f"
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-05",
       "hi_f": 82,
-      "lo_f": 64,
+      "lo_f": 63,
       "precip_in": 0.0,
-      "precip_prob_pct": 2,
+      "precip_prob_pct": 0,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-06",
-      "hi_f": 79,
+      "hi_f": 80,
       "lo_f": 59,
       "precip_in": 0.0,
-      "precip_prob_pct": 3,
+      "precip_prob_pct": 1,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-07",
-      "hi_f": 80,
-      "lo_f": 58,
+      "hi_f": 81,
+      "lo_f": 59,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 0,
       "label": "Clear",
       "icon": "\u2600\ufe0f"
+    },
+    {
+      "date": "2026-10-08",
+      "hi_f": 83,
+      "lo_f": 59,
+      "precip_in": 0.0,
+      "precip_prob_pct": 0,
+      "weathercode": 2,
+      "label": "Partly cloudy",
+      "icon": "\u26c5"
     }
   ]
 }
