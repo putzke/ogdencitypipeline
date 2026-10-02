@@ -19,6 +19,17 @@ reverse-engineered API with no support guarantee from Spypoint — if this
 script starts failing, check https://github.com/hstern/pyspypoint/issues
 for a schema change before assuming the camera itself is offline.
 
+Every frame downloaded into the rolling buffer (see cam_frame_buffer/ below)
+has the camera's own firmware strip (date/time/temp-F/temp-C/moon phase/
+SPYPOINT branding) cropped off the bottom and replaced with a small Ogden
+City logo watermark + Date/Time/Temp(F)-only chip cards, overlaid directly
+on the photo's lower-left corner. This happens once, at download time, so
+both the latest-photo sync and the timelapse GIF (built straight from these
+same buffered frames) automatically match. See apply_photo_overlay() below.
+Uses the Open Sans font files bundled in fonts/ (Apache-2.0 licensed, see
+fonts/LICENSE.txt) rather than relying on fonts being present on the CI
+runner.
+
 Files touched:
   - images/pineview-cam-latest.jpg   (committed — overwritten each run)
   - images/pineview-cam-timelapse.gif (committed — overwritten each run)
@@ -47,7 +58,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 try:
     import spypoint
@@ -94,6 +105,19 @@ POWER_LOG_MAX_LINES = 2000  # ~3 weeks of samples at a 15-min poll cadence
 TIMELAPSE_WINDOW_HOURS = 6
 GIF_FRAME_DURATION_MS = 250
 GIF_MAX_DIMENSION = 900  # downscale frames for a reasonably small GIF
+
+# --- Photo overlay: crop the SPYPOINT firmware strip, add a logo watermark
+# + Date/Time/Temp(F) chip cards instead. Approved design (2026-10-02).
+LOGO_PATH = Path("images/ogdencity-logo.png")
+FONT_SEMIBOLD = Path("fonts/OpenSans-SemiBold.ttf")
+FONT_CONDBOLD = Path("fonts/OpenSans-CondBold.ttf")
+# Measured height, in px, of the camera's firmware strip on a 720x406 "large"
+# photo. If the source resolution ever changes, this scales proportionally
+# (see apply_photo_overlay) rather than silently cropping the wrong amount.
+FIRMWARE_STRIP_PX = 18
+FIRMWARE_STRIP_REFERENCE_H = 406
+OVERLAY_RUST = (139, 74, 43)
+OVERLAY_WATER_DARK = (26, 69, 96)
 
 
 def parse_photo_date(photo, fallback):
@@ -177,14 +201,161 @@ def extract_camera_status(camera):
     return result or None
 
 
-def build_timelapse():
+def _load_font(path, size):
+    try:
+        return ImageFont.truetype(str(path), size)
+    except Exception as exc:
+        print(f"Font load failed for {path} ({exc}); falling back to default font.", file=sys.stderr)
+        return ImageFont.load_default()
+
+
+_overlay_fonts = None  # (label_font, label_font_big, value_font, value_font_big)
+_logo_chip = None      # (resized logo RGBA, box_w, box_h, inner_pad) or None if no logo found
+_overlay_assets_loaded = False
+
+
+def _ensure_overlay_assets():
+    """Lazily load the overlay fonts and pre-render the logo watermark chip
+    once per process (not once per frame) -- these never change run to run."""
+    global _overlay_fonts, _logo_chip, _overlay_assets_loaded
+    if _overlay_assets_loaded:
+        return
+    _overlay_assets_loaded = True
+
+    _overlay_fonts = (
+        _load_font(FONT_SEMIBOLD, 7),   # label_font
+        _load_font(FONT_SEMIBOLD, 14),  # label_font_big (TEMP chip)
+        _load_font(FONT_CONDBOLD, 14),  # value_font
+        _load_font(FONT_CONDBOLD, 28),  # value_font_big (TEMP chip)
+    )
+
+    if LOGO_PATH.exists():
+        try:
+            logo = Image.open(LOGO_PATH).convert("RGBA")
+            lw, lh = logo.size
+            target_h = 32
+            scale = target_h / lh
+            logo_small = logo.resize((max(1, int(lw * scale)), target_h), Image.LANCZOS)
+            pad = 6
+            box_w = logo_small.size[0] + pad * 2
+            box_h = logo_small.size[1] + pad * 2
+            _logo_chip = (logo_small, box_w, box_h, pad)
+        except Exception as exc:
+            print(f"Logo watermark prep failed (non-fatal, skipping logo): {exc}", file=sys.stderr)
+            _logo_chip = None
+    else:
+        print(f"Logo not found at {LOGO_PATH}, skipping watermark.", file=sys.stderr)
+        _logo_chip = None
+
+
+def apply_photo_overlay(image_path, capture_time_utc, temp_f):
+    """Crops the camera's own firmware strip off the bottom of a photo and
+    replaces it with a small Ogden City logo watermark + Date/Time/Temp(F)
+    chip cards, overlaid directly on the photo's lower-left corner (approved
+    design, 2026-10-02). Applied once per frame at download time, so both
+    the latest-photo sync and the timelapse GIF (built from these same
+    buffered frames) pick it up automatically. Best-effort: on any failure
+    this leaves the original downloaded photo untouched rather than taking
+    down the main sync."""
+    try:
+        _ensure_overlay_assets()
+        label_font, label_font_big, value_font, value_font_big = _overlay_fonts
+
+        img = Image.open(image_path).convert("RGBA")
+        W, H = img.size
+        strip_px = (
+            FIRMWARE_STRIP_PX if H == FIRMWARE_STRIP_REFERENCE_H
+            else round(H * (FIRMWARE_STRIP_PX / FIRMWARE_STRIP_REFERENCE_H))
+        )
+        cropped = img.crop((0, 0, W, max(1, H - strip_px)))
+        CW, CH = cropped.size
+
+        local = capture_time_utc.astimezone(MOUNTAIN_TZ)
+        date_str = local.strftime("%m/%d/%Y")
+        time_str = local.strftime("%I:%M %p").lstrip("0")
+        temp_str = f"{round(temp_f)}°F" if temp_f is not None else "--°F"
+
+        margin_left, margin_bottom, gap = 10, 10, 8
+        baseline = CH - margin_bottom
+
+        probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+
+        def chip_spec(label, value, lfont, vfont, pad_x, h, radius, label_off, value_off):
+            w = max(probe.textlength(label, font=lfont),
+                    probe.textlength(value, font=vfont)) + pad_x * 2
+            return dict(label=label, value=value, label_font=lfont, value_font=vfont,
+                        w=w, h=h, radius=radius, label_off=label_off, value_off=value_off)
+
+        chips = [
+            chip_spec("DATE", date_str, label_font, value_font, 10, 31, 6, 3, 13),
+            chip_spec("TIME", time_str, label_font, value_font, 10, 31, 6, 3, 13),
+            # TEMP chip is roughly double the size of the other two (approved design)
+            chip_spec("TEMP", temp_str, label_font_big, value_font_big, 20, 62, 12, 6, 26),
+        ]
+
+        overlay = Image.new("RGBA", (CW, CH), (0, 0, 0, 0))
+        odraw = ImageDraw.Draw(overlay)
+        x = margin_left
+
+        if _logo_chip:
+            logo_small, box_w, box_h, pad = _logo_chip
+            box_y = baseline - box_h
+            odraw.rounded_rectangle([x, box_y, x + box_w, box_y + box_h], radius=6,
+                                     fill=(255, 255, 255, 255))
+            x += box_w + gap
+
+        chip_positions = []
+        for c in chips:
+            chip_y = baseline - c["h"]
+            odraw.rounded_rectangle([x, chip_y, x + c["w"], chip_y + c["h"]], radius=c["radius"],
+                                     fill=(255, 255, 255, 255))
+            chip_positions.append((x, chip_y, c))
+            x += c["w"] + gap
+
+        final = Image.alpha_composite(cropped, overlay)
+
+        if _logo_chip:
+            logo_small, box_w, box_h, pad = _logo_chip
+            box_y = baseline - box_h
+            final.paste(logo_small, (margin_left + pad, box_y + pad), logo_small)
+
+        fdraw = ImageDraw.Draw(final)
+        for x0, chip_y, c in chip_positions:
+            lbl_w = fdraw.textlength(c["label"], font=c["label_font"])
+            fdraw.text((x0 + (c["w"] - lbl_w) / 2, chip_y + c["label_off"]), c["label"],
+                       font=c["label_font"], fill=(*OVERLAY_RUST, 255))
+            val_w = fdraw.textlength(c["value"], font=c["value_font"])
+            fdraw.text((x0 + (c["w"] - val_w) / 2, chip_y + c["value_off"]), c["value"],
+                       font=c["value_font"], fill=(*OVERLAY_WATER_DARK, 255))
+
+        final.convert("RGB").save(image_path, quality=90)
+    except Exception as exc:
+        print(f"Photo overlay failed for {image_path} (non-fatal, original left as-is): {exc}", file=sys.stderr)
+
+
+def build_timelapse(temp_f=None):
     frames = sorted(FRAME_BUFFER_DIR.glob("*.jpg"), key=lambda f: float(f.stem))
     if len(frames) < 2:
         return False, len(frames)
 
     images = []
     for f in frames:
-        img = Image.open(f).convert("RGB")
+        img = Image.open(f)
+        if img.size[1] == FIRMWARE_STRIP_REFERENCE_H:
+            # Still a raw/unprocessed frame (e.g. left over in the cached
+            # buffer from before the overlay feature shipped) -- backfill
+            # the crop + overlay now rather than leaving it. Mixed frame
+            # sizes in one GIF can garble the animation, so every frame
+            # needs to go through this before being added. Best-effort
+            # (temp_f may be a few minutes stale for an old frame, and the
+            # frame's own filename timestamp is still used for date/time).
+            try:
+                capture_time = datetime.fromtimestamp(float(f.stem), tz=timezone.utc)
+            except ValueError:
+                capture_time = datetime.now(timezone.utc)
+            apply_photo_overlay(f, capture_time, temp_f)
+            img = Image.open(f)
+        img = img.convert("RGB")
         img.thumbnail((GIF_MAX_DIMENSION, GIF_MAX_DIMENSION))
         images.append(img)
 
@@ -469,6 +640,7 @@ def main():
             new_photos = photos_asc
 
     now = datetime.now(timezone.utc)
+    temp_f = camera_status.get("temperature_f") if camera_status else None
 
     if new_photos:
         # Download every new photo, not just the newest one, so a batched
@@ -479,13 +651,14 @@ def main():
             photo_url = photo.url("large")
             frame_path = FRAME_BUFFER_DIR / f"{capture_time.timestamp():.0f}.jpg"
             download(photo_url, frame_path)
+            apply_photo_overlay(frame_path, capture_time, temp_f)
             print(f"Downloaded new photo {photo.id} captured {getattr(photo, 'date', '?')}")
         LAST_SEEN_PATH.write_text(latest.id)
     else:
         print(f"No new photo since last run (still {latest.id}); refreshing timelapse only.")
 
     prune_old_frames(now)
-    built, frame_count = build_timelapse()
+    built, frame_count = build_timelapse(temp_f)
 
     # Always republish whatever is newest in the buffer as the "latest photo" —
     # this makes the site self-healing if a prior run downloaded a frame but
