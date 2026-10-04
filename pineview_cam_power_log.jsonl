@@ -686,3 +686,4 @@
 {"t": "2026-10-04T08:30:24Z", "status_updated": "2026-10-04T02:29:20.000Z", "temp_f": 46, "battery_pct": 65, "battery_level": "medium", "solar_pct": 33, "solar_level": "medium", "external_pct": 100, "external_level": "high", "signal_pct": 100}
 {"t": "2026-10-04T08:45:22Z", "status_updated": "2026-10-04T02:44:19.000Z", "temp_f": 46, "battery_pct": 65, "battery_level": "medium", "solar_pct": 33, "solar_level": "medium", "external_pct": 100, "external_level": "high", "signal_pct": 100}
 {"t": "2026-10-04T09:00:25Z", "status_updated": "2026-10-04T02:59:20.000Z", "temp_f": 45, "battery_pct": 65, "battery_level": "medium", "solar_pct": 32, "solar_level": "medium", "external_pct": 100, "external_level": "high", "signal_pct": 100}
+{"t": "2026-10-04T09:15:20Z", "status_updated": "2026-10-04T03:14:19.000Z", "temp_f": 45, "battery_pct": 65, "battery_level": "medium", "solar_pct": 32, "solar_level": "medium", "external_pct": 100, "external_level": "high", "signal_pct": 100}
