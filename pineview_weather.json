@@ -1,40 +1,30 @@
 {
-  "updated": "2026-10-04T05:50:31Z",
+  "updated": "2026-10-04T12:19:49Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
   "source": "Open-Meteo forecast model (estimate, not a rain gauge reading)",
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
-    "as_of_date": "2026-10-03",
+    "as_of_date": "2026-10-04",
     "last_24h_in": 0.0,
     "last_7d_in": 0.74
   },
   "forecast": [
     {
-      "date": "2026-10-03",
-      "hi_f": 81,
-      "lo_f": 48,
+      "date": "2026-10-04",
+      "hi_f": 82,
+      "lo_f": 51,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
-    },
-    {
-      "date": "2026-10-04",
-      "hi_f": 83,
-      "lo_f": 53,
-      "precip_in": 0.0,
-      "precip_prob_pct": 1,
       "weathercode": 0,
       "label": "Clear",
       "icon": "\u2600\ufe0f"
     },
     {
       "date": "2026-10-05",
-      "hi_f": 84,
-      "lo_f": 56,
+      "hi_f": 83,
+      "lo_f": 55,
       "precip_in": 0.0,
       "precip_prob_pct": 1,
       "weathercode": 3,
@@ -43,8 +33,8 @@
     },
     {
       "date": "2026-10-06",
-      "hi_f": 82,
-      "lo_f": 61,
+      "hi_f": 83,
+      "lo_f": 62,
       "precip_in": 0.0,
       "precip_prob_pct": 1,
       "weathercode": 3,
@@ -73,13 +63,23 @@
     },
     {
       "date": "2026-10-09",
-      "hi_f": 80,
-      "lo_f": 59,
+      "hi_f": 82,
+      "lo_f": 58,
       "precip_in": 0.0,
       "precip_prob_pct": 2,
       "weathercode": 0,
       "label": "Clear",
       "icon": "\u2600\ufe0f"
+    },
+    {
+      "date": "2026-10-10",
+      "hi_f": 80,
+      "lo_f": 60,
+      "precip_in": 0.0,
+      "precip_prob_pct": 34,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     }
   ]
 }
