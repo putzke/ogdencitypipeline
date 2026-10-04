@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-04T11:15:24Z",
-  "photo_date": "2026-10-04T11:14:05.217Z",
+  "updated": "2026-10-04T11:30:22Z",
+  "photo_date": "2026-10-04T11:29:05.008Z",
   "photo_tag": "night",
   "source": "SPYPOINT Flex-S-Dark (unofficial API)",
   "timelapse_window_hours": 6,
@@ -26,6 +26,6 @@
       "pct": 100,
       "level": "high"
     },
-    "status_updated": "2026-10-04T05:14:20.000Z"
+    "status_updated": "2026-10-04T05:29:20.000Z"
   }
 }
