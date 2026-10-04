@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-04T12:19:49Z",
+  "updated": "2026-10-04T18:38:59Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -14,7 +14,7 @@
     {
       "date": "2026-10-04",
       "hi_f": 82,
-      "lo_f": 51,
+      "lo_f": 52,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 0,
@@ -24,27 +24,27 @@
     {
       "date": "2026-10-05",
       "hi_f": 83,
-      "lo_f": 55,
+      "lo_f": 54,
       "precip_in": 0.0,
-      "precip_prob_pct": 1,
+      "precip_prob_pct": 3,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-06",
-      "hi_f": 83,
+      "hi_f": 82,
       "lo_f": 62,
-      "precip_in": 0.0,
+      "precip_in": 0.01,
       "precip_prob_pct": 1,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
+      "weathercode": 51,
+      "label": "Light drizzle",
+      "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-10-07",
       "hi_f": 82,
-      "lo_f": 60,
+      "lo_f": 59,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 0,
@@ -63,20 +63,20 @@
     },
     {
       "date": "2026-10-09",
-      "hi_f": 82,
-      "lo_f": 58,
+      "hi_f": 80,
+      "lo_f": 59,
       "precip_in": 0.0,
       "precip_prob_pct": 2,
-      "weathercode": 0,
-      "label": "Clear",
-      "icon": "\u2600\ufe0f"
+      "weathercode": 2,
+      "label": "Partly cloudy",
+      "icon": "\u26c5"
     },
     {
       "date": "2026-10-10",
-      "hi_f": 80,
-      "lo_f": 60,
+      "hi_f": 78,
+      "lo_f": 58,
       "precip_in": 0.0,
-      "precip_prob_pct": 34,
+      "precip_prob_pct": 38,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
