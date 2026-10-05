@@ -1,30 +1,20 @@
 {
-  "updated": "2026-10-05T05:37:35Z",
+  "updated": "2026-10-05T14:34:57Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
   "source": "Open-Meteo forecast model (estimate, not a rain gauge reading)",
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
-    "as_of_date": "2026-10-04",
+    "as_of_date": "2026-10-05",
     "last_24h_in": 0.0,
-    "last_7d_in": 0.74
+    "last_7d_in": 0.0
   },
   "forecast": [
     {
-      "date": "2026-10-04",
+      "date": "2026-10-05",
       "hi_f": 83,
       "lo_f": 52,
-      "precip_in": 0.0,
-      "precip_prob_pct": 1,
-      "weathercode": 0,
-      "label": "Clear",
-      "icon": "\u2600\ufe0f"
-    },
-    {
-      "date": "2026-10-05",
-      "hi_f": 84,
-      "lo_f": 55,
       "precip_in": 0.0,
       "precip_prob_pct": 1,
       "weathercode": 3,
@@ -33,18 +23,18 @@
     },
     {
       "date": "2026-10-06",
-      "hi_f": 82,
-      "lo_f": 58,
-      "precip_in": 0.02,
-      "precip_prob_pct": 2,
-      "weathercode": 51,
-      "label": "Light drizzle",
-      "icon": "\ud83c\udf26\ufe0f"
+      "hi_f": 83,
+      "lo_f": 56,
+      "precip_in": 0.0,
+      "precip_prob_pct": 6,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-07",
       "hi_f": 82,
-      "lo_f": 60,
+      "lo_f": 59,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 0,
@@ -63,10 +53,10 @@
     },
     {
       "date": "2026-10-09",
-      "hi_f": 82,
+      "hi_f": 81,
       "lo_f": 58,
       "precip_in": 0.0,
-      "precip_prob_pct": 1,
+      "precip_prob_pct": 0,
       "weathercode": 0,
       "label": "Clear",
       "icon": "\u2600\ufe0f"
@@ -76,10 +66,20 @@
       "hi_f": 79,
       "lo_f": 58,
       "precip_in": 0.0,
-      "precip_prob_pct": 27,
-      "weathercode": 2,
-      "label": "Partly cloudy",
-      "icon": "\u26c5"
+      "precip_prob_pct": 21,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
+    },
+    {
+      "date": "2026-10-11",
+      "hi_f": 76,
+      "lo_f": 57,
+      "precip_in": 0.04,
+      "precip_prob_pct": 41,
+      "weathercode": 51,
+      "label": "Light drizzle",
+      "icon": "\ud83c\udf26\ufe0f"
     }
   ]
 }
