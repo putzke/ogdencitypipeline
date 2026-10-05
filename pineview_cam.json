@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-05T04:00:25Z",
-  "photo_date": "2026-10-05T03:59:04.728Z",
+  "updated": "2026-10-05T04:15:25Z",
+  "photo_date": "2026-10-05T04:14:04.348Z",
   "photo_tag": "night",
   "source": "SPYPOINT Flex-S-Dark (unofficial API)",
   "timelapse_window_hours": 6,
@@ -14,7 +14,7 @@
         "level": "medium"
       },
       "solar": {
-        "pct": 19,
+        "pct": 18,
         "level": "low"
       },
       "external": {
@@ -26,6 +26,6 @@
       "pct": 100,
       "level": "high"
     },
-    "status_updated": "2026-10-04T21:59:20.000Z"
+    "status_updated": "2026-10-04T22:14:19.000Z"
   }
 }
