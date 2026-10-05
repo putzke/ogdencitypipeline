@@ -108,7 +108,9 @@ GIF_MAX_DIMENSION = 900  # downscale frames for a reasonably small GIF
 
 # --- Photo overlay: crop the SPYPOINT firmware strip, add a logo watermark
 # + Date/Time/Temp(F) chip cards instead. Approved design (2026-10-02).
-LOGO_PATH = Path("images/ogdencity-logo.png")
+# Trimmed, transparent, high-res render of the official vector logo (images/ogdencity-logo.svg),
+# downscaled per frame so it stays crisp.
+LOGO_PATH = Path("images/ogdencity-logo-overlay.png")
 FONT_SEMIBOLD = Path("fonts/OpenSans-SemiBold.ttf")
 FONT_CONDBOLD = Path("fonts/OpenSans-CondBold.ttf")
 # Measured height, in px, of the camera's firmware strip on a 720x406 "large"
@@ -233,10 +235,10 @@ def _ensure_overlay_assets():
         try:
             logo = Image.open(LOGO_PATH).convert("RGBA")
             lw, lh = logo.size
-            target_h = 32
+            target_h = 28
             scale = target_h / lh
             logo_small = logo.resize((max(1, int(lw * scale)), target_h), Image.LANCZOS)
-            pad = 6
+            pad = 8
             box_w = logo_small.size[0] + pad * 2
             box_h = logo_small.size[1] + pad * 2
             _logo_chip = (logo_small, box_w, box_h, pad)
