@@ -1,32 +1,22 @@
 {
-  "updated": "2026-10-05T22:00:42Z",
+  "updated": "2026-10-06T06:18:36Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
   "source": "Open-Meteo forecast model (estimate, not a rain gauge reading)",
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
-    "as_of_date": "2026-10-05",
+    "as_of_date": "2026-10-06",
     "last_24h_in": 0.0,
     "last_7d_in": 0.0
   },
   "forecast": [
     {
-      "date": "2026-10-05",
-      "hi_f": 84,
-      "lo_f": 51,
-      "precip_in": 0.0,
-      "precip_prob_pct": 1,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
-    },
-    {
       "date": "2026-10-06",
       "hi_f": 82,
-      "lo_f": 55,
+      "lo_f": 57,
       "precip_in": 0.0,
-      "precip_prob_pct": 5,
+      "precip_prob_pct": 3,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -53,19 +43,19 @@
     },
     {
       "date": "2026-10-09",
-      "hi_f": 81,
-      "lo_f": 58,
+      "hi_f": 80,
+      "lo_f": 60,
       "precip_in": 0.0,
-      "precip_prob_pct": 1,
-      "weathercode": 0,
-      "label": "Clear",
-      "icon": "\u2600\ufe0f"
+      "precip_prob_pct": 2,
+      "weathercode": 51,
+      "label": "Light drizzle",
+      "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-10-10",
-      "hi_f": 80,
-      "lo_f": 58,
-      "precip_in": 0.01,
+      "hi_f": 77,
+      "lo_f": 55,
+      "precip_in": 0.05,
       "precip_prob_pct": 36,
       "weathercode": 51,
       "label": "Light drizzle",
@@ -74,12 +64,22 @@
     {
       "date": "2026-10-11",
       "hi_f": 75,
-      "lo_f": 55,
-      "precip_in": 0.15,
-      "precip_prob_pct": 45,
-      "weathercode": 51,
-      "label": "Light drizzle",
+      "lo_f": 54,
+      "precip_in": 0.34,
+      "precip_prob_pct": 54,
+      "weathercode": 53,
+      "label": "Drizzle",
       "icon": "\ud83c\udf26\ufe0f"
+    },
+    {
+      "date": "2026-10-12",
+      "hi_f": 63,
+      "lo_f": 53,
+      "precip_in": 0.56,
+      "precip_prob_pct": 46,
+      "weathercode": 61,
+      "label": "Light rain",
+      "icon": "\ud83c\udf27\ufe0f"
     }
   ]
 }
