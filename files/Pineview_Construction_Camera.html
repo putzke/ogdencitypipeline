@@ -320,8 +320,8 @@
       <div class="pn-title">📢 Media: permission required before using the video</div>
       This is an active construction site. <strong>Timelapse video may not be broadcast, streamed or posted until the project team has responded to your request.</strong>
       Clicking <strong>Download MP4</strong> downloads the video and opens a pre-addressed email to
-      <a href="mailto:info@ogdencitypipeline.com?subject=Request%20to%20utilize%20Pineview%20Crossing%20Video">info@ogdencitypipeline.com</a>.
-      Enter your <strong>name, phone and media outlet name</strong> and send it — <strong>video use permission is granted only after you receive a response from the project team.</strong>
+      <a href="mailto:info@ogdencitypipeline.com?cc=clarke.hill%40whitcon.com&subject=Request%20to%20utilize%20Pineview%20Crossing%20Video">info@ogdencitypipeline.com</a>.
+      Enter your <strong>name, phone and media outlet name</strong> and send it. The construction contractor is copied on every request. <strong>Video use permission is granted only after you receive a response from the project team.</strong>
       If no email window opens, send the same details to that address with the subject “Request to utilize Pineview Crossing Video.”
     </div>
     <div class="media-note">
@@ -339,6 +339,7 @@
 (function() {
   var REFRESH_MS = 60000; // re-check for a fresher photo every minute while this tab stays open
   var MAIL_TO = 'info@ogdencitypipeline.com';
+  var MAIL_CC = 'clarke.hill@whitcon.com'; // contractor is copied on every permission request
   var MAIL_SUBJECT = 'Request to utilize Pineview Crossing Video';
   var MAIL_BODY = 'Please enter NAME, PHONE and MEDIA NAME before sending email. Video use permission granted only after a response is received from the project team\n\nNAME:\nPHONE:\nMEDIA NAME:\n';
   var VIDEO_URL = '../images/pineview-cam-timelapse.mp4';
@@ -447,7 +448,7 @@
 
   // ---- Download MP4 + permission email ------------------------------------
   function mailtoUrl() {
-    return 'mailto:' + MAIL_TO + '?subject=' + encodeURIComponent(MAIL_SUBJECT) + '&body=' + encodeURIComponent(MAIL_BODY);
+    return 'mailto:' + MAIL_TO + '?cc=' + encodeURIComponent(MAIL_CC) + '&subject=' + encodeURIComponent(MAIL_SUBJECT) + '&body=' + encodeURIComponent(MAIL_BODY);
   }
   window.pineviewCamMailtoUrl = mailtoUrl; // exposed for testing
 
