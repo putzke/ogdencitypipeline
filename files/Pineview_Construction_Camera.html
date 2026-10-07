@@ -154,6 +154,13 @@
   .tool-btn.primary { background: var(--canyon-rust); border-color: var(--canyon-rust); color: white; }
   .tool-btn.primary:hover { background: #6f3a21; border-color: #6f3a21; }
   .tool-hint { font-size: 0.74rem; opacity: 0.75; }
+  .photo-credit {
+    padding: 10px 20px;
+    background: #EAF3F8;
+    border-bottom: 1px solid rgba(196,168,130,0.3);
+    font-size: 0.84rem;
+    color: var(--water-dark);
+  }
   .permission-notice {
     margin: 0 20px 14px;
     padding: 14px 16px;
@@ -277,6 +284,7 @@
         📷 Camera feed initializing — the first images will appear here shortly after setup.
       </div>
     </div>
+    <div class="photo-credit" id="camCredit"><strong>Still photos:</strong> no permission needed — please credit <strong>“Courtesy of Ogden City Engineering.”</strong></div>
     <div class="viewer-tools" id="camTools">
       <button type="button" class="tool-btn" id="camBtnFull" onclick="pineviewCamFullscreen()">⛶ Full screen</button>
       <button type="button" class="tool-btn primary" id="camBtnDownload" onclick="pineviewCamDownload()" style="display:none;">⬇ Download MP4</button>
@@ -317,7 +325,7 @@
       If no email window opens, send the same details to that address with the subject “Request to utilize Pineview Crossing Video.”
     </div>
     <div class="media-note">
-      Still photos: may be used in broadcast or online media provided they are credited — "Courtesy of Ogden City Engineering." The full-screen view is intended for control rooms and on-air display. The timelapse is a rolling 12-second loop of the last 10 hours, rebuilt about every 30 minutes — it is not live video.
+      Still photos: may be used in broadcast or online media without an email request, provided they are credited — "Courtesy of Ogden City Engineering." The full-screen view is intended for control rooms and on-air display. The timelapse is a rolling 12-second loop of the last 10 hours, rebuilt about every 30 minutes — it is not live video.
     </div>
   </div>
 </main>
@@ -368,6 +376,7 @@
     $('camToolHint').textContent = showingTimelapse
       ? 'Rolling 10-hour timelapse, 12-second loop. Permission required before broadcast or online use (see notice below).'
       : 'Tip: click the photo to view it full screen.';
+    $('camCredit').style.display = showingTimelapse ? 'none' : 'block';
     $('camTools').style.display = onHold ? 'none' : 'flex';
     var ph = $('camPlaceholder');
     if (onHold) {
