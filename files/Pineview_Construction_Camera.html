@@ -154,6 +154,17 @@
   .tool-btn.primary { background: var(--canyon-rust); border-color: var(--canyon-rust); color: white; }
   .tool-btn.primary:hover { background: #6f3a21; border-color: #6f3a21; }
   .tool-hint { font-size: 0.74rem; opacity: 0.75; }
+  .vctl {
+    display: flex; align-items: center; gap: 12px;
+    padding: 8px 20px; background: #0d1f2b; color: white;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 0.78rem;
+  }
+  .vctl .vbtn {
+    background: transparent; color: white; border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 0.8rem; min-width: 38px;
+  }
+  .vctl input[type=range] { flex: 1; accent-color: #C4A882; }
   .photo-credit {
     padding: 10px 20px;
     background: #EAF3F8;
@@ -278,11 +289,16 @@
       <img id="camImgLatest" alt="Latest photo from the Pineview crossing construction camera — click for full screen" title="Click for full screen" src="../images/pineview-cam-latest.jpg"
            onload="document.getElementById('camPlaceholder').style.display='none';"
            onerror="this.style.display='none';document.getElementById('camPlaceholder').style.display='block';">
-      <video id="camVideo" style="display:none;" controls controlsList="nodownload nofullscreen" disablePictureInPicture oncontextmenu="return false;" loop muted playsinline preload="none"
+      <video id="camVideo" style="display:none;" controlsList="nodownload nofullscreen noremoteplayback" disablePictureInPicture disableRemotePlayback oncontextmenu="return false;" loop muted playsinline preload="none"
              aria-label="10-hour rolling timelapse from the Pineview crossing construction camera"></video>
       <div id="camPlaceholder" style="display:none;">
         📷 Camera feed initializing — the first images will appear here shortly after setup.
       </div>
+    </div>
+    <div class="vctl" id="camVctl" style="display:none;">
+      <button type="button" id="vPlay" class="vbtn" aria-label="Pause">❚❚</button>
+      <input type="range" id="vSeek" min="0" max="1000" value="0" aria-label="Timelapse position">
+      <span id="vTime">0:00 / 0:12</span>
     </div>
     <div class="photo-credit" id="camCredit"><strong>Still photos:</strong> no permission needed — please credit <strong>“Courtesy of Ogden City Engineering.”</strong></div>
     <div class="viewer-tools" id="camTools">
@@ -374,6 +390,7 @@
     $('camBtnLatest').classList.toggle('active', !showingTimelapse);
     $('camBtnTimelapse').classList.toggle('active', showingTimelapse);
     $('camBtnDownload').style.display = showingTimelapse ? 'inline-block' : 'none';
+    $('camVctl').style.display = showingTimelapse ? 'flex' : 'none';
     $('camToolHint').textContent = showingTimelapse
       ? 'Rolling 10-hour timelapse, 12-second loop. Full screen and download open a permission-request email — permission required before broadcast or online use.'
       : 'Tip: click the photo to view it full screen.';
@@ -446,6 +463,26 @@
     }
   };
   $('camImgLatest').addEventListener('click', window.pineviewCamOpenFs);
+
+  // ---- Custom playback controls (the browser's built-in video controls are
+  // removed on purpose: they carry their own full-screen / download / picture-
+  // in-picture buttons, which would bypass the permission-request email).
+  (function() {
+    var v = $('camVideo'), seek = $('vSeek'), playBtn = $('vPlay'), timeEl = $('vTime');
+    function fmt(s) { s = Math.max(0, Math.round(s || 0)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+    function sync() {
+      var d = v.duration || 0;
+      seek.value = d ? Math.round(v.currentTime / d * 1000) : 0;
+      timeEl.textContent = fmt(v.currentTime) + ' / ' + fmt(d);
+      playBtn.textContent = v.paused ? '▶' : '❚❚';
+      playBtn.setAttribute('aria-label', v.paused ? 'Play' : 'Pause');
+    }
+    ['timeupdate', 'play', 'pause', 'loadedmetadata', 'durationchange'].forEach(function(e) { v.addEventListener(e, sync); });
+    function toggle() { if (v.paused) { var p = v.play(); if (p && p.catch) p.catch(function() {}); } else { v.pause(); } }
+    playBtn.addEventListener('click', toggle);
+    v.addEventListener('click', toggle);
+    seek.addEventListener('input', function() { if (v.duration) v.currentTime = seek.value / 1000 * v.duration; });
+  })();
 
   // ---- Full-screen VIDEO also requires a permission request ----------------
   var lastFsMail = 0;
