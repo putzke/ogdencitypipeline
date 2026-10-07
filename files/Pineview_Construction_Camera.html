@@ -278,7 +278,7 @@
       <img id="camImgLatest" alt="Latest photo from the Pineview crossing construction camera — click for full screen" title="Click for full screen" src="../images/pineview-cam-latest.jpg"
            onload="document.getElementById('camPlaceholder').style.display='none';"
            onerror="this.style.display='none';document.getElementById('camPlaceholder').style.display='block';">
-      <video id="camVideo" style="display:none;" controls loop muted playsinline preload="none"
+      <video id="camVideo" style="display:none;" controls controlsList="nodownload nofullscreen" disablePictureInPicture oncontextmenu="return false;" loop muted playsinline preload="none"
              aria-label="10-hour rolling timelapse from the Pineview crossing construction camera"></video>
       <div id="camPlaceholder" style="display:none;">
         📷 Camera feed initializing — the first images will appear here shortly after setup.
@@ -375,7 +375,7 @@
     $('camBtnTimelapse').classList.toggle('active', showingTimelapse);
     $('camBtnDownload').style.display = showingTimelapse ? 'inline-block' : 'none';
     $('camToolHint').textContent = showingTimelapse
-      ? 'Rolling 10-hour timelapse, 12-second loop. Permission required before broadcast or online use (see notice below).'
+      ? 'Rolling 10-hour timelapse, 12-second loop. Full screen and download open a permission-request email — permission required before broadcast or online use.'
       : 'Tip: click the photo to view it full screen.';
     $('camCredit').style.display = showingTimelapse ? 'none' : 'block';
     $('camTools').style.display = onHold ? 'none' : 'flex';
@@ -440,11 +440,29 @@
       var v = $('camVideo');
       loadVideo(true);
       if (!requestNativeFs(v) && v.webkitEnterFullscreen) { try { v.webkitEnterFullscreen(); } catch (e) {} }
+      // the permission email pops up via videoFsEntered() once full screen begins
     } else {
       window.pineviewCamOpenFs();
     }
   };
   $('camImgLatest').addEventListener('click', window.pineviewCamOpenFs);
+
+  // ---- Full-screen VIDEO also requires a permission request ----------------
+  var lastFsMail = 0;
+  function videoFsEntered() {
+    var now = Date.now();
+    if (now - lastFsMail < 8000) return; // one email window per full-screen entry
+    lastFsMail = now;
+    setTimeout(function() { window.location.href = mailtoUrl(); }, 700);
+  }
+  window.pineviewCamVideoFsEntered = videoFsEntered; // exposed for testing
+  $('camVideo').addEventListener('webkitbeginfullscreen', videoFsEntered); // iPhone/iPad
+  function onVideoFsChange() {
+    var el = document.fullscreenElement || document.webkitFullscreenElement;
+    if (el && el.id === 'camVideo') videoFsEntered();
+  }
+  document.addEventListener('fullscreenchange', onVideoFsChange);
+  document.addEventListener('webkitfullscreenchange', onVideoFsChange);
 
   // ---- Download MP4 + permission email ------------------------------------
   function mailtoUrl() {
