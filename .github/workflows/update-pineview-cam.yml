@@ -10,6 +10,14 @@ on:
     # runs are best-effort and can lag -- this is not a real-time feed.
     - cron: '4,34 * * * *'
   workflow_dispatch:  # Allow manual trigger
+  # EMERGENCY HOLD: editing camera_hold.json (hold true/false) runs this
+  # workflow right away instead of waiting for the next 30-minute slot, so
+  # the public photo/video come down (or go back up) within a couple of
+  # minutes. Only that one file triggers it, so the bot's own commits of
+  # camera media never re-trigger this workflow.
+  push:
+    paths:
+      - 'camera_hold.json'
 
 concurrency:
   group: pineview-camera-update
@@ -40,7 +48,17 @@ jobs:
       - name: Install dependencies
         run: pip install pyspypoint Pillow
 
-      # The rolling frame buffer used to build the timelapse GIF is kept in
+      # ffmpeg builds the H.264 MP4 timelapse. Install only if the runner
+      # image doesn't already ship it.
+      - name: Ensure ffmpeg is available
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          ffmpeg -version | head -1
+
+      # The rolling frame buffer used to build the timelapse MP4 is kept in
       # Actions cache, NOT committed to git — otherwise every individual
       # frame captured every 30 minutes would live forever in git history.
       - name: Restore camera frame buffer cache
@@ -68,13 +86,14 @@ jobs:
         run: |
           git config user.name "Pineview Camera Bot"
           git config user.email "bot@ogdencitypipeline.com"
-          # Add each file only if it exists this run — the timelapse GIF in
-          # particular doesn't exist until a second frame has been captured,
-          # and "git add" with multiple pathspecs aborts entirely (exit 128)
-          # if any single one doesn't match anything.
-          for f in images/pineview-cam-latest.jpg images/pineview-cam-timelapse.gif pineview_cam.json pineview_cam_hd.json pineview_cam_daily_archive.json pineview_cam_power_log.jsonl; do
-            if [ -f "$f" ]; then
-              git add "$f"
+          # Stage each file if it exists this run OR is already tracked (so a
+          # deletion -- e.g. the photo/video coming down during an emergency
+          # hold, or the retired GIF -- gets committed too). "git add" with
+          # multiple pathspecs aborts entirely (exit 128) if any single one
+          # matches nothing, hence the per-file checks.
+          for f in images/pineview-cam-latest.jpg images/pineview-cam-timelapse.mp4 images/pineview-cam-timelapse.gif pineview_cam.json pineview_cam_hd.json pineview_cam_daily_archive.json pineview_cam_power_log.jsonl pineview_cam_excluded.json; do
+            if [ -e "$f" ] || git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
+              git add -A -- "$f"
             fi
           done
           # Full-HD gallery images and the daily-archive photos each live in

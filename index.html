@@ -2095,6 +2095,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         fetch('pineview_cam.json?v=' + Date.now())
           .then(function(r) { return r.json(); })
           .then(function(d) {
+            if (d.hold) { el.textContent = 'Camera temporarily offline'; return; }
             var parts = [];
             var cs = d.camera_status;
             if (cs && cs.temperature_f != null) parts.push('🌡️ ' + cs.temperature_f + '°F');

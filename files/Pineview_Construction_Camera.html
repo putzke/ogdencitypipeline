@@ -121,11 +121,77 @@
     align-items: center;
     justify-content: center;
   }
-  .viewer img {
+  .viewer img, .viewer video {
     width: 100%;
     max-height: 640px;
     object-fit: contain;
     display: block;
+  }
+  #camImgLatest { cursor: zoom-in; }
+  .viewer-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(196,168,130,0.3);
+    background: rgba(26,69,96,0.04);
+  }
+  .tool-btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid var(--water-dark);
+    background: white;
+    color: var(--water-dark);
+    cursor: pointer;
+  }
+  .tool-btn:hover { background: var(--water-dark); color: white; }
+  .tool-btn.primary { background: var(--canyon-rust); border-color: var(--canyon-rust); color: white; }
+  .tool-btn.primary:hover { background: #6f3a21; border-color: #6f3a21; }
+  .tool-hint { font-size: 0.74rem; opacity: 0.75; }
+  .permission-notice {
+    margin: 0 20px 14px;
+    padding: 14px 16px;
+    background: #FFF4E5;
+    border: 2px solid var(--canyon-rust);
+    border-radius: 8px;
+    color: #4a2a17;
+    font-size: 0.86rem;
+    line-height: 1.6;
+  }
+  .permission-notice .pn-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--canyon-rust);
+    margin-bottom: 4px;
+  }
+  .permission-notice a { color: var(--water-dark); font-weight: 700; }
+  #camFs {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #000;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  #camFs.open { display: flex; }
+  #camFs img { max-width: 100vw; max-height: 100vh; width: auto; height: auto; object-fit: contain; }
+  #camFsClose {
+    position: absolute; top: 12px; right: 14px;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.95rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    color: white; background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,255,255,0.5); border-radius: 6px; padding: 7px 14px; cursor: pointer;
   }
   #camPlaceholder {
     padding: 60px 24px;
@@ -191,25 +257,30 @@
 
 <main>
   <h1>📷 Construction Site Camera</h1>
-  <p class="subtitle">Pineview Reservoir Pipeline Crossing — live photo feed and rolling timelapse from the job site.</p>
+  <p class="subtitle">Pineview Reservoir Pipeline Crossing — live photo feed and a rolling 10-hour timelapse from the job site.</p>
 
   <div class="card">
     <div class="card-header">
       <span class="label">Pineview Crossing</span>
       <div style="display:flex;gap:6px;">
         <button type="button" id="camBtnLatest" class="toggle-btn active" onclick="pineviewCamShow('latest')">Latest Photo</button>
-        <button type="button" id="camBtnTimelapse" class="toggle-btn" onclick="pineviewCamShow('timelapse')">6-Hr Timelapse</button>
+        <button type="button" id="camBtnTimelapse" class="toggle-btn" onclick="pineviewCamShow('timelapse')">10-Hr Timelapse</button>
       </div>
     </div>
     <div class="viewer">
-      <img id="camImgLatest" alt="Latest photo from the Pineview crossing construction camera" src="../images/pineview-cam-latest.jpg"
+      <img id="camImgLatest" alt="Latest photo from the Pineview crossing construction camera — click for full screen" title="Click for full screen" src="../images/pineview-cam-latest.jpg"
            onload="document.getElementById('camPlaceholder').style.display='none';"
            onerror="this.style.display='none';document.getElementById('camPlaceholder').style.display='block';">
-      <img id="camImgTimelapse" alt="6-hour rolling timelapse from the Pineview crossing construction camera" src="../images/pineview-cam-timelapse.gif"
-           style="display:none;" onerror="this.style.display='none';">
+      <video id="camVideo" style="display:none;" controls loop muted playsinline preload="none"
+             aria-label="10-hour rolling timelapse from the Pineview crossing construction camera"></video>
       <div id="camPlaceholder" style="display:none;">
         📷 Camera feed initializing — the first images will appear here shortly after setup.
       </div>
+    </div>
+    <div class="viewer-tools" id="camTools">
+      <button type="button" class="tool-btn" id="camBtnFull" onclick="pineviewCamFullscreen()">⛶ Full screen</button>
+      <button type="button" class="tool-btn primary" id="camBtnDownload" onclick="pineviewCamDownload()" style="display:none;">⬇ Download MP4</button>
+      <span class="tool-hint" id="camToolHint">Tip: click the photo to view it full screen.</span>
     </div>
     <div class="stat-strip" id="camStatStrip" style="display:none;">
       <div class="stat-chip">
@@ -237,67 +308,221 @@
       <span id="camUpdated">Loading feed status…</span>
       <span style="opacity:0.6;">Camera captures every 5 minutes · SPYPOINT Flex-S-Dark</span>
     </div>
+    <div class="permission-notice" role="note">
+      <div class="pn-title">📢 Media: permission required before using the video</div>
+      This is an active construction site. <strong>Timelapse video may not be broadcast, streamed or posted until the project team has responded to your request.</strong>
+      Clicking <strong>Download MP4</strong> downloads the video and opens a pre-addressed email to
+      <a href="mailto:info@ogdencitypipeline.com?subject=Request%20to%20utilize%20Pineview%20Crossing%20Video">info@ogdencitypipeline.com</a>.
+      Enter your <strong>name, phone and media outlet name</strong> and send it — <strong>video use permission is granted only after you receive a response from the project team.</strong>
+      If no email window opens, send the same details to that address with the subject “Request to utilize Pineview Crossing Video.”
+    </div>
     <div class="media-note">
-      Media use: Photos and timelapse footage from this camera may be used in broadcast or online media provided they are credited — "Courtesy of Ogden City Engineering."
+      Still photos: may be used in broadcast or online media provided they are credited — "Courtesy of Ogden City Engineering." The full-screen view is intended for control rooms and on-air display. The timelapse is a rolling 12-second loop of the last 10 hours, rebuilt about every 30 minutes — it is not live video.
     </div>
   </div>
 </main>
 
+<div id="camFs" role="dialog" aria-label="Full screen photo" onclick="pineviewCamCloseFs()">
+  <img id="camFsImg" alt="Latest photo from the Pineview crossing construction camera, full screen">
+  <button type="button" id="camFsClose" onclick="pineviewCamCloseFs(); event.stopPropagation();">✕ Close</button>
+</div>
+
 <script>
 (function() {
   var REFRESH_MS = 60000; // re-check for a fresher photo every minute while this tab stays open
+  var MAIL_TO = 'info@ogdencitypipeline.com';
+  var MAIL_SUBJECT = 'Request to utilize Pineview Crossing Video';
+  var MAIL_BODY = 'Please enter NAME, PHONE and MEDIA NAME before sending email. Video use permission granted only after a response is received from the project team\n\nNAME:\nPHONE:\nMEDIA NAME:\n';
+  var VIDEO_URL = '../images/pineview-cam-timelapse.mp4';
+  var LATEST_URL = '../images/pineview-cam-latest.jpg';
 
-  window.pineviewCamShow = function(mode) {
-    var imgLatest = document.getElementById('camImgLatest');
-    var imgTimelapse = document.getElementById('camImgTimelapse');
-    var btnLatest = document.getElementById('camBtnLatest');
-    var btnTimelapse = document.getElementById('camBtnTimelapse');
-    var placeholder = document.getElementById('camPlaceholder');
-    if (btnTimelapse.disabled && mode === 'timelapse') return;
-    var showingTimelapse = mode === 'timelapse';
-    imgLatest.style.display = showingTimelapse ? 'none' : 'block';
-    imgTimelapse.style.display = showingTimelapse ? 'block' : 'none';
-    if (!showingTimelapse) {
-      placeholder.style.display = (imgLatest.complete && imgLatest.naturalWidth === 0) ? 'block' : 'none';
-    } else {
-      placeholder.style.display = 'none';
+  var mode = 'latest';
+  var onHold = false;
+  var videoVersion = null;      // newest timelapse version announced by pineview_cam.json
+  var videoLoadedVersion = null; // version currently loaded into the <video>
+  var photoVersion = String(Date.now());
+  var lastMeta = null;
+
+  function $(id) { return document.getElementById(id); }
+
+  function loadVideo(autoplay) {
+    var v = $('camVideo');
+    if (videoLoadedVersion === videoVersion && v.getAttribute('src')) {
+      if (autoplay) { var p = v.play(); if (p && p.catch) p.catch(function() {}); }
+      return;
     }
-    btnLatest.classList.toggle('active', !showingTimelapse);
-    btnTimelapse.classList.toggle('active', showingTimelapse);
+    videoLoadedVersion = videoVersion;
+    v.setAttribute('poster', LATEST_URL + '?v=' + photoVersion);
+    v.src = VIDEO_URL + '?v=' + encodeURIComponent(videoVersion || Date.now());
+    v.load();
+    if (autoplay) { var p2 = v.play(); if (p2 && p2.catch) p2.catch(function() {}); }
+  }
+
+  function applyMode() {
+    var showingTimelapse = mode === 'timelapse' && !onHold;
+    $('camImgLatest').style.display = (showingTimelapse || onHold) ? 'none' : 'block';
+    $('camVideo').style.display = showingTimelapse ? 'block' : 'none';
+    $('camBtnLatest').classList.toggle('active', !showingTimelapse);
+    $('camBtnTimelapse').classList.toggle('active', showingTimelapse);
+    $('camBtnDownload').style.display = showingTimelapse ? 'inline-block' : 'none';
+    $('camToolHint').textContent = showingTimelapse
+      ? 'Rolling 10-hour timelapse, 12-second loop. Permission required before broadcast or online use (see notice below).'
+      : 'Tip: click the photo to view it full screen.';
+    $('camTools').style.display = onHold ? 'none' : 'flex';
+    var ph = $('camPlaceholder');
+    if (onHold) {
+      ph.innerHTML = '📷 <strong>Camera feed temporarily offline.</strong><br>The project team has paused the camera. Photos and timelapse will return when updates resume.';
+      ph.style.display = 'block';
+      $('camVideo').pause();
+    } else if (showingTimelapse) {
+      ph.style.display = 'none';
+    } else {
+      var im = $('camImgLatest');
+      ph.innerHTML = '📷 Camera feed initializing — the first images will appear here shortly after setup.';
+      ph.style.display = (im.complete && im.naturalWidth === 0) ? 'block' : 'none';
+    }
+    if (!showingTimelapse) $('camVideo').pause();
+  }
+
+  window.pineviewCamShow = function(newMode) {
+    if (onHold) return;
+    if ($('camBtnTimelapse').disabled && newMode === 'timelapse') return;
+    mode = newMode;
+    applyMode();
+    if (mode === 'timelapse') loadVideo(true);
   };
 
+  // ---- Full screen -------------------------------------------------------
+  function requestNativeFs(el) {
+    var f = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+    if (!f) return false;
+    try { var r = f.call(el); if (r && r.catch) r.catch(function() {}); return true; } catch (e) { return false; }
+  }
+
+  window.pineviewCamOpenFs = function() {
+    if (onHold) return;
+    var fs = $('camFs');
+    $('camFsImg').src = $('camImgLatest').src;
+    fs.classList.add('open');
+    requestNativeFs(fs); // true browser full screen where supported (desktop); the fixed overlay covers iPhone/iPad
+  };
+
+  window.pineviewCamCloseFs = function() {
+    $('camFs').classList.remove('open');
+    var exit = document.exitFullscreen || document.webkitExitFullscreen;
+    if (exit && (document.fullscreenElement || document.webkitFullscreenElement)) {
+      try { var r = exit.call(document); if (r && r.catch) r.catch(function() {}); } catch (e) {}
+    }
+  };
+
+  function onFsChange() {
+    // Esc (or the browser's own exit) leaves true full screen -> close the overlay too.
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+      $('camFs').classList.remove('open');
+    }
+  }
+  document.addEventListener('fullscreenchange', onFsChange);
+  document.addEventListener('webkitfullscreenchange', onFsChange);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') window.pineviewCamCloseFs(); });
+
+  window.pineviewCamFullscreen = function() {
+    if (mode === 'timelapse') {
+      var v = $('camVideo');
+      loadVideo(true);
+      if (!requestNativeFs(v) && v.webkitEnterFullscreen) { try { v.webkitEnterFullscreen(); } catch (e) {} }
+    } else {
+      window.pineviewCamOpenFs();
+    }
+  };
+  $('camImgLatest').addEventListener('click', window.pineviewCamOpenFs);
+
+  // ---- Download MP4 + permission email ------------------------------------
+  function mailtoUrl() {
+    return 'mailto:' + MAIL_TO + '?subject=' + encodeURIComponent(MAIL_SUBJECT) + '&body=' + encodeURIComponent(MAIL_BODY);
+  }
+  window.pineviewCamMailtoUrl = mailtoUrl; // exposed for testing
+
+  window.pineviewCamDownload = function() {
+    if (onHold) return;
+    var stamp = '';
+    var src = videoVersion || (lastMeta && lastMeta.updated);
+    var d = src ? new Date(src) : null;
+    if (d && !isNaN(d.getTime())) {
+      var parts = new Intl.DateTimeFormat('en-CA', {timeZone: 'America/Denver', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false}).formatToParts(d);
+      var g = {}; parts.forEach(function(p) { g[p.type] = p.value; });
+      stamp = '_' + g.year + '-' + g.month + '-' + g.day + '_' + g.hour + g.minute;
+    }
+    var a = document.createElement('a');
+    a.href = VIDEO_URL + '?v=' + encodeURIComponent(videoVersion || Date.now());
+    a.download = 'Pineview-Crossing-Timelapse' + stamp + '.mp4';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    // Then pop up the pre-addressed permission-request email.
+    setTimeout(function() { window.location.href = mailtoUrl(); }, 900);
+  };
+
+  // ---- Status / refresh -----------------------------------------------------
   function refreshStatus() {
     fetch('../pineview_cam.json?v=' + Date.now())
       .then(function(r) { if (!r.ok) throw new Error('no data'); return r.json(); })
       .then(function(d) {
+        lastMeta = d;
+        onHold = !!d.hold;
         var updated = new Date(d.updated);
         var updatedStr = isNaN(updated.getTime()) ? d.updated : updated.toLocaleString('en-US', {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
-        document.getElementById('camUpdated').textContent = 'Last updated: ' + updatedStr + (d.timelapse_available ? '' : ' · Timelapse building…');
-        var btnTimelapse = document.getElementById('camBtnTimelapse');
-        btnTimelapse.disabled = !d.timelapse_available;
+        $('camUpdated').textContent = onHold
+          ? 'Camera updates are temporarily paused.'
+          : 'Last updated: ' + updatedStr + (d.timelapse_available ? '' : ' · Timelapse building…');
+        var btnTimelapse = $('camBtnTimelapse');
+        btnTimelapse.disabled = onHold || !d.timelapse_available;
+        $('camBtnLatest').disabled = onHold;
 
         var cs = d.camera_status;
-        var stripEl = document.getElementById('camStatStrip');
-        if (cs) {
+        var stripEl = $('camStatStrip');
+        if (cs && !onHold) {
           stripEl.style.display = 'flex';
-          document.getElementById('statTemp').textContent = (cs.temperature_f != null) ? cs.temperature_f + '°F' : '—';
+          $('statTemp').textContent = (cs.temperature_f != null) ? cs.temperature_f + '°F' : '—';
           var battery = cs.power && cs.power.battery;
-          document.getElementById('statBattery').textContent = (battery && battery.pct != null) ? battery.pct + '%' : '—';
+          $('statBattery').textContent = (battery && battery.pct != null) ? battery.pct + '%' : '—';
           var external = cs.power && cs.power.external;
-          document.getElementById('statExternal').textContent = (external && external.pct != null) ? external.pct + '%' : '—';
+          $('statExternal').textContent = (external && external.pct != null) ? external.pct + '%' : '—';
           var solar = cs.power && cs.power.solar;
-          document.getElementById('statSolar').textContent = (solar && solar.pct != null) ? solar.pct + '%' : '—';
+          $('statSolar').textContent = (solar && solar.pct != null) ? solar.pct + '%' : '—';
           var signal = cs.signal;
-          document.getElementById('statSignal').textContent = (signal && signal.level) ? signal.level.charAt(0).toUpperCase() + signal.level.slice(1) : '—';
+          $('statSignal').textContent = (signal && signal.level) ? signal.level.charAt(0).toUpperCase() + signal.level.slice(1) : '—';
         } else {
           stripEl.style.display = 'none';
         }
-        // Bust the cache on both images so a left-open tab picks up new frames.
-        document.getElementById('camImgLatest').src = '../images/pineview-cam-latest.jpg?v=' + Date.now();
-        document.getElementById('camImgTimelapse').src = '../images/pineview-cam-timelapse.gif?v=' + Date.now();
+
+        if (onHold) {
+          // Drop whatever is on screen so nothing stale remains visible.
+          $('camImgLatest').removeAttribute('src');
+          $('camVideo').pause();
+          $('camVideo').removeAttribute('src');
+          videoLoadedVersion = null;
+          $('camFs').classList.remove('open');
+          applyMode();
+          return;
+        }
+
+        // Cache-bust by content version (not every minute) so a left-open tab
+        // only re-downloads when something actually changed.
+        var newPhotoVersion = d.photo_date || d.updated || String(Date.now());
+        if (newPhotoVersion !== photoVersion || !$('camImgLatest').getAttribute('src')) {
+          photoVersion = newPhotoVersion;
+          $('camImgLatest').src = LATEST_URL + '?v=' + encodeURIComponent(photoVersion);
+          if ($('camFs').classList.contains('open')) $('camFsImg').src = $('camImgLatest').src;
+        }
+        var newVideoVersion = d.timelapse_updated || null;
+        if (newVideoVersion && newVideoVersion !== videoVersion) {
+          videoVersion = newVideoVersion;
+          if (mode === 'timelapse') loadVideo(true);
+        }
+        applyMode();
       })
       .catch(function() {
-        document.getElementById('camUpdated').textContent = 'Camera feed initializing — check back soon.';
+        $('camUpdated').textContent = 'Camera feed initializing — check back soon.';
       });
   }
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Fetches new photos since the last run from the Pineview crossing Spypoint trail camera and
-rebuilds a rolling timelapse GIF covering the trailing TIMELAPSE_WINDOW_HOURS.
+rebuilds a rolling H.264 MP4 timelapse (trailing 10 hours, 12-second loop, 1280x720).
 
 Also syncs a small "Full-HD Site Photos" gallery: photos manually requested as
 Full-HD from the Spypoint app/gallery arrive asynchronously on a later camera
@@ -19,20 +19,27 @@ reverse-engineered API with no support guarantee from Spypoint — if this
 script starts failing, check https://github.com/hstern/pyspypoint/issues
 for a schema change before assuming the camera itself is offline.
 
-Every frame downloaded into the rolling buffer (see cam_frame_buffer/ below)
-has the camera's own firmware strip (date/time/temp-F/temp-C/moon phase/
-SPYPOINT branding) cropped off the bottom and replaced with a small Ogden
-City logo watermark + Date/Time/Temp(F)-only chip cards, overlaid directly
-on the photo's lower-left corner. This happens once, at download time, so
-both the latest-photo sync and the timelapse GIF (built straight from these
-same buffered frames) automatically match. See apply_photo_overlay() below.
+Raw frames are kept in the rolling buffer (cam_frame_buffer/raw/). Each time
+the site media is rebuilt, every frame is rendered with the camera's own
+firmware strip (date/time/temp-F/temp-C/moon phase/SPYPOINT branding) cropped
+off and replaced by the Ogden City logo + stacked TEMP/DATE chip cards with a
+TIME chip beside them (lower-left corner). The latest JPG and the MP4 both
+come from the same renderer, so they always match. See apply_photo_overlay().
+
+EMERGENCY HOLD: set {"hold": true} in camera_hold.json (editable right in
+GitHub's web editor). The workflow runs immediately, deletes the latest photo
+and timelapse from the site and stops publishing. Setting it back to false
+resumes updates and permanently excludes everything captured during the hold
+(optionally back-dated with "exclude_from"). See run_hold().
 Uses the Open Sans font files bundled in fonts/ (Apache-2.0 licensed, see
 fonts/LICENSE.txt) rather than relying on fonts being present on the CI
 runner.
 
 Files touched:
   - images/pineview-cam-latest.jpg   (committed — overwritten each run)
-  - images/pineview-cam-timelapse.gif (committed — overwritten each run)
+  - images/pineview-cam-timelapse.mp4 (committed — overwritten each run; replaces the old GIF)
+  - camera_hold.json                  (committed — human-edited emergency hold switch)
+  - pineview_cam_excluded.json        (committed — bot-owned record of held/excluded time ranges)
   - pineview_cam.json                 (committed — small status file for the page)
   - images/hd/<photo-id>.jpg           (committed — Full-HD gallery, grows over time)
   - pineview_cam_hd.json               (committed — Full-HD gallery manifest for the page)
@@ -44,7 +51,7 @@ Files touched:
   - pineview_cam_power_log.jsonl       (committed — one line per run: battery/solar/12V/signal/
                                         temp snapshot, for evaluating whether capture/sync
                                         frequency can safely be increased)
-  - cam_frame_buffer/                 (NOT committed — persisted via actions/cache
+  - cam_frame_buffer/raw/             (NOT committed — persisted via actions/cache
                                         between runs so we don't bloat git history
                                         with every individual frame)
 """
@@ -52,9 +59,11 @@ Files touched:
 import json
 import os
 import shutil
+import subprocess
 import sys
 import urllib.request
-from datetime import datetime, timezone
+from functools import lru_cache
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -71,7 +80,11 @@ PASSWORD = os.environ.get("SPYPOINT_PASSWORD")
 
 FRAME_BUFFER_DIR = Path("cam_frame_buffer")
 LATEST_PHOTO_PATH = Path("images/pineview-cam-latest.jpg")
-TIMELAPSE_PATH = Path("images/pineview-cam-timelapse.gif")
+TIMELAPSE_PATH = Path("images/pineview-cam-timelapse.mp4")
+RAW_DIR = FRAME_BUFFER_DIR / "raw"        # untouched 720x406 camera frames, named <epoch>.jpg
+RENDER_DIR = FRAME_BUFFER_DIR / "render"  # scratch: overlay-rendered frames fed to ffmpeg
+HOLD_PATH = Path("camera_hold.json")      # human-edited emergency switch (see run_hold below)
+EXCLUSIONS_PATH = Path("pineview_cam_excluded.json")  # bot-owned: held/excluded time ranges
 METADATA_PATH = Path("pineview_cam.json")
 LAST_SEEN_PATH = FRAME_BUFFER_DIR / ".last_photo_id"
 
@@ -90,7 +103,7 @@ HD_PHOTO_LIMIT = 50  # matches the purchased Full-HD photo request pack
 # (a one-line edit, safely doable right in GitHub's web file editor -- no
 # need for a dev session or the local push workflow) and future runs skip
 # archiving entirely. Nothing else about the script is affected: the main
-# latest-photo sync and 6-hour timelapse keep running untouched, and every
+# latest-photo sync and 10-hour timelapse keep running untouched, and every
 # day already archived stays exactly as it is -- this only gates whether
 # NEW days get added.
 DAILY_ARCHIVE_ENABLED = True
@@ -102,9 +115,15 @@ MOUNTAIN_TZ = ZoneInfo("America/Denver")
 POWER_LOG_PATH = Path("pineview_cam_power_log.jsonl")
 POWER_LOG_MAX_LINES = 2000  # ~3 weeks of samples at a 15-min poll cadence
 
-TIMELAPSE_WINDOW_HOURS = 6
-GIF_FRAME_DURATION_MS = 250
-GIF_MAX_DIMENSION = 900  # downscale frames for a reasonably small GIF
+# Rolling timelapse (H.264 MP4): trailing 10 hours of 5-minute captures
+# (~120 frames) played over a 12-second loop (~10 fps). Frames are rendered
+# 1280 px wide, then padded top/bottom to a broadcast-friendly 1280x720.
+TIMELAPSE_WINDOW_HOURS = 10
+TIMELAPSE_LOOP_SECONDS = 12
+TIMELAPSE_MIN_FPS = 10
+VIDEO_W, VIDEO_H = 1280, 720
+OUTPUT_FPS = 30   # container frame rate -- frames are repeated, which broadcast ingest likes
+OUT_W = 1280      # width the overlay-rendered frames (and the latest JPG) are produced at
 
 # --- Photo overlay: crop the SPYPOINT firmware strip, add a logo watermark
 # + Date/Time/Temp(F) chip cards instead. Approved design (2026-10-02).
@@ -152,7 +171,7 @@ def best_hd_url(photo):
 
 def prune_old_frames(now):
     cutoff = now.timestamp() - TIMELAPSE_WINDOW_HOURS * 3600
-    for f in FRAME_BUFFER_DIR.glob("*.jpg"):
+    for f in RAW_DIR.glob("*.jpg"):
         try:
             ts = float(f.stem)
         except ValueError:
@@ -203,7 +222,8 @@ def extract_camera_status(camera):
     return result or None
 
 
-def _load_font(path, size):
+@lru_cache(maxsize=None)
+def _font(path, size):
     try:
         return ImageFont.truetype(str(path), size)
     except Exception as exc:
@@ -211,166 +231,310 @@ def _load_font(path, size):
         return ImageFont.load_default()
 
 
-_overlay_fonts = None  # (label_font, label_font_big, value_font, value_font_big)
-_logo_chip = None      # (resized logo RGBA, box_w, box_h, inner_pad) or None if no logo found
-_overlay_assets_loaded = False
-
-
-def _ensure_overlay_assets():
-    """Lazily load the overlay fonts and pre-render the logo watermark chip
-    once per process (not once per frame) -- these never change run to run."""
-    global _overlay_fonts, _logo_chip, _overlay_assets_loaded
-    if _overlay_assets_loaded:
-        return
-    _overlay_assets_loaded = True
-
-    _overlay_fonts = (
-        _load_font(FONT_SEMIBOLD, 7),   # label_font
-        _load_font(FONT_SEMIBOLD, 14),  # label_font_big (TEMP chip)
-        _load_font(FONT_CONDBOLD, 14),  # value_font
-        _load_font(FONT_CONDBOLD, 28),  # value_font_big (TEMP chip)
-    )
-
-    if LOGO_PATH.exists():
-        try:
-            logo = Image.open(LOGO_PATH).convert("RGBA")
-            lw, lh = logo.size
-            target_h = 28
-            scale = target_h / lh
-            logo_small = logo.resize((max(1, int(lw * scale)), target_h), Image.LANCZOS)
-            pad = 8
-            box_w = logo_small.size[0] + pad * 2
-            box_h = logo_small.size[1] + pad * 2
-            _logo_chip = (logo_small, box_w, box_h, pad)
-        except Exception as exc:
-            print(f"Logo watermark prep failed (non-fatal, skipping logo): {exc}", file=sys.stderr)
-            _logo_chip = None
-    else:
+@lru_cache(maxsize=None)
+def _logo_for_scale(s):
+    """Logo watermark pre-rendered for scale factor s (cached). Returns
+    (logo RGBA, box_w, box_h, inner_pad) or None if the logo file is missing."""
+    if not LOGO_PATH.exists():
         print(f"Logo not found at {LOGO_PATH}, skipping watermark.", file=sys.stderr)
-        _logo_chip = None
-
-
-def apply_photo_overlay(image_path, capture_time_utc, temp_f):
-    """Crops the camera's own firmware strip off the bottom of a photo and
-    replaces it with a small Ogden City logo watermark + Date/Time/Temp(F)
-    chip cards, overlaid directly on the photo's lower-left corner (approved
-    design, 2026-10-02). Applied once per frame at download time, so both
-    the latest-photo sync and the timelapse GIF (built from these same
-    buffered frames) pick it up automatically. Best-effort: on any failure
-    this leaves the original downloaded photo untouched rather than taking
-    down the main sync."""
+        return None
     try:
-        _ensure_overlay_assets()
-        label_font, label_font_big, value_font, value_font_big = _overlay_fonts
+        logo = Image.open(LOGO_PATH).convert("RGBA")
+        lw, lh = logo.size
+        target_h = round(28 * s)
+        logo_small = logo.resize((max(1, int(lw * target_h / lh)), target_h), Image.LANCZOS)
+        pad = round(8 * s)
+        return (logo_small, logo_small.size[0] + pad * 2, logo_small.size[1] + pad * 2, pad)
+    except Exception as exc:
+        print(f"Logo watermark prep failed (non-fatal, skipping logo): {exc}", file=sys.stderr)
+        return None
 
-        img = Image.open(image_path).convert("RGBA")
+
+def apply_photo_overlay(src_path, dst_path, capture_time_utc, temp_f):
+    """Renders one finished frame from a RAW camera photo: crops the camera's
+    own firmware strip off the bottom, scales the photo up to OUT_W wide, and
+    draws the Ogden City logo + stacked TEMP-over-DATE chip cards with a TIME
+    chip beside them in the lower-left corner (approved stacked layout,
+    2026-10-07). Everything is drawn at the final resolution (not upscaled
+    afterward) so the text stays crisp in the 1280-wide MP4 and the latest
+    JPG. Returns True on success; on any failure it falls back to writing the
+    plain cropped/resized photo (or a straight copy) so the main sync never
+    dies over cosmetics."""
+    try:
+        img = Image.open(src_path).convert("RGBA")
         W, H = img.size
         strip_px = (
             FIRMWARE_STRIP_PX if H == FIRMWARE_STRIP_REFERENCE_H
             else round(H * (FIRMWARE_STRIP_PX / FIRMWARE_STRIP_REFERENCE_H))
         )
         cropped = img.crop((0, 0, W, max(1, H - strip_px)))
-        CW, CH = cropped.size
+        s = OUT_W / W
+        CW, CH = OUT_W, max(1, round(cropped.size[1] * s))
+        cropped = cropped.resize((CW, CH), Image.LANCZOS)
+    except Exception as exc:
+        print(f"Could not open/crop {src_path}: {exc}", file=sys.stderr)
+        return False
+
+    try:
+        label_font = _font(FONT_SEMIBOLD, round(7 * s))
+        label_font_big = _font(FONT_SEMIBOLD, round(14 * s))
+        value_font = _font(FONT_CONDBOLD, round(14 * s))
+        value_font_big = _font(FONT_CONDBOLD, round(28 * s))
+        S = lambda v: round(v * s)
 
         local = capture_time_utc.astimezone(MOUNTAIN_TZ)
         date_str = local.strftime("%m/%d/%Y")
         time_str = local.strftime("%I:%M %p").lstrip("0")
         temp_str = f"{round(temp_f)}°F" if temp_f is not None else "--°F"
 
-        margin_left, margin_bottom, gap = 10, 10, 8
-        baseline = CH - margin_bottom
-
+        margin, gap, stack_gap = S(10), S(8), S(6)
+        base = CH - margin
         probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+        tw = lambda text, font: probe.textlength(text, font=font)
 
-        def chip_spec(label, value, lfont, vfont, pad_x, h, radius, label_off, value_off):
-            w = max(probe.textlength(label, font=lfont),
-                    probe.textlength(value, font=vfont)) + pad_x * 2
-            return dict(label=label, value=value, label_font=lfont, value_font=vfont,
-                        w=w, h=h, radius=radius, label_off=label_off, value_off=value_off)
-
-        chips = [
-            chip_spec("DATE", date_str, label_font, value_font, 10, 31, 6, 3, 13),
-            chip_spec("TIME", time_str, label_font, value_font, 10, 31, 6, 3, 13),
-            # TEMP chip is roughly double the size of the other two (approved design)
-            chip_spec("TEMP", temp_str, label_font_big, value_font_big, 20, 62, 12, 6, 26),
-        ]
+        small_h, big_h = S(31), S(62)
+        date_w = tw(date_str, value_font) + S(20)
+        time_w = tw(time_str, value_font) + S(20)
+        temp_w = tw(temp_str, value_font_big) + S(40)
+        col_w = max(date_w, temp_w)  # TEMP and DATE share one column width
 
         overlay = Image.new("RGBA", (CW, CH), (0, 0, 0, 0))
-        odraw = ImageDraw.Draw(overlay)
-        x = margin_left
+        od = ImageDraw.Draw(overlay)
+        white = (255, 255, 255, 255)
 
-        if _logo_chip:
-            logo_small, box_w, box_h, pad = _logo_chip
-            box_y = baseline - box_h
-            odraw.rounded_rectangle([x, box_y, x + box_w, box_y + box_h], radius=6,
-                                     fill=(255, 255, 255, 255))
+        x = margin
+        logo = _logo_for_scale(s)
+        logo_xy = None
+        if logo:
+            logo_small, box_w, box_h, pad = logo
+            od.rounded_rectangle([x, base - box_h, x + box_w, base], radius=S(6), fill=white)
+            logo_xy = (x + pad, base - box_h + pad)
             x += box_w + gap
 
-        chip_positions = []
-        for c in chips:
-            chip_y = baseline - c["h"]
-            odraw.rounded_rectangle([x, chip_y, x + c["w"], chip_y + c["h"]], radius=c["radius"],
-                                     fill=(255, 255, 255, 255))
-            chip_positions.append((x, chip_y, c))
-            x += c["w"] + gap
+        col_x = x
+        date_y = base - small_h
+        temp_y = date_y - stack_gap - big_h
+        od.rounded_rectangle([col_x, date_y, col_x + col_w, base], radius=S(6), fill=white)
+        od.rounded_rectangle([col_x, temp_y, col_x + col_w, temp_y + big_h], radius=S(12), fill=white)
+        time_x = col_x + col_w + gap
+        od.rounded_rectangle([time_x, date_y, time_x + time_w, base], radius=S(6), fill=white)
 
         final = Image.alpha_composite(cropped, overlay)
+        if logo:
+            final.paste(logo[0], logo_xy, logo[0])
 
-        if _logo_chip:
-            logo_small, box_w, box_h, pad = _logo_chip
-            box_y = baseline - box_h
-            final.paste(logo_small, (margin_left + pad, box_y + pad), logo_small)
+        fd = ImageDraw.Draw(final)
 
-        fdraw = ImageDraw.Draw(final)
-        for x0, chip_y, c in chip_positions:
-            lbl_w = fdraw.textlength(c["label"], font=c["label_font"])
-            fdraw.text((x0 + (c["w"] - lbl_w) / 2, chip_y + c["label_off"]), c["label"],
-                       font=c["label_font"], fill=(*OVERLAY_RUST, 255))
-            val_w = fdraw.textlength(c["value"], font=c["value_font"])
-            fdraw.text((x0 + (c["w"] - val_w) / 2, chip_y + c["value_off"]), c["value"],
-                       font=c["value_font"], fill=(*OVERLAY_WATER_DARK, 255))
+        def put(x0, w, y, label, value, lfont, vfont, label_off, value_off):
+            fd.text((x0 + (w - tw(label, lfont)) / 2, y + S(label_off)), label,
+                    font=lfont, fill=(*OVERLAY_RUST, 255))
+            fd.text((x0 + (w - tw(value, vfont)) / 2, y + S(value_off)), value,
+                    font=vfont, fill=(*OVERLAY_WATER_DARK, 255))
 
-        final.convert("RGB").save(image_path, quality=90)
+        put(col_x, col_w, temp_y, "TEMP", temp_str, label_font_big, value_font_big, 6, 26)
+        put(col_x, col_w, date_y, "DATE", date_str, label_font, value_font, 3, 13)
+        put(time_x, time_w, date_y, "TIME", time_str, label_font, value_font, 3, 13)
+
+        final.convert("RGB").save(dst_path, quality=92)
+        return True
     except Exception as exc:
-        print(f"Photo overlay failed for {image_path} (non-fatal, original left as-is): {exc}", file=sys.stderr)
+        print(f"Photo overlay failed for {src_path} (non-fatal, plain photo used): {exc}", file=sys.stderr)
+        try:
+            cropped.convert("RGB").save(dst_path, quality=92)
+            return True
+        except Exception:
+            return False
+
+
+def load_temp_samples():
+    """(epoch, temp_f) samples from the power log, oldest first. Used to give
+    each frame the temperature closest to its own capture time instead of
+    stamping every frame in a batch with the same reading."""
+    samples = []
+    if POWER_LOG_PATH.exists():
+        for line in POWER_LOG_PATH.read_text().splitlines():
+            try:
+                e = json.loads(line)
+                if e.get("temp_f") is None:
+                    continue
+                samples.append((datetime.fromisoformat(e["t"].replace("Z", "+00:00")).timestamp(), float(e["temp_f"])))
+            except (ValueError, KeyError, TypeError):
+                continue
+    samples.sort()
+    return samples
+
+
+def temp_at(epoch, samples, fallback):
+    """Linear interpolation between the two power-log samples around `epoch`
+    (clamped to the nearest sample if within 2 h, else the fallback)."""
+    if not samples:
+        return fallback
+    if epoch <= samples[0][0]:
+        return samples[0][1] if samples[0][0] - epoch <= 7200 else fallback
+    if epoch >= samples[-1][0]:
+        return samples[-1][1] if epoch - samples[-1][0] <= 7200 else fallback
+    for (t0, v0), (t1, v1) in zip(samples, samples[1:]):
+        if t0 <= epoch <= t1:
+            return v0 if t1 == t0 else v0 + (v1 - v0) * (epoch - t0) / (t1 - t0)
+    return fallback
+
+
+def raw_frames():
+    return sorted(RAW_DIR.glob("*.jpg"), key=lambda f: float(f.stem))
 
 
 def build_timelapse(temp_f=None):
-    frames = sorted(FRAME_BUFFER_DIR.glob("*.jpg"), key=lambda f: float(f.stem))
+    """Renders every buffered raw frame with the overlay, then encodes them
+    into the 10-hour / 12-second H.264 MP4. Returns (built, frame_count)."""
+    frames = raw_frames()
     if len(frames) < 2:
         return False, len(frames)
+    if not shutil.which("ffmpeg"):
+        print("ffmpeg not found on PATH -- cannot build MP4 timelapse.", file=sys.stderr)
+        return False, len(frames)
 
-    images = []
+    samples = load_temp_samples()
+    if RENDER_DIR.exists():
+        shutil.rmtree(RENDER_DIR)
+    RENDER_DIR.mkdir(parents=True)
+    n = 0
     for f in frames:
-        img = Image.open(f)
-        if img.size[1] == FIRMWARE_STRIP_REFERENCE_H:
-            # Still a raw/unprocessed frame (e.g. left over in the cached
-            # buffer from before the overlay feature shipped) -- backfill
-            # the crop + overlay now rather than leaving it. Mixed frame
-            # sizes in one GIF can garble the animation, so every frame
-            # needs to go through this before being added. Best-effort
-            # (temp_f may be a few minutes stale for an old frame, and the
-            # frame's own filename timestamp is still used for date/time).
-            try:
-                capture_time = datetime.fromtimestamp(float(f.stem), tz=timezone.utc)
-            except ValueError:
-                capture_time = datetime.now(timezone.utc)
-            apply_photo_overlay(f, capture_time, temp_f)
-            img = Image.open(f)
-        img = img.convert("RGB")
-        img.thumbnail((GIF_MAX_DIMENSION, GIF_MAX_DIMENSION))
-        images.append(img)
+        epoch = float(f.stem)
+        capture_time = datetime.fromtimestamp(epoch, tz=timezone.utc)
+        if apply_photo_overlay(f, RENDER_DIR / f"{n:05d}.jpg", capture_time, temp_at(epoch, samples, temp_f)):
+            n += 1
+    if n < 2:
+        shutil.rmtree(RENDER_DIR, ignore_errors=True)
+        return False, n
 
-    images[0].save(
-        TIMELAPSE_PATH,
-        format="GIF",
-        save_all=True,
-        append_images=images[1:],
-        duration=GIF_FRAME_DURATION_MS,
-        loop=0,
-        optimize=True,
-    )
-    return True, len(frames)
+    # ~120 frames over 12 s => 10 fps; if the buffer ever holds more than 120
+    # frames, speed up slightly so the loop stays 12 seconds.
+    fps = max(TIMELAPSE_MIN_FPS, n / TIMELAPSE_LOOP_SECONDS)
+    vf = (f"scale={VIDEO_W}:{VIDEO_H}:force_original_aspect_ratio=decrease:flags=lanczos,"
+          f"pad={VIDEO_W}:{VIDEO_H}:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,format=yuv420p")
+    tmp_out = TIMELAPSE_PATH.with_name("pineview-cam-timelapse.tmp.mp4")
+    cmd = ["ffmpeg", "-y", "-loglevel", "error", "-framerate", f"{fps:.4f}",
+           "-i", str(RENDER_DIR / "%05d.jpg"), "-vf", vf,
+           "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+           "-profile:v", "high", "-level", "4.0", "-r", str(OUTPUT_FPS),
+           "-movflags", "+faststart", "-an", str(tmp_out)]
+    try:
+        subprocess.run(cmd, check=True, timeout=300)
+        tmp_out.replace(TIMELAPSE_PATH)
+    except Exception as exc:
+        print(f"ffmpeg encode failed: {exc}", file=sys.stderr)
+        tmp_out.unlink(missing_ok=True)
+        return False, n
+    finally:
+        shutil.rmtree(RENDER_DIR, ignore_errors=True)
+    return True, n
+
+
+def publish_latest(temp_f):
+    """Render the newest buffered raw frame as the public latest photo."""
+    frames = raw_frames()
+    if not frames:
+        return
+    newest = frames[-1]
+    epoch = float(newest.stem)
+    capture_time = datetime.fromtimestamp(epoch, tz=timezone.utc)
+    if not apply_photo_overlay(newest, LATEST_PHOTO_PATH, capture_time,
+                               temp_at(epoch, load_temp_samples(), temp_f)):
+        shutil.copyfile(newest, LATEST_PHOTO_PATH)
+
+
+# --- Emergency hold + excluded time ranges -----------------------------------
+# camera_hold.json is the human-edited switch ({"hold": true, ...}). Editing it
+# (e.g. right in GitHub's web editor) triggers the workflow immediately.
+#   * While hold is true: the latest photo and timelapse MP4 are deleted from
+#     the site, nothing new is fetched or published, and the page shows
+#     "temporarily offline".
+#   * When hold goes back to false: everything captured while on hold (plus
+#     any back-dated `exclude_from`) is permanently skipped, so incident
+#     footage never reappears in the timelapse; live updates resume.
+# State about the held window lives in pineview_cam_excluded.json (bot-owned).
+
+def _read_json(path, default):
+    try:
+        return json.loads(Path(path).read_text())
+    except (OSError, json.JSONDecodeError):
+        return default
+
+
+def parse_when(value):
+    """ISO timestamp -> aware UTC datetime. A value with no timezone is read
+    as Mountain time (what a person typing a time would mean)."""
+    if not value:
+        return None
+    try:
+        dt = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except ValueError:
+        print(f"Unparseable time in camera_hold.json: {value!r}", file=sys.stderr)
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=MOUNTAIN_TZ)
+    return dt.astimezone(timezone.utc)
+
+
+def iso_z(dt):
+    return dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def load_exclusions():
+    d = _read_json(EXCLUSIONS_PATH, {})
+    return {"active_since": d.get("active_since"), "ranges": list(d.get("ranges") or [])}
+
+
+def save_exclusions(state):
+    EXCLUSIONS_PATH.write_text(json.dumps(state, indent=2) + "\n")
+
+
+def is_excluded(dt, ranges):
+    ts = dt.timestamp()
+    for r in ranges:
+        a, b = parse_when(r.get("from")), parse_when(r.get("to"))
+        if a and b and a.timestamp() <= ts <= b.timestamp():
+            return True
+    return False
+
+
+def purge_excluded_frames(ranges):
+    removed = 0
+    for f in raw_frames():
+        if is_excluded(datetime.fromtimestamp(float(f.stem), tz=timezone.utc), ranges):
+            f.unlink()
+            removed += 1
+    if removed:
+        print(f"Removed {removed} buffered frame(s) that fall in excluded ranges.")
+
+
+def run_hold(cfg, state, now):
+    """Camera hold is ON: take the public photo + video down and stop."""
+    candidates = [parse_when(state.get("active_since")), parse_when(cfg.get("exclude_from")), now]
+    since = min(c for c in candidates if c is not None)
+    state["active_since"] = iso_z(since)
+    save_exclusions(state)
+
+    for path in (LATEST_PHOTO_PATH, TIMELAPSE_PATH):
+        path.unlink(missing_ok=True)
+    shutil.rmtree(RENDER_DIR, ignore_errors=True)
+    # Drop buffered frames from the held window so they can't be re-published.
+    for f in raw_frames():
+        if float(f.stem) >= since.timestamp():
+            f.unlink()
+
+    meta = _read_json(METADATA_PATH, {})
+    for k in ("photo_date", "photo_tag", "camera_status", "timelapse_updated"):
+        meta.pop(k, None)
+    meta.update({
+        "updated": iso_z(now),
+        "hold": True,
+        "hold_since": iso_z(since),
+        "timelapse_available": False,
+        "timelapse_frame_count": 0,
+    })
+    METADATA_PATH.write_text(json.dumps(meta, indent=2) + "\n")
+    print(f"CAMERA HOLD ACTIVE since {iso_z(since)} -- latest photo and timelapse removed, no new media published.")
 
 
 def append_power_log(now, camera_status):
@@ -559,6 +723,39 @@ def _debug_jsonable(obj, _depth=0):
 
 
 def main():
+    now = datetime.now(timezone.utc)
+    FRAME_BUFFER_DIR.mkdir(exist_ok=True)
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    LATEST_PHOTO_PATH.parent.mkdir(exist_ok=True)
+
+    # One-time migration: older runs kept already-overlaid frames directly in
+    # cam_frame_buffer/. The overlay is now rendered from raw frames on every
+    # build (so layout changes apply to the whole loop), so discard the legacy
+    # frames and the last-seen marker -- the next sync re-downloads the most
+    # recent ~8 hours of raw frames from SPYPOINT and the buffer grows back
+    # to the full 10-hour window.
+    legacy = list(FRAME_BUFFER_DIR.glob("*.jpg"))
+    if legacy:
+        for f in legacy:
+            f.unlink()
+        LAST_SEEN_PATH.unlink(missing_ok=True)
+        print(f"Migrated frame buffer: dropped {len(legacy)} legacy overlaid frame(s).")
+
+    # Emergency hold / release handling happens BEFORE we even log in.
+    hold_cfg = _read_json(HOLD_PATH, {})
+    excl = load_exclusions()
+    if hold_cfg.get("hold"):
+        run_hold(hold_cfg, excl, now)
+        return
+    if excl.get("active_since"):
+        since = parse_when(excl["active_since"]) or now
+        excl["ranges"].append({"from": iso_z(since), "to": iso_z(now), "note": "camera hold"})
+        excl["active_since"] = None
+        save_exclusions(excl)
+        print(f"Hold released: excluding {iso_z(since)} -> {iso_z(now)} from all published media.")
+    ranges = excl["ranges"]
+    purge_excluded_frames(ranges)
+
     if not USERNAME or not PASSWORD:
         print(
             "SPYPOINT_USERNAME / SPYPOINT_PASSWORD are not set. "
@@ -566,9 +763,6 @@ def main():
             file=sys.stderr,
         )
         sys.exit(1)
-
-    FRAME_BUFFER_DIR.mkdir(exist_ok=True)
-    LATEST_PHOTO_PATH.parent.mkdir(exist_ok=True)
 
     client = spypoint.Client(USERNAME, PASSWORD)
 
@@ -606,7 +800,7 @@ def main():
     # catch up on. 100 covers a full ~8-hour outage with a little margin to
     # spare. (Raised from 48 on 2026-10-01 when the capture interval was
     # tightened from 10 min to 5 min -- 48 only covered ~4 hours at the new
-    # rate. The 6-hour timelapse window itself is enforced separately in
+    # rate. The 10-hour timelapse window itself is enforced separately in
     # prune_old_frames() by each frame's real timestamp, not by this fetch
     # limit -- frames persist across runs in the cached buffer.)
     photos = client.photos(cameras=[camera], limit=100)
@@ -617,7 +811,13 @@ def main():
     # Oldest first -- with scheduled ("X times per day") cellular sync, several
     # queued photos can land on Spypoint's server in a single batch, so more
     # than one photo can be new since our last poll.
-    photos_asc = sorted(photos, key=lambda p: getattr(p, "date", ""))
+    photos_all_asc = sorted(photos, key=lambda p: getattr(p, "date", ""))
+    latest_any = photos_all_asc[-1]
+    # Anything captured inside a held/excluded time range is never published.
+    photos_asc = [p for p in photos_all_asc if not is_excluded(parse_photo_date(p, fallback=now), ranges)]
+    if not photos_asc:
+        print("Every returned photo falls in an excluded range; nothing to publish.", file=sys.stderr)
+        sys.exit(0)
     latest = photos_asc[-1]
 
     sync_daily_archive(photos_asc)
@@ -631,15 +831,16 @@ def main():
     last_seen_id = LAST_SEEN_PATH.read_text().strip() if LAST_SEEN_PATH.exists() else None
 
     if last_seen_id is None:
-        new_photos = photos_asc
+        new_photos = photos_all_asc
     else:
-        seen_ids = [p.id for p in photos_asc]
+        seen_ids = [p.id for p in photos_all_asc]
         if last_seen_id in seen_ids:
-            new_photos = photos_asc[seen_ids.index(last_seen_id) + 1:]
+            new_photos = photos_all_asc[seen_ids.index(last_seen_id) + 1:]
         else:
             # Last-seen photo aged out of the API's returned window (a long
             # gap between runs) -- best effort, take everything we were handed.
-            new_photos = photos_asc
+            new_photos = photos_all_asc
+    new_photos = [p for p in new_photos if not is_excluded(parse_photo_date(p, fallback=now), ranges)]
 
     now = datetime.now(timezone.utc)
     temp_f = camera_status.get("temperature_f") if camera_status else None
@@ -651,11 +852,10 @@ def main():
         for photo in new_photos:
             capture_time = parse_photo_date(photo, fallback=now)
             photo_url = photo.url("large")
-            frame_path = FRAME_BUFFER_DIR / f"{capture_time.timestamp():.0f}.jpg"
-            download(photo_url, frame_path)
-            apply_photo_overlay(frame_path, capture_time, temp_f)
+            frame_path = RAW_DIR / f"{capture_time.timestamp():.0f}.jpg"
+            download(photo_url, frame_path)  # raw; the overlay is rendered at build time
             print(f"Downloaded new photo {photo.id} captured {getattr(photo, 'date', '?')}")
-        LAST_SEEN_PATH.write_text(latest.id)
+        LAST_SEEN_PATH.write_text(latest_any.id)
     else:
         print(f"No new photo since last run (still {latest.id}); refreshing timelapse only.")
 
@@ -666,9 +866,7 @@ def main():
     # this makes the site self-healing if a prior run downloaded a frame but
     # failed before publishing it (e.g. a git error), rather than getting
     # stuck with no photo until the camera's next real capture.
-    newest_frames = sorted(FRAME_BUFFER_DIR.glob("*.jpg"), key=lambda f: float(f.stem))
-    if newest_frames:
-        shutil.copyfile(newest_frames[-1], LATEST_PHOTO_PATH)
+    publish_latest(temp_f)
 
     METADATA_PATH.write_text(
         json.dumps(
@@ -677,9 +875,12 @@ def main():
                 "photo_date": getattr(latest, "date", None),
                 "photo_tag": photo_tag,
                 "source": "SPYPOINT Flex-S-Dark (unofficial API)",
+                "hold": False,
                 "timelapse_window_hours": TIMELAPSE_WINDOW_HOURS,
+                "timelapse_loop_seconds": TIMELAPSE_LOOP_SECONDS,
                 "timelapse_frame_count": frame_count,
                 "timelapse_available": built,
+                "timelapse_updated": now.strftime("%Y-%m-%dT%H:%M:%SZ") if built else None,
                 "camera_status": camera_status,
             },
             indent=2,

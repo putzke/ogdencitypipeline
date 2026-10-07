@@ -1,0 +1,5 @@
+{
+  "_help": "EMERGENCY HOLD. To take the construction-camera photo and timelapse video down immediately, change \"hold\" to true and commit this file (GitHub: pencil icon > edit > Commit changes). The site updates within a few minutes. To resume, change it back to false and commit. Everything captured while on hold is permanently skipped. OPTIONAL: set \"exclude_from\" to an earlier time (e.g. \"2026-10-08T14:20:00-06:00\", or just \"2026-10-08T14:20:00\" for Mountain time) to also skip footage from BEFORE you flipped the switch.",
+  "hold": false,
+  "exclude_from": null
+}
