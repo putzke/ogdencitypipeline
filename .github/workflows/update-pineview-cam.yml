@@ -31,6 +31,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          # Always start from the newest main, not the commit this run was
+          # queued on: with several triggers (schedule, manual, hold-switch
+          # push) a queued run could otherwise check out a stale commit and
+          # hit a rebase conflict on the media files when it pushes.
+          ref: main
           # Push with a real PAT instead of the default GITHUB_TOKEN.
           # GitHub does not let commits pushed with the default token
           # trigger other workflows (anti-recursion protection), which
