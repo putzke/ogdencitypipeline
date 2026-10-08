@@ -1098,25 +1098,17 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   }
   .nav-links a.nav-press-btn:hover { background: var(--canyon-rust); animation: none; }
 
-  /* ── CONSTRUCTION CAMERA PILL — draws the eye to the new feed ── */
+  /* ── CONSTRUCTION CAMERA PILL ── */
   .cam-feed-pill {
     background: rgba(26,69,96,0.05);
     color: var(--water-dark);
     border: 1px solid rgba(26,69,96,0.25);
-    animation: camFeedPulse 2.4s ease-in-out infinite;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
   }
   .cam-feed-pill:hover {
-    animation-play-state: paused;
     background: var(--canyon-rust);
     color: white;
     border-color: var(--canyon-rust);
-  }
-  @keyframes camFeedPulse {
-    0%, 100% { background: rgba(26,69,96,0.05); color: var(--water-dark); border-color: rgba(26,69,96,0.25); box-shadow: 0 0 0 0 rgba(139,74,43,0.35); }
-    50% { background: var(--canyon-rust); color: white; border-color: var(--canyon-rust); box-shadow: 0 0 0 6px rgba(139,74,43,0); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .cam-feed-pill { animation: none; }
   }
   .nav-press-li { position: relative; }
   .nav-badge {
@@ -2058,13 +2050,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <!-- Action buttons row -->
     <div style="display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:24px;flex-wrap:wrap;">
       <a href="files/Pineview_Construction_Camera.html" target="_blank" rel="noopener" class="cam-feed-pill" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:8px 16px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">
-        📷 Construction Site Feed/Timelapse <span style="font-size:0.65rem;background:white;color:var(--canyon-rust);padding:2px 8px;border-radius:10px;margin-left:2px;vertical-align:middle;">NEW</span>
+        📷 <span data-i18n="cam_btn">Construction Camera</span> <span style="font-size:0.65rem;background:white;color:var(--canyon-rust);padding:2px 8px;border-radius:10px;margin-left:2px;vertical-align:middle;">NEW</span>
       </a>
       <a href="files/Pineview_HD_Photos.html" target="_blank" rel="noopener" id="hdGalleryBtn" style="display:inline-flex;align-items:center;gap:6px;background:rgba(26,69,96,0.05);color:var(--water-dark);text-decoration:none;padding:8px 16px;border-radius:20px;border:1px solid rgba(26,69,96,0.25);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(26,69,96,0.12)';this.style.borderColor='rgba(26,69,96,0.45)'" onmouseout="this.style.background='rgba(26,69,96,0.05)';this.style.borderColor='rgba(26,69,96,0.25)'" data-i18n="hd_gallery_btn">
         📸 Full-HD Site Photos <span id="hdGalleryBadge" style="display:none;font-size:0.65rem;background:var(--canyon-rust);color:white;padding:2px 8px;border-radius:10px;margin-left:2px;vertical-align:middle;"></span>
-      </a>
-      <a href="files/Pineview-Satellite_View_SEPTEMBER_15_2026.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:rgba(26,69,96,0.05);color:var(--water-dark);text-decoration:none;padding:8px 16px;border-radius:20px;border:1px solid rgba(26,69,96,0.25);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(26,69,96,0.12)';this.style.borderColor='rgba(26,69,96,0.45)'" onmouseout="this.style.background='rgba(26,69,96,0.05)';this.style.borderColor='rgba(26,69,96,0.25)'" data-i18n="sat_thumb_2">
-        🛰️ Simulated Satellite View — Sept 15, 2026
       </a>
       <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(26,69,96,0.05);color:var(--water-dark);padding:8px 16px;border-radius:20px;border:1px solid rgba(26,69,96,0.25);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">
         <span data-i18n="pano_label">🔭 360° Panorama:</span>
@@ -2074,42 +2063,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         <span style="opacity:0.35;font-weight:400;">|</span>
         <a href="https://pano.seihds.com/processed/SLC/Ogden/PineviewPI/06Oct26_09-32PM/AJ032.htm" target="_blank" rel="noopener" style="color:var(--water-dark);text-decoration:underline;text-underline-offset:2px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.65'" onmouseout="this.style.opacity='1'" data-i18n="pano_date_3">Oct 6</a>
       </span>
+      <a href="https://www.youtube.com/watch?v=ymUWv_ctobM" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:rgba(26,69,96,0.05);color:var(--water-dark);text-decoration:none;padding:8px 16px;border-radius:20px;border:1px solid rgba(26,69,96,0.25);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(26,69,96,0.12)';this.style.borderColor='rgba(26,69,96,0.45)'" onmouseout="this.style.background='rgba(26,69,96,0.05)';this.style.borderColor='rgba(26,69,96,0.25)'" data-i18n="drone_btn">🚁 Drone Fly-over: Oct 6</a>
     </div>
-
-    <div id="camMiniStatus" style="text-align:center;font-family:'Open Sans',sans-serif;font-size:0.78rem;color:var(--text-mid);opacity:0.85;margin-top:-14px;margin-bottom:24px;">
-      📷 <span id="camMiniText">Loading camera status…</span>
-    </div>
-    <script>
-    (function() {
-      var el = document.getElementById('camMiniText');
-      if (!el) return;
-      function timeAgo(iso) {
-        var mins = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
-        if (mins < 1) return 'moments ago';
-        if (mins === 1) return '1 min ago';
-        if (mins < 60) return mins + ' min ago';
-        var hrs = Math.round(mins / 60);
-        return hrs === 1 ? '1 hr ago' : hrs + ' hrs ago';
-      }
-      function refresh() {
-        fetch('pineview_cam.json?v=' + Date.now())
-          .then(function(r) { return r.json(); })
-          .then(function(d) {
-            if (d.hold) { el.textContent = 'Camera temporarily offline'; return; }
-            var parts = [];
-            var cs = d.camera_status;
-            if (cs && cs.temperature_f != null) parts.push('🌡️ ' + cs.temperature_f + '°F');
-            if (d.updated) parts.push('Updated ' + timeAgo(d.updated));
-            el.textContent = parts.length ? parts.join(' · ') : 'Live feed available';
-          })
-          .catch(function() {
-            el.textContent = 'Live feed available';
-          });
-      }
-      refresh();
-      setInterval(refresh, 60000);
-    })();
-    </script>
 
     <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px;padding:14px 18px;background:var(--sky);border-radius:6px;border-left:4px solid var(--water-blue);">
       <p style="font-size:0.88rem;color:var(--text-mid);line-height:1.7;margin:0;flex:1;min-width:240px;" data-i18n-html="pr_media_contact">
@@ -3572,8 +3527,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     driver_notice_usfs: { en: 'Forest Service project', es: 'Proyecto del Servicio Forestal' },
     driver_notice_link: { en: 'Project Details →', es: 'Detalles del Proyecto →' },
 
-    // Satellite banner
-    sat_thumb_2: { en: '🛰️ Simulated Satellite View — Sept 15, 2026', es: '🛰️ Vista Satelital Simulada — 15 sep de 2026' },
 
     // Pineview Clean-Up Day notice (remove after Sept 26, 2026)
     cleanup_title: { en: 'Thank You, Volunteers! Pineview Shoreline Clean-Up a Success', es: '¡Gracias, Voluntarios! Limpieza de la Orilla de Pineview, Todo un Éxito' },
@@ -3677,6 +3630,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 
     // Panorama
     pano_label: { en: '🔭 360° Panorama:', es: '🔭 Panorama 360°:' },
+    drone_btn: { en: '🚁 Drone Fly-over: Oct 6', es: '🚁 Sobrevuelo con dron: 6 oct' },
+    cam_btn: { en: 'Construction Camera', es: 'Cámara de construcción' },
     pano_date_1: { en: 'Aug 28', es: '28 de ago' },
     pano_date_2: { en: 'Sept 19', es: '19 de sep' },
     pano_date_3: { en: 'Oct 10', es: '10 de oct' },
