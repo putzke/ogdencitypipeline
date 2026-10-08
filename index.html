@@ -2052,9 +2052,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       <a href="files/Pineview_Construction_Camera.html" target="_blank" rel="noopener" class="cam-feed-pill" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:8px 16px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">
         📷 <span data-i18n="cam_btn">Construction Camera</span> <span style="font-size:0.65rem;background:white;color:var(--canyon-rust);padding:2px 8px;border-radius:10px;margin-left:2px;vertical-align:middle;">NEW</span>
       </a>
-      <a href="files/Pineview_HD_Photos.html" target="_blank" rel="noopener" id="hdGalleryBtn" style="display:inline-flex;align-items:center;gap:6px;background:rgba(26,69,96,0.05);color:var(--water-dark);text-decoration:none;padding:8px 16px;border-radius:20px;border:1px solid rgba(26,69,96,0.25);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(26,69,96,0.12)';this.style.borderColor='rgba(26,69,96,0.45)'" onmouseout="this.style.background='rgba(26,69,96,0.05)';this.style.borderColor='rgba(26,69,96,0.25)'" data-i18n="hd_gallery_btn">
-        📸 Full-HD Site Photos <span id="hdGalleryBadge" style="display:none;font-size:0.65rem;background:var(--canyon-rust);color:white;padding:2px 8px;border-radius:10px;margin-left:2px;vertical-align:middle;"></span>
-      </a>
       <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(26,69,96,0.05);color:var(--water-dark);padding:8px 16px;border-radius:20px;border:1px solid rgba(26,69,96,0.25);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">
         <span data-i18n="pano_label">🔭 360° Panorama:</span>
         <a href="https://pano.seihds.com/processed/SLC/Ogden/PineviewPI/29Aug26_12-18AM/AE149.htm" target="_blank" rel="noopener" style="color:var(--water-dark);text-decoration:underline;text-underline-offset:2px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.65'" onmouseout="this.style.opacity='1'" data-i18n="pano_date_1">Aug 28</a>
@@ -3680,8 +3677,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     // Nav callout badge
     nav_badge_schedule: { en: 'Schedule Published', es: 'Calendario Publicado' },
 
-    // Full-HD photo gallery (Pineview Crossing)
-    hd_gallery_btn: { en: '📸 Full-HD Site Photos', es: '📸 Fotos del Sitio en Full-HD' }
   };
 
   let currentLang = 'en';
@@ -3872,22 +3867,6 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(function(e) {
       document.getElementById('elevVal').textContent = 'Data unavailable';
     });
-})();
-</script>
-<script>
-(function() {
-  var badge = document.getElementById('hdGalleryBadge');
-  if (!badge) return;
-  fetch('pineview_cam_hd.json?v=' + Date.now())
-    .then(function(r) { return r.ok ? r.json() : null; })
-    .then(function(data) {
-      var count = (data && Array.isArray(data.photos)) ? data.photos.length : 0;
-      if (count > 0) {
-        badge.textContent = count;
-        badge.style.display = 'inline';
-      }
-    })
-    .catch(function() { /* badge just stays hidden */ });
 })();
 </script>
 </body>
