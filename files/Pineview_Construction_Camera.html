@@ -220,32 +220,33 @@
   }
   .stat-strip {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     border-bottom: 1px solid rgba(196,168,130,0.3);
   }
   .stat-chip {
-    flex: 1;
-    min-width: 100px;
+    flex: 1 1 0;
+    min-width: 0;
     text-align: center;
-    padding: 14px 8px;
+    padding: 6px 2px;
     border-right: 1px solid rgba(196,168,130,0.3);
   }
   .stat-chip:last-child { border-right: none; }
   .stat-value {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.55rem;
+    font-size: 1.05rem;
     font-weight: 800;
     color: var(--water-dark);
     line-height: 1.1;
   }
   .stat-label {
-    font-size: 0.66rem;
+    font-size: clamp(0.46rem, 1.9vw, 0.6rem);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.02em;
     color: var(--text-mid);
     opacity: 0.7;
-    margin-top: 3px;
+    margin-top: 2px;
+    white-space: nowrap;
   }
   .status-row {
     padding: 12px 20px;
@@ -307,10 +308,6 @@
       <span class="tool-hint" id="camToolHint">Tip: click the photo to view it full screen.</span>
     </div>
     <div class="stat-strip" id="camStatStrip" style="display:none;">
-      <div class="stat-chip">
-        <div class="stat-value" id="statTemp">--</div>
-        <div class="stat-label">🌡️ Temp</div>
-      </div>
       <div class="stat-chip">
         <div class="stat-value" id="statBattery">--</div>
         <div class="stat-label">🔋 Lit-22</div>
@@ -547,7 +544,6 @@
         var stripEl = $('camStatStrip');
         if (cs && !onHold) {
           stripEl.style.display = 'flex';
-          $('statTemp').textContent = (cs.temperature_f != null) ? cs.temperature_f + '°F' : '—';
           var battery = cs.power && cs.power.battery;
           $('statBattery').textContent = (battery && battery.pct != null) ? battery.pct + '%' : '—';
           var external = cs.power && cs.power.external;
