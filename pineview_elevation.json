@@ -1,73 +1,73 @@
 {
-  "updated": "2026-10-08T19:12:43Z",
+  "updated": "2026-10-09T18:43:18Z",
   "source": "USBR Water Operations 40-Day Dataset",
   "source_url": "https://www.usbr.gov/rsvrWater/rsv40Day.html?siteid=946&reservoirtype=Reservoir",
   "source_short": "USBR",
   "fallback_used": false,
   "target_elevation": 4835.0,
   "current": {
-    "date": "30-Sep-2026",
-    "elevation_ft": 4829.8,
-    "storage_af": 1311,
-    "inflow_cfs": 84,
-    "release_cfs": 7
+    "date": "08-Oct-2026",
+    "elevation_ft": 4830.8,
+    "storage_af": 1646,
+    "inflow_cfs": 9,
+    "release_cfs": 9
   },
   "trends": {
-    "daily_change_ft": 0.5,
-    "avg_7day_drop_ft": 0.11,
-    "remaining_to_target_ft": -5.2,
-    "est_days_to_target": -47,
+    "daily_change_ft": 0.0,
+    "avg_7day_drop_ft": -0.11,
+    "remaining_to_target_ft": -4.2,
+    "est_days_to_target": null,
     "drawdown_progress_pct": 100
   },
   "recent_history": [
     {
-      "date": "30-Sep-2026",
-      "elevation": 4829.8,
-      "storage_af": 1311,
-      "inflow_cfs": 84,
-      "release_cfs": 7
+      "date": "08-Oct-2026",
+      "elevation": 4830.8,
+      "storage_af": 1646,
+      "inflow_cfs": 9,
+      "release_cfs": 9
     },
     {
-      "date": "29-Sep-2026",
-      "elevation": 4829.3,
-      "storage_af": 1158,
-      "inflow_cfs": 51,
-      "release_cfs": 7
+      "date": "07-Oct-2026",
+      "elevation": 4830.8,
+      "storage_af": 1646,
+      "inflow_cfs": 9,
+      "release_cfs": 9
     },
     {
-      "date": "28-Sep-2026",
-      "elevation": 4829.0,
-      "storage_af": 1072,
-      "inflow_cfs": 31,
-      "release_cfs": 60
+      "date": "06-Oct-2026",
+      "elevation": 4830.8,
+      "storage_af": 1646,
+      "inflow_cfs": 9,
+      "release_cfs": 9
     },
     {
-      "date": "27-Sep-2026",
-      "elevation": 4829.2,
-      "storage_af": 1129,
-      "inflow_cfs": 0,
-      "release_cfs": 60
+      "date": "05-Oct-2026",
+      "elevation": 4830.8,
+      "storage_af": 1646,
+      "inflow_cfs": 61,
+      "release_cfs": 9
     },
     {
-      "date": "26-Sep-2026",
-      "elevation": 4829.6,
-      "storage_af": 1249,
-      "inflow_cfs": 0,
-      "release_cfs": 64
+      "date": "04-Oct-2026",
+      "elevation": 4830.5,
+      "storage_af": 1542,
+      "inflow_cfs": 26,
+      "release_cfs": 9
     },
     {
-      "date": "25-Sep-2026",
-      "elevation": 4830.0,
-      "storage_af": 1376,
-      "inflow_cfs": 11,
-      "release_cfs": 61
+      "date": "03-Oct-2026",
+      "elevation": 4830.4,
+      "storage_af": 1508,
+      "inflow_cfs": 44,
+      "release_cfs": 10
     },
     {
-      "date": "24-Sep-2026",
-      "elevation": 4830.3,
-      "storage_af": 1475,
-      "inflow_cfs": 16,
-      "release_cfs": 67
+      "date": "02-Oct-2026",
+      "elevation": 4830.2,
+      "storage_af": 1441,
+      "inflow_cfs": 42,
+      "release_cfs": 9
     }
   ]
 }
