@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-10T09:48:43Z",
+  "updated": "2026-10-10T17:20:05Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -7,79 +7,79 @@
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
     "as_of_date": "2026-10-10",
-    "last_24h_in": 0.4,
-    "last_7d_in": 0.4
+    "last_24h_in": 0.13,
+    "last_7d_in": 0.13
   },
   "forecast": [
     {
       "date": "2026-10-10",
-      "hi_f": 70,
-      "lo_f": 61,
-      "precip_in": 0.4,
-      "precip_prob_pct": 43,
-      "weathercode": 81,
-      "label": "Rain showers",
-      "icon": "\ud83c\udf26\ufe0f"
+      "hi_f": 74,
+      "lo_f": 63,
+      "precip_in": 0.13,
+      "precip_prob_pct": 35,
+      "weathercode": 63,
+      "label": "Rain",
+      "icon": "\ud83c\udf27\ufe0f"
     },
     {
       "date": "2026-10-11",
-      "hi_f": 66,
+      "hi_f": 67,
       "lo_f": 53,
-      "precip_in": 0.55,
-      "precip_prob_pct": 98,
+      "precip_in": 0.56,
+      "precip_prob_pct": 89,
       "weathercode": 63,
       "label": "Rain",
       "icon": "\ud83c\udf27\ufe0f"
     },
     {
       "date": "2026-10-12",
-      "hi_f": 61,
-      "lo_f": 50,
-      "precip_in": 0.9,
-      "precip_prob_pct": 97,
-      "weathercode": 81,
-      "label": "Rain showers",
-      "icon": "\ud83c\udf26\ufe0f"
+      "hi_f": 59,
+      "lo_f": 49,
+      "precip_in": 0.65,
+      "precip_prob_pct": 98,
+      "weathercode": 63,
+      "label": "Rain",
+      "icon": "\ud83c\udf27\ufe0f"
     },
     {
       "date": "2026-10-13",
-      "hi_f": 63,
-      "lo_f": 46,
-      "precip_in": 0.48,
-      "precip_prob_pct": 80,
-      "weathercode": 81,
-      "label": "Rain showers",
-      "icon": "\ud83c\udf26\ufe0f"
-    },
-    {
-      "date": "2026-10-14",
-      "hi_f": 53,
+      "hi_f": 51,
       "lo_f": 43,
-      "precip_in": 0.49,
-      "precip_prob_pct": 74,
+      "precip_in": 0.46,
+      "precip_prob_pct": 86,
       "weathercode": 80,
       "label": "Rain showers",
       "icon": "\ud83c\udf26\ufe0f"
     },
     {
-      "date": "2026-10-15",
-      "hi_f": 59,
-      "lo_f": 44,
-      "precip_in": 0.0,
-      "precip_prob_pct": 28,
-      "weathercode": 2,
-      "label": "Partly cloudy",
-      "icon": "\u26c5"
+      "date": "2026-10-14",
+      "hi_f": 51,
+      "lo_f": 41,
+      "precip_in": 0.04,
+      "precip_prob_pct": 67,
+      "weathercode": 51,
+      "label": "Light drizzle",
+      "icon": "\ud83c\udf26\ufe0f"
     },
     {
-      "date": "2026-10-16",
-      "hi_f": 62,
-      "lo_f": 44,
+      "date": "2026-10-15",
+      "hi_f": 59,
+      "lo_f": 41,
       "precip_in": 0.0,
-      "precip_prob_pct": 2,
+      "precip_prob_pct": 18,
       "weathercode": 1,
       "label": "Mostly clear",
       "icon": "\ud83c\udf24\ufe0f"
+    },
+    {
+      "date": "2026-10-16",
+      "hi_f": 67,
+      "lo_f": 45,
+      "precip_in": 0.0,
+      "precip_prob_pct": 6,
+      "weathercode": 0,
+      "label": "Clear",
+      "icon": "\u2600\ufe0f"
     }
   ]
 }
