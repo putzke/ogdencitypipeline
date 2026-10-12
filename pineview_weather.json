@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-11T19:33:11Z",
+  "updated": "2026-10-12T00:31:27Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -7,15 +7,15 @@
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
     "as_of_date": "2026-10-11",
-    "last_24h_in": 0.44,
-    "last_7d_in": 0.81
+    "last_24h_in": 0.46,
+    "last_7d_in": 0.83
   },
   "forecast": [
     {
       "date": "2026-10-11",
       "hi_f": 65,
-      "lo_f": 51,
-      "precip_in": 0.44,
+      "lo_f": 52,
+      "precip_in": 0.46,
       "precip_prob_pct": 96,
       "weathercode": 63,
       "label": "Rain",
@@ -23,48 +23,48 @@
     },
     {
       "date": "2026-10-12",
-      "hi_f": 53,
-      "lo_f": 48,
-      "precip_in": 0.57,
-      "precip_prob_pct": 71,
+      "hi_f": 55,
+      "lo_f": 47,
+      "precip_in": 0.81,
+      "precip_prob_pct": 73,
       "weathercode": 63,
       "label": "Rain",
       "icon": "\ud83c\udf27\ufe0f"
     },
     {
       "date": "2026-10-13",
-      "hi_f": 52,
-      "lo_f": 45,
-      "precip_in": 0.24,
-      "precip_prob_pct": 90,
+      "hi_f": 48,
+      "lo_f": 39,
+      "precip_in": 0.4,
+      "precip_prob_pct": 92,
       "weathercode": 61,
       "label": "Light rain",
       "icon": "\ud83c\udf27\ufe0f"
     },
     {
       "date": "2026-10-14",
-      "hi_f": 55,
-      "lo_f": 44,
+      "hi_f": 52,
+      "lo_f": 34,
       "precip_in": 0.0,
-      "precip_prob_pct": 72,
-      "weathercode": 45,
-      "label": "Fog",
-      "icon": "\ud83c\udf2b\ufe0f"
+      "precip_prob_pct": 76,
+      "weathercode": 0,
+      "label": "Clear",
+      "icon": "\u2600\ufe0f"
     },
     {
       "date": "2026-10-15",
-      "hi_f": 64,
+      "hi_f": 62,
       "lo_f": 41,
       "precip_in": 0.0,
-      "precip_prob_pct": 18,
+      "precip_prob_pct": 24,
       "weathercode": 0,
       "label": "Clear",
       "icon": "\u2600\ufe0f"
     },
     {
       "date": "2026-10-16",
-      "hi_f": 66,
-      "lo_f": 46,
+      "hi_f": 65,
+      "lo_f": 45,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 0,
@@ -74,12 +74,12 @@
     {
       "date": "2026-10-17",
       "hi_f": 67,
-      "lo_f": 49,
+      "lo_f": 48,
       "precip_in": 0.0,
       "precip_prob_pct": 1,
-      "weathercode": 0,
-      "label": "Clear",
-      "icon": "\u2600\ufe0f"
+      "weathercode": 1,
+      "label": "Mostly clear",
+      "icon": "\ud83c\udf24\ufe0f"
     }
   ]
 }
