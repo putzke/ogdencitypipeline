@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-14T21:31:15Z",
-  "photo_date": "2026-10-14T21:29:22.367Z",
+  "updated": "2026-10-14T21:46:08Z",
+  "photo_date": "2026-10-14T21:44:21.855Z",
   "photo_tag": "day",
   "source": "SPYPOINT Flex-S-Dark (unofficial API)",
   "hold": false,
@@ -8,9 +8,9 @@
   "timelapse_loop_seconds": 12,
   "timelapse_frame_count": 120,
   "timelapse_available": true,
-  "timelapse_updated": "2026-10-14T21:31:15Z",
+  "timelapse_updated": "2026-10-14T21:46:08Z",
   "camera_status": {
-    "temperature_f": 54,
+    "temperature_f": 55,
     "power": {
       "battery": {
         "pct": 64,
@@ -29,6 +29,6 @@
       "pct": 100,
       "level": "high"
     },
-    "status_updated": "2026-10-14T15:29:17.000Z"
+    "status_updated": "2026-10-14T15:44:17.000Z"
   }
 }
