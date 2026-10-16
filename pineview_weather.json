@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-16T16:37:36Z",
+  "updated": "2026-10-16T21:06:06Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,7 +13,7 @@
   "forecast": [
     {
       "date": "2026-10-16",
-      "hi_f": 64,
+      "hi_f": 65,
       "lo_f": 38,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
@@ -24,7 +24,7 @@
     {
       "date": "2026-10-17",
       "hi_f": 68,
-      "lo_f": 41,
+      "lo_f": 42,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 0,
@@ -34,7 +34,7 @@
     {
       "date": "2026-10-18",
       "hi_f": 67,
-      "lo_f": 47,
+      "lo_f": 43,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 0,
@@ -43,42 +43,42 @@
     },
     {
       "date": "2026-10-19",
-      "hi_f": 67,
+      "hi_f": 66,
       "lo_f": 49,
       "precip_in": 0.0,
       "precip_prob_pct": 4,
-      "weathercode": 0,
-      "label": "Clear",
-      "icon": "\u2600\ufe0f"
+      "weathercode": 2,
+      "label": "Partly cloudy",
+      "icon": "\u26c5"
     },
     {
       "date": "2026-10-20",
       "hi_f": 65,
-      "lo_f": 53,
-      "precip_in": 0.0,
-      "precip_prob_pct": 29,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
+      "lo_f": 50,
+      "precip_in": 0.21,
+      "precip_prob_pct": 31,
+      "weathercode": 81,
+      "label": "Rain showers",
+      "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-10-21",
-      "hi_f": 67,
-      "lo_f": 51,
-      "precip_in": 0.02,
-      "precip_prob_pct": 28,
+      "hi_f": 64,
+      "lo_f": 49,
+      "precip_in": 0.01,
+      "precip_prob_pct": 31,
       "weathercode": 51,
       "label": "Light drizzle",
       "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-10-22",
-      "hi_f": 67,
-      "lo_f": 47,
-      "precip_in": 0.97,
-      "precip_prob_pct": 63,
-      "weathercode": 81,
-      "label": "Rain showers",
+      "hi_f": 52,
+      "lo_f": 44,
+      "precip_in": 0.46,
+      "precip_prob_pct": 68,
+      "weathercode": 55,
+      "label": "Heavy drizzle",
       "icon": "\ud83c\udf26\ufe0f"
     }
   ]
