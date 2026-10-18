@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17T23:07:09Z",
+  "updated": "2026-10-18T04:30:14Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,7 +13,7 @@
   "forecast": [
     {
       "date": "2026-10-17",
-      "hi_f": 67,
+      "hi_f": 68,
       "lo_f": 35,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
@@ -27,14 +27,14 @@
       "lo_f": 45,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
-      "weathercode": 1,
-      "label": "Mostly clear",
-      "icon": "\ud83c\udf24\ufe0f"
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-19",
-      "hi_f": 68,
-      "lo_f": 45,
+      "hi_f": 67,
+      "lo_f": 44,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 3,
@@ -43,39 +43,39 @@
     },
     {
       "date": "2026-10-20",
-      "hi_f": 67,
+      "hi_f": 65,
       "lo_f": 53,
-      "precip_in": 0.0,
-      "precip_prob_pct": 15,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
+      "precip_in": 0.02,
+      "precip_prob_pct": 18,
+      "weathercode": 51,
+      "label": "Light drizzle",
+      "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-10-21",
       "hi_f": 71,
       "lo_f": 50,
       "precip_in": 0.0,
-      "precip_prob_pct": 5,
-      "weathercode": 51,
-      "label": "Light drizzle",
-      "icon": "\ud83c\udf26\ufe0f"
+      "precip_prob_pct": 2,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-22",
-      "hi_f": 71,
-      "lo_f": 52,
-      "precip_in": 0.11,
-      "precip_prob_pct": 68,
-      "weathercode": 53,
-      "label": "Drizzle",
+      "hi_f": 69,
+      "lo_f": 53,
+      "precip_in": 0.26,
+      "precip_prob_pct": 66,
+      "weathercode": 80,
+      "label": "Rain showers",
       "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-10-23",
       "hi_f": 53,
-      "lo_f": 45,
-      "precip_in": 1.51,
+      "lo_f": 42,
+      "precip_in": 1.3,
       "precip_prob_pct": 85,
       "weathercode": 81,
       "label": "Rain showers",
