@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-20T22:30:15Z",
+  "updated": "2026-10-20T22:31:02Z",
   "photo_date": "2026-10-20T22:29:23.360Z",
   "photo_tag": "day",
   "source": "SPYPOINT Flex-S-Dark (unofficial API)",
@@ -8,7 +8,7 @@
   "timelapse_loop_seconds": 12,
   "timelapse_frame_count": 106,
   "timelapse_available": true,
-  "timelapse_updated": "2026-10-20T22:30:15Z",
+  "timelapse_updated": "2026-10-20T22:31:02Z",
   "camera_status": {
     "temperature_f": 68,
     "power": {
