@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-22T11:49:36Z",
+  "updated": "2026-10-22T17:09:05Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -7,26 +7,26 @@
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
     "as_of_date": "2026-10-22",
-    "last_24h_in": 0.47,
-    "last_7d_in": 0.5
+    "last_24h_in": 0.57,
+    "last_7d_in": 0.59
   },
   "forecast": [
     {
       "date": "2026-10-22",
       "hi_f": 64,
-      "lo_f": 49,
-      "precip_in": 0.47,
-      "precip_prob_pct": 50,
+      "lo_f": 50,
+      "precip_in": 0.57,
+      "precip_prob_pct": 34,
       "weathercode": 63,
       "label": "Rain",
       "icon": "\ud83c\udf27\ufe0f"
     },
     {
       "date": "2026-10-23",
-      "hi_f": 54,
-      "lo_f": 45,
-      "precip_in": 0.09,
-      "precip_prob_pct": 73,
+      "hi_f": 53,
+      "lo_f": 43,
+      "precip_in": 0.37,
+      "precip_prob_pct": 81,
       "weathercode": 63,
       "label": "Rain",
       "icon": "\ud83c\udf27\ufe0f"
@@ -34,9 +34,9 @@
     {
       "date": "2026-10-24",
       "hi_f": 55,
-      "lo_f": 45,
+      "lo_f": 42,
       "precip_in": 0.0,
-      "precip_prob_pct": 47,
+      "precip_prob_pct": 45,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -46,7 +46,7 @@
       "hi_f": 58,
       "lo_f": 42,
       "precip_in": 0.0,
-      "precip_prob_pct": 23,
+      "precip_prob_pct": 8,
       "weathercode": 0,
       "label": "Clear",
       "icon": "\u2600\ufe0f"
@@ -56,7 +56,7 @@
       "hi_f": 62,
       "lo_f": 44,
       "precip_in": 0.0,
-      "precip_prob_pct": 1,
+      "precip_prob_pct": 4,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -66,7 +66,7 @@
       "hi_f": 64,
       "lo_f": 48,
       "precip_in": 0.0,
-      "precip_prob_pct": 21,
+      "precip_prob_pct": 25,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -76,7 +76,7 @@
       "hi_f": 59,
       "lo_f": 46,
       "precip_in": 0.0,
-      "precip_prob_pct": 5,
+      "precip_prob_pct": 6,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
