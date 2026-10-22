@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-22T17:09:05Z",
+  "updated": "2026-10-22T21:34:07Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -7,56 +7,56 @@
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
     "as_of_date": "2026-10-22",
-    "last_24h_in": 0.57,
-    "last_7d_in": 0.59
+    "last_24h_in": 0.44,
+    "last_7d_in": 0.47
   },
   "forecast": [
     {
       "date": "2026-10-22",
-      "hi_f": 64,
+      "hi_f": 65,
       "lo_f": 50,
-      "precip_in": 0.57,
-      "precip_prob_pct": 34,
-      "weathercode": 63,
-      "label": "Rain",
+      "precip_in": 0.44,
+      "precip_prob_pct": 45,
+      "weathercode": 61,
+      "label": "Light rain",
       "icon": "\ud83c\udf27\ufe0f"
     },
     {
       "date": "2026-10-23",
-      "hi_f": 53,
-      "lo_f": 43,
-      "precip_in": 0.37,
-      "precip_prob_pct": 81,
+      "hi_f": 52,
+      "lo_f": 44,
+      "precip_in": 0.18,
+      "precip_prob_pct": 89,
       "weathercode": 63,
       "label": "Rain",
       "icon": "\ud83c\udf27\ufe0f"
     },
     {
       "date": "2026-10-24",
-      "hi_f": 55,
-      "lo_f": 42,
+      "hi_f": 59,
+      "lo_f": 41,
       "precip_in": 0.0,
-      "precip_prob_pct": 45,
+      "precip_prob_pct": 2,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-25",
-      "hi_f": 58,
-      "lo_f": 42,
+      "hi_f": 59,
+      "lo_f": 43,
       "precip_in": 0.0,
-      "precip_prob_pct": 8,
-      "weathercode": 0,
-      "label": "Clear",
-      "icon": "\u2600\ufe0f"
+      "precip_prob_pct": 11,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-26",
-      "hi_f": 62,
-      "lo_f": 44,
+      "hi_f": 60,
+      "lo_f": 43,
       "precip_in": 0.0,
-      "precip_prob_pct": 4,
+      "precip_prob_pct": 6,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -73,10 +73,10 @@
     },
     {
       "date": "2026-10-28",
-      "hi_f": 59,
-      "lo_f": 46,
+      "hi_f": 63,
+      "lo_f": 48,
       "precip_in": 0.0,
-      "precip_prob_pct": 6,
+      "precip_prob_pct": 7,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
