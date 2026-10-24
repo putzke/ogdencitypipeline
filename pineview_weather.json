@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24T15:55:30Z",
+  "updated": "2026-10-24T20:47:12Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -23,10 +23,10 @@
     },
     {
       "date": "2026-10-25",
-      "hi_f": 56,
-      "lo_f": 40,
+      "hi_f": 57,
+      "lo_f": 38,
       "precip_in": 0.0,
-      "precip_prob_pct": 5,
+      "precip_prob_pct": 4,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -34,7 +34,37 @@
     {
       "date": "2026-10-26",
       "hi_f": 60,
-      "lo_f": 42,
+      "lo_f": 38,
+      "precip_in": 0.0,
+      "precip_prob_pct": 46,
+      "weathercode": 51,
+      "label": "Light drizzle",
+      "icon": "\ud83c\udf26\ufe0f"
+    },
+    {
+      "date": "2026-10-27",
+      "hi_f": 50,
+      "lo_f": 38,
+      "precip_in": 0.41,
+      "precip_prob_pct": 71,
+      "weathercode": 81,
+      "label": "Rain showers",
+      "icon": "\ud83c\udf26\ufe0f"
+    },
+    {
+      "date": "2026-10-28",
+      "hi_f": 55,
+      "lo_f": 40,
+      "precip_in": 0.0,
+      "precip_prob_pct": 12,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
+    },
+    {
+      "date": "2026-10-29",
+      "hi_f": 60,
+      "lo_f": 44,
       "precip_in": 0.0,
       "precip_prob_pct": 25,
       "weathercode": 3,
@@ -42,44 +72,14 @@
       "icon": "\u2601\ufe0f"
     },
     {
-      "date": "2026-10-27",
-      "hi_f": 50,
-      "lo_f": 39,
-      "precip_in": 0.4,
-      "precip_prob_pct": 66,
-      "weathercode": 81,
+      "date": "2026-10-30",
+      "hi_f": 58,
+      "lo_f": 41,
+      "precip_in": 0.38,
+      "precip_prob_pct": 60,
+      "weathercode": 80,
       "label": "Rain showers",
       "icon": "\ud83c\udf26\ufe0f"
-    },
-    {
-      "date": "2026-10-28",
-      "hi_f": 56,
-      "lo_f": 42,
-      "precip_in": 0.0,
-      "precip_prob_pct": 11,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
-    },
-    {
-      "date": "2026-10-29",
-      "hi_f": 62,
-      "lo_f": 44,
-      "precip_in": 0.0,
-      "precip_prob_pct": 18,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
-    },
-    {
-      "date": "2026-10-30",
-      "hi_f": 60,
-      "lo_f": 39,
-      "precip_in": 0.8,
-      "precip_prob_pct": 53,
-      "weathercode": 63,
-      "label": "Rain",
-      "icon": "\ud83c\udf27\ufe0f"
     }
   ]
 }
