@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24T20:47:12Z",
+  "updated": "2026-10-24T23:12:30Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,7 +13,7 @@
   "forecast": [
     {
       "date": "2026-10-24",
-      "hi_f": 58,
+      "hi_f": 57,
       "lo_f": 39,
       "precip_in": 0.0,
       "precip_prob_pct": 1,
