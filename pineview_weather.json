@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-25T11:25:04Z",
+  "updated": "2026-10-25T16:15:34Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,20 +13,20 @@
   "forecast": [
     {
       "date": "2026-10-25",
-      "hi_f": 57,
-      "lo_f": 39,
+      "hi_f": 56,
+      "lo_f": 35,
       "precip_in": 0.0,
-      "precip_prob_pct": 2,
-      "weathercode": 0,
-      "label": "Clear",
-      "icon": "\u2600\ufe0f"
+      "precip_prob_pct": 3,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-26",
       "hi_f": 61,
       "lo_f": 38,
       "precip_in": 0.0,
-      "precip_prob_pct": 37,
+      "precip_prob_pct": 29,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -35,18 +35,18 @@
       "date": "2026-10-27",
       "hi_f": 54,
       "lo_f": 40,
-      "precip_in": 0.04,
-      "precip_prob_pct": 61,
-      "weathercode": 51,
-      "label": "Light drizzle",
-      "icon": "\ud83c\udf26\ufe0f"
+      "precip_in": 0.0,
+      "precip_prob_pct": 58,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-28",
       "hi_f": 56,
       "lo_f": 43,
       "precip_in": 0.03,
-      "precip_prob_pct": 5,
+      "precip_prob_pct": 16,
       "weathercode": 53,
       "label": "Drizzle",
       "icon": "\ud83c\udf26\ufe0f"
@@ -56,7 +56,7 @@
       "hi_f": 60,
       "lo_f": 42,
       "precip_in": 0.0,
-      "precip_prob_pct": 16,
+      "precip_prob_pct": 22,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -66,7 +66,7 @@
       "hi_f": 61,
       "lo_f": 46,
       "precip_in": 0.0,
-      "precip_prob_pct": 63,
+      "precip_prob_pct": 53,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -76,7 +76,7 @@
       "hi_f": 57,
       "lo_f": 44,
       "precip_in": 0.02,
-      "precip_prob_pct": 65,
+      "precip_prob_pct": 56,
       "weathercode": 51,
       "label": "Light drizzle",
       "icon": "\ud83c\udf26\ufe0f"
