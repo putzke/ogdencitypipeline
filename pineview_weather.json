@@ -1,84 +1,84 @@
 {
-  "updated": "2026-10-25T04:38:46Z",
+  "updated": "2026-10-25T11:25:04Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
   "source": "Open-Meteo forecast model (estimate, not a rain gauge reading)",
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
-    "as_of_date": "2026-10-24",
+    "as_of_date": "2026-10-25",
     "last_24h_in": 0.0,
     "last_7d_in": 0.43
   },
   "forecast": [
     {
-      "date": "2026-10-24",
-      "hi_f": 58,
+      "date": "2026-10-25",
+      "hi_f": 57,
       "lo_f": 39,
       "precip_in": 0.0,
-      "precip_prob_pct": 1,
-      "weathercode": 2,
-      "label": "Partly cloudy",
-      "icon": "\u26c5"
-    },
-    {
-      "date": "2026-10-25",
-      "hi_f": 56,
-      "lo_f": 37,
-      "precip_in": 0.0,
-      "precip_prob_pct": 5,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
+      "precip_prob_pct": 2,
+      "weathercode": 0,
+      "label": "Clear",
+      "icon": "\u2600\ufe0f"
     },
     {
       "date": "2026-10-26",
       "hi_f": 61,
       "lo_f": 38,
       "precip_in": 0.0,
-      "precip_prob_pct": 43,
-      "weathercode": 51,
-      "label": "Light drizzle",
-      "icon": "\ud83c\udf26\ufe0f"
+      "precip_prob_pct": 37,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-27",
-      "hi_f": 53,
+      "hi_f": 54,
       "lo_f": 40,
-      "precip_in": 0.02,
-      "precip_prob_pct": 58,
+      "precip_in": 0.04,
+      "precip_prob_pct": 61,
       "weathercode": 51,
       "label": "Light drizzle",
       "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-10-28",
-      "hi_f": 57,
+      "hi_f": 56,
       "lo_f": 43,
-      "precip_in": 0.0,
+      "precip_in": 0.03,
       "precip_prob_pct": 5,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
+      "weathercode": 53,
+      "label": "Drizzle",
+      "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-10-29",
       "hi_f": 60,
-      "lo_f": 43,
+      "lo_f": 42,
       "precip_in": 0.0,
-      "precip_prob_pct": 20,
+      "precip_prob_pct": 16,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-30",
-      "hi_f": 60,
+      "hi_f": 61,
       "lo_f": 46,
-      "precip_in": 0.07,
+      "precip_in": 0.0,
+      "precip_prob_pct": 63,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
+    },
+    {
+      "date": "2026-10-31",
+      "hi_f": 57,
+      "lo_f": 44,
+      "precip_in": 0.02,
       "precip_prob_pct": 65,
-      "weathercode": 53,
-      "label": "Drizzle",
+      "weathercode": 51,
+      "label": "Light drizzle",
       "icon": "\ud83c\udf26\ufe0f"
     }
   ]
