@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T22:12:20Z",
+  "updated": "2026-10-28T05:39:43Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,28 +13,28 @@
   "forecast": [
     {
       "date": "2026-10-27",
-      "hi_f": 58,
+      "hi_f": 59,
       "lo_f": 37,
       "precip_in": 0.0,
-      "precip_prob_pct": 28,
+      "precip_prob_pct": 27,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-28",
-      "hi_f": 57,
-      "lo_f": 38,
+      "hi_f": 58,
+      "lo_f": 40,
       "precip_in": 0.0,
-      "precip_prob_pct": 28,
+      "precip_prob_pct": 27,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-10-29",
-      "hi_f": 61,
-      "lo_f": 42,
+      "hi_f": 63,
+      "lo_f": 39,
       "precip_in": 0.0,
       "precip_prob_pct": 1,
       "weathercode": 3,
@@ -53,33 +53,33 @@
     },
     {
       "date": "2026-10-31",
-      "hi_f": 60,
-      "lo_f": 46,
+      "hi_f": 62,
+      "lo_f": 47,
       "precip_in": 0.0,
-      "precip_prob_pct": 49,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
+      "precip_prob_pct": 60,
+      "weathercode": 51,
+      "label": "Light drizzle",
+      "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-11-01",
-      "hi_f": 52,
-      "lo_f": 36,
-      "precip_in": 1.41,
-      "precip_prob_pct": 84,
-      "weathercode": 81,
-      "label": "Rain showers",
-      "icon": "\ud83c\udf26\ufe0f"
+      "hi_f": 51,
+      "lo_f": 34,
+      "precip_in": 1.94,
+      "precip_prob_pct": 81,
+      "weathercode": 82,
+      "label": "Heavy showers",
+      "icon": "\u26c8\ufe0f"
     },
     {
       "date": "2026-11-02",
-      "hi_f": 42,
-      "lo_f": 32,
-      "precip_in": 0.08,
-      "precip_prob_pct": 72,
-      "weathercode": 80,
-      "label": "Rain showers",
-      "icon": "\ud83c\udf26\ufe0f"
+      "hi_f": 44,
+      "lo_f": 33,
+      "precip_in": 0.0,
+      "precip_prob_pct": 65,
+      "weathercode": 0,
+      "label": "Clear",
+      "icon": "\u2600\ufe0f"
     }
   ]
 }
