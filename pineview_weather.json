@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28T20:15:01Z",
+  "updated": "2026-10-29T00:54:12Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,7 +13,7 @@
   "forecast": [
     {
       "date": "2026-10-28",
-      "hi_f": 58,
+      "hi_f": 59,
       "lo_f": 39,
       "precip_in": 0.0,
       "precip_prob_pct": 31,
@@ -24,7 +24,7 @@
     {
       "date": "2026-10-29",
       "hi_f": 63,
-      "lo_f": 40,
+      "lo_f": 39,
       "precip_in": 0.0,
       "precip_prob_pct": 2,
       "weathercode": 3,
@@ -34,7 +34,7 @@
     {
       "date": "2026-10-30",
       "hi_f": 63,
-      "lo_f": 47,
+      "lo_f": 46,
       "precip_in": 0.0,
       "precip_prob_pct": 22,
       "weathercode": 3,
@@ -43,40 +43,40 @@
     },
     {
       "date": "2026-10-31",
-      "hi_f": 61,
-      "lo_f": 47,
-      "precip_in": 0.01,
+      "hi_f": 55,
+      "lo_f": 48,
+      "precip_in": 0.14,
       "precip_prob_pct": 36,
-      "weathercode": 51,
-      "label": "Light drizzle",
+      "weathercode": 80,
+      "label": "Rain showers",
       "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-11-01",
-      "hi_f": 52,
-      "lo_f": 33,
-      "precip_in": 1.17,
-      "precip_prob_pct": 86,
+      "hi_f": 50,
+      "lo_f": 36,
+      "precip_in": 0.93,
+      "precip_prob_pct": 90,
       "weathercode": 81,
       "label": "Rain showers",
       "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-11-02",
-      "hi_f": 43,
-      "lo_f": 31,
-      "precip_in": 0.0,
-      "precip_prob_pct": 74,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
+      "hi_f": 44,
+      "lo_f": 30,
+      "precip_in": 0.05,
+      "precip_prob_pct": 80,
+      "weathercode": 51,
+      "label": "Light drizzle",
+      "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-11-03",
       "hi_f": 50,
-      "lo_f": 33,
+      "lo_f": 32,
       "precip_in": 0.0,
-      "precip_prob_pct": 13,
+      "precip_prob_pct": 11,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
