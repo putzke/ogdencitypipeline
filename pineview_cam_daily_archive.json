@@ -209,6 +209,12 @@
       "captured_local": "2026-10-31 13:02:54 MDT",
       "captured_utc": "2026-10-31T19:02:54.522Z",
       "file": "images/daily-archive/2026-10-31.jpg"
+    },
+    {
+      "date": "2026-11-01",
+      "captured_local": "2026-11-01 13:02:54 MST",
+      "captured_utc": "2026-11-01T20:02:54.179Z",
+      "file": "images/daily-archive/2026-11-01.jpg"
     }
   ]
 }
