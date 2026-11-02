@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T11:00:22Z",
+  "updated": "2026-11-02T21:41:45Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,7 +13,7 @@
   "forecast": [
     {
       "date": "2026-11-02",
-      "hi_f": 49,
+      "hi_f": 48,
       "lo_f": 36,
       "precip_in": 0.0,
       "precip_prob_pct": 61,
@@ -26,45 +26,35 @@
       "hi_f": 51,
       "lo_f": 34,
       "precip_in": 0.0,
-      "precip_prob_pct": 0,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
-    },
-    {
-      "date": "2026-11-04",
-      "hi_f": 48,
-      "lo_f": 40,
-      "precip_in": 0.02,
-      "precip_prob_pct": 42,
-      "weathercode": 51,
-      "label": "Light drizzle",
-      "icon": "\ud83c\udf26\ufe0f"
-    },
-    {
-      "date": "2026-11-05",
-      "hi_f": 52,
-      "lo_f": 38,
-      "precip_in": 0.0,
       "precip_prob_pct": 1,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
-      "date": "2026-11-06",
-      "hi_f": 52,
-      "lo_f": 38,
+      "date": "2026-11-04",
+      "hi_f": 50,
+      "lo_f": 40,
       "precip_in": 0.0,
-      "precip_prob_pct": 6,
+      "precip_prob_pct": 36,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
-      "date": "2026-11-07",
-      "hi_f": 56,
-      "lo_f": 41,
+      "date": "2026-11-05",
+      "hi_f": 51,
+      "lo_f": 37,
+      "precip_in": 0.0,
+      "precip_prob_pct": 2,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
+    },
+    {
+      "date": "2026-11-06",
+      "hi_f": 53,
+      "lo_f": 38,
       "precip_in": 0.0,
       "precip_prob_pct": 3,
       "weathercode": 3,
@@ -72,14 +62,24 @@
       "icon": "\u2601\ufe0f"
     },
     {
+      "date": "2026-11-07",
+      "hi_f": 56,
+      "lo_f": 40,
+      "precip_in": 0.0,
+      "precip_prob_pct": 2,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
+    },
+    {
       "date": "2026-11-08",
       "hi_f": 58,
-      "lo_f": 41,
+      "lo_f": 42,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
-      "weathercode": 0,
-      "label": "Clear",
-      "icon": "\u2600\ufe0f"
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     }
   ]
 }
