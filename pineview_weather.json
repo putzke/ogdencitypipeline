@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T21:41:45Z",
+  "updated": "2026-11-03T06:44:44Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,8 +13,8 @@
   "forecast": [
     {
       "date": "2026-11-02",
-      "hi_f": 48,
-      "lo_f": 36,
+      "hi_f": 49,
+      "lo_f": 37,
       "precip_in": 0.0,
       "precip_prob_pct": 61,
       "weathercode": 3,
@@ -23,7 +23,7 @@
     },
     {
       "date": "2026-11-03",
-      "hi_f": 51,
+      "hi_f": 53,
       "lo_f": 34,
       "precip_in": 0.0,
       "precip_prob_pct": 1,
@@ -33,28 +33,18 @@
     },
     {
       "date": "2026-11-04",
-      "hi_f": 50,
-      "lo_f": 40,
-      "precip_in": 0.0,
-      "precip_prob_pct": 36,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
+      "hi_f": 49,
+      "lo_f": 39,
+      "precip_in": 0.07,
+      "precip_prob_pct": 32,
+      "weathercode": 63,
+      "label": "Rain",
+      "icon": "\ud83c\udf27\ufe0f"
     },
     {
       "date": "2026-11-05",
-      "hi_f": 51,
+      "hi_f": 50,
       "lo_f": 37,
-      "precip_in": 0.0,
-      "precip_prob_pct": 2,
-      "weathercode": 3,
-      "label": "Overcast",
-      "icon": "\u2601\ufe0f"
-    },
-    {
-      "date": "2026-11-06",
-      "hi_f": 53,
-      "lo_f": 38,
       "precip_in": 0.0,
       "precip_prob_pct": 3,
       "weathercode": 3,
@@ -62,18 +52,28 @@
       "icon": "\u2601\ufe0f"
     },
     {
-      "date": "2026-11-07",
-      "hi_f": 56,
-      "lo_f": 40,
+      "date": "2026-11-06",
+      "hi_f": 53,
+      "lo_f": 37,
       "precip_in": 0.0,
       "precip_prob_pct": 2,
+      "weathercode": 0,
+      "label": "Clear",
+      "icon": "\u2600\ufe0f"
+    },
+    {
+      "date": "2026-11-07",
+      "hi_f": 56,
+      "lo_f": 37,
+      "precip_in": 0.0,
+      "precip_prob_pct": 0,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-11-08",
-      "hi_f": 58,
+      "hi_f": 59,
       "lo_f": 42,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
