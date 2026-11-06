@@ -38,6 +38,34 @@ jobs:
         with:
           # Upload entire repository
           path: '.'
+      # The camera bot pushes about every 15 minutes, so this deploy runs ~100
+      # times a day. Now and then GitHub Pages itself is slow ("syncing_files"
+      # past the default 10-minute wait) or refuses ("try again later"), and
+      # every one of those used to fail the run and send an email -- even
+      # though the next push 15 minutes later deploys the site anyway.
+      # So: wait up to 20 minutes, don't fail the run on a one-off deploy
+      # error, and fail (= email) only when the LIVE site is actually stale.
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+        continue-on-error: true
+        with:
+          timeout: 1200000
+
+      - name: Fail only if the live site has stopped updating
+        if: steps.deployment.outcome == 'failure'
+        env:
+          STALE_MINUTES: '90'
+        run: |
+          live=$(curl -fsSL --max-time 30 "https://ogdencitypipeline.com/pineview_cam.json?nocache=$(date +%s)" || true)
+          updated=$(printf '%s' "$live" | python3 -c "import json,sys; print(json.load(sys.stdin).get('updated',''))" 2>/dev/null || true)
+          if [ -z "$updated" ]; then
+            echo "::error::Deploy failed and the live site's pineview_cam.json could not be read."
+            exit 1
+          fi
+          age=$(( ( $(date -u +%s) - $(date -u -d "$updated" +%s) ) / 60 ))
+          if [ "$age" -gt "$STALE_MINUTES" ]; then
+            echo "::error::Deploy failed and the live site was last updated $age minutes ago ($updated)."
+            exit 1
+          fi
+          echo "::warning::GitHub Pages deploy failed this time, but the live site was updated $age minutes ago; the next push will redeploy."
