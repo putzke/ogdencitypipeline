@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08T17:55:09Z",
+  "updated": "2026-11-08T22:01:36Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -24,7 +24,7 @@
     {
       "date": "2026-11-09",
       "hi_f": 63,
-      "lo_f": 40,
+      "lo_f": 42,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 3,
@@ -76,7 +76,7 @@
       "hi_f": 59,
       "lo_f": 43,
       "precip_in": 0.0,
-      "precip_prob_pct": 6,
+      "precip_prob_pct": 11,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
