@@ -1634,7 +1634,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 
 <!-- LATEST NOTICE BAR -->
 <!-- Latest Notice bar. To hide when no notice is active, add the "hidden" attribute to the div below; to change the message, edit the latest_notice text in the translations table. -->
-<div id="latestNoticeBar" role="region" aria-label="Latest notice" style="background:var(--notice-amber);color:#fff;text-align:center;padding:8px 16px;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.04em;line-height:1.4;" data-i18n-html="latest_notice"><strong style="text-transform:uppercase;">Latest Notice:</strong> As early as Nov. 2, a quarter-mile one-lane closure on SR-39 in Ogden Canyon. Typical delays about 5 minutes. <a href="#phase4" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">View details &rarr;</a></div>
+<div id="latestNoticeBar" role="region" aria-label="Latest notices" style="background:var(--notice-amber);color:#fff;text-align:center;padding:8px 16px;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.04em;line-height:1.4;">
+  <div data-i18n-html="latest_notice"><strong style="text-transform:uppercase;">Latest Notice:</strong> As early as Nov. 2, a quarter-mile one-lane closure on SR-39 in Ogden Canyon. Typical delays about 5 minutes. <a href="#phase4" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">View details &rarr;</a></div>
+  <div data-i18n-html="latest_notice2" style="margin-top:4px;"><strong style="text-transform:uppercase;">Resident Notice:</strong> Possible slight water pressure reduction in Ogden Canyon, Nov. 9 &ndash; April 2027. <a href="#resident-notice" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">View details &rarr;</a></div>
+</div>
 <!-- END LATEST NOTICE BAR -->
 
 <!-- NAV -->
@@ -3216,6 +3219,45 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   </div>
 </section>
 
+<!-- RESIDENT NOTICE - POSSIBLE SLIGHT WATER PRESSURE REDUCTION -->
+<section id="resident-notice" aria-labelledby="resident-notice-title">
+  <div class="section-inner">
+    <p class="section-label" data-i18n="rn_label">Resident Notice</p>
+    <h2 class="section-title" id="resident-notice-title" data-i18n="rn_title">Possible Slight Water Pressure Reduction</h2>
+
+    <div class="ph4-banners">
+      <div class="ph4-ban start" data-i18n-html="rn_ban">Monday, November 9, 2026 &nbsp;through&nbsp; April 2027</div>
+      <div class="ph4-ban end"><span data-i18n="rn_ban2">Canyon residents only</span></div>
+    </div>
+
+    <p class="ph4-intro"><strong data-i18n="rn_dear">Dear Ogden Canyon Resident,</strong><br><br><span data-i18n="rn_intro">As work continues on the Ogden Canyon pipeline project, you may notice a slight reduction in water pressure at your home beginning Monday, November 9 and continuing through April 2027. This notice is being sent to canyon residents only.</span></p>
+
+    <div class="ph4-grid">
+      <div class="ph4-card">
+        <h3 data-i18n="rn_h">What to Expect</h3>
+        <ul>
+          <li><span class="ic" aria-hidden="true">&#127968;</span><span data-i18n-html="rn_e1"><strong>All canyon residents:</strong> A slight loss of pressure is possible at every home in the canyon.</span></li>
+          <li><span class="ic" aria-hidden="true">&#9968;&#65039;</span><span data-i18n-html="rn_e2"><strong>Elevation matters:</strong> Additional pressure loss will depend on how high your home sits above the 24-inch pipeline. The higher you are, the more you may notice it.</span></li>
+          <li><span class="ic" aria-hidden="true">&#128167;</span><span data-i18n-html="rn_e3"><strong>Homes without a pump:</strong> Residents who do not have a pump will experience the greatest loss.</span></li>
+          <li><span class="ic" aria-hidden="true">&#9989;</span><span data-i18n-html="rn_e4"><strong>Expected to be light:</strong> This is typically a low-demand period in the valley, so any pressure loss should be relatively light.</span></li>
+        </ul>
+      </div>
+      <div class="ph4-card">
+        <h3 data-i18n="rn_ch">Questions</h3>
+        <p style="font-size:.93rem;line-height:1.6;color:var(--text-mid);margin:0 0 14px;" data-i18n="rn_q">If you have questions or notice a change in your water pressure, please contact the project team. We appreciate your patience as this important work moves forward.</p>
+        <dl class="ph4-facts">
+          <dt data-i18n="rn_tel">Phone</dt>
+          <dd><a href="tel:8018388365" style="color:var(--water-dark);font-weight:600;">801-838-8365</a></dd>
+          <dt data-i18n="rn_mail">Email</dt>
+          <dd><a href="mailto:info@ogdencitypipeline.com" style="color:var(--water-dark);font-weight:600;">info@ogdencitypipeline.com</a></dd>
+          <dt data-i18n="rn_team_t">Project Team</dt>
+          <dd>Ogden Canyon 36-Inch Pipeline Project Team<br>Ogden City &nbsp;|&nbsp; Sunrise Engineering &nbsp;|&nbsp; Whitaker Construction</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="gallery" aria-labelledby="gallery-title">
   <div class="section-inner">
     <p class="section-label" data-i18n="label_photos">Construction Progress</p>
@@ -3638,6 +3680,23 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     notice_udwr:   { en: 'UDWR — Anglers Notice',          es: 'UDWR — Aviso para Pescadores' },
     notice_camera: { en: 'Construction Cam: (5min Updates)', es: 'Cámara de Construcción: (Actualizaciones cada 5 min)' },
     latest_notice: { en: '<strong style="text-transform:uppercase;">Latest Notice:</strong> As early as Nov. 2, a quarter-mile one-lane closure on SR-39 in Ogden Canyon. Typical delays about 5 minutes. <a href="#phase4" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">View details &rarr;</a>', es: '<strong style="text-transform:uppercase;">Último Aviso:</strong> Desde el 2 de nov., cierre de un carril de un cuarto de milla en la SR-39 en Ogden Canyon. Demoras típicas de unos 5 minutos. <a href="#phase4" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">Ver detalles &rarr;</a>' },
+    latest_notice2: { en: '<strong style="text-transform:uppercase;">Resident Notice:</strong> Possible slight water pressure reduction in Ogden Canyon, Nov. 9 &ndash; April 2027. <a href="#resident-notice" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">View details &rarr;</a>', es: '<strong style="text-transform:uppercase;">Aviso a Residentes:</strong> Posible ligera reducción de la presión del agua en Ogden Canyon, del 9 de nov. a abril de 2027. <a href="#resident-notice" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">Ver detalles &rarr;</a>' },
+    rn_label: { en: 'Resident Notice', es: 'Aviso a los Residentes' },
+    rn_title: { en: 'Possible Slight Water Pressure Reduction', es: 'Posible Ligera Reducción de la Presión del Agua' },
+    rn_ban: { en: 'Monday, November 9, 2026 &nbsp;through&nbsp; April 2027', es: 'Lunes 9 de noviembre de 2026 &nbsp;hasta&nbsp; abril de 2027' },
+    rn_ban2: { en: 'Canyon residents only', es: 'Solo para residentes del cañón' },
+    rn_dear: { en: 'Dear Ogden Canyon Resident,', es: 'Estimado residente de Ogden Canyon:' },
+    rn_intro: { en: 'As work continues on the Ogden Canyon pipeline project, you may notice a slight reduction in water pressure at your home beginning Monday, November 9 and continuing through April 2027. This notice is being sent to canyon residents only.', es: 'A medida que continúan los trabajos del proyecto de la tubería de Ogden Canyon, es posible que usted note una ligera reducción en la presión del agua en su hogar a partir del lunes 9 de noviembre y hasta abril de 2027. Este aviso se envía únicamente a los residentes del cañón.' },
+    rn_h: { en: 'What to Expect', es: 'Qué Esperar' },
+    rn_e1: { en: '<strong>All canyon residents:</strong> A slight loss of pressure is possible at every home in the canyon.', es: '<strong>Todos los residentes del cañón:</strong> Es posible una ligera pérdida de presión en todos los hogares del cañón.' },
+    rn_e2: { en: '<strong>Elevation matters:</strong> Additional pressure loss will depend on how high your home sits above the 24-inch pipeline. The higher you are, the more you may notice it.', es: '<strong>La elevación importa:</strong> La pérdida de presión adicional dependerá de qué tan alto esté su hogar sobre la tubería de 24 pulgadas. Mientras más alto esté, más podría notarlo.' },
+    rn_e3: { en: '<strong>Homes without a pump:</strong> Residents who do not have a pump will experience the greatest loss.', es: '<strong>Hogares sin bomba:</strong> Los residentes que no tienen una bomba experimentarán la mayor pérdida.' },
+    rn_e4: { en: '<strong>Expected to be light:</strong> This is typically a low-demand period in the valley, so any pressure loss should be relatively light.', es: '<strong>Se espera que sea leve:</strong> Normalmente este es un período de baja demanda en el valle, por lo que cualquier pérdida de presión debería ser relativamente leve.' },
+    rn_ch: { en: 'Questions', es: 'Preguntas' },
+    rn_q: { en: 'If you have questions or notice a change in your water pressure, please contact the project team. We appreciate your patience as this important work moves forward.', es: 'Si tiene preguntas o nota un cambio en la presión del agua, comuníquese con el equipo del proyecto. Agradecemos su paciencia mientras avanza este importante trabajo.' },
+    rn_tel: { en: 'Phone', es: 'Teléfono' },
+    rn_mail: { en: 'Email', es: 'Correo electrónico' },
+    rn_team_t: { en: 'Project Team', es: 'Equipo del Proyecto' },
     driver_notice_usfs: { en: 'Forest Service project', es: 'Proyecto del Servicio Forestal' },
     driver_notice_link: { en: 'Project Details →', es: 'Detalles del Proyecto →' },
 
