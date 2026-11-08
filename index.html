@@ -858,6 +858,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     white-space: nowrap;
     letter-spacing: 0.02em;
   }
+  .sch-flag { display:inline-block; font-family:'Barlow Condensed',sans-serif; font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#1A4560; background:#ffc04d; border-radius:999px; padding:1px 8px; line-height:1.5; white-space:nowrap; }
   .sch-chip-complete { background: rgba(74,124,89,0.25); color: #7ee89a; border: 1px solid rgba(74,124,89,0.4); }
   .sch-chip-active   { background: rgba(212,130,10,0.25); color: #ffc04d; border: 1px solid rgba(212,130,10,0.4); }
   .sch-chip-upcoming { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.15); }
@@ -1782,7 +1783,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <div class="phase-badges">
       <span class="badge badge-complete"><span class="badge-dot" aria-hidden="true"></span data-i18n="phase_1">Phase 1 — Complete</span>
       <span class="badge badge-complete"><span class="badge-dot" aria-hidden="true"></span data-i18n="phase_2">Phase 2 — Complete</span>
-      <span class="badge badge-active"><span class="badge-dot" aria-hidden="true"></span data-i18n="phase_eb">East Bench — Active (May–Nov 2026)</span>
+      <span class="badge badge-active"><span class="badge-dot" aria-hidden="true"></span data-i18n="phase_eb">East Bench — Active (May–Dec 2026)</span>
       <span class="badge badge-active"><span class="badge-dot" aria-hidden="true"></span data-i18n="phase_pw">Pineview Reservoir Crossing — Active</span>
       <span class="badge badge-upcoming"><span class="badge-dot" aria-hidden="true"></span data-i18n="phase_p4">Phase 4 — Canyon: Lane Closure Starts Nov. 2*</span>
     </div>
@@ -1963,9 +1964,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         <span class="sch-status sch-complete" data-i18n="sch_s_complete">Complete</span>
       </div>
       <div class="schedule-item">
-        <div><span class="sch-chip sch-chip-active">May 1 – Nov 1, 2026</span></div>
+        <div><span class="sch-chip sch-chip-active">May 1 – Dec 1, 2026</span></div>
         <div>
-          <p class="sch-title" data-i18n="sch_t3">East Bench Pipeline Replacement</p>
+          <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;"><p class="sch-title" data-i18n="sch_t3">East Bench Pipeline Replacement</p><span class="sch-flag" data-i18n="sch_flag_updated">Updated</span></div>
           <p class="sch-desc" data-i18n="sch_d3">Two-phase pipeline replacement along the east bench to water storage tanks at 22nd South. The 22nd South Trailhead parking lot is closed to vehicles during this period. Foot traffic is safely accommodated; specific trail sections along active work areas will be closed and posted as work progresses.</p>
         </div>
         <span class="sch-status sch-active" data-i18n="sch_s_active">Active Now</span>
@@ -3673,7 +3674,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     // Phase bar badges
     phase_1:     { en: 'Phase 1 — Complete',                           es: 'Fase 1 — Completada' },
     phase_2:     { en: 'Phase 2 — Complete',                           es: 'Fase 2 — Completada' },
-    phase_eb:    { en: 'East Bench — Active (May–Nov 2026)',           es: 'East Bench — Activa (May–Nov 2026)' },
+    phase_eb:    { en: 'East Bench — Active (May–Dec 2026)',           es: 'East Bench — Activa (May–Dec 2026)' },
     phase_pw:    { en: 'Pineview Reservoir Crossing — Active',      es: 'Cruce de la Presa Pineview — Activo' },
 
     // Notice bar
@@ -3753,6 +3754,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     sch_d9: { en: 'Pipeline replacement and installation from 342 Ogden Canyon to Pipe Bridge near Alaskan Inn — Additional details TBA.', es: 'Reemplazo e instalación de tubería desde 342 Ogden Canyon hasta el puente de tubería cerca de Alaskan Inn — Detalles adicionales por confirmar.' },
     sch_d10: { en: 'Full pipeline replacement through Ogden Canyon anticipated to be complete.', es: 'Se anticipa la finalización del reemplazo completo de la tubería a través de Ogden Canyon.' },
     sch_s_complete: { en: 'Complete', es: 'Completado' },
+    sch_flag_updated: { en: 'Updated', es: 'Actualizado' },
     sch_s_active: { en: 'Active Now', es: 'Activo Ahora' },
     sch_s_ongoing: { en: 'Ongoing', es: 'En Curso' },
     sch_s_upcoming: { en: 'Upcoming', es: 'Próximo' },
