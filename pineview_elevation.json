@@ -1,12 +1,12 @@
 {
-  "updated": "2026-11-11T20:05:26Z",
+  "updated": "2026-11-12T20:42:54Z",
   "source": "USBR Water Operations 40-Day Dataset",
   "source_url": "https://www.usbr.gov/rsvrWater/rsv40Day.html?siteid=946&reservoirtype=Reservoir",
   "source_short": "USBR",
   "fallback_used": false,
   "target_elevation": 4835.0,
   "current": {
-    "date": "05-Nov-2026",
+    "date": "11-Nov-2026",
     "elevation_ft": 4832.9,
     "storage_af": 2447,
     "inflow_cfs": 76,
@@ -21,53 +21,53 @@
   },
   "recent_history": [
     {
+      "date": "11-Nov-2026",
+      "elevation": 4832.9,
+      "storage_af": 2447,
+      "inflow_cfs": 76,
+      "release_cfs": 76
+    },
+    {
+      "date": "10-Nov-2026",
+      "elevation": 4832.9,
+      "storage_af": 2447,
+      "inflow_cfs": 76,
+      "release_cfs": 76
+    },
+    {
+      "date": "09-Nov-2026",
+      "elevation": 4832.9,
+      "storage_af": 2447,
+      "inflow_cfs": 76,
+      "release_cfs": 76
+    },
+    {
+      "date": "08-Nov-2026",
+      "elevation": 4832.9,
+      "storage_af": 2447,
+      "inflow_cfs": 76,
+      "release_cfs": 76
+    },
+    {
+      "date": "07-Nov-2026",
+      "elevation": 4832.9,
+      "storage_af": 2447,
+      "inflow_cfs": 76,
+      "release_cfs": 76
+    },
+    {
+      "date": "06-Nov-2026",
+      "elevation": 4832.9,
+      "storage_af": 2447,
+      "inflow_cfs": 76,
+      "release_cfs": 76
+    },
+    {
       "date": "05-Nov-2026",
       "elevation": 4832.9,
       "storage_af": 2447,
       "inflow_cfs": 76,
       "release_cfs": 76
-    },
-    {
-      "date": "04-Nov-2026",
-      "elevation": 4832.9,
-      "storage_af": 2447,
-      "inflow_cfs": 76,
-      "release_cfs": 76
-    },
-    {
-      "date": "03-Nov-2026",
-      "elevation": 4832.9,
-      "storage_af": 2447,
-      "inflow_cfs": 76,
-      "release_cfs": 76
-    },
-    {
-      "date": "02-Nov-2026",
-      "elevation": 4832.9,
-      "storage_af": 2447,
-      "inflow_cfs": 76,
-      "release_cfs": 76
-    },
-    {
-      "date": "01-Nov-2026",
-      "elevation": 4832.9,
-      "storage_af": 2447,
-      "inflow_cfs": 88,
-      "release_cfs": 67
-    },
-    {
-      "date": "31-Oct-2026",
-      "elevation": 4832.8,
-      "storage_af": 2406,
-      "inflow_cfs": 56,
-      "release_cfs": 56
-    },
-    {
-      "date": "30-Oct-2026",
-      "elevation": 4832.8,
-      "storage_af": 2406,
-      "inflow_cfs": 28,
-      "release_cfs": 49
     }
   ]
 }
