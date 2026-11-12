@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11T17:06:05Z",
+  "updated": "2026-11-12T00:41:13Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,8 +13,8 @@
   "forecast": [
     {
       "date": "2026-11-11",
-      "hi_f": 59,
-      "lo_f": 31,
+      "hi_f": 60,
+      "lo_f": 30,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 0,
@@ -23,8 +23,8 @@
     },
     {
       "date": "2026-11-12",
-      "hi_f": 63,
-      "lo_f": 36,
+      "hi_f": 62,
+      "lo_f": 35,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 3,
@@ -34,9 +34,9 @@
     {
       "date": "2026-11-13",
       "hi_f": 60,
-      "lo_f": 45,
+      "lo_f": 42,
       "precip_in": 0.0,
-      "precip_prob_pct": 18,
+      "precip_prob_pct": 15,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -44,42 +44,42 @@
     {
       "date": "2026-11-14",
       "hi_f": 48,
-      "lo_f": 39,
-      "precip_in": 0.32,
-      "precip_prob_pct": 91,
-      "weathercode": 80,
+      "lo_f": 34,
+      "precip_in": 0.64,
+      "precip_prob_pct": 94,
+      "weathercode": 81,
       "label": "Rain showers",
       "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-11-15",
       "hi_f": 48,
-      "lo_f": 35,
+      "lo_f": 34,
       "precip_in": 0.0,
-      "precip_prob_pct": 5,
-      "weathercode": 45,
-      "label": "Fog",
-      "icon": "\ud83c\udf2b\ufe0f"
+      "precip_prob_pct": 3,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-11-16",
-      "hi_f": 54,
+      "hi_f": 55,
       "lo_f": 40,
       "precip_in": 0.0,
-      "precip_prob_pct": 20,
+      "precip_prob_pct": 18,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-11-17",
-      "hi_f": 56,
-      "lo_f": 41,
-      "precip_in": 0.02,
-      "precip_prob_pct": 75,
-      "weathercode": 51,
-      "label": "Light drizzle",
-      "icon": "\ud83c\udf26\ufe0f"
+      "hi_f": 57,
+      "lo_f": 42,
+      "precip_in": 0.0,
+      "precip_prob_pct": 67,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     }
   ]
 }
