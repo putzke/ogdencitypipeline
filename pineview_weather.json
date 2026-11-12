@@ -1,30 +1,20 @@
 {
-  "updated": "2026-11-12T00:41:13Z",
+  "updated": "2026-11-12T11:03:37Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
   "source": "Open-Meteo forecast model (estimate, not a rain gauge reading)",
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
-    "as_of_date": "2026-11-11",
+    "as_of_date": "2026-11-12",
     "last_24h_in": 0.0,
     "last_7d_in": 0.0
   },
   "forecast": [
     {
-      "date": "2026-11-11",
-      "hi_f": 60,
-      "lo_f": 30,
-      "precip_in": 0.0,
-      "precip_prob_pct": 0,
-      "weathercode": 0,
-      "label": "Clear",
-      "icon": "\u2600\ufe0f"
-    },
-    {
       "date": "2026-11-12",
-      "hi_f": 62,
-      "lo_f": 35,
+      "hi_f": 61,
+      "lo_f": 34,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 3,
@@ -33,19 +23,19 @@
     },
     {
       "date": "2026-11-13",
-      "hi_f": 60,
-      "lo_f": 42,
+      "hi_f": 62,
+      "lo_f": 41,
       "precip_in": 0.0,
-      "precip_prob_pct": 15,
+      "precip_prob_pct": 25,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-11-14",
-      "hi_f": 48,
+      "hi_f": 49,
       "lo_f": 34,
-      "precip_in": 0.64,
+      "precip_in": 0.62,
       "precip_prob_pct": 94,
       "weathercode": 81,
       "label": "Rain showers",
@@ -56,17 +46,17 @@
       "hi_f": 48,
       "lo_f": 34,
       "precip_in": 0.0,
-      "precip_prob_pct": 3,
+      "precip_prob_pct": 1,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-11-16",
-      "hi_f": 55,
-      "lo_f": 40,
+      "hi_f": 52,
+      "lo_f": 38,
       "precip_in": 0.0,
-      "precip_prob_pct": 18,
+      "precip_prob_pct": 13,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -74,12 +64,22 @@
     {
       "date": "2026-11-17",
       "hi_f": 57,
-      "lo_f": 42,
+      "lo_f": 41,
       "precip_in": 0.0,
-      "precip_prob_pct": 67,
+      "precip_prob_pct": 65,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
+    },
+    {
+      "date": "2026-11-18",
+      "hi_f": 44,
+      "lo_f": 38,
+      "precip_in": 0.71,
+      "precip_prob_pct": 60,
+      "weathercode": 61,
+      "label": "Light rain",
+      "icon": "\ud83c\udf27\ufe0f"
     }
   ]
 }
