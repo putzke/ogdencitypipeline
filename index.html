@@ -255,7 +255,7 @@
       "name": "How will this project affect recreation opportunities and access at Pineview?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Anticipated low water levels will gradually render all boat ramps inaccessible. Cemetery Point and Middle Inlet may close earlier than planned for the year. Anderson Cove is expected to remain open all year. Other fee free sites will not be affected, however access to water will be impacted by low water levels."
+        "text": "Anticipated low water levels will gradually render all boat ramps inaccessible. Latest projections by water managers show the Anderson Cove boat ramp being inaccessible around July 20th and the Cemetery Point boat ramp around mid-August. Fee sites including Cemetery Point and Middle Inlet may close earlier than planned for the year, while Anderson Cove camping and day use is expected to remain open all year. Other fee-free sites will not be affected, however access to water will be impacted by low water levels."
       }
     },
     {
@@ -264,14 +264,6 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "The project was reviewed by an interdisciplinary team of Forest Service resource specialists. As a result of coordination on the design criteria, any potential effects were minimized."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What recreation sites will be inaccessible as the water recedes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Fee sites including Cemetery Point and Middle Inlet may close earlier than anticipated based on the drawdown timeline. Anderson Cove is expected to remain open all year."
       }
     },
     {
@@ -335,7 +327,7 @@
       "name": "Will any boat ramp launches at Pineview Reservoir be affected by the project?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Anderson Cove and Cemetery Boat Launches will gradually become inaccessible as water levels recede. A full site closure for Port Ramp Boat Launch will remain in effect through 2026 to complete reconstruction of the site."
+        "text": "Anderson Cove and Cemetery Point boat launches will gradually become inaccessible as water levels recede. Latest projections by water managers show Anderson Cove boat ramp being inaccessible around July 20th. Anderson Cove camping and day use will remain open all year. Cemetery Point boat ramp is expected to become inaccessible mid-August. Cemetery Point is still expected to remain open for day use through mid-September. Personal watercraft that do not require a boat ramp for launch may still access the water from either of these locations. A full site closure for Port Ramp Boat Launch will remain in effect through 2026 to complete reconstruction of the site."
       }
     },
     {
@@ -2314,23 +2306,24 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
           <div style="font-size:0.78rem;font-weight:700;color:var(--canyon-rust);flex-shrink:0;white-space:nowrap;">View Data →</div>
         </a>
 
-        <a href="https://water.utah.gov/reservoirs/" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;gap:20px;background:var(--sky);border:1px solid #e8e0d6;border-left:4px solid var(--canyon-rust);border-radius:6px;padding:14px 18px;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)';this.style.transform='translateX(4px)'" onmouseout="this.style.boxShadow='none';this.style.transform='translateX(0)'">
+        <a href="https://wre-rapps.utah.gov/Reservoir/" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;gap:20px;background:var(--sky);border:1px solid #e8e0d6;border-left:4px solid var(--canyon-rust);border-radius:6px;padding:14px 18px;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)';this.style.transform='translateX(4px)'" onmouseout="this.style.boxShadow='none';this.style.transform='translateX(0)'">
           <div style="font-size:1.5rem;flex-shrink:0;">📊</div>
           <div style="flex:1;min-width:0;">
             <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.95rem;font-weight:700;text-transform:uppercase;color:var(--water-dark);margin-bottom:2px;">Pineview Water Levels vs. Other Reservoirs</div>
-            <div style="font-size:0.8rem;color:var(--text-mid);line-height:1.5;">Utah Division of Water Resources — Compare Pineview reservoir levels against other Utah reservoirs in context.</div>
+            <div style="font-size:0.8rem;color:var(--text-mid);line-height:1.5;">Utah Division of Water Resources — Interactive map of Utah reservoir conditions; compare Pineview against other Utah reservoirs.</div>
           </div>
           <div style="font-size:0.78rem;font-weight:700;color:var(--canyon-rust);flex-shrink:0;white-space:nowrap;">View Reservoir Levels →</div>
         </a>
 
-        <a href="https://www.usbr.gov/rsvrWater/faces/rsvr.xhtml?siteid=946" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;gap:20px;background:var(--sky);border:1px solid #e8e0d6;border-left:4px solid var(--canyon-rust);border-radius:6px;padding:14px 18px;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)';this.style.transform='translateX(4px)'" onmouseout="this.style.boxShadow='none';this.style.transform='translateX(0)'">
+        <!-- OFFLINE: usbr.gov RISE page returned "page not available" (Nov 2026). To restore: change this <div> back to <a href="(data-offline-href value)" target="_blank" rel="noopener">, remove the opacity/filter/pointer-events styles, and set the label back to "Generate Plot →". -->
+        <div aria-disabled="true" title="Temporarily unavailable" data-offline-href="https://www.usbr.gov/rsvrWater/faces/rsvr.xhtml?siteid=946" style="text-decoration:none;opacity:0.45;filter:grayscale(1);pointer-events:none;cursor:default;user-select:none;display:flex;align-items:center;gap:20px;background:var(--sky);border:1px solid #e8e0d6;border-left:4px solid var(--canyon-rust);border-radius:6px;padding:14px 18px;transition:box-shadow 0.2s,transform 0.2s;">
           <div style="font-size:1.5rem;flex-shrink:0;">📈</div>
           <div style="flex:1;min-width:0;">
             <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.95rem;font-weight:700;text-transform:uppercase;color:var(--water-dark);margin-bottom:2px;">Pineview Elevation — Historical Data</div>
             <div style="font-size:0.8rem;color:var(--text-mid);line-height:1.5;">Bureau of Reclamation RISE — Plot your own graph and download time series elevation data for Pineview Reservoir.</div>
           </div>
-          <div style="font-size:0.78rem;font-weight:700;color:var(--canyon-rust);flex-shrink:0;white-space:nowrap;">Generate Plot →</div>
-        </a>
+          <div style="font-size:0.78rem;font-weight:700;color:var(--canyon-rust);flex-shrink:0;white-space:nowrap;">Temporarily unavailable</div>
+        </div>
 
         <a href="https://www.usbr.gov/rsvrWater/rsv40Day.html?siteid=946&reservoirtype=Reservoir" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;gap:20px;background:var(--sky);border:1px solid #e8e0d6;border-left:4px solid var(--canyon-rust);border-radius:6px;padding:14px 18px;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)';this.style.transform='translateX(4px)'" onmouseout="this.style.boxShadow='none';this.style.transform='translateX(0)'">
           <div style="font-size:1.5rem;flex-shrink:0;">📅</div>
@@ -2760,14 +2753,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
           </div>
         </div>
 
-        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="recreation access pineview reservoir water levels boat ramp anderson cove cemetery point fee free">
+        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="recreation opportunities access pineview reservoir water levels boat ramp anderson cove cemetery point middle inlet fee free sites inaccessible recede">
           <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
             How will this project affect recreation opportunities and access at Pineview?
             <span class="qa-chevron">▼</span>
           </button>
           <div class="qa-answer">
-            <div class="qa-answer-text">Anticipated low water levels will gradually render all boat ramps inaccessible. Latest projections by water managers show Anderson Cove being inaccessible around July 20th. Cemetery Point is expected to close mid-August. Other fee-free sites will not be affected, however access to water will be impacted by low water levels.</div>
+            <div class="qa-answer-text">Anticipated low water levels will gradually render all boat ramps inaccessible. Latest projections by water managers show the Anderson Cove boat ramp being inaccessible around July 20th and the Cemetery Point boat ramp around mid-August. Fee sites including Cemetery Point and Middle Inlet may close earlier than planned for the year, while Anderson Cove camping and day use is expected to remain open all year. Other fee-free sites will not be affected, however access to water will be impacted by low water levels.</div>
             <div class="qa-contact direct">
               <div>
                 <div class="qa-contact-label">✅ Sunrise Engineering — Public Involvement Team</div>
@@ -2832,24 +2825,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
           </div>
         </div>
 
-        <div class="qa-card theme-3" data-theme="3" data-q="recreation opportunities access pineview boat ramps cemetery point middle inlet anderson cove" role="listitem">
-          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
-            <span class="qa-theme-dot"></span>
-            How will this project affect recreation opportunities and access at Pineview?
-            <span class="qa-chevron">▼</span>
-          </button>
-          <div class="qa-answer">
-            <div class="qa-answer-text">Anticipated low water levels will gradually render all boat ramps inaccessible. Cemetery Point and Middle Inlet may close earlier than planned for the year. Anderson Cove is expected to remain open all year. Other fee free sites will not be affected, however access to water will be impacted by low water levels.</div>
-            <div class="qa-contact direct">
-              <div>
-                <div class="qa-contact-label">✅ Sunrise Engineering — Public Involvement Team</div>
-                Our PI team will assist with your inquiry and direct you to the appropriate Ogden City Communications contact for press interviews.<br>
-                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="qa-card theme-3" data-theme="3" data-q="ecological concerns forest service sensitive species interdisciplinary design criteria effects minimized" role="listitem">
           <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
             <span class="qa-theme-dot"></span>
@@ -2867,36 +2842,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
             </div>
           </div>
         </div>
-
-        <div class="qa-card theme-3" data-theme="3" data-q="recreation sites inaccessible water recedes cemetery point middle inlet anderson cove fee sites" role="listitem">
-          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
-            <span class="qa-theme-dot"></span>
-            What recreation sites will be inaccessible as the water recedes?
-            <span class="qa-chevron">▼</span>
-          </button>
-          <div class="qa-answer">
-            <div class="qa-answer-text">Fee sites including Cemetery Point and Middle Inlet may close earlier than anticipated based on the drawdown timeline. Anderson Cove is expected to remain open all year.</div>
-            <div class="qa-contact direct">
-              <div>
-                <div class="qa-contact-label">✅ Sunrise Engineering — Public Involvement Team</div>
-                Our PI team will assist with your inquiry and direct you to the appropriate Ogden City Communications contact for press interviews.<br>
-                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      <!-- No results fallback -->
-      <div class="qa-no-results" id="qaNoResults">
-        <p>No matching questions found. Try different keywords, or contact our media representative directly.</p>
-        <div class="qa-fallback-card">
-          <strong>📞 Public Involvement Team — Sunrise Engineering</strong>
-          <a href="tel:8018388365">801-838-8365</a>
-          <a href="mailto:info@ogdencitypipeline.com" style="margin-top:4px;">info@ogdencitypipeline.com</a>
-          <a href="#" style="margin-top:4px;font-weight:400;color:var(--text-light);font-size:0.85rem;">We will direct you to the appropriate Ogden City contact</a>
-        </div>
-      </div>
-
 
         <div class="qa-card theme-1" role="listitem" data-theme="1" data-q="how long refill reservoir pipeline complete average snowpack runoff">
           <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
@@ -3068,24 +3013,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
           </button>
           <div class="qa-answer">
             <div class="qa-answer-text">Motorized vehicles are prohibited on the beach and lakebed at any time, including areas exposed due to receding water levels, per Code of Federal Regulations 261.13.</div>
-            <div class="qa-contact direct">
-              <div>
-                <div class="qa-contact-label">✅ Sunrise Engineering — Public Involvement Team</div>
-                Our PI team will assist with your inquiry and direct you to the appropriate Ogden City Communications contact for press interviews.<br>
-                <a href="tel:8018388365">801-838-8365</a> · <a href="mailto:info@ogdencitypipeline.com">info@ogdencitypipeline.com</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="qa-card theme-3" role="listitem" data-theme="3" data-q="boat ramp launch Pineview Reservoir Anderson Cove Cemetery Port Ramp closure water levels recede">
-          <button class="qa-question" onclick="toggleQA(this)" aria-expanded="false">
-            <span class="qa-theme-dot"></span>
-            Will any boat ramp launches at Pineview Reservoir be affected by the project?
-            <span class="qa-chevron">▼</span>
-          </button>
-          <div class="qa-answer">
-            <div class="qa-answer-text">Anderson Cove and Cemetery Boat Launches will gradually become inaccessible as water levels recede. A full site closure for Port Ramp Boat Launch will remain in effect through 2026 to complete reconstruction of the site.</div>
             <div class="qa-contact direct">
               <div>
                 <div class="qa-contact-label">✅ Sunrise Engineering — Public Involvement Team</div>
