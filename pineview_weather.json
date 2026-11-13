@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T19:53:02Z",
+  "updated": "2026-11-13T01:49:10Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,7 +13,7 @@
   "forecast": [
     {
       "date": "2026-11-12",
-      "hi_f": 59,
+      "hi_f": 62,
       "lo_f": 30,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
@@ -25,26 +25,26 @@
       "date": "2026-11-13",
       "hi_f": 62,
       "lo_f": 42,
-      "precip_in": 0.02,
-      "precip_prob_pct": 29,
-      "weathercode": 51,
-      "label": "Light drizzle",
-      "icon": "\ud83c\udf26\ufe0f"
-    },
-    {
-      "date": "2026-11-14",
-      "hi_f": 48,
-      "lo_f": 32,
-      "precip_in": 0.72,
-      "precip_prob_pct": 81,
+      "precip_in": 0.14,
+      "precip_prob_pct": 40,
       "weathercode": 63,
       "label": "Rain",
       "icon": "\ud83c\udf27\ufe0f"
     },
     {
+      "date": "2026-11-14",
+      "hi_f": 45,
+      "lo_f": 33,
+      "precip_in": 0.57,
+      "precip_prob_pct": 93,
+      "weathercode": 71,
+      "label": "Light snow",
+      "icon": "\ud83c\udf28\ufe0f"
+    },
+    {
       "date": "2026-11-15",
-      "hi_f": 46,
-      "lo_f": 32,
+      "hi_f": 47,
+      "lo_f": 33,
       "precip_in": 0.0,
       "precip_prob_pct": 1,
       "weathercode": 3,
@@ -54,32 +54,32 @@
     {
       "date": "2026-11-16",
       "hi_f": 53,
-      "lo_f": 39,
+      "lo_f": 38,
       "precip_in": 0.0,
-      "precip_prob_pct": 10,
+      "precip_prob_pct": 9,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-11-17",
-      "hi_f": 45,
+      "hi_f": 50,
       "lo_f": 35,
-      "precip_in": 0.85,
-      "precip_prob_pct": 60,
-      "weathercode": 63,
-      "label": "Rain",
+      "precip_in": 0.63,
+      "precip_prob_pct": 70,
+      "weathercode": 61,
+      "label": "Light rain",
       "icon": "\ud83c\udf27\ufe0f"
     },
     {
       "date": "2026-11-18",
-      "hi_f": 37,
-      "lo_f": 27,
-      "precip_in": 0.13,
-      "precip_prob_pct": 69,
-      "weathercode": 71,
-      "label": "Light snow",
-      "icon": "\ud83c\udf28\ufe0f"
+      "hi_f": 38,
+      "lo_f": 24,
+      "precip_in": 0.39,
+      "precip_prob_pct": 71,
+      "weathercode": 61,
+      "label": "Light rain",
+      "icon": "\ud83c\udf27\ufe0f"
     }
   ]
 }
