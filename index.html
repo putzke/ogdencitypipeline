@@ -1776,7 +1776,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <!-- LATEST PHOTOS: thumbnails open the photo viewer. Update the two images/indexes when new photos are added. -->
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:12px;">
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--canyon-stone);" data-i18n="wk_photos_cap">Latest from the field &mdash; click to enlarge</span>
-      <div class="vid-tile vid-sm" role="button" tabindex="0" aria-label="Video: pipeline construction highlights across Pineview Reservoir, November 9, 2026" onclick="openVideo()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}" style="height:70px;"><img src="images/pipe-drop-poster-nov-9-2026.jpg" alt="Video: pipeline construction highlights across Pineview Reservoir, November 9, 2026" width="124" height="70" style="height:70px;width:auto;border-radius:6px;border:2px solid rgba(226,185,135,0.65);display:block;"><span class="vid-play"></span><span class="vid-badge">Video</span></div>
+      <div class="vid-tile vid-sm" role="button" tabindex="0" aria-label="Video: pipeline construction highlights across Pineview Reservoir, November 9, 2026" onclick="openVideo()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}" style="height:70px;"><img src="images/pipeline-highlights-poster-nov-9-2026.jpg" alt="Video: pipeline construction highlights across Pineview Reservoir, November 9, 2026" width="124" height="70" style="height:70px;width:auto;border-radius:6px;border:2px solid rgba(226,185,135,0.65);display:block;"><span class="vid-play"></span><span class="vid-badge">Video</span></div>
       <img src="images/pipe-lowering-nov-2026-thumb.jpg" alt="Crew lowering a section of 48-inch pipe into the trench with an excavator, November 2026" onclick="openLightbox(2)" width="140" height="105" style="height:70px;width:auto;border-radius:6px;border:2px solid rgba(226,185,135,0.65);cursor:zoom-in;display:block;">
       <img src="images/reservoir-pipe-nov-2026-thumb.jpg" alt="48-inch pipe staged alongside the trench across the exposed Pineview Reservoir bed, November 2026" onclick="openLightbox(1)" width="140" height="105" style="height:70px;width:auto;border-radius:6px;border:2px solid rgba(226,185,135,0.65);cursor:zoom-in;display:block;">
       <img src="images/trench-road-nov-2026-thumb.jpg" alt="Pipeline trench and excavator crossing the Pineview Reservoir bed, looking toward the shoreline, November 2026" onclick="openLightbox(0)" width="140" height="105" style="height:70px;width:auto;border-radius:6px;border:2px solid rgba(226,185,135,0.65);cursor:zoom-in;display:block;">
@@ -3208,7 +3208,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       <img src="images/reservoir-pipe-nov-2026.jpg" alt="48-inch pipe staged alongside the trench across the exposed Pineview Reservoir bed, November 2026" onclick="openLightbox(1)" loading="lazy">
       <img src="images/pipe-lowering-nov-2026.jpg" alt="Crew lowering a section of 48-inch pipe into the trench with an excavator, November 2026" onclick="openLightbox(2)" loading="lazy">
       <div class="vid-tile g-wide" role="button" tabindex="0" aria-label="Video: pipeline construction highlights across Pineview Reservoir, November 9, 2026" onclick="openVideo()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}">
-        <img src="images/pipe-drop-poster-nov-9-2026.jpg" alt="Video: pipeline construction highlights across Pineview Reservoir, November 9, 2026" loading="lazy"><span class="vid-play"></span><span class="vid-badge">Video &middot; 0:20</span>
+        <img src="images/pipeline-highlights-poster-nov-9-2026.jpg" alt="Video: pipeline construction highlights across Pineview Reservoir, November 9, 2026" loading="lazy"><span class="vid-play"></span><span class="vid-badge">Video &middot; 0:40</span>
       </div>
       <img src="images/gallery-1.jpg" alt="Construction in Ogden Canyon" onclick="openLightbox(3)">
       <img src="images/gallery-2.jpg" alt="Pipeline work near Alaskan Inn" onclick="openLightbox(4)">
@@ -3265,9 +3265,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   <button class="lightbox-nav next" id="lbNext" aria-label="Next photo" onclick="shiftLightbox(1)">&#8250;</button>
 </div>
 <div class="lightbox-overlay" id="videoModal" role="dialog" aria-modal="true" aria-label="Video player" onclick="if(event.target===this)closeVideo()">
-  <video class="video-player" id="videoPlayer" controls playsinline preload="none" poster="images/pipe-drop-poster-nov-9-2026.jpg"></video>
+  <video class="video-player" id="videoPlayer" controls playsinline preload="none" poster="images/pipeline-highlights-poster-nov-9-2026.jpg"></video>
   <div class="lightbox-controls">
-    <a class="lightbox-btn" href="images/pipeline-highlights-nov-9-2026.mp4" download target="_blank">&#11015; Download</a>
+    <a class="lightbox-btn" href="images/pipeline-highlights-nov-9-2026.mp4?v=5" download target="_blank">&#11015; Download</a>
     <button class="lightbox-btn close-btn" aria-label="Close video" onclick="closeVideo()">&#10005; Close</button>
   </div>
 </div>
@@ -3403,7 +3403,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   }
   function openVideo() {
     const v = document.getElementById('videoPlayer');
-    if (!v.getAttribute('src')) v.src = 'images/pipeline-highlights-nov-9-2026.mp4';
+    if (!v.getAttribute('src')) v.src = 'images/pipeline-highlights-nov-9-2026.mp4?v=5';
     document.getElementById('videoModal').classList.add('open');
     document.body.style.overflow = 'hidden';
     v.play().catch(() => {});
