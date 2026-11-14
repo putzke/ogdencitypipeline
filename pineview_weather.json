@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T17:59:01Z",
+  "updated": "2026-11-14T22:22:15Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -7,15 +7,15 @@
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
     "as_of_date": "2026-11-14",
-    "last_24h_in": 0.34,
-    "last_7d_in": 0.35
+    "last_24h_in": 0.26,
+    "last_7d_in": 0.28
   },
   "forecast": [
     {
       "date": "2026-11-14",
       "hi_f": 49,
       "lo_f": 35,
-      "precip_in": 0.34,
+      "precip_in": 0.26,
       "precip_prob_pct": 83,
       "weathercode": 61,
       "label": "Light rain",
@@ -24,7 +24,7 @@
     {
       "date": "2026-11-15",
       "hi_f": 51,
-      "lo_f": 34,
+      "lo_f": 33,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
       "weathercode": 3,
@@ -36,7 +36,7 @@
       "hi_f": 56,
       "lo_f": 39,
       "precip_in": 0.0,
-      "precip_prob_pct": 1,
+      "precip_prob_pct": 0,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -46,7 +46,7 @@
       "hi_f": 49,
       "lo_f": 34,
       "precip_in": 0.72,
-      "precip_prob_pct": 90,
+      "precip_prob_pct": 93,
       "weathercode": 81,
       "label": "Rain showers",
       "icon": "\ud83c\udf26\ufe0f"
@@ -56,7 +56,7 @@
       "hi_f": 40,
       "lo_f": 28,
       "precip_in": 0.0,
-      "precip_prob_pct": 54,
+      "precip_prob_pct": 53,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -66,17 +66,17 @@
       "hi_f": 49,
       "lo_f": 35,
       "precip_in": 0.0,
-      "precip_prob_pct": 74,
-      "weathercode": 45,
-      "label": "Fog",
-      "icon": "\ud83c\udf2b\ufe0f"
+      "precip_prob_pct": 73,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-11-20",
       "hi_f": 39,
       "lo_f": 35,
       "precip_in": 0.48,
-      "precip_prob_pct": 78,
+      "precip_prob_pct": 83,
       "weathercode": 55,
       "label": "Heavy drizzle",
       "icon": "\ud83c\udf26\ufe0f"
