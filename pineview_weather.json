@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-15T16:20:00Z",
+  "updated": "2026-11-15T22:47:31Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -13,7 +13,7 @@
   "forecast": [
     {
       "date": "2026-11-15",
-      "hi_f": 49,
+      "hi_f": 50,
       "lo_f": 34,
       "precip_in": 0.0,
       "precip_prob_pct": 0,
@@ -23,63 +23,63 @@
     },
     {
       "date": "2026-11-16",
-      "hi_f": 58,
+      "hi_f": 59,
       "lo_f": 38,
       "precip_in": 0.0,
-      "precip_prob_pct": 2,
+      "precip_prob_pct": 3,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-11-17",
-      "hi_f": 52,
-      "lo_f": 34,
-      "precip_in": 0.96,
-      "precip_prob_pct": 96,
-      "weathercode": 63,
-      "label": "Rain",
-      "icon": "\ud83c\udf27\ufe0f"
+      "hi_f": 55,
+      "lo_f": 35,
+      "precip_in": 0.97,
+      "precip_prob_pct": 99,
+      "weathercode": 80,
+      "label": "Rain showers",
+      "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-11-18",
-      "hi_f": 37,
-      "lo_f": 28,
-      "precip_in": 0.2,
-      "precip_prob_pct": 62,
+      "hi_f": 36,
+      "lo_f": 27,
+      "precip_in": 0.28,
+      "precip_prob_pct": 56,
       "weathercode": 85,
       "label": "Snow showers",
       "icon": "\ud83c\udf28\ufe0f"
     },
     {
       "date": "2026-11-19",
-      "hi_f": 40,
-      "lo_f": 30,
-      "precip_in": 0.0,
-      "precip_prob_pct": 76,
-      "weathercode": 45,
-      "label": "Fog",
-      "icon": "\ud83c\udf2b\ufe0f"
+      "hi_f": 39,
+      "lo_f": 28,
+      "precip_in": 0.06,
+      "precip_prob_pct": 78,
+      "weathercode": 51,
+      "label": "Light drizzle",
+      "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-11-20",
       "hi_f": 36,
-      "lo_f": 33,
-      "precip_in": 1.36,
+      "lo_f": 24,
+      "precip_in": 0.87,
       "precip_prob_pct": 91,
-      "weathercode": 81,
+      "weathercode": 80,
       "label": "Rain showers",
       "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-11-21",
       "hi_f": 38,
-      "lo_f": 25,
-      "precip_in": 0.0,
-      "precip_prob_pct": 54,
-      "weathercode": 45,
-      "label": "Fog",
-      "icon": "\ud83c\udf2b\ufe0f"
+      "lo_f": 26,
+      "precip_in": 0.02,
+      "precip_prob_pct": 52,
+      "weathercode": 71,
+      "label": "Light snow",
+      "icon": "\ud83c\udf28\ufe0f"
     }
   ]
 }
