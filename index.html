@@ -1731,8 +1731,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.9);line-height:1.6;">Crews have now placed the 48-inch pipeline into the trench and are backfilling with material for stability and compaction. The old 36-inch pipeline is actively being slip lined for future operational redundancy. Additional pipeline material is offloading near the water treatment plant and near the Upper Hermitage staging area. The 36-inch pipeline replacement/installation has begun near the water treatment plant and will cross SR-39 before traversing along the eastbound side of SR-39 toward The Oaks Restaurant.</div>
     <!-- LATEST FROM THE FIELD: featured video + photo thumbnails (photos open the photo viewer by gallery index) -->
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px;margin-top:16px;">
-      <div class="vid-tile vid-feature" role="button" tabindex="0" aria-label="Video: pipeline construction highlights across Pineview Reservoir, November 9, 2026" onclick="openVideo()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}">
-        <img src="images/pipeline-highlights-poster-nov-9-2026.jpg" alt="Video: pipeline construction highlights across Pineview Reservoir, November 9, 2026"><span class="vid-play"></span><span class="vid-new">New video</span><span class="vid-badge">Watch &middot; 0:40</span>
+      <div class="vid-tile vid-feature" role="button" tabindex="0" aria-label="Video: pipeline construction highlights across Pineview Reservoir, November 16, 2026" onclick="openVideo()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}">
+        <img src="images/pipeline-highlights-poster-nov-16-2026.jpg" alt="Video: pipeline construction highlights across Pineview Reservoir, November 16, 2026"><span class="vid-play"></span><span class="vid-new">New video</span><span class="vid-badge">Watch &middot; 0:41</span>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px;text-align:left;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#fff;" data-i18n="wk_video_cap">Watch the latest video</div>
@@ -3228,8 +3228,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       <img class="g-wide" src="images/trench-road-nov-2026.jpg" alt="Pipeline trench and excavator crossing the Pineview Reservoir bed, looking toward the shoreline, November 2026" onclick="openLightbox(0)" loading="lazy">
       <img src="images/reservoir-pipe-nov-2026.jpg" alt="48-inch pipe staged alongside the trench across the exposed Pineview Reservoir bed, November 2026" onclick="openLightbox(1)" loading="lazy">
       <img src="images/pipe-lowering-nov-2026.jpg" alt="Crew lowering a section of 48-inch pipe into the trench with an excavator, November 2026" onclick="openLightbox(2)" loading="lazy">
-      <div class="vid-tile g-wide" role="button" tabindex="0" aria-label="Video: pipeline construction highlights across Pineview Reservoir, November 9, 2026" onclick="openVideo()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}">
-        <img src="images/pipeline-highlights-poster-nov-9-2026.jpg" alt="Video: pipeline construction highlights across Pineview Reservoir, November 9, 2026" loading="lazy"><span class="vid-play"></span><span class="vid-badge">Video &middot; 0:40</span>
+      <div class="vid-tile g-wide" role="button" tabindex="0" aria-label="Video: pipeline construction highlights across Pineview Reservoir, November 16, 2026" onclick="openVideo()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}">
+        <img src="images/pipeline-highlights-poster-nov-16-2026.jpg" alt="Video: pipeline construction highlights across Pineview Reservoir, November 16, 2026" loading="lazy"><span class="vid-play"></span><span class="vid-badge">Video &middot; 0:41</span>
       </div>
       <img src="images/gallery-1.jpg" alt="Construction in Ogden Canyon" onclick="openLightbox(3)">
       <img src="images/gallery-2.jpg" alt="Pipeline work near Alaskan Inn" onclick="openLightbox(4)">
@@ -3286,9 +3286,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   <button class="lightbox-nav next" id="lbNext" aria-label="Next photo" onclick="shiftLightbox(1)">&#8250;</button>
 </div>
 <div class="lightbox-overlay" id="videoModal" role="dialog" aria-modal="true" aria-label="Video player" onclick="if(event.target===this)closeVideo()">
-  <video class="video-player" id="videoPlayer" controls playsinline preload="none" poster="images/pipeline-highlights-poster-nov-9-2026.jpg"></video>
+  <video class="video-player" id="videoPlayer" controls playsinline preload="none" poster="images/pipeline-highlights-poster-nov-16-2026.jpg"></video>
   <div class="lightbox-controls">
-    <a class="lightbox-btn" href="images/pipeline-highlights-nov-9-2026.mp4?v=5" download target="_blank">&#11015; Download</a>
+    <a class="lightbox-btn" href="images/pipeline-highlights-nov-16-2026.mp4?v=6" download target="_blank">&#11015; Download</a>
     <button class="lightbox-btn close-btn" aria-label="Close video" onclick="closeVideo()">&#10005; Close</button>
   </div>
 </div>
@@ -3424,7 +3424,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   }
   function openVideo() {
     const v = document.getElementById('videoPlayer');
-    if (!v.getAttribute('src')) v.src = 'images/pipeline-highlights-nov-9-2026.mp4?v=5';
+    if (!v.getAttribute('src')) v.src = 'images/pipeline-highlights-nov-16-2026.mp4?v=6';
     document.getElementById('videoModal').classList.add('open');
     document.body.style.overflow = 'hidden';
     v.play().catch(() => {});
