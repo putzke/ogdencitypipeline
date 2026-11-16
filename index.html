@@ -1562,6 +1562,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 }
 /* Phase 4 section */
 #phase4{background:var(--sky)}
+#well-memo{background:var(--sky)}
 .ph4-banners{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 18px}
 .ph4-ban{border-radius:8px;padding:12px 18px;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:.03em;color:#fff}
 .ph4-ban.start{background:var(--canyon-rust);flex:2;min-width:260px}
@@ -1647,7 +1648,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 <!-- LATEST NOTICE BAR -->
 <!-- Latest Notice bar. To hide when no notice is active, add the "hidden" attribute to the div below; to change the message, edit the latest_notice text in the translations table. -->
 <div id="latestNoticeBar" role="region" aria-label="Latest notices" style="background:var(--notice-amber);color:#fff;text-align:center;padding:8px 16px;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.04em;line-height:1.4;">
-  <div data-i18n-html="latest_notice"><strong style="text-transform:uppercase;">Latest Notice:</strong> As early as Nov. 2, a quarter-mile one-lane closure on SR-39 in Ogden Canyon. Typical delays about 5 minutes. <a href="#phase4" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">View details &rarr;</a></div>
+  <div data-i18n-html="latest_notice"><strong style="text-transform:uppercase;">Pineview Well Update:</strong> Utah Division of Water Rights recommends sealing a 1915 flowing well exposed in the reservoir. <a href="#well-memo" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">Read the facts &rarr;</a></div>
   <div data-i18n-html="latest_notice2" style="margin-top:4px;"><strong style="text-transform:uppercase;">Resident Notice:</strong> Possible slight water pressure reduction in Ogden Canyon, Nov. 9 &ndash; April 2027. <a href="#resident-notice" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">View details &rarr;</a></div>
 </div>
 <!-- END LATEST NOTICE BAR -->
@@ -1664,8 +1665,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       <li><a href="#news" data-i18n="nav_news">News</a></li>
       <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
       <li><a href="#schedule" data-i18n="nav_schedule">Schedule</a></li>
-      <li class="nav-press-li"><a href="#pineview" class="nav-press-btn" data-i18n="nav_press">Pineview Crossing</a><span class="nav-badge" data-i18n="nav_badge_schedule">Schedule Published</span></li>
-      <li class="nav-press-li"><a href="#phase4" class="nav-ph4" data-i18n="nav_ph4">Phase 4 – Canyon</a><span class="nav-badge" data-i18n="nav_badge_ph4">Starts Nov. 2*</span></li>
+      <li class="nav-press-li"><a href="#pineview" class="nav-press-btn" data-i18n="nav_press">Pineview Crossing</a></li>
+      <li class="nav-press-li"><a href="#phase4" class="nav-ph4" data-i18n="nav_ph4">Phase 4 – Canyon</a></li>
       <li><a href="#gallery" data-i18n="nav_photos">Photos</a></li>
       <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
     </ul>
@@ -1684,7 +1685,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <a href="#news" class="mobile-link" data-i18n="mnav_news">News</a>
     <a href="#faq" class="mobile-link" data-i18n="mnav_faq">FAQ</a>
     <a href="#schedule" class="mobile-link" data-i18n="mnav_schedule">Schedule</a>
-    <a href="#pineview" class="mobile-link mobile-press-link">📄 Press Release — Pineview Reservoir <span class="mobile-badge" data-i18n="nav_badge_schedule">Schedule Published</span></a>
+    <a href="#pineview" class="mobile-link mobile-press-link">📄 Press Release — Pineview Reservoir</a>
     <a href="#phase4" class="mobile-link" data-i18n="mnav_ph4">🚧 Phase 4 – Canyon: SR-39 Lane Closure</a>
     <a href="#gallery" class="mobile-link" data-i18n="mnav_photos">Photos</a>
     <a href="#contact" class="mobile-link" data-i18n="mnav_contact">Contact</a>
@@ -1704,7 +1705,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   <span style="color:rgba(255,255,255,0.4);font-size:0.75rem;">|</span>
   <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;">
     <img src="data:image/png;base64,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" alt="USFS" style="width:16px;height:16px;border-radius:2px;vertical-align:middle;">
-    <span data-i18n="driver_notice_usfs" style="color:white;font-weight:700;">Forest Service project</span>
+    <span data-i18n="driver_notice_usfs" style="color:white;font-weight:700;">USFS Boat Ramp Project</span>
     <span style="color:rgba(255,255,255,0.4);font-size:0.75rem;">|</span>
     <a href="https://storymaps.arcgis.com/stories/99671b5b29834d43bb2bd6fccae1ab8e" target="_blank" rel="noopener" style="color:white;text-decoration:underline;font-weight:700;text-underline-offset:3px;white-space:nowrap;" data-i18n="driver_notice_link">Project Details &rarr;</a>
   </div>
@@ -3121,6 +3122,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         </div>
       </div><!-- end qa-list -->
 
+      <div class="qa-no-results" id="qaNoResults"><p data-i18n="qa_noresults">No questions match your search. Try different words, or contact the project team at 801-838-8365.</p></div>
+
     </div><!-- end qa-tool -->
 
   </div>
@@ -3217,6 +3220,55 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
         </dl>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- WELL MEMO SUMMARY (no nav link; linked from the top notice bar) -->
+<section id="well-memo" aria-labelledby="well-memo-title">
+  <div class="section-inner">
+    <p class="section-label" data-i18n="wm_label">Public Record Summary</p>
+    <h2 class="section-title" id="well-memo-title" data-i18n="wm_title">Pineview Reservoir Flowing Well: The Facts</h2>
+
+    <div class="ph4-banners">
+      <div class="ph4-ban start" data-i18n="wm_ban1">Utah Division of Water Rights Memorandum — September 28, 2026</div>
+      <div class="ph4-ban end"><span data-i18n="wm_ban2">Water Right 35-1983</span></div>
+    </div>
+
+    <p class="ph4-intro" data-i18n="wm_intro">You may have seen or heard about water flowing from a pipe standing in the exposed lakebed of Pineview Reservoir. This short summary of the State’s findings is provided so the facts are clear. It is a summary only; the full memorandum is linked below as a public record.</p>
+
+    <div class="ph4-grid">
+      <div class="ph4-card">
+        <h3 data-i18n="wm_h1">Well History</h3>
+        <ul>
+          <li><span class="ic" aria-hidden="true">&#128197;</span><span data-i18n-html="wm_a1"><strong>Drilled in 1915:</strong> A 6-inch iron pipe, 65 feet deep, originally a flowing well that needed no pump. It was first owned by Simon Jensen, founder of Jensen Farms.</span></li>
+          <li><span class="ic" aria-hidden="true">&#127754;</span><span data-i18n-html="wm_a2"><strong>Submerged in 1937:</strong> The well went underwater when Pineview Reservoir filled. No records show the wellhead was sealed beforehand, so it has likely flowed into the reservoir for at least part of each year since.</span></li>
+          <li><span class="ic" aria-hidden="true">&#9201;&#65039;</span><span data-i18n-html="wm_a3"><strong>Not a new well:</strong> It predates the pipeline project by more than a century. The reservoir drawdown for the Ogden City pipeline project simply exposed it.</span></li>
+        </ul>
+      </div>
+      <div class="ph4-card">
+        <h3 data-i18n="wm_h2">Inspection Results</h3>
+        <dl class="ph4-facts">
+          <dt data-i18n="wm_d1">Inspected</dt><dd data-i18n="wm_v1">September 25, 2026, by Division staff with Utah Geological Survey staff</dd>
+          <dt data-i18n="wm_d2">Location</dt><dd data-i18n="wm_v2">About 500 feet off the south shore of the reservoir, on federal land</dd>
+          <dt data-i18n="wm_d3">Wellhead</dt><dd data-i18n="wm_v3">Metal pipe standing 44 inches tall, 8-inch outer diameter, with a 2.75-inch opening about 36 inches above ground</dd>
+          <dt data-i18n="wm_d4">Flow rate</dt><dd data-i18n="wm_v4">About 20.5 gallons per minute (measured repeatedly by bucket and stopwatch)</dd>
+          <dt data-i18n="wm_d5">Field readings</dt><dd data-i18n="wm_v5">pH 6.68 • 11.2 °C (52.2 °F) • specific conductivity 798 µS/cm</dd>
+          <dt data-i18n="wm_d6">Lab samples</dt><dd data-i18n="wm_v6">Collected; results will be added to the State’s file once processed</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="ph4-card" style="margin-bottom:18px;">
+      <h3 data-i18n="wm_h3">Recommended Action</h3>
+      <ul>
+        <li><span class="ic" aria-hidden="true">&#9888;&#65039;</span><span data-i18n-html="wm_r1"><strong>Why it matters:</strong> The State considers the open well a contamination risk to the groundwater system, because the open casing can act as a direct pathway for reservoir water to reach the aquifer when upward flow stops.</span></li>
+        <li><span class="ic" aria-hidden="true">&#128295;</span><span data-i18n-html="wm_r2"><strong>What is recommended:</strong> The well should be properly abandoned (sealed) by a licensed Utah water well driller under Utah Administrative Code R655-4-14. The driller pumps cement through a tremie pipe from the bottom of the well (65 feet) up to the surface, filling the entire casing.</span></li>
+        <li><span class="ic" aria-hidden="true">&#128197;</span><span data-i18n-html="wm_r3"><strong>Timing:</strong> The reservoir is currently drawn down, which provides a window to complete the work before it is refilled in January 2027. Crews would likely stage from the south bank near the Jensen-Fowers Farm and pump cement across the exposed lakebed to the wellhead.</span></li>
+      </ul>
+    </div>
+
+    <p style="margin:0 0 14px;"><a class="btn-primary" href="files/Division_of_Water_Rights_Memo_35-1983.pdf" target="_blank" rel="noopener" data-i18n-html="wm_btn" style="display:inline-block;">Read the full memorandum (PDF) &rarr;</a></p>
+    <p class="ph4-note" data-i18n="wm_src">Source: Utah Division of Water Rights, Memo to File 35-1983, “Jensen-Fowers Farm LLC – Flowing Well in Pineview Reservoir,” by Hannah Finley, P.G., Well Drilling Program, September 28, 2026. This page summarizes the memorandum and does not replace it.</p>
   </div>
 </section>
 
@@ -3673,8 +3725,37 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     // Notice bar
     notice_udwr:   { en: 'UDWR — Anglers Notice',          es: 'UDWR — Aviso para Pescadores' },
     notice_camera: { en: 'Construction Cam: (5min Updates)', es: 'Cámara de Construcción: (Actualizaciones cada 5 min)' },
-    latest_notice: { en: '<strong style="text-transform:uppercase;">Latest Notice:</strong> As early as Nov. 2, a quarter-mile one-lane closure on SR-39 in Ogden Canyon. Typical delays about 5 minutes. <a href="#phase4" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">View details &rarr;</a>', es: '<strong style="text-transform:uppercase;">Último Aviso:</strong> Desde el 2 de nov., cierre de un carril de un cuarto de milla en la SR-39 en Ogden Canyon. Demoras típicas de unos 5 minutos. <a href="#phase4" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">Ver detalles &rarr;</a>' },
+    latest_notice: { en: '<strong style="text-transform:uppercase;">Pineview Well Update:</strong> Utah Division of Water Rights recommends sealing a 1915 flowing well exposed in the reservoir. <a href="#well-memo" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">Read the facts &rarr;</a>', es: '<strong style="text-transform:uppercase;">Actualización del Pozo de Pineview:</strong> La División de Derechos de Agua de Utah recomienda sellar un pozo de flujo libre de 1915 expuesto en el embalse. <a href="#well-memo" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">Lea los hechos &rarr;</a>' },
     latest_notice2: { en: '<strong style="text-transform:uppercase;">Resident Notice:</strong> Possible slight water pressure reduction in Ogden Canyon, Nov. 9 &ndash; April 2027. <a href="#resident-notice" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">View details &rarr;</a>', es: '<strong style="text-transform:uppercase;">Aviso a Residentes:</strong> Posible ligera reducción de la presión del agua en Ogden Canyon, del 9 de nov. a abril de 2027. <a href="#resident-notice" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">Ver detalles &rarr;</a>' },
+    qa_noresults: { en: 'No questions match your search. Try different words, or contact the project team at 801-838-8365.', es: 'Ninguna pregunta coincide con su búsqueda. Pruebe con otras palabras o comuníquese con el equipo del proyecto al 801-838-8365.' },
+    wm_label: { en: 'Public Record Summary', es: 'Resumen de Registro Público' },
+    wm_title: { en: 'Pineview Reservoir Flowing Well: The Facts', es: 'El Pozo de Flujo Libre en el Embalse Pineview: Los Hechos' },
+    wm_ban1: { en: 'Utah Division of Water Rights Memorandum — September 28, 2026', es: 'Memorando de la División de Derechos de Agua de Utah — 28 de septiembre de 2026' },
+    wm_ban2: { en: 'Water Right 35-1983', es: 'Derecho de Agua 35-1983' },
+    wm_intro: { en: 'You may have seen or heard about water flowing from a pipe standing in the exposed lakebed of Pineview Reservoir. This short summary of the State’s findings is provided so the facts are clear. It is a summary only; the full memorandum is linked below as a public record.', es: 'Es posible que haya visto o escuchado sobre agua que fluye de una tubería en el lecho expuesto del Embalse Pineview. Este breve resumen de los hallazgos del Estado se ofrece para aclarar los hechos. Es solo un resumen; el memorando completo se enlaza abajo como registro público.' },
+    wm_h1: { en: 'Well History', es: 'Historia del Pozo' },
+    wm_a1: { en: '<strong>Drilled in 1915:</strong> A 6-inch iron pipe, 65 feet deep, originally a flowing well that needed no pump. It was first owned by Simon Jensen, founder of Jensen Farms.', es: '<strong>Perforado en 1915:</strong> Una tubería de hierro de 6 pulgadas y 65 pies de profundidad, originalmente un pozo de flujo libre que no necesitaba bomba. Su primer dueño fue Simon Jensen, fundador de Jensen Farms.' },
+    wm_a2: { en: '<strong>Submerged in 1937:</strong> The well went underwater when Pineview Reservoir filled. No records show the wellhead was sealed beforehand, so it has likely flowed into the reservoir for at least part of each year since.', es: '<strong>Sumergido en 1937:</strong> El pozo quedó bajo el agua cuando se llenó el Embalse Pineview. No hay registros de que el cabezal se haya sellado antes, por lo que probablemente ha fluido hacia el embalse durante al menos parte de cada año desde entonces.' },
+    wm_a3: { en: '<strong>Not a new well:</strong> It predates the pipeline project by more than a century. The reservoir drawdown for the Ogden City pipeline project simply exposed it.', es: '<strong>No es un pozo nuevo:</strong> Es anterior al proyecto de tubería por más de un siglo. El descenso del embalse para el proyecto de tubería de Ogden City simplemente lo dejó al descubierto.' },
+    wm_h2: { en: 'Inspection Results', es: 'Resultados de la Inspección' },
+    wm_d1: { en: 'Inspected', es: 'Inspeccionado' },
+    wm_v1: { en: 'September 25, 2026, by Division staff with Utah Geological Survey staff', es: '25 de septiembre de 2026, por personal de la División con personal del Servicio Geológico de Utah' },
+    wm_d2: { en: 'Location', es: 'Ubicación' },
+    wm_v2: { en: 'About 500 feet off the south shore of the reservoir, on federal land', es: 'A unos 500 pies de la orilla sur del embalse, en terreno federal' },
+    wm_d3: { en: 'Wellhead', es: 'Cabezal del pozo' },
+    wm_v3: { en: 'Metal pipe standing 44 inches tall, 8-inch outer diameter, with a 2.75-inch opening about 36 inches above ground', es: 'Tubería metálica de 44 pulgadas de alto y 8 pulgadas de diámetro exterior, con una abertura de 2.75 pulgadas a unas 36 pulgadas del suelo' },
+    wm_d4: { en: 'Flow rate', es: 'Caudal' },
+    wm_v4: { en: 'About 20.5 gallons per minute (measured repeatedly by bucket and stopwatch)', es: 'Unos 20.5 galones por minuto (medido repetidamente con cubeta y cronómetro)' },
+    wm_d5: { en: 'Field readings', es: 'Mediciones en campo' },
+    wm_v5: { en: 'pH 6.68 • 11.2 °C (52.2 °F) • specific conductivity 798 µS/cm', es: 'pH 6.68 • 11.2 °C (52.2 °F) • conductividad específica 798 µS/cm' },
+    wm_d6: { en: 'Lab samples', es: 'Muestras de laboratorio' },
+    wm_v6: { en: 'Collected; results will be added to the State’s file once processed', es: 'Recolectadas; los resultados se agregarán al expediente del Estado una vez procesadas' },
+    wm_h3: { en: 'Recommended Action', es: 'Acción Recomendada' },
+    wm_r1: { en: '<strong>Why it matters:</strong> The State considers the open well a contamination risk to the groundwater system, because the open casing can act as a direct pathway for reservoir water to reach the aquifer when upward flow stops.', es: '<strong>Por qué importa:</strong> El Estado considera que el pozo abierto es un riesgo de contaminación para el sistema de agua subterránea, porque el revestimiento abierto puede ser una vía directa para que el agua del embalse llegue al acuífero cuando cesa el flujo ascendente.' },
+    wm_r2: { en: '<strong>What is recommended:</strong> The well should be properly abandoned (sealed) by a licensed Utah water well driller under Utah Administrative Code R655-4-14. The driller pumps cement through a tremie pipe from the bottom of the well (65 feet) up to the surface, filling the entire casing.', es: '<strong>Qué se recomienda:</strong> El pozo debe abandonarse (sellarse) adecuadamente por un perforador de pozos de agua con licencia de Utah, conforme al Código Administrativo de Utah R655-4-14. El perforador bombea cemento por una tubería tremie desde el fondo del pozo (65 pies) hasta la superficie, llenando todo el revestimiento.' },
+    wm_r3: { en: '<strong>Timing:</strong> The reservoir is currently drawn down, which provides a window to complete the work before it is refilled in January 2027. Crews would likely stage from the south bank near the Jensen-Fowers Farm and pump cement across the exposed lakebed to the wellhead.', es: '<strong>Momento:</strong> El embalse está actualmente bajo, lo que ofrece una ventana para completar el trabajo antes de que se vuelva a llenar en enero de 2027. Es probable que el trabajo se organice desde la orilla sur cerca de Jensen-Fowers Farm, bombeando el cemento por el lecho expuesto hasta el cabezal.' },
+    wm_btn: { en: 'Read the full memorandum (PDF) &rarr;', es: 'Leer el memorando completo (PDF) &rarr;' },
+    wm_src: { en: 'Source: Utah Division of Water Rights, Memo to File 35-1983, “Jensen-Fowers Farm LLC – Flowing Well in Pineview Reservoir,” by Hannah Finley, P.G., Well Drilling Program, September 28, 2026. This page summarizes the memorandum and does not replace it.', es: 'Fuente: División de Derechos de Agua de Utah, Memorando al Expediente 35-1983, “Jensen-Fowers Farm LLC – Pozo de Flujo Libre en el Embalse Pineview”, por Hannah Finley, P.G., Programa de Perforación de Pozos, 28 de septiembre de 2026. Esta página resume el memorando y no lo reemplaza.' },
     rn_label: { en: 'Resident Notice', es: 'Aviso a los Residentes' },
     rn_title: { en: 'Possible Slight Water Pressure Reduction', es: 'Posible Ligera Reducción de la Presión del Agua' },
     rn_ban: { en: 'Monday, November 9, 2026 &nbsp;through&nbsp; April 2027', es: 'Lunes 9 de noviembre de 2026 &nbsp;hasta&nbsp; abril de 2027' },
@@ -3691,7 +3772,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     rn_tel: { en: 'Phone', es: 'Teléfono' },
     rn_mail: { en: 'Email', es: 'Correo electrónico' },
     rn_team_t: { en: 'Project Team', es: 'Equipo del Proyecto' },
-    driver_notice_usfs: { en: 'Forest Service project', es: 'Proyecto del Servicio Forestal' },
+    driver_notice_usfs: { en: 'USFS Boat Ramp Project', es: 'Proyecto de Rampa de Botes del USFS' },
     driver_notice_link: { en: 'Project Details →', es: 'Detalles del Proyecto →' },
 
 
