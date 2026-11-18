@@ -1,69 +1,59 @@
 {
-  "updated": "2026-11-18T00:56:08Z",
+  "updated": "2026-11-18T11:38:42Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
   "source": "Open-Meteo forecast model (estimate, not a rain gauge reading)",
   "source_url": "https://open-meteo.com/",
   "rainfall_estimate": {
-    "as_of_date": "2026-11-17",
-    "last_24h_in": 0.5,
-    "last_7d_in": 0.77
+    "as_of_date": "2026-11-18",
+    "last_24h_in": 0.0,
+    "last_7d_in": 0.68
   },
   "forecast": [
     {
-      "date": "2026-11-17",
-      "hi_f": 49,
-      "lo_f": 31,
-      "precip_in": 0.5,
-      "precip_prob_pct": 99,
-      "weathercode": 75,
-      "label": "Heavy snow",
-      "icon": "\ud83c\udf28\ufe0f"
-    },
-    {
       "date": "2026-11-18",
-      "hi_f": 45,
-      "lo_f": 30,
+      "hi_f": 42,
+      "lo_f": 29,
       "precip_in": 0.0,
-      "precip_prob_pct": 24,
+      "precip_prob_pct": 20,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-11-19",
-      "hi_f": 38,
-      "lo_f": 32,
-      "precip_in": 0.39,
-      "precip_prob_pct": 90,
+      "hi_f": 42,
+      "lo_f": 30,
+      "precip_in": 0.75,
+      "precip_prob_pct": 83,
+      "weathercode": 75,
+      "label": "Heavy snow",
+      "icon": "\ud83c\udf28\ufe0f"
+    },
+    {
+      "date": "2026-11-20",
+      "hi_f": 35,
+      "lo_f": 30,
+      "precip_in": 1.57,
+      "precip_prob_pct": 96,
       "weathercode": 73,
       "label": "Snow",
       "icon": "\ud83c\udf28\ufe0f"
     },
     {
-      "date": "2026-11-20",
-      "hi_f": 36,
-      "lo_f": 32,
-      "precip_in": 0.91,
-      "precip_prob_pct": 96,
-      "weathercode": 80,
-      "label": "Rain showers",
-      "icon": "\ud83c\udf26\ufe0f"
-    },
-    {
       "date": "2026-11-21",
-      "hi_f": 35,
-      "lo_f": 21,
-      "precip_in": 0.1,
-      "precip_prob_pct": 50,
+      "hi_f": 34,
+      "lo_f": 22,
+      "precip_in": 0.11,
+      "precip_prob_pct": 56,
       "weathercode": 73,
       "label": "Snow",
       "icon": "\ud83c\udf28\ufe0f"
     },
     {
       "date": "2026-11-22",
-      "hi_f": 38,
+      "hi_f": 37,
       "lo_f": 21,
       "precip_in": 0.0,
       "precip_prob_pct": 12,
@@ -73,12 +63,22 @@
     },
     {
       "date": "2026-11-23",
-      "hi_f": 35,
-      "lo_f": 22,
-      "precip_in": 0.09,
-      "precip_prob_pct": 34,
+      "hi_f": 38,
+      "lo_f": 25,
+      "precip_in": 0.02,
+      "precip_prob_pct": 24,
       "weathercode": 71,
       "label": "Light snow",
+      "icon": "\ud83c\udf28\ufe0f"
+    },
+    {
+      "date": "2026-11-24",
+      "hi_f": 33,
+      "lo_f": 23,
+      "precip_in": 0.08,
+      "precip_prob_pct": 7,
+      "weathercode": 73,
+      "label": "Snow",
       "icon": "\ud83c\udf28\ufe0f"
     }
   ]
