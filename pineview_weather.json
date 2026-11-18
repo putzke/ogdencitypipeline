@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-18T11:38:42Z",
+  "updated": "2026-11-18T20:29:05Z",
   "location": "Huntsville, UT 84317",
   "latitude": 41.26077,
   "longitude": -111.76994,
@@ -23,63 +23,63 @@
     },
     {
       "date": "2026-11-19",
-      "hi_f": 42,
-      "lo_f": 30,
-      "precip_in": 0.75,
-      "precip_prob_pct": 83,
-      "weathercode": 75,
-      "label": "Heavy snow",
+      "hi_f": 46,
+      "lo_f": 35,
+      "precip_in": 0.48,
+      "precip_prob_pct": 79,
+      "weathercode": 73,
+      "label": "Snow",
       "icon": "\ud83c\udf28\ufe0f"
     },
     {
       "date": "2026-11-20",
       "hi_f": 35,
-      "lo_f": 30,
-      "precip_in": 1.57,
-      "precip_prob_pct": 96,
-      "weathercode": 73,
-      "label": "Snow",
-      "icon": "\ud83c\udf28\ufe0f"
+      "lo_f": 31,
+      "precip_in": 1.23,
+      "precip_prob_pct": 93,
+      "weathercode": 81,
+      "label": "Rain showers",
+      "icon": "\ud83c\udf26\ufe0f"
     },
     {
       "date": "2026-11-21",
       "hi_f": 34,
-      "lo_f": 22,
-      "precip_in": 0.11,
-      "precip_prob_pct": 56,
-      "weathercode": 73,
-      "label": "Snow",
+      "lo_f": 18,
+      "precip_in": 0.22,
+      "precip_prob_pct": 74,
+      "weathercode": 85,
+      "label": "Snow showers",
       "icon": "\ud83c\udf28\ufe0f"
     },
     {
       "date": "2026-11-22",
-      "hi_f": 37,
-      "lo_f": 21,
+      "hi_f": 36,
+      "lo_f": 20,
       "precip_in": 0.0,
-      "precip_prob_pct": 12,
+      "precip_prob_pct": 13,
       "weathercode": 3,
       "label": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     {
       "date": "2026-11-23",
-      "hi_f": 38,
-      "lo_f": 25,
-      "precip_in": 0.02,
-      "precip_prob_pct": 24,
-      "weathercode": 71,
-      "label": "Light snow",
+      "hi_f": 34,
+      "lo_f": 24,
+      "precip_in": 0.25,
+      "precip_prob_pct": 34,
+      "weathercode": 73,
+      "label": "Snow",
       "icon": "\ud83c\udf28\ufe0f"
     },
     {
       "date": "2026-11-24",
-      "hi_f": 33,
-      "lo_f": 23,
-      "precip_in": 0.08,
-      "precip_prob_pct": 7,
-      "weathercode": 73,
-      "label": "Snow",
-      "icon": "\ud83c\udf28\ufe0f"
+      "hi_f": 32,
+      "lo_f": 16,
+      "precip_in": 0.0,
+      "precip_prob_pct": 8,
+      "weathercode": 3,
+      "label": "Overcast",
+      "icon": "\u2601\ufe0f"
     }
   ]
 }
