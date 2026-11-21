@@ -931,6 +931,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   .vid-feature .vid-play::after { margin-left: 5px; border-width: 12px 0 12px 20px; }
   .vid-feature .vid-badge { left: auto; right: 8px; bottom: 8px; }
   .vid-new { position: absolute; top: 8px; left: 8px; background: #8B4A2B; color: #fff; font-family: 'Barlow Condensed',sans-serif; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 9px; border-radius: 3px; pointer-events: none; }
+  .cam-tile { display: block; animation: none; background: linear-gradient(135deg,#1F5174,#14324A); text-decoration: none; }
+  .cam-tile:hover { animation: none; }
+  .cam-live { position: absolute; top: 8px; left: 8px; display: inline-flex; align-items: center; gap: 6px; background: #B3261E; color: #fff; font-family: 'Barlow Condensed',sans-serif; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 9px; border-radius: 3px; pointer-events: none; }
+  .cam-live::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #fff; }
   @keyframes vidGlow { 0%,100% { box-shadow: 0 0 0 0 rgba(226,185,135,0.6), 0 4px 16px rgba(0,0,0,0.4); } 50% { box-shadow: 0 0 0 10px rgba(226,185,135,0), 0 4px 16px rgba(0,0,0,0.4); } }
   @media (prefers-reduced-motion: reduce) { .vid-feature { animation: none; } }
   .yt-frame { width: min(90vw, calc(78vh * 16 / 9)); aspect-ratio: 16 / 9; height: auto; border: 0; border-radius: 4px; box-shadow: 0 8px 48px rgba(0,0,0,0.6); background: #000; }
@@ -1729,8 +1733,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 <!-- WEEKLY UPDATE BANNER — edit content below each week -->
 <div style="background:linear-gradient(135deg,rgba(26,69,96,0.97),rgba(15,46,66,0.97));border-top:2px solid var(--canyon-stone);border-bottom:2px solid var(--canyon-stone);padding:18px 28px 20px;text-align:center;">
   <div style="max-width:900px;margin:0 auto;">
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--canyon-stone);margin-bottom:5px;">📋 Upcoming Week — November 16</div>
-    <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.9);line-height:1.6;">Crews have now placed the 48-inch pipeline into the trench and are backfilling with material for stability and compaction. The old 36-inch pipeline is actively being slip lined for future operational redundancy. Additional pipeline material is offloading near the water treatment plant and near the Upper Hermitage staging area. The 36-inch pipeline replacement/installation has begun near the water treatment plant and will cross SR-39 before traversing along the eastbound side of SR-39 toward The Oaks Restaurant.</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--canyon-stone);margin-bottom:5px;">📋 Upcoming Week — November 23</div>
+    <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.9);line-height:1.6;">Crews continue backfilling and compacting the excavated space with material for stability. The old 36-inch pipeline has been slip lined entirely across the reservoir bed for future operational redundancy. The 36-inch pipeline replacement/installation is ongoing near the water treatment plant and will cross SR-39 before traversing along the eastbound side of SR-39 toward The Oaks Restaurant. Be prepared for short-distance traffic control in the upper canyon.</div>
     <!-- LATEST FROM THE FIELD: featured video + photo thumbnails (photos open the photo viewer by gallery index) -->
     <div style="margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#fff;" data-i18n="wk_video_cap">Watch the latest videos</div>
     <div style="font-family:'Open Sans',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.8);margin-top:2px;" data-i18n="wk_video_sub">Construction highlights and a drone fly-over comparison</div>
@@ -1748,6 +1752,12 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       </div>
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--canyon-stone);margin-top:6px;text-align:center;white-space:nowrap;line-height:1.25;" data-i18n="wk_v2">Drone comparison: Oct 6 vs Nov 17</div>
       </div>
+      <div style="display:flex;flex-direction:column;align-items:center;">
+      <a class="vid-tile vid-feature cam-tile" id="camTile" href="files/Pineview_Construction_Camera.html" target="_blank" rel="noopener" aria-label="Open the live Pineview construction camera page (updates every 5 minutes)">
+        <img id="camTileImg" src="images/pineview-cam-latest.jpg" alt="Latest photo from the Pineview crossing construction camera"><span class="cam-live">Live</span><span class="vid-badge" data-i18n="wk_cam_badge">Updates every 5 min</span>
+      </a>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--canyon-stone);margin-top:6px;text-align:center;white-space:nowrap;line-height:1.25;" data-i18n="wk_cam">Live construction cam</div>
+      </div>
       </div>
       <div style="width:100%;text-align:center;margin-top:2px;">
         <a href="#gallery" style="font-family:'Open Sans',sans-serif;font-size:0.8rem;font-weight:600;color:#fff;text-decoration:underline;text-underline-offset:2px;" data-i18n="wk_photos_all">View all project photos &rarr;</a>
@@ -1756,6 +1766,15 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   </div>
 </div>
 <!-- END WEEKLY UPDATE BANNER -->
+<script>
+(function(){
+  var img=document.getElementById("camTileImg"); if(!img) return;
+  fetch("pineview_cam.json?v="+Date.now()).then(function(r){return r.json();}).then(function(d){
+    if(d && d.hold){ img.style.display="none"; return; }
+    if(d && d.photo_date){ img.src="images/pineview-cam-latest.jpg?v="+encodeURIComponent(d.photo_date); }
+  }).catch(function(){});
+})();
+</script>
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-inner">
@@ -3818,6 +3837,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     wk_video_cap: { en: 'Watch the latest videos', es: 'Vea los videos m\u00e1s recientes' },
     wk_video_sub: { en: 'Construction highlights and a drone fly-over comparison', es: 'Lo m\u00e1s destacado de la construcci\u00f3n y una comparaci\u00f3n de sobrevuelos con dron' },
     wk_v1: { en: 'Construction highlights', es: 'Lo m\u00e1s destacado de la obra' },
+    wk_cam: { en: 'Live construction cam', es: 'C\u00e1mara de construcci\u00f3n en vivo' },
+    wk_cam_badge: { en: 'Updates every 5 min', es: 'Cada 5 min' },
     wk_v2: { en: 'Drone comparison: Oct 6 vs Nov 17', es: 'Comparaci\u00f3n con dron: 6 oct vs 17 nov' },
     wk_photos_all: { en: 'View all project photos \u2192', es: 'Ver todas las fotos del proyecto \u2192' },
     sch_flag_updated: { en: 'Updated', es: 'Actualizado' },
