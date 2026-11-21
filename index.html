@@ -924,10 +924,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   .vid-tile.vid-sm .vid-play { width: 30px; height: 30px; border-width: 1.5px; }
   .vid-tile.vid-sm .vid-play::after { margin-left: 2px; border-width: 6px 0 6px 10px; }
   .vid-tile.vid-sm .vid-badge { left: 4px; bottom: 4px; font-size: 0.6rem; padding: 1px 5px; }
-  .vid-feature { width: 236px; aspect-ratio: 16/9; border: 2px solid #E2B987; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.4); animation: vidGlow 2.8s ease-in-out infinite; transition: transform 0.2s; }
+  .vid-feature { width: 196px; aspect-ratio: 16/9; border: 2px solid #E2B987; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.4); animation: vidGlow 2.8s ease-in-out infinite; transition: transform 0.2s; }
   .vid-feature:hover { transform: scale(1.03); animation-play-state: paused; }
   .vid-feature img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .vid-feature .vid-play { width: 62px; height: 62px; background: rgba(139,74,43,0.94); border-width: 3px; }
+  .vid-feature .vid-play { width: 54px; height: 54px; background: rgba(139,74,43,0.94); border-width: 3px; }
   .vid-feature .vid-play::after { margin-left: 5px; border-width: 12px 0 12px 20px; }
   .vid-feature .vid-badge { left: auto; right: 8px; bottom: 8px; }
   .vid-new { position: absolute; top: 8px; left: 8px; background: #8B4A2B; color: #fff; font-family: 'Barlow Condensed',sans-serif; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 9px; border-radius: 3px; pointer-events: none; }
@@ -1734,31 +1734,23 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     <!-- LATEST FROM THE FIELD: featured video + photo thumbnails (photos open the photo viewer by gallery index) -->
     <div style="margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#fff;" data-i18n="wk_video_cap">Watch the latest videos</div>
     <div style="font-family:'Open Sans',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.8);margin-top:2px;" data-i18n="wk_video_sub">Construction highlights and a drone fly-over comparison</div>
-    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px;margin-top:12px;">
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:18px;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px;margin-top:10px;">
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;">
       <div style="display:flex;flex-direction:column;align-items:center;">
       <div class="vid-tile vid-feature" role="button" tabindex="0" aria-label="Video: pipeline construction highlights across Pineview Reservoir, November 16, 2026" onclick="openVideo()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}">
         <img src="images/pipeline-highlights-poster-nov-16-2026.jpg" alt="Video: pipeline construction highlights across Pineview Reservoir, November 16, 2026"><span class="vid-play"></span><span class="vid-badge">Watch &middot; 0:41</span>
       </div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--canyon-stone);margin-top:7px;text-align:center;max-width:236px;line-height:1.25;" data-i18n="wk_v1">Construction highlights</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--canyon-stone);margin-top:6px;text-align:center;max-width:196px;line-height:1.25;" data-i18n="wk_v1">Construction highlights</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;">
       <div class="vid-tile vid-feature" role="button" tabindex="0" aria-label="Video: drone fly-over comparison of the Pineview Reservoir crossing, October 6 versus November 17, 2026" onclick="openYouTube()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openYouTube();}">
         <img src="images/drone-comparison-poster.jpg" alt="Video: drone fly-over comparison of the Pineview Reservoir crossing, October 6 versus November 17, 2026"><span class="vid-play"></span><span class="vid-new">New video</span><span class="vid-badge">Watch &middot; 0:50</span>
       </div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--canyon-stone);margin-top:7px;text-align:center;max-width:236px;line-height:1.25;" data-i18n="wk_v2">Drone comparison: Oct 6 vs Nov 17</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--canyon-stone);margin-top:6px;text-align:center;max-width:196px;line-height:1.25;" data-i18n="wk_v2">Drone comparison: Oct 6 vs Nov 17</div>
       </div>
       </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;width:100%;margin-top:4px;">
-        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:4px;">
-          <img src="images/pipe-lowering-nov-2026-thumb.jpg" alt="Crew lowering a section of 48-inch pipe into the trench with an excavator, November 2026" onclick="openLightbox(2)" width="140" height="105" style="height:70px;width:auto;border-radius:6px;border:2px solid rgba(226,185,135,0.65);cursor:zoom-in;display:block;">
-          <img src="images/reservoir-pipe-nov-2026-thumb.jpg" alt="48-inch pipe staged alongside the trench across the exposed Pineview Reservoir bed, November 2026" onclick="openLightbox(1)" width="140" height="105" style="height:70px;width:auto;border-radius:6px;border:2px solid rgba(226,185,135,0.65);cursor:zoom-in;display:block;">
-          <img src="images/trench-road-nov-2026-thumb.jpg" alt="Pipeline trench and excavator crossing the Pineview Reservoir bed, looking toward the shoreline, November 2026" onclick="openLightbox(0)" width="140" height="105" style="height:70px;width:auto;border-radius:6px;border:2px solid rgba(226,185,135,0.65);cursor:zoom-in;display:block;">
-        </div>
-        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;">
-          <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--canyon-stone);" data-i18n="wk_photos_cap">Latest from the field &mdash; click to enlarge</span>
-          <a href="#gallery" style="font-family:'Open Sans',sans-serif;font-size:0.8rem;font-weight:600;color:#fff;text-decoration:underline;text-underline-offset:2px;" data-i18n="wk_photos_all">View all project photos &rarr;</a>
-        </div>
+      <div style="width:100%;text-align:center;margin-top:-2px;">
+        <a href="#gallery" style="font-family:'Open Sans',sans-serif;font-size:0.8rem;font-weight:600;color:#fff;text-decoration:underline;text-underline-offset:2px;" data-i18n="wk_photos_all">View all project photos &rarr;</a>
       </div>
     </div>
   </div>
