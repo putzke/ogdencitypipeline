@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<meta name="description" content="Live traffic impacts for the Ogden Canyon 36-Inch Pipeline project: UDOT cameras on SR-39 and SR-158, current travel times between Ogden Canyon Mouth, Pineview Dam, and Eden, and the UDOT road sign at the canyon mouth.">
+<title>Traffic Impacts | Ogden Canyon 36-Inch Pipeline Replacement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canyon-rust:#8B4A2B; --canyon-stone:#C4A882; --water-blue:#2A6D8F; --water-dark:#1A4560;
+    --sky:#EAF3F8; --earth:#F5EFE6; --text-dark:#1C1C1C; --text-mid:#4A4A4A; --text-light:#595959;
+    --ok:#2E7D4F; --warn:#B86E00; --bad:#B3261E; --notice-amber:#D4820A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--sky);color:var(--text-dark);line-height:1.5}
+  a{color:var(--water-blue)}
+  .top{background:linear-gradient(135deg,var(--water-dark),#0f2e42);border-bottom:3px solid var(--canyon-stone);padding:12px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .top img{height:44px;width:auto}
+  .top h1{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:1.3rem;color:var(--canyon-stone);flex:1;min-width:200px}
+  .top a.back{color:var(--canyon-stone);text-decoration:none;font-size:.8rem;font-weight:600;border:1px solid rgba(196,168,130,.5);padding:6px 14px;border-radius:4px}
+  .top a.back:hover{background:rgba(196,168,130,.2)}
+  main{max-width:1080px;margin:0 auto;padding:24px 16px 48px}
+  h2{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--water-dark);font-size:1.5rem;margin:30px 0 4px}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:4px 20px}
+  .sec-head h2{margin-bottom:4px}
+  .credit{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:.85rem;font-weight:600;color:var(--water-dark)}
+  .credit img{height:30px;width:auto;display:block}
+  .sub{color:var(--text-mid);font-size:.92rem;margin-bottom:14px}
+  .card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.12);padding:18px 20px}
+  .project-notice{border-left:6px solid var(--notice-amber);background:#FFF8EC}
+  .project-notice h3{font-size:1.05rem;color:var(--water-dark);margin-bottom:6px}
+  .project-notice p{font-size:.95rem;color:var(--text-mid)}
+  .project-notice .upd{font-size:.78rem;color:var(--text-light);margin-top:8px}
+  .tt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  .tt{border-top:5px solid #bbb}
+  .tt.ok{border-top-color:var(--ok)} .tt.warn{border-top-color:var(--warn)} .tt.bad{border-top-color:var(--bad)}
+  .tt .seg{font-weight:600;font-size:.95rem;color:var(--water-dark);min-height:2.6em}
+  .tt .now{font-family:'Barlow Condensed',sans-serif;font-size:2.6rem;font-weight:700;line-height:1.1;margin-top:4px}
+  .tt .now small{font-size:1rem;font-weight:600;color:var(--text-mid)}
+  .tt .meta{font-size:.82rem;color:var(--text-mid)}
+  .tt .badge{display:inline-block;font-size:.75rem;font-weight:700;border-radius:20px;padding:2px 10px;margin-top:8px;color:#fff;background:#888}
+  .tt.ok .badge{background:var(--ok)} .tt.warn .badge{background:var(--warn)} .tt.bad .badge{background:var(--bad)}
+  .stamp{font-size:.78rem;color:var(--text-light);margin-top:10px}
+  .stamp.stale{color:var(--bad);font-weight:600}
+  .cams{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+  .cam{padding:0;overflow:hidden}
+  .cam .frame{position:relative;background:#0f2e42;aspect-ratio:16/9}
+  .cam img{width:100%;height:100%;object-fit:cover;display:block}
+  .cam .fail{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;color:#fff;font-size:.88rem;padding:16px}
+  .cam .cap{padding:10px 14px;font-size:.9rem;font-weight:600;color:var(--water-dark);display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .cam .cap span{font-weight:400;font-size:.75rem;color:var(--text-light)}
+  .cams.small{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .cams.small .cap{font-size:.78rem;padding:8px 10px}
+  .affected{display:inline-block;background:var(--notice-amber);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:3px;padding:1px 7px;margin-right:6px}
+  .sign-wrap{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+  .sign{background:#111;border:4px solid #444;border-radius:6px;padding:14px 22px;min-width:240px;text-align:center;font-family:'Courier New',monospace;color:#FFB000;font-weight:700;font-size:1.35rem;line-height:1.25;letter-spacing:.08em;white-space:pre-line;text-shadow:0 0 6px rgba(255,176,0,.55)}
+  .sign-info{flex:1;min-width:230px;font-size:.9rem;color:var(--text-mid)}
+  .sign-info b{color:var(--water-dark)}
+  .sources{font-size:.88rem;color:var(--text-mid)}
+  .sources ul{margin:8px 0 0 20px}
+  .sources li{margin-bottom:4px}
+  .cam .frame{cursor:zoom-in;display:block;border:0;width:100%;padding:0;font:inherit}
+  .cam .frame:focus-visible{outline:3px solid var(--notice-amber);outline-offset:-3px}
+  .cam .zoom{position:absolute;right:8px;bottom:8px;background:rgba(15,46,66,.8);color:#fff;font-size:.72rem;font-weight:600;border-radius:4px;padding:3px 8px;pointer-events:none}
+  #lb{position:fixed;inset:0;background:rgba(10,25,35,.92);z-index:1000;display:none;align-items:center;justify-content:center;flex-direction:column;padding:16px;gap:10px}
+  #lb.open{display:flex}
+  #lb img{max-width:min(1100px,96vw);max-height:76vh;width:auto;height:auto;border-radius:6px;background:#0f2e42;box-shadow:0 4px 30px rgba(0,0,0,.6)}
+  #lb .lbcap{color:#fff;font-weight:600;text-align:center;font-size:.95rem}
+  #lb .lbx{position:absolute;top:12px;right:16px;background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:50%;width:40px;height:40px;font-size:1.4rem;cursor:pointer}
+  #lb .lbx:hover{background:rgba(255,255,255,.3)}
+  .btn{display:inline-block;margin-top:12px;background:var(--water-blue);color:#fff;text-decoration:none;font-weight:600;font-size:.85rem;border-radius:6px;padding:8px 16px}
+  .btn:hover{background:var(--water-dark)}
+  footer{text-align:center;font-size:.78rem;color:var(--text-light);padding:0 16px 32px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <img src="images/ogdencity-logo.png" alt="Ogden City Logo">
+  <h1>Traffic Impacts</h1>
+  <a class="back" href="/">← Back to project site</a>
+</div>
+
+<main>
+
+  <!-- 1. OUR OWN PROJECT NOTICE (edit by hand) -->
+  <h2>Project Traffic Control</h2>
+  <p class="sub">What our crews are doing on the road right now.</p>
+  <div class="card project-notice">
+    <h3>Short-distance traffic control in the upper canyon</h3>
+    <p>Flaggers may control one lane of SR-39 near the Pineview Water Treatment Plant and the SR-39 crossing as crews install the new 36-inch pipeline toward The Oaks Restaurant. Short, intermittent traffic control may also be in place on SR-158 on the west side of Pineview Reservoir. Please slow down, follow the flaggers, and allow a few extra minutes.</p>
+    <p class="upd">Project update posted Nov 23, 2026 · For lane closure details, the map, and the flyer, see <a href="index.html#phase4">Phase 4 – Canyon: SR-39 Lane Closure</a>.</p>
+  </div>
+
+  <!-- 2. TRAVEL TIMES -->
+  <h2>Live Travel Times</h2>
+  <p class="sub">Current drive time compared with normal, between Ogden Canyon Mouth, Pineview Dam, and Eden.</p>
+  <div class="tt-grid" id="ttGrid">
+    <div class="card tt"><div class="seg">Loading travel times…</div></div>
+  </div>
+  <div class="stamp" id="ttStamp"></div>
+
+  <!-- 3. CAMERAS -->
+  <div class="sec-head">
+    <h2>Live Cameras</h2>
+    <div class="credit">
+      <img id="udotLogo" src="images/udot-logo.png" alt="Utah Department of Transportation (UDOT)" onerror="this.style.display='none'">
+      <span>Camera views courtesy of UDOT</span>
+    </div>
+  </div>
+  <p class="sub">The two cameras nearest our work. Pictures refresh about once a minute.</p>
+  <div class="cams" id="camsMain"></div>
+
+  <h2 style="font-size:1.15rem;margin-top:26px">More cameras on SR-39 and SR-158</h2>
+  <div class="cams small" id="camsMore"></div>
+
+  <!-- 4. ROAD SIGN -->
+  <h2>UDOT Road Sign — SR-39 Eastbound at Ogden Canyon Mouth</h2>
+  <p class="sub">The message drivers see as they approach the canyon.</p>
+  <div class="card">
+    <div class="sign-wrap">
+      <div class="sign" id="signBox" aria-live="polite">ROADWORK
+5 MILE
+AHEAD</div>
+      <div class="sign-info">
+        <p><b>Message last checked Nov 23, 2026.</b> The sign alternates between two screens. Road sign messages are set by UDOT and can change at any time, so check UDOT for the live message.</p>
+        <a class="btn" href="https://ogdenvalley.udot.utah.gov/road-information/" target="_blank" rel="noopener">See the live sign on UDOT's site →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. SOURCES -->
+  <h2>Sources &amp; Disclaimer</h2>
+  <div class="card sources">
+    <p>Traffic cameras, road signs, and travel-time information on this page come from the Utah Department of Transportation and its partners. The Ogden City pipeline project does not own or operate these systems, and this page is not operated or endorsed by UDOT. For official road conditions, always check UDOT.</p>
+    <ul>
+      <li><a href="https://ogdenvalley.udot.utah.gov/road-information/" target="_blank" rel="noopener">UDOT Ogden Valley — Road Information</a> (Roads to Recreation)</li>
+      <li><a href="https://www.udottraffic.utah.gov/" target="_blank" rel="noopener">UDOT Traffic</a> — cameras</li>
+      <li><a href="https://uplan.maps.arcgis.com/apps/dashboards/2899dd62581a410a8af96f7f0774dc36" target="_blank" rel="noopener">Ogden Valley Traffic Information dashboard</a> — Utah Geospatial Resource Center (UGRC) / UPlan, travel times</li>
+      <li>Follow UDOT Ogden Valley: <a href="https://x.com/OgdenValleyUDOT" target="_blank" rel="noopener">X @OgdenValleyUDOT</a></li>
+    </ul>
+  </div>
+
+</main>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Camera view">
+  <button class="lbx" id="lbClose" aria-label="Close camera view">×</button>
+  <div class="lbcap" id="lbCap"></div>
+  <img id="lbImg" alt="">
+</div>
+
+<footer>© 2026 Ogden City · Ogden Canyon 36-Inch Pipeline Replacement Project</footer>
+
+<script>
+/* ───────── CONFIG (edit here) ───────── */
+const CAMERAS_MAIN = [
+  {id:'179479', name:'SR-39 Ogden Canyon @ MP 13.24', note:'Near the water treatment plant', affected:true},
+  {id:'178954', name:'SR-39 Ogden Canyon @ SR-158 / MP 13.8', note:'Pineview west side', affected:true}
+];
+const CAMERAS_MORE = [
+  {id:'178920', name:'SR-39 @ SR-167 Trappers Loop / MP 17.53'},
+  {id:'179675', name:'SR-39 @ Monte Cristo / MP 36.84'},
+  {id:'178262', name:'SR-39 @ Monte Cristo / MP 46.2'},
+  {id:'179759', name:'SR-158 @ Powder Mountain / MP 8.33'},
+  {id:'179677', name:'SR-158 @ Powder Mountain / MP 11.62'}
+];
+const CAM_URL = id => 'https://www.udottraffic.utah.gov/map/Cctv/' + id;
+const UDOT_PAGE = 'https://ogdenvalley.udot.utah.gov/road-information/';
+const ROUTES_URL = 'https://services.arcgis.com/pA2nEVnB6tquxgOW/arcgis/rest/services/OgdenValley_Routes/FeatureServer/3/query';
+const SEGMENTS = [
+  'Ogden Canyon Mouth to Pineview Dam',
+  'Pineview Dam to Ogden Canyon Mouth',
+  'Pineview Dam to Eden'
+];
+const SIGN_SCREENS = ['ROADWORK\n5 MILE\nAHEAD', 'ROADWORK\nONE WAY\nFLAGGING'];
+
+/* ───────── Cameras ───────── */
+function camCard(c, small){
+  const d = document.createElement('div');
+  d.className = 'card cam';
+  d.innerHTML =
+    '<button type="button" class="frame" aria-label="Enlarge camera: '+c.name+'">' +
+      '<img alt="Live camera: '+c.name+'" loading="lazy">' +
+      '<div class="fail">Camera image is unavailable right now.<br>View it on UDOT\'s site.</div>' +
+      '<span class="zoom">Click to enlarge</span>' +
+    '</button>' +
+    '<div class="cap"><div>'+(c.affected?'<span class="affected">Near our work</span>':'')+c.name+'</div><span class="ts"></span></div>';
+  const img = d.querySelector('img'), fail = d.querySelector('.fail'), ts = d.querySelector('.ts');
+  function load(){
+    img.onload = () => { fail.style.display='none'; ts.textContent = 'Updated ' + new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}); };
+    img.onerror = () => { fail.style.display='flex'; };
+    img.src = CAM_URL(c.id) + '?t=' + Date.now();
+  }
+  load(); setInterval(load, 60000);
+  d.querySelector('.frame').addEventListener('click', () => openLb(c));
+  return d;
+}
+CAMERAS_MAIN.forEach(c => document.getElementById('camsMain').appendChild(camCard(c)));
+CAMERAS_MORE.forEach(c => document.getElementById('camsMore').appendChild(camCard(c, true)));
+
+/* ───────── Enlarged camera view ───────── */
+const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
+let lbTimer = null, lbCam = null;
+function lbLoad(){ lbImg.src = CAM_URL(lbCam.id) + '?t=' + Date.now(); }
+function openLb(c){
+  lbCam = c; lbCap.textContent = c.name; lbImg.alt = 'Live camera: ' + c.name;
+  lbLoad(); lb.classList.add('open'); document.body.style.overflow = 'hidden';
+  clearInterval(lbTimer); lbTimer = setInterval(lbLoad, 60000);
+  document.getElementById('lbClose').focus();
+}
+function closeLb(){ lb.classList.remove('open'); document.body.style.overflow = ''; clearInterval(lbTimer); lbImg.removeAttribute('src'); }
+document.getElementById('lbClose').addEventListener('click', closeLb);
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) closeLb(); });
+
+/* ───────── Travel times ───────── */
+function ttStatus(extra){           // extra = minutes slower than free-flow
+  if (extra <= 2) return ['ok','Normal'];
+  if (extra <= 5) return ['warn','Some delay'];
+  return ['bad','Heavy delay'];
+}
+async function loadTimes(){
+  const grid = document.getElementById('ttGrid'), stamp = document.getElementById('ttStamp');
+  try{
+    const where = "Label IN ('" + SEGMENTS.join("','") + "')";
+    const url = ROUTES_URL + '?where=' + encodeURIComponent(where) +
+      '&outFields=Label,Current_Travel_Time__min_,Free_Flow_Travel_Time__min_,Distance__miles_,LATEST_LOCAL_DATETIME&returnGeometry=false&f=json';
+    const j = await fetch(url, {cache:'no-store'}).then(r => r.json());
+    if (!j.features || !j.features.length) throw new Error('no data');
+    const rows = SEGMENTS.map(s => j.features.map(f => f.attributes).find(a => a.Label === s)).filter(Boolean);
+    grid.innerHTML = '';
+    let newest = 0;
+    rows.forEach(a => {
+      const cur = a.Current_Travel_Time__min_, free = a.Free_Flow_Travel_Time__min_, extra = Math.max(0, cur - free);
+      const [cls, label] = ttStatus(extra);
+      newest = Math.max(newest, a.LATEST_LOCAL_DATETIME || 0);
+      const d = document.createElement('div');
+      d.className = 'card tt ' + cls;
+      d.innerHTML =
+        '<div class="seg">' + a.Label.replace(' to ', ' → ') + '</div>' +
+        '<div class="now">' + cur + ' <small>min now</small></div>' +
+        '<div class="meta">Normal: ' + free + ' min · ' + a.Distance__miles_ + ' miles</div>' +
+        '<span class="badge">' + label + (extra > 0 ? ' · +' + extra + ' min' : '') + '</span>';
+      grid.appendChild(d);
+    });
+    if (newest){
+      const when = new Date(newest);
+      const ageMin = (Date.now() - newest) / 60000;
+      const t = when.toLocaleString('en-US', {timeZone:'America/Denver', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
+      stamp.className = 'stamp' + (ageMin > 30 ? ' stale' : '');
+      stamp.textContent = 'UDOT data last updated ' + t + ' (Mountain Time)' + (ageMin > 30 ? ' — this data may be delayed.' : '.') +
+        ' Source: UDOT / Utah Geospatial Resource Center.';
+    }
+  }catch(e){
+    grid.innerHTML = '<div class="card tt"><div class="seg">Travel times are unavailable right now.</div>' +
+      '<a class="btn" href="https://uplan.maps.arcgis.com/apps/dashboards/2899dd62581a410a8af96f7f0774dc36" target="_blank" rel="noopener">Open the UDOT dashboard →</a></div>';
+  }
+}
+loadTimes(); setInterval(loadTimes, 60000);
+
+/* ───────── Sign (alternating screens) ───────── */
+let si = 0; const signBox = document.getElementById('signBox');
+setInterval(() => { si = (si + 1) % SIGN_SCREENS.length; signBox.textContent = SIGN_SCREENS[si]; }, 3000);
+</script>
+</body>
+</html>
