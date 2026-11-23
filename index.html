@@ -1654,7 +1654,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 <!-- Latest Notice bar. To hide when no notice is active, add the "hidden" attribute to the div below; to change the message, edit the latest_notice text in the translations table. -->
 <div id="latestNoticeBar" role="region" aria-label="Latest notices" style="background:var(--notice-amber);color:#fff;text-align:center;padding:8px 16px;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.04em;line-height:1.4;">
   <div data-i18n-html="latest_notice"><strong style="text-transform:uppercase;">Pineview Well Update:</strong> Utah Division of Water Rights recommends sealing a 1915 flowing well exposed in the reservoir. <a href="#well-memo" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">Read the facts &rarr;</a></div>
-  <div data-i18n-html="latest_notice2" style="margin-top:4px;"><strong style="text-transform:uppercase;">Resident Notice:</strong> Possible slight water pressure reduction in Ogden Canyon, Nov. 9 &ndash; April 2027. <a href="#resident-notice" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">View details &rarr;</a></div>
 </div>
 <!-- END LATEST NOTICE BAR -->
 
@@ -1716,8 +1715,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
   </div>
   <span style="color:rgba(255,255,255,0.4);font-size:0.75rem;">|</span>
   <div style="display:flex;align-items:center;gap:6px;">
-    <span style="font-size:1rem;line-height:1;" aria-hidden="true">📷</span>
-    <a href="files/Pineview_Construction_Camera.html" target="_blank" rel="noopener" style="color:white;text-decoration:underline;font-weight:700;text-underline-offset:3px;" data-i18n="notice_camera">Construction Cam: (5min Updates)</a>
+    <span style="font-size:1rem;line-height:1;" aria-hidden="true">💧</span>
+    <a href="#resident-notice" style="color:white;text-decoration:underline;font-weight:700;text-underline-offset:3px;" data-i18n="notice_pressure">Resident Notice: Water Pressure →</a>
   </div>
   <span style="color:rgba(255,255,255,0.4);font-size:0.75rem;">|</span>
   <div style="display:flex;align-items:center;gap:6px;">
@@ -1761,6 +1760,17 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
       </div>
       <div style="width:100%;text-align:center;margin-top:2px;">
         <a href="#gallery" style="font-family:'Open Sans',sans-serif;font-size:0.8rem;font-weight:600;color:#fff;text-decoration:underline;text-underline-offset:2px;" data-i18n="wk_photos_all">View all project photos &rarr;</a>
+      </div>
+      <div id="volunteer" style="width:100%;display:flex;justify-content:center;margin-top:12px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;max-width:760px;background:rgba(255,255,255,0.07);border:1px solid rgba(226,185,135,0.55);border-left:5px solid var(--canyon-rust);border-radius:8px;padding:14px 18px;text-align:left;">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSegiLu_0bjRDSHAW3XsMjF_I0CJxjuECIrikrliYyfSctTO4g/viewform" target="_blank" rel="noopener" aria-label="Open the Pineview Fish Habitat Volunteer Sign-Up form" style="flex:none;background:#fff;border-radius:6px;padding:5px;line-height:0;display:block;"><img src="images/pineview-habitat-volunteer-qr.png" alt="QR code linking to the Pineview Fish Habitat Volunteer Sign-Up form" width="96" height="96" style="display:block;"></a>
+          <div style="flex:1 1 320px;min-width:240px;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--canyon-stone);" data-i18n="vol_label">🐟 Volunteers needed</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#fff;line-height:1.2;margin-top:2px;" data-i18n="vol_title">Help build fish habitat at Pineview Reservoir</div>
+            <div style="font-family:'Open Sans',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.88);line-height:1.55;margin-top:6px;" data-i18n="vol_body">Utah DWR needs volunteers to assemble and install fish habitat structures during the Pineview drawdown, with funding support from Ogden City. Assembly is tentatively planned for December in Ogden and installation for January at Pineview. Dates are not final; UDWR expects to send instructions to sign-ups by about Friday, Dec. 4.</div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSegiLu_0bjRDSHAW3XsMjF_I0CJxjuECIrikrliYyfSctTO4g/viewform" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;background:var(--canyon-rust);color:#fff;text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:7px 18px;border-radius:20px;border:1px solid rgba(226,185,135,0.6);" data-i18n="vol_btn">Sign up to volunteer →</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -3749,6 +3759,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
 
     // Notice bar
     notice_udwr:   { en: 'UDWR — Anglers Notice',          es: 'UDWR — Aviso para Pescadores' },
+    notice_pressure: { en: 'Resident Notice: Water Pressure \u2192', es: 'Aviso a Residentes: Presi\u00f3n del Agua \u2192' },
     notice_camera: { en: 'Construction Cam: (5min Updates)', es: 'Cámara de Construcción: (Actualizaciones cada 5 min)' },
     latest_notice: { en: '<strong style="text-transform:uppercase;">Pineview Well Update:</strong> Utah Division of Water Rights recommends sealing a 1915 flowing well exposed in the reservoir. <a href="#well-memo" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">Read the facts &rarr;</a>', es: '<strong style="text-transform:uppercase;">Actualización del Pozo de Pineview:</strong> La División de Derechos de Agua de Utah recomienda sellar un pozo de flujo libre de 1915 expuesto en el embalse. <a href="#well-memo" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">Lea los hechos &rarr;</a>' },
     latest_notice2: { en: '<strong style="text-transform:uppercase;">Resident Notice:</strong> Possible slight water pressure reduction in Ogden Canyon, Nov. 9 &ndash; April 2027. <a href="#resident-notice" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">View details &rarr;</a>', es: '<strong style="text-transform:uppercase;">Aviso a Residentes:</strong> Posible ligera reducción de la presión del agua en Ogden Canyon, del 9 de nov. a abril de 2027. <a href="#resident-notice" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">Ver detalles &rarr;</a>' },
@@ -3837,6 +3848,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #2A6D8F; outline-offs
     wk_video_cap: { en: 'Watch the latest videos', es: 'Vea los videos m\u00e1s recientes' },
     wk_video_sub: { en: 'Construction highlights and a drone fly-over comparison', es: 'Lo m\u00e1s destacado de la construcci\u00f3n y una comparaci\u00f3n de sobrevuelos con dron' },
     wk_v1: { en: 'Construction highlights', es: 'Lo m\u00e1s destacado de la obra' },
+    vol_label: { en: '\u{1F41F} Volunteers needed', es: '\u{1F41F} Se necesitan voluntarios' },
+    vol_title: { en: 'Help build fish habitat at Pineview Reservoir', es: 'Ayude a crear h\u00e1bitat para peces en el embalse Pineview' },
+    vol_body: { en: 'Utah DWR needs volunteers to assemble and install fish habitat structures during the Pineview drawdown, with funding support from Ogden City. Assembly is tentatively planned for December in Ogden and installation for January at Pineview. Dates are not final; UDWR expects to send instructions to sign-ups by about Friday, Dec. 4.', es: 'El UDWR necesita voluntarios para armar e instalar estructuras de h\u00e1bitat para peces durante el descenso del nivel de Pineview, con apoyo financiero de Ogden City. El armado est\u00e1 previsto tentativamente para diciembre en Ogden y la instalaci\u00f3n para enero en Pineview. Las fechas a\u00fan no son definitivas; el UDWR espera enviar instrucciones a los inscritos alrededor del viernes 4 de diciembre.' },
+    vol_btn: { en: 'Sign up to volunteer \u2192', es: 'Inscr\u00edbase como voluntario \u2192' },
     wk_cam: { en: 'Live construction cam', es: 'C\u00e1mara de construcci\u00f3n en vivo' },
     wk_cam_badge: { en: 'Updates every 5 min', es: 'Cada 5 min' },
     wk_v2: { en: 'Drone comparison: Oct 6 vs Nov 17', es: 'Comparaci\u00f3n con dron: 6 oct vs 17 nov' },
