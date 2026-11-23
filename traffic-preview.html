@@ -24,6 +24,10 @@
   .preview-flag{background:#FFF3CD;color:#5a4300;border-bottom:1px solid #e6c96b;text-align:center;font-size:.85rem;padding:8px 16px;font-weight:600}
   main{max-width:1080px;margin:0 auto;padding:24px 16px 48px}
   h2{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--water-dark);font-size:1.5rem;margin:30px 0 4px}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:4px 20px}
+  .sec-head h2{margin-bottom:4px}
+  .credit{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:.85rem;font-weight:600;color:var(--water-dark)}
+  .credit img{height:30px;width:auto;display:block}
   .sub{color:var(--text-mid);font-size:.92rem;margin-bottom:14px}
   .card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.12);padding:18px 20px}
   .project-notice{border-left:6px solid var(--notice-amber);background:#FFF8EC}
@@ -62,6 +66,15 @@
   details.review summary{cursor:pointer;font-weight:700;color:var(--canyon-rust)}
   details.review ul{margin:8px 0 0 20px}
   details.review li{margin-bottom:4px}
+  .cam .frame{cursor:zoom-in;display:block;border:0;width:100%;padding:0;font:inherit}
+  .cam .frame:focus-visible{outline:3px solid var(--notice-amber);outline-offset:-3px}
+  .cam .zoom{position:absolute;right:8px;bottom:8px;background:rgba(15,46,66,.8);color:#fff;font-size:.72rem;font-weight:600;border-radius:4px;padding:3px 8px;pointer-events:none}
+  #lb{position:fixed;inset:0;background:rgba(10,25,35,.92);z-index:1000;display:none;align-items:center;justify-content:center;flex-direction:column;padding:16px;gap:10px}
+  #lb.open{display:flex}
+  #lb img{max-width:min(1100px,96vw);max-height:76vh;width:auto;height:auto;border-radius:6px;background:#0f2e42;box-shadow:0 4px 30px rgba(0,0,0,.6)}
+  #lb .lbcap{color:#fff;font-weight:600;text-align:center;font-size:.95rem}
+  #lb .lbx{position:absolute;top:12px;right:16px;background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:50%;width:40px;height:40px;font-size:1.4rem;cursor:pointer}
+  #lb .lbx:hover{background:rgba(255,255,255,.3)}
   .btn{display:inline-block;margin-top:12px;background:var(--water-blue);color:#fff;text-decoration:none;font-weight:600;font-size:.85rem;border-radius:6px;padding:8px 16px}
   .btn:hover{background:var(--water-dark)}
   footer{text-align:center;font-size:.78rem;color:var(--text-light);padding:0 16px 32px}
@@ -96,7 +109,13 @@
   <div class="stamp" id="ttStamp"></div>
 
   <!-- 3. CAMERAS -->
-  <h2>Live Cameras</h2>
+  <div class="sec-head">
+    <h2>Live Cameras</h2>
+    <div class="credit">
+      <img id="udotLogo" src="https://ogdenvalley.udot.utah.gov/wp-content/uploads/2026/08/udot_logo_blue.webp" alt="Utah Department of Transportation (UDOT)" onerror="this.style.display='none'">
+      <span>Camera views courtesy of UDOT</span>
+    </div>
+  </div>
   <p class="sub">The two cameras nearest our work. Pictures refresh about once a minute.</p>
   <div class="cams" id="camsMain"></div>
 
@@ -142,6 +161,12 @@ AHEAD</div>
   </details>
 </main>
 
+<div id="lb" role="dialog" aria-modal="true" aria-label="Camera view">
+  <button class="lbx" id="lbClose" aria-label="Close camera view">×</button>
+  <div class="lbcap" id="lbCap"></div>
+  <img id="lbImg" alt="">
+</div>
+
 <footer>© 2026 Ogden City · Ogden Canyon 36-Inch Pipeline Replacement Project</footer>
 
 <script>
@@ -172,10 +197,11 @@ function camCard(c, small){
   const d = document.createElement('div');
   d.className = 'card cam';
   d.innerHTML =
-    '<a class="frame" style="display:block" href="'+UDOT_PAGE+'" target="_blank" rel="noopener" aria-label="'+c.name+' — open on UDOT">' +
+    '<button type="button" class="frame" aria-label="Enlarge camera: '+c.name+'">' +
       '<img alt="Live camera: '+c.name+'" loading="lazy">' +
       '<div class="fail">Camera image is unavailable right now.<br>View it on UDOT\'s site.</div>' +
-    '</a>' +
+      '<span class="zoom">Click to enlarge</span>' +
+    '</button>' +
     '<div class="cap"><div>'+(c.affected?'<span class="affected">Near our work</span>':'')+c.name+'</div><span class="ts"></span></div>';
   const img = d.querySelector('img'), fail = d.querySelector('.fail'), ts = d.querySelector('.ts');
   function load(){
@@ -184,10 +210,26 @@ function camCard(c, small){
     img.src = CAM_URL(c.id) + '?t=' + Date.now();
   }
   load(); setInterval(load, 60000);
+  d.querySelector('.frame').addEventListener('click', () => openLb(c));
   return d;
 }
 CAMERAS_MAIN.forEach(c => document.getElementById('camsMain').appendChild(camCard(c)));
 CAMERAS_MORE.forEach(c => document.getElementById('camsMore').appendChild(camCard(c, true)));
+
+/* ───────── Enlarged camera view ───────── */
+const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
+let lbTimer = null, lbCam = null;
+function lbLoad(){ lbImg.src = CAM_URL(lbCam.id) + '?t=' + Date.now(); }
+function openLb(c){
+  lbCam = c; lbCap.textContent = c.name; lbImg.alt = 'Live camera: ' + c.name;
+  lbLoad(); lb.classList.add('open'); document.body.style.overflow = 'hidden';
+  clearInterval(lbTimer); lbTimer = setInterval(lbLoad, 60000);
+  document.getElementById('lbClose').focus();
+}
+function closeLb(){ lb.classList.remove('open'); document.body.style.overflow = ''; clearInterval(lbTimer); lbImg.removeAttribute('src'); }
+document.getElementById('lbClose').addEventListener('click', closeLb);
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) closeLb(); });
 
 /* ───────── Travel times ───────── */
 function ttStatus(extra){           // extra = minutes slower than free-flow
