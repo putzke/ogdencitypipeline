@@ -47,7 +47,7 @@ jobs:
       # error, and fail (= email) only when the LIVE site is actually stale.
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
         continue-on-error: true
         with:
           timeout: 1200000
