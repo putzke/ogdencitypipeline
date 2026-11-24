@@ -26,6 +26,10 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    # A normal run takes about a minute. If a step ever hangs (camera API,
+    # network), kill the run after 15 minutes so it cannot block the queue
+    # (concurrency group) and the Pages redeploys that follow its pushes.
+    timeout-minutes: 15
     permissions:
       contents: write
     steps:

@@ -61,15 +61,13 @@
   .sign-info b{color:var(--water-dark)}
   .r2r{display:flex;align-items:center;gap:22px;flex-wrap:wrap;border-left:6px solid var(--water-dark)}
   .r2r-brand{display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit}
-  .r2r-brand img{height:44px;width:auto;display:block}
-  .r2r-brand .div{width:1px;align-self:stretch;background:#9aa7b4}
-  .r2r-name{font-family:Georgia,'Times New Roman',serif;color:#14305e;line-height:1.15}
-  .r2r-name b{display:block;font-size:1.45rem}
-  .r2r-name i{display:block;font-size:.95rem;font-weight:700;font-style:normal}
+  .r2r-brand img{height:52px;width:auto;display:block;max-width:100%}
   .r2r-text{flex:1;min-width:240px;font-size:.9rem;color:var(--text-mid)}
   .r2r-text .links{margin-top:6px;font-size:.82rem}
   .r2r-text .links a{margin-right:12px;font-weight:600}
   .sources{font-size:.88rem;color:var(--text-mid)}
+  .sources .src-logo{display:inline-block;vertical-align:middle;margin-left:8px;text-decoration:none}
+  .sources .src-logo img{height:26px;width:auto;display:block}
   .sources ul{margin:8px 0 0 20px}
   .sources li{margin-bottom:4px}
   .cam .frame{cursor:zoom-in;display:block;border:0;width:100%;padding:0;font:inherit}
@@ -147,9 +145,7 @@ AHEAD</div>
   <p class="sub">For official road status across the valley, closures, traction law, and travel tips.</p>
   <div class="card r2r">
     <a class="r2r-brand" href="https://ogdenvalley.udot.utah.gov/" target="_blank" rel="noopener" aria-label="UDOT Ogden Valley Roads to Recreation">
-      <img src="images/udot-logo.png" alt="UDOT">
-      <span class="div" aria-hidden="true"></span>
-      <span class="r2r-name"><b>Ogden Valley</b><i>Roads to Recreation</i></span>
+      <img src="images/udot-ogden-valley-logo.png" alt="UDOT Ogden Valley – Roads to Recreation">
     </a>
     <div class="r2r-text">
       <p>UDOT's information resource for Ogden Valley, covering SR-39 (Ogden Canyon), SR-158 (Powder Mountain Road), SR-167 (Trappers Loop), and I-84 (Weber Canyon).</p>
@@ -168,7 +164,7 @@ AHEAD</div>
   <div class="card sources">
     <p>Traffic cameras, road signs, and travel-time information on this page come from the Utah Department of Transportation and its partners. The Ogden City pipeline project does not own or operate these systems, and this page is not operated or endorsed by UDOT. For official road conditions, always check UDOT.</p>
     <ul>
-      <li><a href="https://ogdenvalley.udot.utah.gov/road-information/" target="_blank" rel="noopener">UDOT Ogden Valley — Road Information</a> (Roads to Recreation)</li>
+      <li><a href="https://ogdenvalley.udot.utah.gov/road-information/" target="_blank" rel="noopener">UDOT Ogden Valley — Road Information</a> (Roads to Recreation) <a href="https://ogdenvalley.udot.utah.gov/" target="_blank" rel="noopener" class="src-logo" aria-label="UDOT Ogden Valley – Roads to Recreation"><img src="images/udot-ogden-valley-logo.png" alt="UDOT Ogden Valley – Roads to Recreation"></a></li>
       <li><a href="https://www.udottraffic.utah.gov/" target="_blank" rel="noopener">UDOT Traffic</a> — cameras</li>
       <li><a href="https://uplan.maps.arcgis.com/apps/dashboards/2899dd62581a410a8af96f7f0774dc36" target="_blank" rel="noopener">Ogden Valley Traffic Information dashboard</a> — Utah Geospatial Resource Center (UGRC) / UPlan, travel times</li>
       <li>Follow UDOT Ogden Valley: <a href="https://x.com/OgdenValleyUDOT" target="_blank" rel="noopener">X @OgdenValleyUDOT</a></li>
